@@ -7,17 +7,16 @@ const KakaoMap = () => {
       <Map
         id='map'
         center={{
-          lat: 37.552484,
-          lng: 126.937641,
+          lat: 37.552484, // 맨 처음 보여줄 위도
+          lng: 126.937641, // 맨 처음 보여줄 경도
         }}
         style={{
-          width: '100%',
-          height: '945px',
-          overflow: 'hidden',
+          width: '500px',
+          height: '500px',
         }}
-        level={3}
+        level={8} // 맨 처음 확대 및 축소 정도 (1 ~ 15)
       >
-        <KakaoMapMarker /* 맵 마커 파일 */ />
+        <KakaoMapMarker /* 맵 마커 js */ />
         <ZoomControl position={'RIGHT'} /* 확대 및 축소 컨트롤러 */ />
       </Map>
     </>

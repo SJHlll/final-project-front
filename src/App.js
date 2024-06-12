@@ -1,10 +1,10 @@
 import './App.css';
-import KakaoMap from './KakaoMap/KakaoMap';
+import ChargeStation from './Charge-Station/ChargeStation';
 
 function App() {
   return (
     <>
-      <KakaoMap />
+      <ChargeStation />
     </>
   );
 }
