@@ -1,6 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
-import KakaoMap from './utils/KakaoMap';
+import KakaoMap from './KakaoMap/KakaoMap';
 
 function App() {
   return (
