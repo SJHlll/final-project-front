@@ -9,7 +9,7 @@ const ChargeStationList = () => {
 
   return (
     // 컨테이너
-    <div className='Container'>
+    <div className='ListContainer'>
       <div className='Station'>
         {/* 왼쪽박스 */}
         <div className='Status'>

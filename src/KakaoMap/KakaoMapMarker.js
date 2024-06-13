@@ -61,7 +61,7 @@ const KakaoMapMarker = () => {
               top: '-32px',
               right: '-1px',
               border: '1px solid black',
-              fontSize: '35px',
+              fontSize: '25px',
               fontWeight: 'bold',
               width: '30px',
               height: '30px',

@@ -1,4 +1,4 @@
-.Container {
+.ListContainer {
     width: 500px;
     height: 100px;
     border: 1px solid #333;
@@ -46,6 +46,10 @@
                 font-size: 1.2rem;
                 cursor: pointer;
                 float: right;
+            }
+
+            .SearchBtn:hover {
+                background-color: #F2F2F2;
             }
         }
     }
