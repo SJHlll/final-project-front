@@ -1,23 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ChargeStationSearch from './ChargeStationSearch';
 import ChargeStationList from './ChargeStationList';
+import '../scss/SearchList.scss'; // CSS 파일을 import 해주세요 (필요에 따라 파일명은 변경 가능)
 
 const SearchList = ({ visible }) => {
+  const [isVisible, setIsVisible] = useState(visible);
+
+  // visible prop이 변경되면 isVisible 상태를 업데이트합니다.
+  React.useEffect(() => {
+    setIsVisible(visible);
+  }, [visible]);
+
   return (
     <>
       <div
-        style={{
-          height: '800px',
-          backgroundColor: 'white',
-          zIndex: '1',
-          display: visible ? 'block' : 'none',
-          position: 'absolute',
-          top: '0',
-          opacity: '0.92',
-        }}
+        className={`search-list-container ${isVisible ? 'visible' : 'hidden'}`}
       >
-        <ChargeStationSearch /* 충전소찾기 */ />
-        <ChargeStationList /* 충전소목록 */ />
+        <div className='search-list-content'>
+          <ChargeStationSearch />
+          <ChargeStationList />
+        </div>
       </div>
     </>
   );

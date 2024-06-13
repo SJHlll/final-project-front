@@ -16,7 +16,7 @@ const Btn = ({ toggleSearchBox, isSearchBoxVisible }) => {
         }}
         onClick={toggleSearchBox}
       >
-        {isSearchBoxVisible ? '검색창 닫기' : '검색창 열기'}
+        {isSearchBoxVisible ? '충전소 검색창 닫기' : '충전소 검색창 열기'}
       </Button>
       <Button
         type='submit'
