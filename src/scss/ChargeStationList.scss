@@ -1,0 +1,54 @@
+.Container {
+    width: 500px;
+    height: 100px;
+    border: 1px solid #333;
+    background-color: rgb(143, 178, 255);
+
+    .Station {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+
+        .Status {
+            margin-left: 10px;
+
+            .Name {
+                font-size: 1.3rem;
+                font-weight: bold;
+                margin-bottom: 25px;
+            }
+
+            .Address {
+                font-size: 0.9rem;
+            }
+        }
+
+        .Charger {
+            text-align: center;
+            margin-right: 10px;
+
+            .ChargerNum {
+                font-size: 0.9rem;
+                margin-bottom: 5px;
+            }
+
+            .ChargeAble {
+                margin-bottom: 5px;
+            }
+
+            .SearchBtn {
+                border: 1px solid black;
+                background-color: white;
+                width: 100px;
+                height: 30px;
+                line-height: 30px;
+                font-weight: bold;
+                font-size: 1.2rem;
+                cursor: pointer;
+                float: right;
+            }
+        }
+    }
+
+
+}
