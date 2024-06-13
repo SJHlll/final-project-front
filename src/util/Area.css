@@ -18,7 +18,7 @@
     width: 45%;
     padding: 5px;
     margin: 7.5px;
-    margin-top: 45px;
+    margin-top: 5px;
 }
 
 .search-input {
@@ -27,7 +27,7 @@
     margin: 5px;
 }
 
-.button {
+.search-btn {
     padding: 8px 16px;
     margin: 5px;
     cursor: pointer;
@@ -37,6 +37,20 @@
     border-radius: 5px;
 }
 
-.button:hover {
+.search-btn:hover {
     background-color: #0056b3;
+}
+
+.reset-btn {
+    padding: 8px 16px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: #ebf5ff;
+    color: #2c7fdf;
+    border: 1px solid #2c7fdf;
+    border-radius: 5px;
+}
+
+.reset-btn:hover {
+    background-color: #c2e1ff;
 }

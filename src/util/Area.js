@@ -96,10 +96,10 @@ const Area = () => {
           value={facilitySearch}
           onChange={handleFacilitySearchChange}
         />
-        <button className='button' onClick={handleSearch}>
+        <button className='search-btn' onClick={handleSearch}>
           검색
         </button>
-        <button className='button' onClick={resetArea}>
+        <button className='reset-btn' onClick={resetArea}>
           초기화
         </button>
       </div>

@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import KakaoMap from '../KakaoMap/KakaoMap';
-import ChargeStationList from './ChargeStationList';
-import ReservationBtn from './ReservationBtn';
-import ChargeStationSearch from './ChargeStationSearch';
+import Btn from './Btn';
+import SearchList from './SearchList';
 
 const ChargeStation = () => {
+  const [isSearchBoxVisible, setSearchBoxVisible] = useState(false);
+
+  // 검색창, 목록 열고 닫기 함수
+  const toggleSearchBox = () => {
+    setSearchBoxVisible(!isSearchBoxVisible);
+  };
+
   return (
     <>
-      <KakaoMap /* 카카오지도 */ />
-      <ReservationBtn /* 예약버튼 */ />
-      <ChargeStationSearch /* 충전소찾기 */ />
-      <ChargeStationList /* 충전소목록 */ />
+      <div style={{ position: 'relative' }}>
+        <KakaoMap /* 카카오지도 */ />
+        <Btn
+          toggleSearchBox={toggleSearchBox}
+          isSearchBoxVisible={isSearchBoxVisible} /* 버튼 */
+        />
+        <SearchList visible={isSearchBoxVisible} /* 검색, 리스트 */ />
+      </div>
     </>
   );
 };
