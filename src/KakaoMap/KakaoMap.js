@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Map, ZoomControl } from 'react-kakao-maps-sdk';
 import KakaoMapMarker from './KakaoMapMarker';
 import styled from 'styled-components';
 import { areas } from '../charge_station/areas';
+import { MapContext } from '../context/MapContext';
 
 // 카카오 지도 스타일
 const MapContainer = styled(Map)`
@@ -11,13 +12,15 @@ const MapContainer = styled(Map)`
   border: 1px solid #888;
 `;
 
-const ps = new window.kakao.maps.services.Places();
+// const ps = new window.kakao.maps.services.Places();
 
 const KakaoMap = () => {
   // 지도 초기 위도, 경도
   const [center, setCenter] = useState({ lat: 37.552484, lng: 126.937641 });
 
-  // 장소
+  const { selectedStation, selectedMarkerIndex } = useContext(MapContext);
+
+  // 장소 배열
   const [markers, setMarkers] = useState(areas);
 
   // 마커 클릭 시 창 열림
@@ -40,8 +43,8 @@ const KakaoMap = () => {
     setMarkers(updatedMarkers);
   };
 
+  // 맵의 배경 클릭 시 창 닫힘
   const handleMapClick = () => {
-    // 맵의 배경 클릭 시 창 닫힘
     const updatedMarkers = markers.map((marker) => ({
       ...marker,
       isOpen: false,
@@ -49,12 +52,19 @@ const KakaoMap = () => {
     setMarkers(updatedMarkers);
   };
 
+  // 선택된 좌표 변경 시 지도 중심 업데이트
+  useEffect(() => {
+    if (selectedStation) {
+      setCenter(selectedStation);
+      openWindow(selectedMarkerIndex);
+    }
+  }, [selectedStation, selectedMarkerIndex]);
+
   return (
     <>
       <MapContainer
         id='map'
         center={center}
-        isPanto={true}
         level={6} // 맨 처음 확대 및 축소 정도 (1 ~ 15)
         onClick={handleMapClick}
       >

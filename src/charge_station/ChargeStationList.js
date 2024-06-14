@@ -18,6 +18,7 @@ const ChargeStationList = () => {
           StationAddress={station.StationAddress}
           AC={station.AC}
           DC={station.DC}
+          index={index}
         />
       ))}
     </div>

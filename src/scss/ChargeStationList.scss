@@ -1,6 +1,8 @@
 .ListContainer {
     width: 500px;
+    max-height: 659px;
     // background-color: rgb(143, 178, 255);
+    overflow-y: auto;
 
     .Station {
         display: flex;

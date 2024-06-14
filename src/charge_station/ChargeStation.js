@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import KakaoMap from '../kakaomap/KakaoMap';
 import Btn from './Btn';
 import SearchList from './SearchList';
+import { MapProvider } from '../context/MapContext';
 
 const ChargeStation = () => {
   const [isSearchBoxVisible, setSearchBoxVisible] = useState(false);
@@ -13,14 +14,16 @@ const ChargeStation = () => {
 
   return (
     <>
-      <div style={{ position: 'relative' }}>
-        <KakaoMap /* 카카오지도 */ />
-        <Btn /* 버튼 */
-          toggleSearchBox={toggleSearchBox}
-          isSearchBoxVisible={isSearchBoxVisible}
-        />
-        <SearchList visible={isSearchBoxVisible} /* 검색, 리스트 */ />
-      </div>
+      <MapProvider>
+        <div style={{ position: 'relative' }}>
+          <KakaoMap /* 카카오지도 */ />
+          <Btn /* 버튼 */
+            toggleSearchBox={toggleSearchBox}
+            isSearchBoxVisible={isSearchBoxVisible}
+          />
+          <SearchList visible={isSearchBoxVisible} /* 검색, 리스트 */ />
+        </div>
+      </MapProvider>
     </>
   );
 };
