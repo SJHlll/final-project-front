@@ -12,11 +12,14 @@ const Station = ({
   DC,
   index,
 }) => {
-  const { setSelectedStation, setSelectedMarkerIndex } = useContext(MapContext);
+  const { setSelectedStation, setSelectedMarkerIndex, setMapLevel } =
+    useContext(MapContext);
 
+  // 위치 찾기 버튼 클릭 시 발동하는 함수
   const handleLocateClick = () => {
     setSelectedStation({ lat, lng }); // 선택된 좌표 업데이트
     setSelectedMarkerIndex(index); // 선택된 마커 인덱스 설정
+    setMapLevel(4); // 지도 레벨 설정
   };
 
   return (

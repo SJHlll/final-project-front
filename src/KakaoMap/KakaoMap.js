@@ -18,8 +18,6 @@ const KakaoMap = () => {
   // 지도 초기 위도, 경도
   const [center, setCenter] = useState({ lat: 37.552484, lng: 126.937641 });
 
-  const { selectedStation, selectedMarkerIndex } = useContext(MapContext);
-
   // 장소 배열
   const [markers, setMarkers] = useState(areas);
 
@@ -52,6 +50,9 @@ const KakaoMap = () => {
     setMarkers(updatedMarkers);
   };
 
+  const { selectedStation, selectedMarkerIndex, mapLevel } =
+    useContext(MapContext);
+
   // 선택된 좌표 변경 시 지도 중심 업데이트
   useEffect(() => {
     if (selectedStation) {
@@ -65,7 +66,7 @@ const KakaoMap = () => {
       <MapContainer
         id='map'
         center={center}
-        level={6} // 맨 처음 확대 및 축소 정도 (1 ~ 15)
+        level={mapLevel}
         onClick={handleMapClick}
       >
         {markers.map((marker, index) => (
