@@ -3,6 +3,7 @@ import { Button } from 'reactstrap';
 const Btn = ({ toggleSearchBox, isSearchBoxVisible }) => {
   return (
     <>
+      {/* 검색창 및 목록 열기 */}
       <Button
         type='submit'
         variant='contained'
@@ -18,6 +19,7 @@ const Btn = ({ toggleSearchBox, isSearchBoxVisible }) => {
       >
         {isSearchBoxVisible ? '충전소 검색창 닫기' : '충전소 검색창 열기'}
       </Button>
+      {/* 에약창 이동하기, 아직 미구현 */}
       <Button
         type='submit'
         variant='contained'

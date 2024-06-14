@@ -6,7 +6,7 @@ import '../scss/SearchList.scss'; // CSS 파일을 import 해주세요 (필요�
 const SearchList = ({ visible }) => {
   const [isVisible, setIsVisible] = useState(visible);
 
-  // visible prop이 변경되면 isVisible 상태를 업데이트합니다.
+  // 열림, 닫힘
   React.useEffect(() => {
     setIsVisible(visible);
   }, [visible]);

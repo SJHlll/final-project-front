@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import KakaoMap from '../KakaoMap/KakaoMap';
+import KakaoMap from '../kakaomap/KakaoMap';
 import Btn from './Btn';
 import SearchList from './SearchList';
 
@@ -15,9 +15,9 @@ const ChargeStation = () => {
     <>
       <div style={{ position: 'relative' }}>
         <KakaoMap /* 카카오지도 */ />
-        <Btn
+        <Btn /* 버튼 */
           toggleSearchBox={toggleSearchBox}
-          isSearchBoxVisible={isSearchBoxVisible} /* 버튼 */
+          isSearchBoxVisible={isSearchBoxVisible}
         />
         <SearchList visible={isSearchBoxVisible} /* 검색, 리스트 */ />
       </div>

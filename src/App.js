@@ -1,5 +1,5 @@
 import './App.css';
-import ChargeStation from './Charge-Station/ChargeStation';
+import ChargeStation from './charge_station/ChargeStation';
 
 function App() {
   return (

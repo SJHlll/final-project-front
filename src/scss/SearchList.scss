@@ -1,17 +1,17 @@
 .search-list-container {
     height: 800px;
     background-color: white;
+    border-right: 1px solid #555;
     z-index: 1;
     position: absolute;
     top: 0;
-    opacity: 0.92;
-    transition: left 0.5s ease; /* left 속성에 대한 애니메이션 설정 */
+    transition: left 0.3s ease;
   }
   
   .search-list-container.visible {
-    left: 0; /* 보이는 경우 왼쪽으로 이동 */
+    left: 0;
   }
   
   .search-list-container.hidden {
-    left: -500px; /* 숨겨진 경우 왼쪽으로 이동 */
+    left: -500px;
   }
