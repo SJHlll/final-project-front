@@ -29,7 +29,7 @@ const Area = () => {
     setSelectedSubArea(e.target.value);
   };
 
-  // 검색 기능
+  // 키워드 검색 기능
   const handleFacilitySearchChange = (event) => {
     setFacilitySearch(event.target.value);
   };
@@ -49,7 +49,7 @@ const Area = () => {
       }
       // 아무것도 안고를 시
     } else {
-      alert('최소 시/도 지역까지 선택해주세요.');
+      // 일단은 모든 충전소 검색. 어케하지
     }
   };
 

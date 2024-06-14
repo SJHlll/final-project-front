@@ -1,13 +1,22 @@
 import { useState } from 'react';
-import { Map, ZoomControl, useKakaoLoader } from 'react-kakao-maps-sdk';
+import { Map, ZoomControl } from 'react-kakao-maps-sdk';
 import KakaoMapMarker from './KakaoMapMarker';
+import styled from 'styled-components';
+
+// 카카오 지도 스타일
+const MapContainer = styled(Map)`
+  width: 1280px;
+  height: 798px;
+  border: 1px solid #888;
+`;
 
 const KakaoMap = () => {
-  useKakaoLoader();
-  const [center, setCenter] = useState({ lat: 37.552484, lng: 126.937641 }); // 지도 초기 위경도
+  // 지도 초기 위도, 경도
+  const [center, setCenter] = useState({ lat: 37.552484, lng: 126.937641 });
 
   const [markers, setMarkers] = useState([
     {
+      id: '000001',
       lat: 37.552484,
       lng: 126.937641,
       StationName: '한국ICT인재개발원 신촌센터',
@@ -16,6 +25,7 @@ const KakaoMap = () => {
       isOpen: false,
     },
     {
+      id: '000002',
       lat: 37.531863,
       lng: 126.914162,
       StationName: '국회의사당',
@@ -56,21 +66,17 @@ const KakaoMap = () => {
 
   return (
     <>
-      <Map
+      <MapContainer
         id='map'
         center={center}
         isPanto={true}
-        style={{
-          width: '1280px',
-          height: '798px',
-          border: '1px solid #888',
-        }}
         level={6} // 맨 처음 확대 및 축소 정도 (1 ~ 15)
         onClick={handleMapClick}
       >
         {markers.map((marker, index) => (
           <KakaoMapMarker
             key={index}
+            id={marker.id}
             lat={marker.lat}
             lng={marker.lng}
             StationName={marker.StationName}
@@ -82,7 +88,7 @@ const KakaoMap = () => {
           />
         ))}
         <ZoomControl position={'RIGHT'} /* 확대 및 축소 컨트롤러 */ />
-      </Map>
+      </MapContainer>
     </>
   );
 };
