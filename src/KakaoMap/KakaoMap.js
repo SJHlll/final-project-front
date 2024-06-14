@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Map, ZoomControl } from 'react-kakao-maps-sdk';
 import KakaoMapMarker from './KakaoMapMarker';
 import styled from 'styled-components';
+import { areas } from '../charge_station/areas';
 
 // 카카오 지도 스타일
 const MapContainer = styled(Map)`
@@ -10,30 +11,14 @@ const MapContainer = styled(Map)`
   border: 1px solid #888;
 `;
 
+const ps = new window.kakao.maps.services.Places();
+
 const KakaoMap = () => {
   // 지도 초기 위도, 경도
   const [center, setCenter] = useState({ lat: 37.552484, lng: 126.937641 });
 
-  const [markers, setMarkers] = useState([
-    {
-      id: '000001',
-      lat: 37.552484,
-      lng: 126.937641,
-      StationName: '한국ICT인재개발원 신촌센터',
-      AC: 2,
-      DC: 3,
-      isOpen: false,
-    },
-    {
-      id: '000002',
-      lat: 37.531863,
-      lng: 126.914162,
-      StationName: '국회의사당',
-      AC: 0,
-      DC: 0,
-      isOpen: false,
-    },
-  ]);
+  // 장소
+  const [markers, setMarkers] = useState(areas);
 
   // 마커 클릭 시 창 열림
   const openWindow = (index) => {
