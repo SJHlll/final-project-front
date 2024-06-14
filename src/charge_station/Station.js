@@ -3,7 +3,7 @@ import '../scss/ChargeStationList.scss';
 
 const Station = ({ name, address, ac, dc }) => {
   return (
-    <div className='Station'>
+    <div className='Station' style={{ marginTop: '5px' }}>
       {/* 왼쪽박스 */}
       <div className='Status'>
         <div className='Name'>{name}</div>
