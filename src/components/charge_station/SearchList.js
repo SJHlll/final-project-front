@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ChargeStationSearch from './ChargeStationSearch';
 import ChargeStationList from './ChargeStationList';
-import '../scss/SearchList.scss'; // CSS 파일을 import 해주세요 (필요에 따라 파일명은 변경 가능)
+import '../../scss/SearchList.scss';
 
 const SearchList = ({ visible }) => {
   const [isVisible, setIsVisible] = useState(visible);

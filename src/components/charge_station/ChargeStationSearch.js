@@ -1,6 +1,6 @@
 import React from 'react';
 import Area from './area/Area';
-import '../scss/ChargeStationSearch.scss';
+import '../../scss/ChargeStationSearch.scss';
 
 const ChargeStationSearch = () => {
   return (

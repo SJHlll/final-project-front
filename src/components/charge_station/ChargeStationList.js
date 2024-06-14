@@ -1,6 +1,6 @@
 import React from 'react';
 import Station from './Station';
-import '../scss/ChargeStationList.scss';
+import '../../scss/ChargeStationList.scss';
 import { areas } from './areas';
 
 const ChargeStationList = () => {
