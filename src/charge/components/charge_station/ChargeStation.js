@@ -1,32 +1,45 @@
-import React, { useState } from 'react';
+import React from 'react';
 import KakaoMap from '../../kakaomap/KakaoMap';
-import Btn from './Btn';
 import SearchList from './SearchList';
 import { MapProvider } from './contexts/MapContext';
+import Header from '../../../Car/components/Header/Header';
+import Footer from '../../../Car/components/Footer/Footer';
+import { Button } from 'reactstrap';
 
 const ChargeStation = () => {
-  const [isSearchBoxVisible, setSearchBoxVisible] =
-    useState(false);
-
-  // 검색창, 목록 열고 닫기 함수
-  const toggleSearchBox = () => {
-    setSearchBoxVisible(!isSearchBoxVisible);
-  };
-
   return (
     <>
+      <Header />
       <MapProvider>
-        <div style={{ position: 'relative' }}>
+        <div
+          style={{
+            position: 'relative',
+          }}
+        >
           <KakaoMap /* 카카오지도 */ />
-          <Btn /* 버튼 */
-            toggleSearchBox={toggleSearchBox}
-            isSearchBoxVisible={isSearchBoxVisible}
-          />
-          <SearchList
-            visible={isSearchBoxVisible} /* 검색, 리스트 */
-          />
+          {/* 에약창 이동하기, 아직 미구현 */}
+          <Button
+            type='submit'
+            variant='contained'
+            style={{
+              background: '#A9F5F2',
+              width: '250px',
+              height: '50px',
+              zIndex: '1',
+              fontSize: '1.15rem',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              position: 'absolute',
+              right: '-1px',
+              bottom: '1px',
+            }}
+          >
+            Plug & Go 충전소 예약하기
+          </Button>
+          <SearchList />
         </div>
       </MapProvider>
+      {/* <Footer /> 굳이 푸터를 안넣어도 될듯 */}
     </>
   );
 };

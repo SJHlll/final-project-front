@@ -1,12 +1,11 @@
 .search-list-container {
-    height: 800px;
+    height: 795px;
     background-color: white;
     border-right: 1px solid #888;
     z-index: 1;
     position: absolute;
-    opacity: 0.935;
-    top: 0;
-    transition: left 0.3s ease;
+    top: 1px;
+    transition: left 0.5s ease;
   }
   
   .search-list-container.visible {
@@ -15,4 +14,31 @@
   
   .search-list-container.hidden {
     left: -500px;
+  }
+
+  .open-btn {
+    background-color: white;
+    width: 25px;
+    height: 75px;
+    text-align: center;
+    line-height: 75px;
+    z-index: 1;
+    font-size: 1.5rem;
+    font-weight: 'bold';
+    cursor: pointer;
+    position: absolute;
+    border: 1px solid #888;
+    border-left: none;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    top: 360px;
+    transition: left 0.5s ease;
+  }
+  
+  .open-btn.visible {
+    left: 500px;
+  }
+
+  .open-btn.hidden {
+    left: 0;
   }

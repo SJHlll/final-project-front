@@ -7,8 +7,8 @@ import { MapContext } from '../components/charge_station/contexts/MapContext';
 
 // 카카오 지도 스타일
 const MapContainer = styled(Map)`
-  width: 1280px;
-  height: 798px;
+  width: 100%;
+  height: 795px;
   border: 1px solid #888;
 `;
 
