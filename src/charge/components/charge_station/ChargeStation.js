@@ -5,7 +5,8 @@ import SearchList from './SearchList';
 import { MapProvider } from './contexts/MapContext';
 
 const ChargeStation = () => {
-  const [isSearchBoxVisible, setSearchBoxVisible] = useState(false);
+  const [isSearchBoxVisible, setSearchBoxVisible] =
+    useState(false);
 
   // 검색창, 목록 열고 닫기 함수
   const toggleSearchBox = () => {
@@ -21,7 +22,9 @@ const ChargeStation = () => {
             toggleSearchBox={toggleSearchBox}
             isSearchBoxVisible={isSearchBoxVisible}
           />
-          <SearchList visible={isSearchBoxVisible} /* 검색, 리스트 */ />
+          <SearchList
+            visible={isSearchBoxVisible} /* 검색, 리스트 */
+          />
         </div>
       </MapProvider>
     </>

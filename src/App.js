@@ -10,6 +10,7 @@ import Mypage from './Car/components/Mainpage/Mypage';
 import Carreview from './Car/components/CarHeader/Carreview';
 import Error from '../src/Car/components/Errorpage/Error';
 import Loginpage from '../src/Car/components/Mainpage/Loginpage';
+import ChargeStation from './charge/components/charge_station/ChargeStation';
 
 const App = () => {
   return (
@@ -28,6 +29,12 @@ const App = () => {
         <Route path='/car/noti' element={<Carnoti />} />
         <Route path='/car/event' element={<Carevent />} />
         <Route path='/car/review' element={<Carreview />} />
+
+        {/* 충전소 페이지 */}
+        <Route
+          path='charge/home'
+          element={<ChargeStation />}
+        />
 
         <Route path='/*' element={<Error />} />
       </Routes>

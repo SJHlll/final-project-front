@@ -14,7 +14,10 @@ const MapContainer = styled(Map)`
 
 const KakaoMap = () => {
   // 지도 초기 위도, 경도
-  const [center, setCenter] = useState({ lat: 37.552484, lng: 126.937641 });
+  const [center, setCenter] = useState({
+    lat: 37.552484,
+    lng: 126.937641,
+  });
 
   // 장소 배열
   const [markers, setMarkers] = useState(areas);
@@ -79,7 +82,9 @@ const KakaoMap = () => {
             closeWindow={() => closeWindow(index)}
           />
         ))}
-        <ZoomControl position={'RIGHT'} /* 확대 및 축소 컨트롤러 */ />
+        <ZoomControl
+          position={'RIGHT'} /* 확대 및 축소 컨트롤러 */
+        />
       </MapContainer>
     </>
   );

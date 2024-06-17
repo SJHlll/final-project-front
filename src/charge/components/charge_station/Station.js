@@ -12,8 +12,11 @@ const Station = ({
   DC,
   index,
 }) => {
-  const { setSelectedStation, setSelectedMarkerIndex, setMapLevel } =
-    useContext(MapContext);
+  const {
+    setSelectedStation,
+    setSelectedMarkerIndex,
+    setMapLevel,
+  } = useContext(MapContext);
 
   // 위치 찾기 버튼 클릭 시 발동하는 함수
   const handleLocateClick = () => {
@@ -35,7 +38,10 @@ const Station = ({
           급속 : {AC}대 / 완속 : {DC}대
         </div>
         <div className='ChargeAble'>충전 가능</div>
-        <div className='SearchBtn' onClick={handleLocateClick}>
+        <div
+          className='SearchBtn'
+          onClick={handleLocateClick}
+        >
           위치 찾기
         </div>
       </div>

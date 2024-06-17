@@ -10,7 +10,9 @@ export const SearchProvider = ({ children }) => {
   });
 
   return (
-    <SearchContext.Provider value={{ searchConditions, setSearchConditions }}>
+    <SearchContext.Provider
+      value={{ searchConditions, setSearchConditions }}
+    >
       {children}
     </SearchContext.Provider>
   );

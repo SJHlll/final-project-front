@@ -22,9 +22,19 @@ const KakaoMapMarker = ({
       onClick={openWindow}
     >
       {isOpen && (
-        <div style={{ minWidth: '200px', position: 'relative' }}>
+        <div
+          style={{
+            minWidth: '200px',
+            position: 'relative',
+          }}
+        >
           <div style={{ padding: '5px', color: '#000' }}>
-            <div style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
+            <div
+              style={{
+                fontSize: '1.2rem',
+                fontWeight: 'bold',
+              }}
+            >
               <div
                 style={{
                   display: 'flex',
@@ -73,7 +83,17 @@ const KakaoMapMarker = ({
                   창닫기
                 </span>
               </div>
-              <span>{StationName}</span>
+              <span
+                style={{
+                  display: 'inline-block',
+                  maxWidth: '250px',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                }}
+              >
+                {StationName}
+              </span>
             </div>
             <hr />
             <span>

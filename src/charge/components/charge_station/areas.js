@@ -4,7 +4,8 @@ export const areas = [
     lat: 37.552484,
     lng: 126.937641,
     StationName: '한국ICT인재개발원 신촌센터',
-    StationAddress: '서울특별시 마포구 백범로 23 케이터틀 3층',
+    StationAddress:
+      '서울특별시 마포구 백범로 23 케이터틀 3층',
     AC: 2,
     DC: 3,
     isOpen: false,
@@ -59,7 +60,7 @@ export const areas = [
     lat: 37.509519,
     lng: 127.04441,
     StationName: '서울삼성동우체국',
-    StationAddress: '서울 강남구 선릉로 572',
+    StationAddress: '서울특별시 강남구 선릉로 572',
     AC: 1,
     DC: 1,
     isOpen: false,

@@ -1,11 +1,16 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useContext,
+} from 'react';
 import { areas } from './cities';
 import { SearchContext } from '../contexts/SearchContext';
 import './Area.css';
 
 const Area = () => {
   const [selectedArea, setSelectedArea] = useState('');
-  const [selectedSubArea, setSelectedSubArea] = useState('');
+  const [selectedSubArea, setSelectedSubArea] =
+    useState('');
   const [subAreas, setSubAreas] = useState([]);
   const [facilitySearch, setFacilitySearch] = useState('');
 
@@ -13,7 +18,9 @@ const Area = () => {
 
   // selectedArea(시/도)가 변경될 때 해당 지역의 subArea(시/군/구) 업데이트
   useEffect(() => {
-    const foundArea = areas.find((area) => area.name === selectedArea);
+    const foundArea = areas.find(
+      (area) => area.name === selectedArea,
+    );
     if (foundArea) {
       setSubAreas(foundArea.subArea);
     } else {
@@ -39,7 +46,11 @@ const Area = () => {
 
   // 검색 버튼
   const handleSearch = () => {
-    setSearchConditions({ selectedArea, selectedSubArea, facilitySearch });
+    setSearchConditions({
+      selectedArea,
+      selectedSubArea,
+      facilitySearch,
+    });
   };
 
   // 초기화 버튼
@@ -65,7 +76,7 @@ const Area = () => {
 
   return (
     <div className='area-selector'>
-      <div className='box'>
+      <div className='search-box'>
         <select
           className='select-box'
           value={selectedArea}
@@ -91,7 +102,7 @@ const Area = () => {
           ))}
         </select>
       </div>
-      <div className='box'>
+      <div className='search-box'>
         <input
           className='search-input'
           type='text'
@@ -100,7 +111,10 @@ const Area = () => {
           onChange={handleFacilitySearchChange}
           onKeyDown={KeyboardSearch}
         />
-        <button className='search-btn' onClick={handleSearch}>
+        <button
+          className='search-btn'
+          onClick={handleSearch}
+        >
           검색
         </button>
         <button className='reset-btn' onClick={resetArea}>
