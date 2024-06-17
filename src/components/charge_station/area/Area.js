@@ -43,7 +43,7 @@ const Area = () => {
   };
 
   // 초기화 버튼
-  const resetArea = (e) => {
+  const resetArea = () => {
     setSelectedArea('');
     setSelectedSubArea('');
     setFacilitySearch('');

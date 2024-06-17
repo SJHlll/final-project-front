@@ -12,8 +12,6 @@ const MapContainer = styled(Map)`
   border: 1px solid #888;
 `;
 
-// const ps = new window.kakao.maps.services.Places();
-
 const KakaoMap = () => {
   // 지도 초기 위도, 경도
   const [center, setCenter] = useState({ lat: 37.552484, lng: 126.937641 });
@@ -23,14 +21,12 @@ const KakaoMap = () => {
 
   // 마커 클릭 시 창 열림
   const openWindow = (index) => {
-    const clickedMarker = markers[index];
     setMarkers(
       markers.map((marker, i) => ({
         ...marker,
         isOpen: i === index,
       })),
     );
-    setCenter({ lat: clickedMarker.lat, lng: clickedMarker.lng });
   };
 
   // 창닫기 클릭시 창 닫힘

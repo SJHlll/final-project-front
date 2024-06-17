@@ -19,7 +19,7 @@ const Station = ({
   const handleLocateClick = () => {
     setSelectedStation({ lat, lng }); // 선택된 좌표 업데이트
     setSelectedMarkerIndex(index); // 선택된 마커 인덱스 설정
-    setMapLevel(4); // 지도 레벨 설정
+    setMapLevel(5); // 지도 레벨 설정
   };
 
   return (

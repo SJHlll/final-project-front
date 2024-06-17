@@ -23,19 +23,25 @@ const ChargeStationList = () => {
 
   return (
     <div className='ListContainer'>
-      {filteredStations.map((station, index) => (
-        <Station
-          key={index}
-          id={station.id}
-          lat={station.lat}
-          lng={station.lng}
-          StationName={station.StationName}
-          StationAddress={station.StationAddress}
-          AC={station.AC}
-          DC={station.DC}
-          index={index}
-        />
-      ))}
+      {filteredStations.length > 0 ? (
+        filteredStations.map((station, index) => (
+          <>
+            <Station
+              key={index}
+              id={station.id}
+              lat={station.lat}
+              lng={station.lng}
+              StationName={station.StationName}
+              StationAddress={station.StationAddress}
+              AC={station.AC}
+              DC={station.DC}
+              index={station.index}
+            />
+          </>
+        ))
+      ) : (
+        <p>검색하신 조건에 맞는 충전소가 없습니다..</p>
+      )}
     </div>
   );
 };
