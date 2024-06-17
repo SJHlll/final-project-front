@@ -1,0 +1,27 @@
+.carsearchbar{
+    background-color: rgb(28, 28, 145);
+    width: 100%;
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.searchdate{
+    width: 20%;
+    height: 80%;
+    background-color: rgb(255, 255, 255);
+}
+.searchtime{
+    width: 20%;
+    height: 80%;
+    
+    background-color: rgb(255, 255, 255);
+}
+.searchbarbtn{
+    width: 10%;
+    height: 80%;
+    margin-left: 0.1%;
+    background-color: rgb(179, 179, 253);
+    border: 0.1px solid;
+    border-radius: 3%;
+}

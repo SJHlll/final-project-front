@@ -1,0 +1,37 @@
+.carcontentheaderbody{
+    width: 70%;
+    height: auto;
+    min-height: 100vh;
+    margin: 0 auto;
+    margin-top: 2%;
+    background-color: white;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.contenthdtitle{
+    width: 70%;
+    font-size: 20px;
+    margin: 0 2%;
+    margin-bottom: 1%;
+    border-bottom: 1px solid silver;
+    line-height: 2;
+
+    
+
+}   
+
+svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
+    overflow: visible;
+    box-sizing: content-box;
+    margin: 0 5%;
+}
+.contenthdsub{
+    float: right;
+    width: 25%;
+    font-size: 13px;
+    text-align-last: right;
+}
+.contenthdmain{
+    float: left;
+}
