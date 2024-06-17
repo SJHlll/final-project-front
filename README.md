@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# 리액트 프로젝트 시작하기
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. node.js 설치 (LTS 버전으로)
 
-## Available Scripts
+2. create-react-app 설치 (최초 1번)
 
-In the project directory, you can run:
+`$ npm install -g create-react-app`
 
-### `npm start`
+3. react 프로젝트 생성
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+`$ npx create-react-app 프로젝트이름`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+4. react 프로젝트 실행
 
-### `npm test`
+`$ cd 프로젝트폴더`
+`$ npm start`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- http://localhost:3000 에서 프론트엔드 서버 실행.
 
-### `npm run build`
+# git clone 시 주의사항
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`$ npm install`
+명령을 터미널에서 실행하여 라이브러리 설치<br>
+이유: node_modules 폴더는 github에 포함되어 있지 않기 때문에 다른 환경에서는 라이브러리 다운로드 및 설치가 반드시 필요!
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# 추가 라이브러리 설치
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. styled-components: 동적 css 처리를 도와주는 라이브러리.
 
-### `npm run eject`
+- `$ npm install styled-components`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. css 확장 라이브러리 sass
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- `$ npm install sass`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# 집에서 리엑트할때 요령
+1. 구글에 node.js를 쳐서 LTS였나 이 버전으로 다운받기
+2. 터미널을 켜서 npm install 해보기
+3. 안되면 vs코드 지우고 다시 설치 후 그냥 4개 체크박스 체크후 설치
+4. 우선 클론 땡겨놓기
+5. npm install
+6. npm i
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# 폰트 어썸사용하기 
+ - 승재한테질문하기
+ - 구글에 쳐보기(install, import 필요)
