@@ -1,4 +1,4 @@
-import '../../scss/SearchList.scss';
+import '../scss/SearchList.scss';
 
 const OpenBtn = ({
   toggleSearchBox,

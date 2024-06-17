@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import Station from './Station';
-import '../../scss/ChargeStationList.scss';
+import '../scss/ChargeStationList.scss';
 import { areas } from './areas';
-import { SearchContext } from './contexts/SearchContext';
+import { SearchContext } from '../contexts/SearchContext';
 
 const ChargeStationList = () => {
   const { searchConditions } = useContext(SearchContext);
