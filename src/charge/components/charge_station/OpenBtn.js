@@ -1,4 +1,3 @@
-import { Button } from 'reactstrap';
 import '../../scss/SearchList.scss';
 
 const OpenBtn = ({

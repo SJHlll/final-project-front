@@ -1,8 +1,8 @@
 import React from 'react';
 import KakaoMap from '../../kakaomap/KakaoMap';
 import SearchList from './SearchList';
-import { MapProvider } from './contexts/MapContext';
 import Header from '../../../Car/components/Header/Header';
+import { MapProvider } from './contexts/MapContext';
 import { Button } from 'reactstrap';
 
 const ChargeStation = () => {
@@ -10,11 +10,7 @@ const ChargeStation = () => {
     <>
       <Header />
       <MapProvider>
-        <div
-          style={{
-            position: 'relative',
-          }}
-        >
+        <div style={{ position: 'relative' }}>
           <KakaoMap /* 카카오지도 */ />
           {/* 에약창 이동하기, 아직 미구현 */}
           <Button

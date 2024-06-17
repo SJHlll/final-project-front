@@ -2,6 +2,7 @@
     height: 795px;
     background-color: white;
     border-right: 1px solid #888;
+    border-left: 1px solid #888;
     z-index: 1;
     position: absolute;
     top: 1px;
@@ -21,14 +22,14 @@
     width: 25px;
     height: 75px;
     text-align: center;
-    line-height: 75px;
+    line-height: 70px;
     z-index: 1;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 'bold';
     cursor: pointer;
     position: absolute;
     border: 1px solid #888;
-    border-left: none;
+    border-left-color: #ddd;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     top: 360px;
