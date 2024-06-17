@@ -1,0 +1,19 @@
+.careventlist{
+width: 100%;
+height: 25vh;
+background-color: white;
+flex-wrap: wrap;
+display: flex;
+justify-content: space-between;
+
+}
+
+.eventlistimg{
+    width: 100%;
+    height: 70%;
+}
+.eventlist{
+    width: 32%;
+    height: 30vh;
+align-content: center;
+}
