@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import '../../scss/ChargeStationList.scss';
-import { MapContext } from './contexts/MapContext';
+import { MapContext } from '../contexts/MapContext';
 
 const Station = ({
   id,
