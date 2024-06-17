@@ -3,7 +3,6 @@ import KakaoMap from '../../kakaomap/KakaoMap';
 import SearchList from './SearchList';
 import { MapProvider } from './contexts/MapContext';
 import Header from '../../../Car/components/Header/Header';
-import Footer from '../../../Car/components/Footer/Footer';
 import { Button } from 'reactstrap';
 
 const ChargeStation = () => {
