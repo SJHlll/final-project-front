@@ -2,8 +2,8 @@ import { useContext, useEffect, useState } from 'react';
 import { Map, ZoomControl } from 'react-kakao-maps-sdk';
 import KakaoMapMarker from './KakaoMapMarker';
 import styled from 'styled-components';
-import { areas } from '../components/charge_station/areas';
-import { MapContext } from '../components/charge_station/contexts/MapContext';
+import { areas } from '../charge_station/areas';
+import { MapContext } from '../charge_station/contexts/MapContext';
 
 // 카카오 지도 스타일
 const MapContainer = styled(Map)`
