@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ChargeStationSearch from './ChargeStationSearch';
 import ChargeStationList from './ChargeStationList';
 import '../../scss/SearchList.scss';
+import { SearchProvider } from '../contexts/SearchContext';
 
 const SearchList = ({ visible }) => {
   const [isVisible, setIsVisible] = useState(visible);
@@ -13,14 +14,16 @@ const SearchList = ({ visible }) => {
 
   return (
     <>
-      <div
-        className={`search-list-container ${isVisible ? 'visible' : 'hidden'}`}
-      >
-        <div className='search-list-content'>
-          <ChargeStationSearch />
-          <ChargeStationList />
+      <SearchProvider>
+        <div
+          className={`search-list-container ${isVisible ? 'visible' : 'hidden'}`}
+        >
+          <div className='search-list-content'>
+            <ChargeStationSearch />
+            <ChargeStationList />
+          </div>
         </div>
-      </div>
+      </SearchProvider>
     </>
   );
 };

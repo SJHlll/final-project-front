@@ -1,4 +1,3 @@
-// src/context/MapContext.js
 import React, { createContext, useState } from 'react';
 
 export const MapContext = createContext();

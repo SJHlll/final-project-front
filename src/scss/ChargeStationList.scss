@@ -12,21 +12,25 @@
 
         .Status {
             margin-left: 10px;
+            width: 300px;
+            position: relative;
 
             .Name {
-                font-size: 1.3rem;
+                font-size: 1.1rem;
                 font-weight: bold;
-                margin-bottom: 25px;
             }
 
             .Address {
                 font-size: 0.9rem;
+                position: absolute;
+                bottom: 5px;
             }
         }
 
         .Charger {
             text-align: center;
             margin-right: 10px;
+            width: 150px;
 
             .ChargerNum {
                 font-size: 0.9rem;
@@ -35,6 +39,7 @@
 
             .ChargeAble {
                 margin-bottom: 5px;
+                text-align: right;
             }
 
             .SearchBtn {

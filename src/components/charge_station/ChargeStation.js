@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import KakaoMap from '../../kakaomap/KakaoMap';
 import Btn from './Btn';
 import SearchList from './SearchList';
-import { MapProvider } from '../../context/MapContext';
+import { MapProvider } from '../contexts/MapContext';
 
 const ChargeStation = () => {
   const [isSearchBoxVisible, setSearchBoxVisible] = useState(false);

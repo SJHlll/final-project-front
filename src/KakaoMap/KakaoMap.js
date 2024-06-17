@@ -3,7 +3,7 @@ import { Map, ZoomControl } from 'react-kakao-maps-sdk';
 import KakaoMapMarker from './KakaoMapMarker';
 import styled from 'styled-components';
 import { areas } from '../components/charge_station/areas';
-import { MapContext } from '../context/MapContext';
+import { MapContext } from '../components/contexts/MapContext';
 
 // 카카오 지도 스타일
 const MapContainer = styled(Map)`

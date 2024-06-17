@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { areas } from './areas';
+import React, { useEffect, useState, useContext } from 'react';
+import { areas } from './cities';
+import { SearchContext } from '../../contexts/SearchContext';
 import './Area.css';
 
 const Area = () => {
@@ -7,6 +8,8 @@ const Area = () => {
   const [selectedSubArea, setSelectedSubArea] = useState('');
   const [subAreas, setSubAreas] = useState([]);
   const [facilitySearch, setFacilitySearch] = useState('');
+
+  const { setSearchConditions } = useContext(SearchContext);
 
   // selectedArea(시/도)가 변경될 때 해당 지역의 subArea(시/군/구) 업데이트
   useEffect(() => {
@@ -36,21 +39,7 @@ const Area = () => {
 
   // 검색 버튼
   const handleSearch = () => {
-    // (시/도) 선택 시
-    if (selectedArea) {
-      // (시/군/구) 선택 시
-      if (selectedSubArea) {
-        console.log(
-          `${selectedArea} ${selectedSubArea} 내의 ${facilitySearch}충전소 검색`,
-        );
-        // (시/군/구) 미선택 시
-      } else if (!selectedSubArea) {
-        console.log(`${selectedArea} 내의 ${facilitySearch}충전소 검색`);
-      }
-      // 아무것도 안고를 시
-    } else {
-      // 일단은 모든 충전소 검색. 어케하지
-    }
+    setSearchConditions({ selectedArea, selectedSubArea, facilitySearch });
   };
 
   // 초기화 버튼
@@ -58,6 +47,20 @@ const Area = () => {
     setSelectedArea('');
     setSelectedSubArea('');
     setFacilitySearch('');
+    setSearchConditions({
+      selectedArea: '',
+      selectedSubArea: '',
+      facilitySearch: '',
+    });
+  };
+
+  // input 태그 Enter키, ESC키 작동함수
+  const KeyboardSearch = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    } else if (e.key === 'Escape') {
+      setFacilitySearch('');
+    }
   };
 
   return (
@@ -92,9 +95,10 @@ const Area = () => {
         <input
           className='search-input'
           type='text'
-          placeholder='충전소 검색'
+          placeholder='충전소 이름 검색'
           value={facilitySearch}
           onChange={handleFacilitySearchChange}
+          onKeyDown={KeyboardSearch}
         />
         <button className='search-btn' onClick={handleSearch}>
           검색

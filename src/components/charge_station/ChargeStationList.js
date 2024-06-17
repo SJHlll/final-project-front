@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Station from './Station';
 import '../../scss/ChargeStationList.scss';
 import { areas } from './areas';
+import { SearchContext } from '../contexts/SearchContext';
 
 const ChargeStationList = () => {
-  const stations = areas;
+  const { searchConditions } = useContext(SearchContext);
+  const { selectedArea, selectedSubArea, facilitySearch } = searchConditions;
+
+  const filteredStations = areas.filter((station) => {
+    const isAreaMatch = selectedArea
+      ? station.StationAddress.includes(selectedArea)
+      : true;
+    const isSubAreaMatch = selectedSubArea
+      ? station.StationAddress.includes(selectedSubArea)
+      : true;
+    const isFacilityMatch = facilitySearch
+      ? station.StationName.includes(facilitySearch)
+      : true;
+    return isAreaMatch && isSubAreaMatch && isFacilityMatch;
+  });
 
   return (
     <div className='ListContainer'>
-      {stations.map((station, index) => (
+      {filteredStations.map((station, index) => (
         <Station
           key={index}
           id={station.id}
