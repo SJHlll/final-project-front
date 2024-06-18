@@ -35,6 +35,5 @@
         "react/jsx-key": "off",
         "indent": "off",
         "max-len": "off"
-    
     }
 }
