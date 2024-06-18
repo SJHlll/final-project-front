@@ -9,7 +9,6 @@ export const areas = [
     AC: 2,
     DC: 3,
     isOpen: false,
-    index: 0,
   },
   {
     id: '000002',
@@ -20,7 +19,6 @@ export const areas = [
     AC: 2,
     DC: 0,
     isOpen: false,
-    index: 1,
   },
   {
     id: '000003',
@@ -31,7 +29,6 @@ export const areas = [
     AC: 0,
     DC: 2,
     isOpen: false,
-    index: 2,
   },
   {
     id: '000004',
@@ -42,7 +39,6 @@ export const areas = [
     AC: 3,
     DC: 4,
     isOpen: false,
-    index: 3,
   },
   {
     id: '000005',
@@ -53,7 +49,6 @@ export const areas = [
     AC: 1,
     DC: 1,
     isOpen: false,
-    index: 4,
   },
   {
     id: '000006',
@@ -64,6 +59,5 @@ export const areas = [
     AC: 1,
     DC: 1,
     isOpen: false,
-    index: 5,
   },
 ];

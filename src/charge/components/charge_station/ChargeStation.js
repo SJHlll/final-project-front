@@ -11,8 +11,6 @@ const ChargeStation = () => {
       <MapProvider>
         <div style={{ position: 'relative' }}>
           <KakaoMap /* 카카오지도 */ />
-          {/* 에약창 이동하기, 아직 미구현 */}
-
           <SearchList />
         </div>
       </MapProvider>

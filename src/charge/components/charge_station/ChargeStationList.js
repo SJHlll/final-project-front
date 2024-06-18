@@ -1,78 +1,100 @@
-import React, { useContext } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import Station from './Station';
 import '../scss/ChargeStationList.scss';
-import { areas } from './areas';
 import { SearchContext } from '../contexts/SearchContext';
 
 const ChargeStationList = () => {
   const { searchConditions } = useContext(SearchContext);
-  const { selectedArea, selectedSubArea, facilitySearch } =
-    searchConditions;
-  const isInitialSearch =
-    !selectedArea && !selectedSubArea && !facilitySearch;
+  const {
+    selectedArea,
+    selectedSubArea,
+    facilitySearch,
+    isSearchClicked,
+  } = searchConditions;
+  const [stations, setStations] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const filteredStations = areas.filter((station) => {
+  // 백엔드(데이터베이스)에서 받아온 충전소 데이터
+  useEffect(() => {
+    if (!isSearchClicked) return;
+
+    const fetchStations = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const response = await fetch(
+          'http://localhost:8181/charge/home', // 현재 링크
+        );
+        if (!response.ok) {
+          throw new Error('Failed to fetch stations');
+        }
+        const data = await response.json();
+        setStations(data.chargers);
+        setIsLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setIsLoading(false);
+      }
+    };
+    fetchStations();
+  }, [isSearchClicked]);
+
+  const filteredStations = stations.filter((station) => {
     const isAreaMatch = selectedArea
-      ? station.StationAddress.includes(selectedArea)
+      ? station.address.includes(selectedArea)
       : true;
     const isSubAreaMatch = selectedSubArea
-      ? station.StationAddress.includes(selectedSubArea)
+      ? station.address.includes(selectedSubArea)
       : true;
     const isFacilityMatch = facilitySearch
-      ? station.StationName.includes(facilitySearch)
+      ? station.chargerName.includes(facilitySearch)
       : true;
     return isAreaMatch && isSubAreaMatch && isFacilityMatch;
   });
 
+  if (!isSearchClicked) {
+    return (
+      <p
+        style={{
+          textAlign: 'center',
+        }}
+      >
+        검색 조건을 입력해주세요.
+      </p>
+    );
+  }
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
   return (
     <div className='ListContainer'>
-      {isInitialSearch ? (
-        <div>
-          <p
-            style={{
-              textAlign: 'center',
-            }}
-          >
-            검색 결과가 없습니다. 행정구역 시/도를
-            지정해주세요.
-          </p>
-          {/* 더미시작 */}
-          <p>
-            현재 더미데이터 (삭제할예정.
-            ChargeStationList.js)
-          </p>
-          <p>
-            한국ICT인재개발원 신촌센터 / 서울특별시 마포구
-          </p>
-          <p>국회의사당 / 서울특별시 영등포구</p>
-          <p>청와대 / 서울특별시 종로구</p>
-          <p>반포자이 / 서울특별시 서초구</p>
-          <p>
-            서울교통공사 군자차량사업소 / 서울특별시 성동구
-          </p>
-          <p>서울삼성동우체국 / 서울특별시 강남구</p>
-          {/* 더미끝 */}
-        </div>
-      ) : filteredStations.length > 0 ? (
+      {filteredStations.length > 0 ? (
         filteredStations.map((station, index) => (
           <Station
             key={index}
             id={station.id}
-            lat={station.lat}
-            lng={station.lng}
-            StationName={station.StationName}
-            StationAddress={station.StationAddress}
+            lat={station.latitude}
+            lng={station.longitude}
+            StationName={station.chargerName}
+            StationAddress={station.address}
             AC={station.AC}
             DC={station.DC}
             index={station.index}
           />
         ))
       ) : (
-        <p
-          style={{
-            textAlign: 'center',
-          }}
-        >
+        <p style={{ textAlign: 'center' }}>
           조건에 맞는 충전소가 없습니다. 검색을 다시
           진행해주세요.
         </p>
