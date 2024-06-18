@@ -1,7 +1,7 @@
 import { Grid, TextField } from '@mui/material';
 import React from 'react';
 import { Container } from 'reactstrap';
-import '../../scss/Login.scss';
+// import '../../scss/Login.scss';
 import { KAKAO_AUTH_URL } from '../../config/kakao-config';
 import { NAVER_AUTH_URL } from '../../config/naver-config';
 
@@ -17,7 +17,7 @@ const Login = () => {
             <img
               style={{ width: '30%', height: '30%' }}
               alt='kakaobtn'
-              src={require('../../assets/kakao_login_medium_wide.png')}
+              // src={require('../../assets/kakao_login_medium_wide.png')}
             />
           </a>
         </Grid>
@@ -26,7 +26,7 @@ const Login = () => {
             <img
               style={{ width: '10%', height: '10%' }}
               alt='naverbtn'
-              src={require('../../assets/kakao_login_medium_wide.png')}
+              // src={require('../../assets/kakao_login_medium_wide.png')}
             />
           </a>
         </Grid>
@@ -34,7 +34,7 @@ const Login = () => {
           <img
             style={{ width: '10%', height: '10%' }}
             alt='googlebtn'
-            src={require('../../assets/kakao_login_medium_wide.png')}
+            // src={require('../../assets/kakao_login_medium_wide.png')}
           />
         </Grid>
       </Container>

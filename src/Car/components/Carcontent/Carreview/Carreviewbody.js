@@ -1,6 +1,6 @@
 import React from 'react';
 import './Carreviewbody.scss';
-import Carreviewlist from './Carreviewtlist';
+import Carreviewlist from './Carreviewlist';
 import Carcontentheader from '../Carcontentheader';
 
 const Carreviewbody = () => {
