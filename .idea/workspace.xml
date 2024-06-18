@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="71373143-ef0f-4721-abc9-56f81679c9e1" name="변경" comment="" />
+    <list default="true" id="71373143-ef0f-4721-abc9-56f81679c9e1" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/user/KakaoLoginHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/user/KakaoLoginHandler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/user/NaverLoginHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/user/NaverLoginHandler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/naver-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/naver-config.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
