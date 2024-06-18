@@ -13,15 +13,15 @@
   }
   
   .search-list-container.hidden {
-    left: -500px;
+    left: -510px;
   }
 
   .open-btn {
     background-color: white;
-    width: 25px;
-    height: 75px;
+    width: 35px;
+    height: 100px;
     text-align: center;
-    line-height: 70px;
+    line-height: 95px;
     z-index: 1;
     font-size: 2rem;
     font-weight: 'bold';
@@ -40,5 +40,5 @@
   }
 
   .open-btn.hidden {
-    left: 0;
+    left: -10px;
   }

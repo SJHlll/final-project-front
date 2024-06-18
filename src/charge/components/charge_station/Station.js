@@ -3,14 +3,16 @@ import '../scss/ChargeStationList.scss';
 import { MapContext } from '../contexts/MapContext';
 
 const Station = ({
-  id,
-  lat,
-  lng,
+  index,
   StationName,
   StationAddress,
-  AC,
-  DC,
-  index,
+  ChargeSpeed,
+  ChargeType,
+  ChargeCompany,
+  Facilities,
+  Availability,
+  lat,
+  lng,
 }) => {
   const {
     setSelectedStation,
@@ -29,21 +31,25 @@ const Station = ({
     <div className='Station' style={{ marginTop: '5px' }}>
       {/* 왼쪽박스 */}
       <div className='Status'>
-        <div className='Name'>{StationName}</div>
-        <div className='Address'>{StationAddress}</div>
+        <div className='Name' onClick={handleLocateClick}>
+          <span>
+            ({ChargeSpeed}) {StationName}
+          </span>
+        </div>
+        <div className='Address'>
+          <a
+            href={`https://map.kakao.com/link/to/${StationAddress},${lat},${lng}`}
+            target='_blank'
+            rel='noreferrer'
+          >
+            {StationAddress}
+          </a>
+        </div>
       </div>
       {/* 오른쪽박스 */}
       <div className='Charger'>
-        <div className='ChargerNum'>
-          급속 : {AC}대 / 완속 : {DC}대
-        </div>
-        <div className='ChargeAble'>충전 가능</div>
-        <div
-          className='SearchBtn'
-          onClick={handleLocateClick}
-        >
-          위치 찾기
-        </div>
+        <div className='ChargerNum'>{ChargeType}</div>
+        <div className='ChargeAble'>{Availability}</div>
       </div>
     </div>
   );
