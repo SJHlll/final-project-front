@@ -1,9 +1,10 @@
 .carcontentheaderbody{
     width: 70%;
-    height: auto;
-    min-height: 100vh;
+    height: 1vh;
+
     margin: 0 auto;
     margin-top: 2%;
+    margin-bottom: 2%;
     background-color: white;
     align-items: center;
     display: flex;
@@ -13,7 +14,6 @@
     width: 70%;
     font-size: 20px;
     margin: 0 2%;
-    margin-bottom: 1%;
     border-bottom: 1px solid silver;
     line-height: 2;
 

@@ -7,7 +7,9 @@ const CarInfo = () => {
     fetch('/carsData.json')
       .then((response) => response.json())
       .then((data) => setCarsData(data))
-      .catch((error) => console.error('Error fetching data:', error));
+      .catch((error) =>
+        console.error('Error fetching data:', error),
+      );
   }, []);
 
   return (

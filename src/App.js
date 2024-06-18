@@ -1,12 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
-import Homepage from './components/mainpage/Homepage';
 import { Route, Routes } from 'react-router-dom';
+import Login from './components/user/Login';
 import KakaoLoginHandler from './components/user/KakaoLoginHandler';
 import NaverLoginHandler from './components/user/NaverLoginHandler';
 import React from 'react';
 import './App.scss';
-import { Route, Routes } from 'react-router-dom';
 import Choose from './Car/components/Mainpage/Choose';
 import Carhome from './Car/components/Mainpage/Carhome';
 import Carevent from './Car/components/CarHeader/Carevent';
@@ -22,13 +19,33 @@ const App = () => {
   return (
     <div className='App'>
       <Routes>
-        {/* 공동페이지 */}
-        <Route exact path='/' element={<Loginpage />} />
-        <Route path='/car/home' element={<Carhome />} />
-        <Route path='/choose' element={<Choose />} />
+        {/* 테스트 로그인페이지 */}
+        <Route path='/testlogin' element={<Loginpage />} />
 
-        {/* 마이페이지 */}
-        <Route path='/mypage' element={<Mypage />} />
+        {/* 공통 로그인페이지 */}
+        <Route exact path='/' element={<Login />} />
+
+        {/* 카카오 로그인페이지 */}
+        <Route
+          path='/oauth/kakao'
+          element={<KakaoLoginHandler />}
+        />
+        {/* 네이버 로그인페이지 */}
+        <Route
+          path='/oauth/naver'
+          element={<NaverLoginHandler />}
+        />
+        {/* 구글 로그인페이지 */}
+
+        {/* 렌트카, 충전소 선택페이지 */}
+        <Route path='/choose' element={<Choose />} />
+        <Route path='/car/home' element={<Carhome />} />
+
+        {/* 충전소 페이지 */}
+        <Route
+          path='charge/home'
+          element={<ChargeStation />}
+        />
 
         {/* 차 렌트 페이지 */}
         <Route path='/car/res' element={<Carres />} />
@@ -36,21 +53,10 @@ const App = () => {
         <Route path='/car/event' element={<Carevent />} />
         <Route path='/car/review' element={<Carreview />} />
 
-function App() {
-  return (
-    <Routes>
-      <Route path='/login' element={<Homepage />} />
-      <Route path='/oauth/kakao' element={<KakaoLoginHandler />} />
-      <Route path='/oauth/naver' element={<NaverLoginHandler />} />
-    </Routes>
-  );
-}
-        {/* 충전소 페이지 */}
-        <Route
-          path='charge/home'
-          element={<ChargeStation />}
-        />
+        {/* 마이페이지 */}
+        <Route path='/mypage' element={<Mypage />} />
 
+        {/* 에러페이지 */}
         <Route path='/*' element={<Error />} />
       </Routes>
     </div>
