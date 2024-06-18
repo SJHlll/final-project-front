@@ -1,3 +1,9 @@
+import logo from './logo.svg';
+import './App.css';
+import Homepage from './components/mainpage/Homepage';
+import { Route, Routes } from 'react-router-dom';
+import KakaoLoginHandler from './components/user/KakaoLoginHandler';
+import NaverLoginHandler from './components/user/NaverLoginHandler';
 import React from 'react';
 import './App.scss';
 import { Route, Routes } from 'react-router-dom';
@@ -10,6 +16,7 @@ import Mypage from './Car/components/Mainpage/Mypage';
 import Carreview from './Car/components/CarHeader/Carreview';
 import Error from '../src/Car/components/Errorpage/Error';
 import Loginpage from '../src/Car/components/Mainpage/Loginpage';
+import ChargeStation from './charge/components/charge_station/ChargeStation';
 
 const App = () => {
   return (
@@ -28,6 +35,21 @@ const App = () => {
         <Route path='/car/noti' element={<Carnoti />} />
         <Route path='/car/event' element={<Carevent />} />
         <Route path='/car/review' element={<Carreview />} />
+
+function App() {
+  return (
+    <Routes>
+      <Route path='/login' element={<Homepage />} />
+      <Route path='/oauth/kakao' element={<KakaoLoginHandler />} />
+      <Route path='/oauth/naver' element={<NaverLoginHandler />} />
+    </Routes>
+  );
+}
+        {/* 충전소 페이지 */}
+        <Route
+          path='charge/home'
+          element={<ChargeStation />}
+        />
 
         <Route path='/*' element={<Error />} />
       </Routes>
