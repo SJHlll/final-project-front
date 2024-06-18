@@ -1,16 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ChargeStationSearch from './ChargeStationSearch';
 import ChargeStationList from './ChargeStationList';
-import '../../scss/SearchList.scss';
-import { SearchProvider } from './contexts/SearchContext';
+import '../scss/SearchList.scss';
+import { SearchProvider } from '../contexts/SearchContext';
+import OpenBtn from './OpenBtn';
 
 const SearchList = ({ visible }) => {
   const [isVisible, setIsVisible] = useState(visible);
 
   // 열림, 닫힘
-  React.useEffect(() => {
+  useEffect(() => {
     setIsVisible(visible);
   }, [visible]);
+
+  const toggleSearchBox = () => {
+    setIsVisible(!isVisible);
+  };
 
   return (
     <>
@@ -23,6 +28,10 @@ const SearchList = ({ visible }) => {
             <ChargeStationList />
           </div>
         </div>
+        <OpenBtn
+          toggleSearchBox={toggleSearchBox}
+          isSearchBoxVisible={isVisible}
+        />
       </SearchProvider>
     </>
   );

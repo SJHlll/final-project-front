@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import Station from './Station';
-import '../../scss/ChargeStationList.scss';
+import '../scss/ChargeStationList.scss';
 import { areas } from './areas';
-import { SearchContext } from './contexts/SearchContext';
+import { SearchContext } from '../contexts/SearchContext';
 
 const ChargeStationList = () => {
   const { searchConditions } = useContext(SearchContext);
@@ -36,8 +36,11 @@ const ChargeStationList = () => {
             검색 결과가 없습니다. 행정구역 시/도를
             지정해주세요.
           </p>
-          <hr />
-          <p>현재 더미데이터</p>
+          {/* 더미시작 */}
+          <p>
+            현재 더미데이터 (삭제할예정.
+            ChargeStationList.js)
+          </p>
           <p>
             한국ICT인재개발원 신촌센터 / 서울특별시 마포구
           </p>
@@ -48,6 +51,7 @@ const ChargeStationList = () => {
             서울교통공사 군자차량사업소 / 서울특별시 성동구
           </p>
           <p>서울삼성동우체국 / 서울특별시 강남구</p>
+          {/* 더미끝 */}
         </div>
       ) : filteredStations.length > 0 ? (
         filteredStations.map((station, index) => (
