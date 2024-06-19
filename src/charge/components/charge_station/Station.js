@@ -4,6 +4,8 @@ import { MapContext } from '../contexts/MapContext';
 
 const Station = ({
   index,
+  Id,
+  StationId,
   Name,
   Address,
   Speed,
@@ -25,6 +27,20 @@ const Station = ({
     setSelectedStation({ lat, lng }); // 선택된 좌표 업데이트
     setSelectedMarkerIndex(index); // 선택된 마커 인덱스 설정
     setMapLevel(5); // 지도 레벨 설정
+    console.log(
+      index,
+      Id,
+      StationId,
+      Name,
+      Address,
+      Speed,
+      Type,
+      Management,
+      areaIn,
+      Available,
+      lat,
+      lng,
+    );
   };
 
   return (
@@ -50,6 +66,7 @@ const Station = ({
       <div className='Charger'>
         <div className='ChargerType'>{Type}</div>
         <div className='ChargeAble'>{Available}</div>
+        <div>{StationId}</div>
       </div>
     </div>
   );

@@ -2,8 +2,8 @@ import { useContext, useEffect, useState } from 'react';
 import { Map, ZoomControl } from 'react-kakao-maps-sdk';
 import KakaoMapMarker from './KakaoMapMarker';
 import styled from 'styled-components';
-import { areas } from '../charge_station/areas';
 import { MapContext } from '../contexts/MapContext';
+import { StationContext } from '../contexts/StationContext';
 
 // 카카오 지도 스타일
 const MapContainer = styled(Map)`
@@ -13,14 +13,30 @@ const MapContainer = styled(Map)`
 `;
 
 const KakaoMap = () => {
+  const [markers, setMarkers] = useState([]);
+  const { stations, visibleCount } =
+    useContext(StationContext);
+  const { selectedStation, selectedMarkerIndex, mapLevel } =
+    useContext(MapContext);
+
   // 지도 초기 위도, 경도
   const [center, setCenter] = useState({
     lat: 37.552484,
     lng: 126.937641,
   });
 
-  // 장소 배열
-  const [markers, setMarkers] = useState(areas);
+  useEffect(() => {
+    setMarkers(
+      stations.slice(0, visibleCount).map((station) => ({
+        lat: station.latitude,
+        lng: station.longitude,
+        Id: station.stationId, // 데이터베이스의 id
+        StationName: station.stationName,
+        Speed: station.speed,
+        isOpen: false,
+      })),
+    );
+  }, [stations, visibleCount]);
 
   // 마커 클릭 시 창 열림
   const openWindow = (index) => {
@@ -49,9 +65,6 @@ const KakaoMap = () => {
     setMarkers(updatedMarkers);
   };
 
-  const { selectedStation, selectedMarkerIndex, mapLevel } =
-    useContext(MapContext);
-
   // 선택된 좌표 변경 시 지도 중심 업데이트
   useEffect(() => {
     if (selectedStation) {
@@ -71,12 +84,12 @@ const KakaoMap = () => {
         {markers.map((marker, index) => (
           <KakaoMapMarker
             key={index}
-            id={marker.id}
+            index={marker.id}
             lat={marker.lat}
             lng={marker.lng}
+            Id={marker.stationId}
             StationName={marker.StationName}
-            AC={marker.AC}
-            DC={marker.DC}
+            Speed={marker.Speed}
             isOpen={marker.isOpen}
             openWindow={() => openWindow(index)}
             closeWindow={() => closeWindow(index)}

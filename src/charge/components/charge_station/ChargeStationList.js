@@ -6,7 +6,9 @@ import React, {
 import Station from './Station';
 import '../scss/ChargeStationList.scss';
 import { SearchContext } from '../contexts/SearchContext';
+import { StationContext } from '../contexts/StationContext';
 import loadingImg from '../../assets/img/loading.png';
+import haversine from 'haversine';
 
 const ChargeStationList = () => {
   const { searchConditions } = useContext(SearchContext);
@@ -16,10 +18,18 @@ const ChargeStationList = () => {
     facilitySearch,
     isSearchClicked,
   } = searchConditions;
-  const [stations, setStations] = useState([]);
+  const {
+    stations,
+    setStations,
+    visibleCount,
+    setVisibleCount,
+  } = useContext(StationContext);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [visibleCount, setVisibleCount] = useState(20);
+  const [centerCoords] = useState({
+    latitude: 37.552484,
+    longitude: 126.937641,
+  });
 
   // 백엔드(데이터베이스)에서 받아온 충전소 데이터
   useEffect(() => {
@@ -95,19 +105,32 @@ const ChargeStationList = () => {
   // 더 보기 버튼 클릭 시 20개씩 더 보여주는 함수
   const handleShowMore = () => {
     setVisibleCount((prevCount) => prevCount + 20);
-    console.log(stations);
+    console.log(centerCoords);
   };
+
+  // 중심 좌표에서 가까운 순으로 충전소 정렬
+  const sortedStations = filteredStations
+    .map((station) => ({
+      ...station,
+      distance: haversine(centerCoords, {
+        latitude: station.latitude,
+        longitude: station.longitude,
+      }),
+    }))
+    .sort((a, b) => a.distance - b.distance);
 
   return (
     <div className='ListContainer'>
-      {filteredStations.length > 0 ? (
+      {sortedStations.length > 0 ? (
         <>
-          {filteredStations
+          {sortedStations
             .slice(0, visibleCount)
             .map((station, index) => (
               <Station
                 key={index}
                 index={index}
+                Id={station.id} // 데이터베이스 id
+                StationId={station.stationId} // 충전기 id
                 Name={station.stationName} // 충전소 이름
                 Address={station.address} // 충전소 주소
                 Speed={station.speed} // 완속 or 급속

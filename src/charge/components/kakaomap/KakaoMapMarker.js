@@ -2,12 +2,11 @@ import React from 'react';
 import { MapMarker } from 'react-kakao-maps-sdk';
 
 const KakaoMapMarker = ({
-  id,
   lat,
   lng,
+  Id,
   StationName,
-  AC,
-  DC,
+  Speed,
   isOpen,
   openWindow,
   closeWindow,
@@ -56,7 +55,7 @@ const KakaoMapMarker = ({
                     borderRadius: '10px',
                   }}
                 >
-                  {id}
+                  {Id}
                 </span>
                 <a
                   href={`https://map.kakao.com/link/to/${StationName},${lat},${lng}`}
@@ -96,9 +95,7 @@ const KakaoMapMarker = ({
               </span>
             </div>
             <hr />
-            <span>
-              급속 : {AC}개 / 완속 : {DC}개
-            </span>
+            <span>{Speed}</span>
           </div>
         </div>
       )}
