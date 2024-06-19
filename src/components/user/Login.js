@@ -4,8 +4,15 @@ import { Container } from 'reactstrap';
 // import '../../scss/Login.scss';
 import { KAKAO_AUTH_URL } from '../../config/kakao-config';
 import { NAVER_AUTH_URL } from '../../config/naver-config';
+import { GOOGLE_URL } from '../../config/google-config';
+import {
+  GoogleLogin,
+  GoogleOAuthProvider,
+} from '@react-oauth/google';
+import GoogleAuthLogin from './GoogleAuthLogin';
 
 const Login = () => {
+  const clientId = process.env.REACT_APP_GOOGLE_CLIENT_KEY;
   return (
     <>
       <Container className='body-top'>
@@ -31,11 +38,7 @@ const Login = () => {
           </a>
         </Grid>
         <Grid>
-          <img
-            style={{ width: '10%', height: '10%' }}
-            alt='googlebtn'
-            // src={require('../../assets/kakao_login_medium_wide.png')}
-          />
+          <GoogleAuthLogin />
         </Grid>
       </Container>
     </>
