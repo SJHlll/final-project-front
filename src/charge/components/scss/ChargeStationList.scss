@@ -12,7 +12,7 @@
 
         .Status {
             margin-left: 10px;
-            width: 300px;
+            width: 66%;
             position: relative;
 
             .Name {
@@ -44,21 +44,22 @@
         }
 
         .Charger {
-            text-align: center;
             margin-right: 10px;
-            width: 150px;
+            text-align: right;
+            width: 34%;
 
-            .ChargerNum {
-                font-size: 0.9rem;
+            .ChargerType {
+                font-size: 0.8rem;
                 margin-bottom: 5px;
             }
 
             .ChargeAble {
                 margin-bottom: 5px;
-                text-align: right;
             }
         }
     }
+
+
 
     .show-more-button {
         width: 100px;

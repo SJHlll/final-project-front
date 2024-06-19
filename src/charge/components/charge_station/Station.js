@@ -48,7 +48,7 @@ const Station = ({
       </div>
       {/* 오른쪽박스 */}
       <div className='Charger'>
-        <div className='ChargerNum'>{ChargeType}</div>
+        <div className='ChargerType'>{ChargeType}</div>
         <div className='ChargeAble'>{Availability}</div>
       </div>
     </div>
