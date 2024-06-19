@@ -4,13 +4,13 @@ import { MapContext } from '../contexts/MapContext';
 
 const Station = ({
   index,
-  StationName,
-  StationAddress,
-  ChargeSpeed,
-  ChargeType,
-  ChargeCompany,
-  Facilities,
-  Availability,
+  Name,
+  Address,
+  Speed,
+  Type,
+  Management,
+  areaIn,
+  Available,
   lat,
   lng,
 }) => {
@@ -33,23 +33,23 @@ const Station = ({
       <div className='Status'>
         <div className='Name' onClick={handleLocateClick}>
           <span>
-            ({ChargeSpeed}) {StationName}
+            ({Speed}) {Name}
           </span>
         </div>
         <div className='Address'>
           <a
-            href={`https://map.kakao.com/link/to/${StationAddress},${lat},${lng}`}
+            href={`https://map.kakao.com/link/to/${Address},${lat},${lng}`}
             target='_blank'
             rel='noreferrer'
           >
-            {StationAddress}
+            {Address}
           </a>
         </div>
       </div>
       {/* 오른쪽박스 */}
       <div className='Charger'>
-        <div className='ChargerType'>{ChargeType}</div>
-        <div className='ChargeAble'>{Availability}</div>
+        <div className='ChargerType'>{Type}</div>
+        <div className='ChargeAble'>{Available}</div>
       </div>
     </div>
   );

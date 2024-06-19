@@ -1,7 +1,6 @@
 import React, {
   useContext,
   useEffect,
-  useRef,
   useState,
 } from 'react';
 import Station from './Station';
@@ -52,14 +51,17 @@ const ChargeStationList = () => {
 
   // 시/도, 시/군/구, 키워드 검색 함수
   const filteredStations = stations.filter((station) => {
+    // 데이터베이스 주소, 시/도 매치
     const isAreaMatch = selectedArea
       ? station.address.includes(selectedArea)
       : true;
+    // 데이터베이스 주소, 시/군/구 매치
     const isSubAreaMatch = selectedSubArea
       ? station.address.includes(selectedSubArea)
       : true;
+    // 데이터베이스 이름, 검색어 매치
     const isFacilityMatch = facilitySearch
-      ? station.chargerName.includes(facilitySearch)
+      ? station.stationName.includes(facilitySearch)
       : true;
     return isAreaMatch && isSubAreaMatch && isFacilityMatch;
   });
@@ -106,14 +108,13 @@ const ChargeStationList = () => {
               <Station
                 key={index}
                 index={index}
-                id={station.id}
-                StationName={station.chargerName} // 충전소 이름
-                StationAddress={station.address} // 충전소 주소
-                ChargeSpeed={station.chargingSpeed} // 완속 or 급속
-                ChargeType={station.chargerType} // 충전기 타입
-                ChargeCompany={station.chargerCompany} // 충전기 회사
-                Facilities={station.facilities} // 이용 시설
-                Availability={station.availability} // 이용자 제한 or 이용 가능
+                Name={station.stationName} // 충전소 이름
+                Address={station.address} // 충전소 주소
+                Speed={station.speed} // 완속 or 급속
+                Type={station.chargerType} // 충전기 타입
+                Management={station.management} // 충전기 회사
+                areaIn={station.areaIn} // 이용 시설
+                Available={station.available} // 이용자 제한 or 이용 가능
                 price={station.chargingPrice} // 충전 가격
                 lat={station.latitude} // 위도
                 lng={station.longitude} // 경도
