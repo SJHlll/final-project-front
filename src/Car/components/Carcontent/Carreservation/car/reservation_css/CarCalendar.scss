@@ -1,0 +1,40 @@
+// .content{
+//     // margin: 0px 100px 500px 100px;
+//     // border: 2px solid red;
+//     width: 500px;
+//     height: 650px;
+//     border-radius: 30px;
+//     background-color: red;
+// }
+/* General styles for selected dates */
+.react-datepicker__day--selected,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--in-range,
+.react-datepicker__day--selecting-range-start,
+.react-datepicker__day--selecting-range-end,
+.react-datepicker__day--range-start,
+.react-datepicker__day--range-end {
+    background-color: #216ba5 !important;
+    color: #fff !important;
+}
+
+/* Specific style for end date */
+.react-datepicker__day--range-end {
+    background-color: #216ba5 !important;
+    color: #fff !important;
+    border-radius: 0.3rem;
+}
+.content {
+    .react-datepicker {
+      width: 100%;
+    }
+  
+    #calendar {
+      width: 100%;
+    }
+  
+    #pickupTime,
+    #returnTime {
+      margin-top: 10px;
+    }
+  }
