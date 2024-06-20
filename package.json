@@ -5,19 +5,22 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@fontsource/inter": "^5.0.18",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@mui/icons-material": "^5.15.17",
+    "@mui/joy": "^5.0.0-beta.36",
     "@mui/material": "^5.15.17",
     "@react-oauth/google": "^0.12.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "bootstrap": "^5.3.3",
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0",
     "react-icons": "^5.2.1",
     "react-kakao-maps-sdk": "^1.1.27",
     "react-router-dom": "^6.23.1",
@@ -64,5 +67,9 @@
     "eslint-plugin-react": "^7.34.1",
     "globals": "^15.1.0",
     "prettier": "^3.2.5"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
   }
 }

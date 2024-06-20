@@ -3,3 +3,18 @@
     grid-template-rows: auto 1fr auto;
     min-height: 98vh;
   }
+  body {
+    background-color: lightgray;
+  }
+  
+  .App {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    // min-height: 98vh;
+    width: 93%;
+    min-height: 85vh;
+    margin: 0 3% auto auto;
+    background-color: #fff;
+    // border: 1px solid red;
+  }
+  
