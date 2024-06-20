@@ -1,9 +1,9 @@
 .search-list-container {
-    height: 84vh;
+    height: 73vh;
     background-color: white;
     border: 1px solid #888;
-    z-index: 1;
     position: absolute;
+    z-index: 1;
     top: 0;
     transition: left 0.5s ease;
   }
@@ -13,7 +13,7 @@
   }
   
   .search-list-container.hidden {
-    left: -510px;
+    left: -500px;
   }
 
   .open-btn {
@@ -31,7 +31,7 @@
     border-left-color: #ddd;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
-    top: 360px;
+    top: 32vh;
     transition: left 0.5s ease;
   }
   
@@ -40,5 +40,5 @@
   }
 
   .open-btn.hidden {
-    left: -10px;
+    left: 0;
   }
