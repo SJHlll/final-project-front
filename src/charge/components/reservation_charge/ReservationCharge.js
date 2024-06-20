@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
-import { Modal, ModalBody, ModalFooter } from 'reactstrap';
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from 'reactstrap';
 import ReservationModal from './ReservationModal';
 import '../scss/ReservationCharge.scss';
 import styled from 'styled-components';
@@ -48,14 +53,19 @@ const ReservationCharge = () => {
   const modalOpen = (
     <ModalBackground>
       <Modal isOpen={modal} toggle={toggle}>
-        <Button
-          color='success'
-          variant='outlined'
-          onClick={toggle}
-          style={{ marginBottom: '10px' }}
-        >
-          뒤로가기
-        </Button>
+        <ModalHeader>
+          <Button
+            color='success'
+            variant='outlined'
+            onClick={toggle}
+            style={{
+              width: 'fit-content',
+              height: '30px',
+            }}
+          >
+            X
+          </Button>
+        </ModalHeader>
         <ModalBody>
           <ReservationModal />
         </ModalBody>
@@ -65,7 +75,7 @@ const ReservationCharge = () => {
             variant='outlined'
             color='success'
             size='small'
-            style={{ width: '30%' }}
+            style={{ width: '30%', height: '30px' }}
             onClick={reservationHandler}
           >
             예약하기
