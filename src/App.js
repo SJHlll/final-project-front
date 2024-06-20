@@ -44,7 +44,7 @@ const App = () => {
 
         {/* 충전소 페이지 */}
         <Route
-          path='charge/home'
+          path='charge/list'
           element={<ChargeStation />}
         />
         <Route
