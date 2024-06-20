@@ -130,10 +130,8 @@ const ChargeStationList = () => {
         <>
           {sortedStations
             .slice(0, visibleCount)
-            .map((station, index) => (
+            .map((station) => (
               <Station
-                key={index}
-                index={index}
                 Id={station.id} // 데이터베이스 id
                 StationId={station.stationId} // 충전기 id
                 Name={station.stationName} // 충전소 이름

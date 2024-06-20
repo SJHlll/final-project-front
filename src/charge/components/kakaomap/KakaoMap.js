@@ -4,6 +4,7 @@ import KakaoMapMarker from './KakaoMapMarker';
 import styled from 'styled-components';
 import { MapContext } from '../contexts/MapContext';
 import { removeDuplicates } from '../utils/utils';
+import KakaoMapModal from './KakaoMapModal';
 
 // 카카오 지도 스타일
 const MapContainer = styled(Map)`
@@ -18,8 +19,9 @@ const KakaoMap = () => {
     [],
   );
   const [mapInstance, setMapInstance] = useState(null);
-  const { selectedStation, mapLevel } =
+  const { selectedStation, mapLevel, setMapLevel } =
     useContext(MapContext);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // 지도 초기 위도, 경도
   const [center, setCenter] = useState({
@@ -42,8 +44,7 @@ const KakaoMap = () => {
           data.chargers,
         );
         setMarkers(
-          uniqueStations.map((station, index) => ({
-            index,
+          uniqueStations.map((station) => ({
             id: station.id,
             lat: station.latitude,
             lng: station.longitude,
@@ -88,8 +89,15 @@ const KakaoMap = () => {
   useEffect(() => {
     if (selectedStation) {
       setCenter(selectedStation);
+      setIsModalOpen(true);
     }
   }, [selectedStation]);
+
+  // 휠 올리고 내릴 시 실시간 맵 레벨 업데이트
+  const handleZoomChanged = (map) => {
+    const level = map.getLevel();
+    setMapLevel(level);
+  };
 
   return (
     <>
@@ -99,24 +107,24 @@ const KakaoMap = () => {
         level={mapLevel}
         onCreate={setMapInstance}
         onBoundsChanged={handleBoundsChanged}
+        onZoomChanged={handleZoomChanged}
       >
         <MarkerClusterer
           averageCenter={true}
           minLevel={4}
           gridSize={120}
         >
-          {filteredMarkers.map((marker, index) => (
+          {filteredMarkers.map((marker) => (
             <KakaoMapMarker
-              key={index}
-              index={index}
               lat={marker.lat}
               lng={marker.lng}
-              Id={marker.StationId}
-              StationName={marker.StationName}
-              Speed={marker.Speed}
             />
           ))}
         </MarkerClusterer>
+        <KakaoMapModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
       </MapContainer>
     </>
   );

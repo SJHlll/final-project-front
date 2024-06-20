@@ -3,7 +3,6 @@ import '../scss/ChargeStationList.scss';
 import { MapContext } from '../contexts/MapContext';
 
 const Station = ({
-  index,
   Id,
   StationId,
   Name,
@@ -16,16 +15,12 @@ const Station = ({
   lat,
   lng,
 }) => {
-  const {
-    setSelectedStation,
-    setSelectedMarkerIndex,
-    setMapLevel,
-  } = useContext(MapContext);
+  const { setSelectedStation, setMapLevel } =
+    useContext(MapContext);
 
   // 위치 찾기 버튼 클릭 시 발동하는 함수
   const handleLocateClick = () => {
     setSelectedStation({ lat, lng }); // 선택된 좌표 업데이트
-    setSelectedMarkerIndex(index); // 선택된 마커 인덱스 설정
     setMapLevel(2); // 지도 레벨 설정
     console.log(
       StationId,
