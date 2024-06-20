@@ -4,6 +4,8 @@ import { MapContext } from '../contexts/MapContext';
 
 const Station = ({
   Id,
+  lat,
+  lng,
   StationId,
   Name,
   Address,
@@ -12,8 +14,6 @@ const Station = ({
   Management,
   areaIn,
   Available,
-  lat,
-  lng,
 }) => {
   const { setSelectedStation, setMapLevel } =
     useContext(MapContext);

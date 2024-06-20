@@ -43,7 +43,7 @@ const ChargeStationList = () => {
       // 불러왔다
       try {
         const response = await fetch(
-          'http://localhost:8181/charge/home', // 현재 링크
+          'http://localhost:8181/charge/list', // 현재 링크
         );
         // 에러떴다
         if (!response.ok) {

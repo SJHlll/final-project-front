@@ -1,6 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
-import { Map, MarkerClusterer } from 'react-kakao-maps-sdk';
-import KakaoMapMarker from './KakaoMapMarker';
+import {
+  Map,
+  MapMarker,
+  MarkerClusterer,
+} from 'react-kakao-maps-sdk';
 import styled from 'styled-components';
 import { MapContext } from '../contexts/MapContext';
 import { removeDuplicates } from '../utils/utils';
@@ -22,6 +25,8 @@ const KakaoMap = () => {
   const { selectedStation, mapLevel, setMapLevel } =
     useContext(MapContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedMarker, setSelectedMarker] =
+    useState(null);
 
   // 지도 초기 위도, 경도
   const [center, setCenter] = useState({
@@ -34,7 +39,7 @@ const KakaoMap = () => {
     const fetchStations = async () => {
       try {
         const response = await fetch(
-          'http://localhost:8181/charge/home',
+          'http://localhost:8181/charge/list',
         );
         if (!response.ok) {
           throw new Error('Failed to fetch stations');
@@ -45,12 +50,17 @@ const KakaoMap = () => {
         );
         setMarkers(
           uniqueStations.map((station) => ({
-            id: station.id,
+            Id: station.id,
             lat: station.latitude,
             lng: station.longitude,
             StationId: station.stationId,
             StationName: station.stationName,
+            Address: station.address,
             Speed: station.speed,
+            Type: station.chargerType,
+            Management: station.management,
+            areaIn: station.areaIn,
+            Available: station.available,
           })),
         );
       } catch (error) {
@@ -89,7 +99,6 @@ const KakaoMap = () => {
   useEffect(() => {
     if (selectedStation) {
       setCenter(selectedStation);
-      setIsModalOpen(true);
     }
   }, [selectedStation]);
 
@@ -97,6 +106,12 @@ const KakaoMap = () => {
   const handleZoomChanged = (map) => {
     const level = map.getLevel();
     setMapLevel(level);
+  };
+
+  // 마커 클릭 함수
+  const handleMarkerClick = (marker) => {
+    setSelectedMarker(marker);
+    setIsModalOpen(true);
   };
 
   return (
@@ -115,15 +130,21 @@ const KakaoMap = () => {
           gridSize={120}
         >
           {filteredMarkers.map((marker) => (
-            <KakaoMapMarker
-              lat={marker.lat}
-              lng={marker.lng}
+            <MapMarker
+              key={marker.id}
+              position={{
+                lat: marker.lat,
+                lng: marker.lng,
+              }}
+              clickable={true}
+              onClick={() => handleMarkerClick(marker)}
             />
           ))}
         </MarkerClusterer>
         <KakaoMapModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
+          marker={selectedMarker}
         />
       </MapContainer>
     </>
