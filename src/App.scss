@@ -1,5 +1,15 @@
+body {
+  background-color: #fff;
+}
+
 .App {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    min-height: 98vh;
-  }
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  // min-height: 98vh;
+  width: 93%;
+  min-height: 86vh;
+  margin: 3% auto;
+  border: 10px solid lightgray;
+
+
+}
