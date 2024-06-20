@@ -1,78 +1,163 @@
-import React, { useContext } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import Station from './Station';
 import '../scss/ChargeStationList.scss';
-import { areas } from './areas';
 import { SearchContext } from '../contexts/SearchContext';
+import { StationContext } from '../contexts/StationContext';
+import { removeDuplicates } from '../utils/utils';
+import loadingImg from '../../assets/img/loading.png';
+import haversine from 'haversine';
 
 const ChargeStationList = () => {
   const { searchConditions } = useContext(SearchContext);
-  const { selectedArea, selectedSubArea, facilitySearch } =
-    searchConditions;
-  const isInitialSearch =
-    !selectedArea && !selectedSubArea && !facilitySearch;
+  const {
+    selectedArea,
+    selectedSubArea,
+    facilitySearch,
+    isSearchClicked,
+  } = searchConditions;
+  const {
+    stations,
+    setStations,
+    visibleCount,
+    setVisibleCount,
+  } = useContext(StationContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [centerCoords] = useState({
+    latitude: 37.552484,
+    longitude: 126.937641,
+  });
 
-  const filteredStations = areas.filter((station) => {
+  // 백엔드(데이터베이스)에서 받아온 충전소 데이터
+  useEffect(() => {
+    if (!isSearchClicked) return;
+
+    const fetchStations = async () => {
+      // 로딩중이다
+      setIsLoading(true);
+      setError(null);
+      // 불러왔다
+      try {
+        const response = await fetch(
+          'http://localhost:8181/charge/list', // 현재 링크
+        );
+        // 에러떴다
+        if (!response.ok) {
+          throw new Error('Failed to fetch stations');
+        }
+
+        const data = await response.json();
+        const uniqueStations = removeDuplicates(
+          data.chargers,
+        );
+        setStations(uniqueStations);
+        setIsLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setIsLoading(false);
+      }
+    };
+    fetchStations();
+  }, [isSearchClicked]);
+
+  // 시/도, 시/군/구, 키워드 검색 함수
+  const filteredStations = stations.filter((station) => {
+    // 데이터베이스 주소, 시/도 매치
     const isAreaMatch = selectedArea
-      ? station.StationAddress.includes(selectedArea)
+      ? station.address.includes(selectedArea)
       : true;
+    // 데이터베이스 주소, 시/군/구 매치
     const isSubAreaMatch = selectedSubArea
-      ? station.StationAddress.includes(selectedSubArea)
+      ? station.address.includes(selectedSubArea)
       : true;
+    // 데이터베이스 이름, 검색어 매치
     const isFacilityMatch = facilitySearch
-      ? station.StationName.includes(facilitySearch)
+      ? station.stationName.includes(facilitySearch)
       : true;
     return isAreaMatch && isSubAreaMatch && isFacilityMatch;
   });
 
+  // 검색을 안한 초기 상태
+  if (!isSearchClicked) {
+    return <p>검색 조건을 입력해주세요.</p>;
+  }
+
+  // 충전소 데이터 불러오는 상태
+  if (isLoading) {
+    return (
+      <div>
+        <p>충전소 정보를 불러오는 중...</p>
+        <p>
+          <img
+            className='loading'
+            src={loadingImg}
+            alt='Loading'
+          />
+        </p>
+      </div>
+    );
+  }
+
+  // 에러
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
+  // 더 보기 버튼 클릭 시 20개씩 더 보여주는 함수
+  const handleShowMore = () => {
+    setVisibleCount((prevCount) => prevCount + 20);
+    console.log(centerCoords);
+  };
+
+  // 중심 좌표에서 가까운 순으로 충전소 정렬
+  const sortedStations = filteredStations
+    .map((station) => ({
+      ...station,
+      distance: haversine(centerCoords, {
+        latitude: station.latitude,
+        longitude: station.longitude,
+      }),
+    }))
+    .sort((a, b) => a.distance - b.distance);
+
   return (
     <div className='ListContainer'>
-      {isInitialSearch ? (
-        <div>
-          <p
-            style={{
-              textAlign: 'center',
-            }}
-          >
-            검색 결과가 없습니다. 행정구역 시/도를
-            지정해주세요.
-          </p>
-          {/* 더미시작 */}
-          <p>
-            현재 더미데이터 (삭제할예정.
-            ChargeStationList.js)
-          </p>
-          <p>
-            한국ICT인재개발원 신촌센터 / 서울특별시 마포구
-          </p>
-          <p>국회의사당 / 서울특별시 영등포구</p>
-          <p>청와대 / 서울특별시 종로구</p>
-          <p>반포자이 / 서울특별시 서초구</p>
-          <p>
-            서울교통공사 군자차량사업소 / 서울특별시 성동구
-          </p>
-          <p>서울삼성동우체국 / 서울특별시 강남구</p>
-          {/* 더미끝 */}
-        </div>
-      ) : filteredStations.length > 0 ? (
-        filteredStations.map((station, index) => (
-          <Station
-            key={index}
-            id={station.id}
-            lat={station.lat}
-            lng={station.lng}
-            StationName={station.StationName}
-            StationAddress={station.StationAddress}
-            AC={station.AC}
-            DC={station.DC}
-            index={station.index}
-          />
-        ))
+      {sortedStations.length > 0 ? (
+        <>
+          {sortedStations
+            .slice(0, visibleCount)
+            .map((station) => (
+              <Station
+                Id={station.id} // 데이터베이스 id
+                StationId={station.stationId} // 충전기 id
+                Name={station.stationName} // 충전소 이름
+                Address={station.address} // 충전소 주소
+                Speed={station.speed} // 완속 or 급속
+                Type={station.chargerType} // 충전기 타입
+                Management={station.management} // 충전기 회사
+                areaIn={station.areaIn} // 이용 시설
+                Available={station.available} // 이용자 제한 or 이용 가능
+                price={station.chargingPrice} // 충전 가격
+                lat={station.latitude} // 위도
+                lng={station.longitude} // 경도
+              />
+            ))}
+          {visibleCount < filteredStations.length && (
+            <div
+              onClick={handleShowMore}
+              className='show-more-button'
+            >
+              {' '}
+              &darr; 더 보기 &darr;
+            </div>
+          )}
+        </>
       ) : (
-        <p
-          style={{
-            textAlign: 'center',
-          }}
-        >
+        <p>
           조건에 맞는 충전소가 없습니다. 검색을 다시
           진행해주세요.
         </p>

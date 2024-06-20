@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import ChargeStationSearch from './ChargeStationSearch';
 import ChargeStationList from './ChargeStationList';
 import '../scss/SearchList.scss';
-import { SearchProvider } from '../contexts/SearchContext';
 import OpenBtn from './OpenBtn';
 
 const SearchList = ({ visible }) => {
@@ -19,20 +18,18 @@ const SearchList = ({ visible }) => {
 
   return (
     <>
-      <SearchProvider>
-        <div
-          className={`search-list-container ${isVisible ? 'visible' : 'hidden'}`}
-        >
-          <div className='search-list-content'>
-            <ChargeStationSearch />
-            <ChargeStationList />
-          </div>
+      <div
+        className={`search-list-container ${isVisible ? 'visible' : 'hidden'}`}
+      >
+        <div className='search-list-content'>
+          <ChargeStationSearch />
+          <ChargeStationList />
         </div>
-        <OpenBtn
-          toggleSearchBox={toggleSearchBox}
-          isSearchBoxVisible={isVisible}
-        />
-      </SearchProvider>
+      </div>
+      <OpenBtn
+        toggleSearchBox={toggleSearchBox}
+        isSearchBoxVisible={isVisible}
+      />
     </>
   );
 };
