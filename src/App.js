@@ -19,7 +19,6 @@ import Test from './charge/Test';
 import ChargeStation from './charge/components/charge_station/ChargeStation';
 import ReservationCharge from './charge/components/reservation_charge/ReservationCharge';
 
-
 const App = () => {
   return (
     <div className='App'>
