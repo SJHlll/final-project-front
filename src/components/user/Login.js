@@ -22,18 +22,18 @@ const Login = () => {
         <Grid item xs={12}>
           <a href={KAKAO_AUTH_URL}>
             <img
-              style={{ width: '30%', height: '30%' }}
+              style={{ width: '70%', height: '50%' }}
               alt='kakaobtn'
-              // src={require('../../assets/kakao_login_medium_wide.png')}
+              src={require('../../Car/assets/kakaoLogin.png')}
             />
           </a>
         </Grid>
         <Grid>
           <a href={NAVER_AUTH_URL}>
             <img
-              style={{ width: '10%', height: '10%' }}
+              style={{ width: '70%', height: '10%' }}
               alt='naverbtn'
-              // src={require('../../assets/kakao_login_medium_wide.png')}
+              src={require('../../Car/assets/naverLogin.png')}
             />
           </a>
         </Grid>
