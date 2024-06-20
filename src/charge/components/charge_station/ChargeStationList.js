@@ -7,6 +7,7 @@ import Station from './Station';
 import '../scss/ChargeStationList.scss';
 import { SearchContext } from '../contexts/SearchContext';
 import { StationContext } from '../contexts/StationContext';
+import { removeDuplicates } from '../utils/utils';
 import loadingImg from '../../assets/img/loading.png';
 import haversine from 'haversine';
 
@@ -48,8 +49,12 @@ const ChargeStationList = () => {
         if (!response.ok) {
           throw new Error('Failed to fetch stations');
         }
+
         const data = await response.json();
-        setStations(data.chargers);
+        const uniqueStations = removeDuplicates(
+          data.chargers,
+        );
+        setStations(uniqueStations);
         setIsLoading(false);
       } catch (error) {
         setError(error.message);

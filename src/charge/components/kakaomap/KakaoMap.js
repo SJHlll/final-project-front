@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
-import { Map, ZoomControl } from 'react-kakao-maps-sdk';
+import { Map, MarkerClusterer } from 'react-kakao-maps-sdk';
 import KakaoMapMarker from './KakaoMapMarker';
 import styled from 'styled-components';
 import { MapContext } from '../contexts/MapContext';
-import { StationContext } from '../contexts/StationContext';
+import { removeDuplicates } from '../utils/utils';
 
 // 카카오 지도 스타일
 const MapContainer = styled(Map)`
@@ -14,9 +14,11 @@ const MapContainer = styled(Map)`
 
 const KakaoMap = () => {
   const [markers, setMarkers] = useState([]);
-  const { stations, visibleCount } =
-    useContext(StationContext);
-  const { selectedStation, selectedMarkerIndex, mapLevel } =
+  const [filteredMarkers, setFilteredMarkers] = useState(
+    [],
+  );
+  const [mapInstance, setMapInstance] = useState(null);
+  const { selectedStation, mapLevel } =
     useContext(MapContext);
 
   // 지도 초기 위도, 경도
@@ -25,53 +27,69 @@ const KakaoMap = () => {
     lng: 126.937641,
   });
 
+  // 충전소 데이터 fetch 및 중복 제거
   useEffect(() => {
-    setMarkers(
-      stations.slice(0, visibleCount).map((station) => ({
-        lat: station.latitude,
-        lng: station.longitude,
-        Id: station.stationId, // 데이터베이스의 id
-        StationName: station.stationName,
-        Speed: station.speed,
-        isOpen: false,
-      })),
-    );
-  }, [stations, visibleCount]);
+    const fetchStations = async () => {
+      try {
+        const response = await fetch(
+          'http://localhost:8181/charge/home',
+        );
+        if (!response.ok) {
+          throw new Error('Failed to fetch stations');
+        }
+        const data = await response.json();
+        const uniqueStations = removeDuplicates(
+          data.chargers,
+        );
+        setMarkers(
+          uniqueStations.map((station, index) => ({
+            index,
+            id: station.id,
+            lat: station.latitude,
+            lng: station.longitude,
+            StationId: station.stationId,
+            StationName: station.stationName,
+            Speed: station.speed,
+          })),
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  // 마커 클릭 시 창 열림
-  const openWindow = (index) => {
-    setMarkers(
-      markers.map((marker, i) => ({
-        ...marker,
-        isOpen: i === index,
-      })),
+    fetchStations();
+  }, []);
+
+  // 초기 지도 로딩 시 필터링된 마커 설정
+  useEffect(() => {
+    if (mapInstance) {
+      handleBoundsChanged(mapInstance);
+      mapInstance.setMaxLevel(5); // 확대 축소 레벨 제한
+    }
+  }, [mapInstance, markers]);
+
+  // 지도 경계 변경 시 필터링된 마커 업데이트
+  const handleBoundsChanged = (map) => {
+    const bounds = map.getBounds();
+    const sw = bounds.getSouthWest();
+    const ne = bounds.getNorthEast();
+
+    const filtered = markers.filter(
+      (marker) =>
+        marker.lat >= sw.getLat() &&
+        marker.lat <= ne.getLat() &&
+        marker.lng >= sw.getLng() &&
+        marker.lng <= ne.getLng(),
     );
+    setFilteredMarkers(filtered);
   };
 
-  // 창닫기 클릭시 창 닫힘
-  const closeWindow = (index) => {
-    const updatedMarkers = markers.map((marker, i) =>
-      i === index ? { ...marker, isOpen: false } : marker,
-    );
-    setMarkers(updatedMarkers);
-  };
-
-  // 맵의 배경 클릭 시 창 닫힘
-  const handleMapClick = () => {
-    const updatedMarkers = markers.map((marker) => ({
-      ...marker,
-      isOpen: false,
-    }));
-    setMarkers(updatedMarkers);
-  };
-
-  // 선택된 좌표 변경 시 지도 중심 업데이트
+  // 충전소 위치 찾기 버튼 클릭 시 지도 중심 업데이트
   useEffect(() => {
     if (selectedStation) {
       setCenter(selectedStation);
-      openWindow(selectedMarkerIndex);
     }
-  }, [selectedStation, selectedMarkerIndex]);
+  }, [selectedStation]);
 
   return (
     <>
@@ -79,25 +97,26 @@ const KakaoMap = () => {
         id='map'
         center={center}
         level={mapLevel}
-        onClick={handleMapClick}
+        onCreate={setMapInstance}
+        onBoundsChanged={handleBoundsChanged}
       >
-        {markers.map((marker, index) => (
-          <KakaoMapMarker
-            key={index}
-            index={marker.id}
-            lat={marker.lat}
-            lng={marker.lng}
-            Id={marker.stationId}
-            StationName={marker.StationName}
-            Speed={marker.Speed}
-            isOpen={marker.isOpen}
-            openWindow={() => openWindow(index)}
-            closeWindow={() => closeWindow(index)}
-          />
-        ))}
-        <ZoomControl
-          position={'RIGHT'} /* 확대 및 축소 컨트롤러 */
-        />
+        <MarkerClusterer
+          averageCenter={true}
+          minLevel={4}
+          gridSize={120}
+        >
+          {filteredMarkers.map((marker, index) => (
+            <KakaoMapMarker
+              key={index}
+              index={index}
+              lat={marker.lat}
+              lng={marker.lng}
+              Id={marker.StationId}
+              StationName={marker.StationName}
+              Speed={marker.Speed}
+            />
+          ))}
+        </MarkerClusterer>
       </MapContainer>
     </>
   );
