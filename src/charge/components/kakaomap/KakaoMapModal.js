@@ -26,6 +26,9 @@ const ModalContent = styled.div`
 `;
 
 const KakaoMapModal = ({ isOpen, onClose, marker }) => {
+  const available =
+    marker.Available === '이용가능' ? 'able' : 'disable';
+
   if (!isOpen) return null;
 
   return (
@@ -41,25 +44,27 @@ const KakaoMapModal = ({ isOpen, onClose, marker }) => {
                 {marker.StationName}
               </p>
               <hr />
-              <div>
+              <div className='man-ava'>
                 <p className='station-management'>
-                  관리 회사: {marker.Management}
+                  {marker.Management}
                 </p>
-                <p className='station-available'>
-                  이용 가능 여부: {marker.Available}
+                <p className={available}>
+                  {marker.Available}
+                </p>
+              </div>
+              <div className='id-spe-typ'>
+                <p className='station-id'>
+                  {marker.StationId}
+                </p>
+                <p className='station-speed'>
+                  {marker.Speed}
+                </p>
+                <p className='station-type'>
+                  {marker.Type}
                 </p>
               </div>
               <p className='station-address'>
                 주소: {marker.Address}
-              </p>
-              <p className='station-speed'>
-                충전 속도: {marker.Speed}
-              </p>
-              <p className='station-type'>
-                충전기 타입: {marker.Type}
-              </p>
-              <p className='station-id'>
-                충전기 ID: {marker.StationId}
               </p>
               <a
                 href={`https://map.kakao.com/link/to/${marker.StationName},${marker.lat},${marker.lng}`}
