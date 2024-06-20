@@ -45,7 +45,7 @@ const KakaoMapModal = ({ isOpen, onClose, marker }) => {
               <h3 style={{ display: 'flex' }}>
                 <span>{marker.StationName}</span>
                 <a
-                  href={`https://map.kakao.com/link/to/${marker.Address},${marker.lat},${marker.lng}`}
+                  href={`https://map.kakao.com/link/to/${marker.StationName},${marker.lat},${marker.lng}`}
                   target='_blank'
                   rel='noreferrer'
                   style={{ marginLeft: 'auto' }}
