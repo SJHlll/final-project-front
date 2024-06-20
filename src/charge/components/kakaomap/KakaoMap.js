@@ -12,7 +12,7 @@ import KakaoMapModal from './KakaoMapModal';
 // 카카오 지도 스타일
 const MapContainer = styled(Map)`
   width: 100%;
-  height: 100%;
+  height: 84vh;
   border: 1px solid #888;
 `;
 
