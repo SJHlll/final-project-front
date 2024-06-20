@@ -26,9 +26,6 @@ const ModalContent = styled.div`
 `;
 
 const KakaoMapModal = ({ isOpen, onClose, marker }) => {
-  const available =
-    marker.Available === '이용가능' ? 'able' : 'disable';
-
   if (!isOpen) return null;
 
   return (
@@ -48,7 +45,13 @@ const KakaoMapModal = ({ isOpen, onClose, marker }) => {
                 <p className='station-management'>
                   {marker.Management}
                 </p>
-                <p className={available}>
+                <p
+                  className={
+                    marker.Available === '이용가능'
+                      ? 'able'
+                      : 'disable'
+                  }
+                >
                   {marker.Available}
                 </p>
               </div>
@@ -75,6 +78,12 @@ const KakaoMapModal = ({ isOpen, onClose, marker }) => {
                 길찾기
               </a>
             </div>
+            {/* 
+            충전기
+              DC차데모 : DC_ChadeMO.png
+              DC콤보 : DC_Combo.png
+              AC3상 : AC_3.png
+             */}
           </>
         )}
       </ModalContent>
