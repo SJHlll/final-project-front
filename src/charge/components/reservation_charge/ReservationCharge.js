@@ -1,9 +1,17 @@
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
-import { Modal, ModalBody, ModalFooter } from 'reactstrap';
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from 'reactstrap';
 import ReservationModal from './ReservationModal';
 import '../scss/ReservationCharge.scss';
 import styled from 'styled-components';
+import ReservationList from './ReservationList';
+import Header from '../../Header/Chargeheader';
+import { StationProvider } from '../contexts/StationContext';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -20,11 +28,15 @@ const ModalBackground = styled.div`
 
 const ReservationCharge = () => {
   const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
 
-  const toggle = () => {
-    console.log('버튼 클릭중!');
-    setModal(!modal);
-  };
+  // const [reservations, setReservations] = useState([]);
+
+  // const reservationCharge = async (rentTime) => {
+  //   const newReservation = {
+  //     regDate: rentTime,
+  //   };
+  // };
 
   // Modal Open 버튼 활성화
   const button = (
@@ -44,18 +56,17 @@ const ReservationCharge = () => {
     setModal(!modal);
   };
 
+  const closeBtn = (
+    <Button color='success' size='large' onClick={toggle}>
+      &times;
+    </Button>
+  );
+
   // 예약하기 모달창 활성화
   const modalOpen = (
     <ModalBackground>
       <Modal isOpen={modal} toggle={toggle}>
-        <Button
-          color='success'
-          variant='outlined'
-          onClick={toggle}
-          style={{ marginBottom: '10px' }}
-        >
-          뒤로가기
-        </Button>
+        <ModalHeader toggle={toggle} close={closeBtn} />
         <ModalBody>
           <ReservationModal />
         </ModalBody>
@@ -65,7 +76,7 @@ const ReservationCharge = () => {
             variant='outlined'
             color='success'
             size='small'
-            style={{ width: '30%' }}
+            style={{ width: '30%', height: '30px' }}
             onClick={reservationHandler}
           >
             예약하기
@@ -75,7 +86,15 @@ const ReservationCharge = () => {
     </ModalBackground>
   );
 
-  return <>{modal ? modalOpen : button}</>;
+  return (
+    <>
+      <Header />
+      {modal ? modalOpen : button}
+      <StationProvider>
+        <ReservationList />
+      </StationProvider>
+    </>
+  );
 };
 
 export default ReservationCharge;

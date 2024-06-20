@@ -1,0 +1,19 @@
+.Testheader{
+    width: 100%;
+    height: 100px;
+}
+.logo{
+    background-image: url(../../assets/newlogo.png);
+    background-size: cover;
+    width: 100px;
+    height: 100px;
+    margin-left: 17%;
+    // position: relative;
+    // bottom: 20%;
+    cursor: pointer;
+}
+.loginbtn{
+    position: relative;
+    left: 70%;
+    bottom: 100%;
+}

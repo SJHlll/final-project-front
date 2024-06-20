@@ -3,6 +3,7 @@ import ChargeStationSearch from './ChargeStationSearch';
 import ChargeStationList from './ChargeStationList';
 import '../scss/SearchList.scss';
 import OpenBtn from './OpenBtn';
+import SmallScreen from './SmallScreen';
 
 const SearchList = ({ visible }) => {
   const [isVisible, setIsVisible] = useState(visible);
@@ -30,6 +31,7 @@ const SearchList = ({ visible }) => {
         toggleSearchBox={toggleSearchBox}
         isSearchBoxVisible={isVisible}
       />
+      <SmallScreen isSearchBoxVisible={isVisible} />
     </>
   );
 };

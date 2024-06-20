@@ -1,3 +1,4 @@
+/src/Car/assets/mainback.mp4
 .DS_STORE
 node_modules
 scripts/flow/*/.flowconfig
@@ -45,3 +46,4 @@ packages/react-devtools-fusebox/dist
 packages/react-devtools-inline/dist
 packages/react-devtools-shell/dist
 packages/react-devtools-timeline/dist
+

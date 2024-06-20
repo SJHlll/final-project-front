@@ -2,11 +2,12 @@ import React from 'react';
 import LodingMotion from '../../../loading/LodingMotion';
 import MainContent from './mainContent/MainContent';
 import ChargeFooter from '../../footer/ChargeFooter';
+import './ChargeMain.scss';
 // import Header from '../../Header/Header';
 
 const chargeMain = () => {
   return (
-    <div>
+    <div className='chargeapp'>
       <LodingMotion />
       <MainContent />
       <ChargeFooter />
