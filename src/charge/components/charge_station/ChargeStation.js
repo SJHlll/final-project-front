@@ -21,7 +21,6 @@ const ChargeStation = () => {
           </MapProvider>
         </SearchProvider>
       </StationProvider>
-      {/* <Footer /> 굳이 푸터를 안넣어도 될듯 */}
     </>
   );
 };
