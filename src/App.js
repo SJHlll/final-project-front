@@ -19,7 +19,6 @@ import Test from './charge/Test';
 import ChargeStation from './charge/components/charge_station/ChargeStation';
 import ReservationCharge from './charge/components/reservation_charge/ReservationCharge';
 
-
 const App = () => {
   return (
     <div className='App'>
@@ -70,7 +69,7 @@ const App = () => {
 
         {/* 충전소 메인 페이지 */}
         <Route
-          path='/charge/main'
+          path='/charge/home'
           element={<ChargeMain />}
         />
         <Route path='/charge/test' element={<Test />} />
