@@ -1,8 +1,9 @@
 import React from 'react';
 import KakaoMap from '../kakaomap/KakaoMap';
 import SearchList from './SearchList';
-import Header from '../../../Car/components/Header/Header';
+
 import { MapProvider } from '../contexts/MapContext';
+import Header from '../../Header/Header';
 
 const ChargeStation = () => {
   return (

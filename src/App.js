@@ -13,7 +13,10 @@ import Mypage from './Car/components/Mainpage/Mypage';
 import Carreview from './Car/components/CarHeader/Carreview';
 import Error from '../src/Car/components/Errorpage/Error';
 import Loginpage from '../src/Car/components/Mainpage/Loginpage';
-import ChargeStation from './charge/components/charge_station/ChargeStation';
+// import ChargeStation from './charge/components/charge_station/ChargeStation';
+// import Header from './charge/Header/Header';
+import ChargeMain from './charge/Categori/main/ChargeMain';
+import Test from './charge/Test';
 
 const App = () => {
   return (
@@ -43,8 +46,8 @@ const App = () => {
 
         {/* 충전소 페이지 */}
         <Route
-          path='charge/home'
-          element={<ChargeStation />}
+          path='/charge/home'
+          element={<ChargeMain />}
         />
 
         {/* 차 렌트 페이지 */}
@@ -58,6 +61,13 @@ const App = () => {
 
         {/* 에러페이지 */}
         <Route path='/*' element={<Error />} />
+
+        {/* 충전소 메인 페이지 */}
+        <Route
+          path='/charge/main'
+          element={<ChargeMain />}
+        />
+        <Route path='/charge/test' element={<Test />} />
       </Routes>
     </div>
   );
