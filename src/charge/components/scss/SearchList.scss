@@ -5,23 +5,24 @@
     position: absolute;
     z-index: 1;
     top: 0;
-    transition: left 0.5s ease, opacity 0.6s ease;
   }
   
   .search-list-container.visible {
     left: 0;
     opacity: 1;
+    transition: left 0.5s ease, opacity 0.3s ease;
   }
   
   .search-list-container.hidden {
     left: -500px;
     opacity: 0;
+    transition: left 0.5s ease, opacity 0.7s ease;
   }
 
   
 
   .open-btn {
-    background-color: #ddd;
+    background-color: white;
     width: 35px;
     height: 100px;
     text-align: center;
