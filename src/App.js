@@ -12,18 +12,17 @@ import Carres from './Car/components/CarHeader/Carres';
 import Mypage from './Car/components/Mainpage/Mypage';
 import Carreview from './Car/components/CarHeader/Carreview';
 import Error from '../src/Car/components/Errorpage/Error';
-import Loginpage from '../src/Car/components/Mainpage/Loginpage';
 import ChargeStation from './charge/components/charge_station/ChargeStation';
+import Testhome from './Car/components/Mainpage/testCarhome/Testhome';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Testmain from './Car/components/Mainpage/testCarhome/Testmain';
 
 const App = () => {
   return (
     <div className='App'>
       <Routes>
-        {/* 테스트 로그인페이지 */}
-        <Route path='/testlogin' element={<Loginpage />} />
-
         {/* 공통 로그인페이지 */}
-        <Route exact path='/' element={<Login />} />
+        <Route exact path='/' element={<Testmain />} />
 
         {/* 카카오 로그인페이지 */}
         <Route
@@ -39,7 +38,6 @@ const App = () => {
 
         {/* 렌트카, 충전소 선택페이지 */}
         <Route path='/choose' element={<Choose />} />
-        <Route path='/car/home' element={<Carhome />} />
 
         {/* 충전소 페이지 */}
         <Route
@@ -47,7 +45,9 @@ const App = () => {
           element={<ChargeStation />}
         />
 
-        {/* 차 렌트 페이지 */}
+        {/* 차 렌트 메인페이지 */}
+        <Route path='/car/home' element={<Carhome />} />
+        {/* 차 렌트 상세페이지 */}
         <Route path='/car/res' element={<Carres />} />
         <Route path='/car/noti' element={<Carnoti />} />
         <Route path='/car/event' element={<Carevent />} />
