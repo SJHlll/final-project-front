@@ -70,7 +70,7 @@ const App = () => {
 
         {/* 충전소 메인 페이지 */}
         <Route
-          path='/charge/main'
+          path='/charge/home'
           element={<ChargeMain />}
         />
         <Route path='/charge/test' element={<Test />} />

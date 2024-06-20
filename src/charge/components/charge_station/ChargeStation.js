@@ -3,7 +3,7 @@ import KakaoMap from '../kakaomap/KakaoMap';
 import SearchList from './SearchList';
 
 import { MapProvider } from '../contexts/MapContext';
-import Header from '../../Header/Header';
+import Header from '../../Header/Chargeheader';
 import { StationProvider } from '../contexts/StationContext';
 import { SearchProvider } from '../contexts/SearchContext';
 

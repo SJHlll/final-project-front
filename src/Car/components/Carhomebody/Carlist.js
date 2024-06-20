@@ -58,7 +58,7 @@ const Carlist = () => {
       <div className='carlist'>
         <div className='carlistcontainer'>
           {cars.map((car) => (
-            <div className='box' key={car.id}>
+            <div className='carbox' key={car.id}>
               <div className='inbox'>
                 <img src={`${car.img}`} className='img' />
                 <div className='carinfo'>
