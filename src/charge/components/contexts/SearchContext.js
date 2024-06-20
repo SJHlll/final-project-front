@@ -7,6 +7,7 @@ export const SearchProvider = ({ children }) => {
     selectedArea: '',
     selectedSubArea: '',
     facilitySearch: '',
+    isSearchClicked: false,
   });
 
   return (

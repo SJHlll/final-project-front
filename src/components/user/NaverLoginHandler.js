@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const NaverLoginHandler = () => {
   console.log(
-    '사용자가 동의화면을 통해 필수 정보 동의 후 kakao인증 서버에서 redirect를 진행함!',
+    '사용자가 동의화면을 통해 필수 정보 동의 후 naver인증 서버에서 redirect를 진행함!',
   );
 
   const { onLogin } = useContext(AuthContext);
@@ -61,3 +61,4 @@ const NaverLoginHandler = () => {
 };
 
 export default NaverLoginHandler;
+

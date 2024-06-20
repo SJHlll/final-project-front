@@ -5,6 +5,12 @@ import { Button, Container } from 'reactstrap';
 import { KAKAO_AUTH_URL } from '../../config/kakao-config';
 import { NAVER_AUTH_URL } from '../../config/naver-config';
 import { useNavigate } from 'react-router-dom';
+import { GOOGLE_URL } from '../../config/google-config';
+import {
+  GoogleLogin,
+  GoogleOAuthProvider,
+} from '@react-oauth/google';
+import GoogleAuthLogin from './GoogleAuthLogin';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -13,6 +19,8 @@ const Login = () => {
     // 특정 경로로 네비게이션
     navigate(text);
   };
+
+  const clientId = process.env.REACT_APP_GOOGLE_CLIENT_KEY;
   return (
     <>
       <Container className='body-top'>
@@ -38,11 +46,7 @@ const Login = () => {
           </a>
         </Grid>
         <Grid>
-          <img
-            style={{ width: '10%', height: '10%' }}
-            alt='googlebtn'
-            // src={require('../../assets/kakao_login_medium_wide.png')}
-          />
+          <GoogleAuthLogin />
         </Grid>
         <Button
           className='testbtn'
