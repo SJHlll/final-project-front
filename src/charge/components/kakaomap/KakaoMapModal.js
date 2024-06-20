@@ -28,30 +28,42 @@ const KakaoMapModal = ({ isOpen, onClose, marker }) => {
   return (
     <ModalBackground>
       <ModalContent onClick={(e) => e.stopPropagation()}>
-        <button onClick={onClose}>Close</button>
+        <span
+          onClick={onClose}
+          style={{
+            float: 'right',
+            cursor: 'pointer',
+            fontWeight: 'bold',
+            fontSize: '2rem',
+          }}
+        >
+          X
+        </span>
         {marker && (
-          <div>
-            <h3 style={{ display: 'flex' }}>
-              <span>{marker.StationName}</span>
-              <a
-                href={`https://map.kakao.com/link/to/${marker.Address},${marker.lat},${marker.lng}`}
-                target='_blank'
-                rel='noreferrer'
-                style={{ marginLeft: 'auto' }}
-              >
-                길찾기
-              </a>
-            </h3>
-            <p>주소: {marker.Address}</p>
-            <p>충전 속도: {marker.Speed}</p>
-            <p>충전기 타입: {marker.Type}</p>
-            <p>관리 회사: {marker.Management}</p>
-            <p>이용 시설: {marker.areaIn}</p>
-            <p>이용 가능 여부: {marker.Available}</p>
-            <p>위도: {marker.lat}</p>
-            <p>경도: {marker.lng}</p>
-            <p>충전기 ID: {marker.StationId}</p>
-          </div>
+          <>
+            <div style={{ paddingTop: '30px' }}>
+              <h3 style={{ display: 'flex' }}>
+                <span>{marker.StationName}</span>
+                <a
+                  href={`https://map.kakao.com/link/to/${marker.Address},${marker.lat},${marker.lng}`}
+                  target='_blank'
+                  rel='noreferrer'
+                  style={{ marginLeft: 'auto' }}
+                >
+                  길찾기
+                </a>
+              </h3>
+              <p>주소: {marker.Address}</p>
+              <p>충전 속도: {marker.Speed}</p>
+              <p>충전기 타입: {marker.Type}</p>
+              <p>관리 회사: {marker.Management}</p>
+              <p>이용 시설: {marker.areaIn}</p>
+              <p>이용 가능 여부: {marker.Available}</p>
+              <p>위도: {marker.lat}</p>
+              <p>경도: {marker.lng}</p>
+              <p>충전기 ID: {marker.StationId}</p>
+            </div>
+          </>
         )}
       </ModalContent>
     </ModalBackground>
