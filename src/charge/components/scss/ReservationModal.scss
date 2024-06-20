@@ -1,0 +1,19 @@
+.form-wrapper {
+    width: 600px;
+    background-color: bisque;
+
+    .flex {
+        display: flex;
+        width: 100%;
+        padding: 15px 15px 15px 10px;
+    }
+
+    .column {
+        width: 200px;
+    }
+}
+
+.reservation {
+    width: 30%;
+    justify-self: center;
+}

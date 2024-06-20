@@ -1,0 +1,18 @@
+.App {
+    min-height: 50vh;
+}
+
+.modal-content {
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    border: 1px solid black;
+}
+
+.modal-footer {
+    text-align: center;
+    margin-top: 20px
+}

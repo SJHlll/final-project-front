@@ -50,6 +50,7 @@ const Area = () => {
       selectedArea,
       selectedSubArea,
       facilitySearch,
+      isSearchClicked: true,
     });
   };
 
@@ -62,6 +63,7 @@ const Area = () => {
       selectedArea: '',
       selectedSubArea: '',
       facilitySearch: '',
+      isSearchClicked: false,
     });
   };
 

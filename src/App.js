@@ -14,6 +14,7 @@ import Carreview from './Car/components/CarHeader/Carreview';
 import Error from '../src/Car/components/Errorpage/Error';
 import Loginpage from '../src/Car/components/Mainpage/Loginpage';
 import ChargeStation from './charge/components/charge_station/ChargeStation';
+import ReservationCharge from './charge/components/reservation_charge/ReservationCharge';
 
 const App = () => {
   return (
@@ -43,8 +44,12 @@ const App = () => {
 
         {/* 충전소 페이지 */}
         <Route
-          path='charge/home'
+          path='charge/list'
           element={<ChargeStation />}
+        />
+        <Route
+          path='charge/reservation'
+          element={<ReservationCharge />}
         />
 
         {/* 차 렌트 페이지 */}

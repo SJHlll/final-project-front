@@ -1,6 +1,6 @@
 .ListContainer {
     width: 500px;
-    max-height: 656px;
+    max-height: 653px;
     // background-color: rgb(143, 178, 255);
     overflow-y: auto;
 
@@ -12,53 +12,90 @@
 
         .Status {
             margin-left: 10px;
-            width: 300px;
+            width: 66%;
             position: relative;
 
             .Name {
                 font-size: 1.1rem;
                 font-weight: bold;
+                
+                span {
+                    cursor: pointer;
+                }
+                span:hover {
+                    color: blue;
+                }
             }
 
             .Address {
-                font-size: 0.9rem;
+                font-size: 0.75rem;
                 position: absolute;
                 bottom: 5px;
+                cursor: pointer;
+                
+                a {
+                    color: black;
+                    text-decoration: none;
+                }
+                a:hover {
+                    font-weight: bold;
+                }
             }
         }
 
         .Charger {
-            text-align: center;
             margin-right: 10px;
-            width: 150px;
+            text-align: right;
+            width: 34%;
 
-            .ChargerNum {
-                font-size: 0.9rem;
+            .ChargerType {
+                font-size: 0.8rem;
                 margin-bottom: 5px;
             }
 
             .ChargeAble {
                 margin-bottom: 5px;
-                text-align: right;
-            }
-
-            .SearchBtn {
-                border: 1px solid black;
-                background-color: white;
-                width: 100px;
-                height: 30px;
-                line-height: 30px;
-                font-weight: bold;
-                font-size: 1.2rem;
-                cursor: pointer;
-                float: right;
-            }
-
-            .SearchBtn:hover {
-                background-color: #F2F2F2;
             }
         }
     }
 
 
+
+    .show-more-button {
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        margin: 5px auto;
+        border-radius: 10px;
+        cursor: pointer;
+        background-color: #ebf5ff;
+        color: #2c7fdf;
+        border: 1px solid #2c7fdf;
+    }
+    
+    .show-more-button:hover {
+        background-color: #c2e1ff;
+    }
+
+
+}
+
+p {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.loading {
+    width: 100px;
+    height: 100px;
+    animation: spin 3.5s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
 }
