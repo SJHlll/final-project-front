@@ -1,5 +1,5 @@
 // Modal.js
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const ModalBackground = styled.div`
