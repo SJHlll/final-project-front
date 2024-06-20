@@ -1,6 +1,6 @@
 .form-wrapper {
     width: 600px;
-    background-color: bisque;
+    border: 1px solid black;
 
     .flex {
         display: flex;
@@ -16,4 +16,8 @@
 .reservation {
     width: 30%;
     justify-self: center;
+}
+
+.modal-content {
+    background-color: #fff;
 }

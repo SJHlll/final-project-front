@@ -1,0 +1,60 @@
+.close-btn {
+    float: right;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 32px;
+    margin-right: 10px;
+}
+
+.station-container {
+
+    .station-name {
+        text-align: left;
+        font-size: 2rem;
+        letter-spacing: 3px;
+    }
+
+    .man-ava {
+        display: flex;
+        justify-content: space-around;
+
+        p {
+            margin: 0;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            width: 40%;
+        }
+
+        .station-management {
+            border: 2px solid #ddd;
+        }  
+
+        .able {
+            border: 2px solid green;
+        }
+
+        .disable {
+            border: 2px solid red;
+        }
+
+    }
+
+    .id-spe-typ {
+        display: flex;
+        justify-content: space-around;
+
+        p {
+            border: 2px solid black;
+        }
+
+        .station-id {}
+    
+        .station-speed {}
+    
+        .station-type {}
+
+    }
+
+    .station-address {}
+}

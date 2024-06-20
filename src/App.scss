@@ -2,14 +2,19 @@
 //   background-color: #fff;
 // }
 
-// .App {
-//   display: grid;
-//   grid-template-rows: auto 1fr auto;
-//   // min-height: 98vh;
-//   width: 93%;
-//   min-height: 86vh;
-//   margin: 3% auto;
-//   border: 10px solid lightgray;
+.App {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  // min-height: 98vh;
+  width: 93%;
+  min-height: 85vh;
+  margin: 0 3% auto auto;
+  background-color: #fff;
 
-
-// }
+  border: 10px solid lightgray;
+  
+  body {
+    background-color: lightgray;
+  }
+  
+}

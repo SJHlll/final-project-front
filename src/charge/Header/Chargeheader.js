@@ -13,27 +13,27 @@ const Header = () => {
   const headerItem = [
     {
       name: '충전소보기',
-      navigate: '/Charge/reserve',
+      navigate: '/charge/list',
     },
     {
       name: '예약하기',
-      navigate: '/Charge/howToUse',
+      navigate: '/charge/reservation',
     },
     {
       name: '이용방법',
-      navigate: '/Charge/noticeEvents',
+      navigate: '/charge/noticeEvents',
     },
     {
       name: '이용후기',
-      navigate: '/Charge/reviews',
+      navigate: '/charge/reviews',
     },
     {
       name: '렌트카',
-      navigate: '/Car/main',
+      navigate: '/car/home',
     },
     {
       name: 'MyPage',
-      navigate: '/Car/mypage',
+      navigate: '/car/mypage',
     },
   ];
 
