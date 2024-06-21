@@ -34,9 +34,15 @@ const CarCalendar = ({ closeModal }) => {
     setHours(setMinutes(new Date(), 30), 16),
   );
 
+  const [endTime, setEndTime] = useState(
+    setHours(setMinutes(new Date(), 30), 16),
+  );
+
+  console.log(setStartTime);
+  console.log(setEndTime);
+
   return (
     <div className='content'>
-      <button onClick={closeModal}>닫기버튼</button>
       <div>
         <DatePicker
           id='calendar'
@@ -117,8 +123,8 @@ const CarCalendar = ({ closeModal }) => {
       <div>
         <DatePicker
           id='returnTime'
-          selected={startTime}
-          onChange={(date) => setStartTime(date)}
+          selected={endTime}
+          onChange={(date) => setEndTime(date)}
           showTimeSelect
           showTimeSelectOnly
           timeIntervals={30}

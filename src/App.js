@@ -15,56 +15,65 @@ import Error from '../src/Car/components/Errorpage/Error';
 import Loginpage from '../src/Car/components/Mainpage/Loginpage';
 import ChargeStation from './charge/components/charge_station/ChargeStation';
 import ReservationCharge from './charge/components/reservation_charge/ReservationCharge';
+import { AuthContextProvider } from './util/AuthContext';
 
 const App = () => {
   return (
-    <div className='App'>
-      <Routes>
-        {/* 테스트 로그인페이지 */}
-        <Route path='/testlogin' element={<Loginpage />} />
+    <AuthContextProvider>
+      <div className='App'>
+        <Routes>
+          {/* 테스트 로그인페이지 */}
+          <Route
+            path='/testlogin'
+            element={<Loginpage />}
+          />
 
-        {/* 공통 로그인페이지 */}
-        <Route exact path='/' element={<Login />} />
+          {/* 공통 로그인페이지 */}
+          <Route exact path='/' element={<Login />} />
 
-        {/* 카카오 로그인페이지 */}
-        <Route
-          path='/oauth/kakao'
-          element={<KakaoLoginHandler />}
-        />
-        {/* 네이버 로그인페이지 */}
-        <Route
-          path='/oauth/naver'
-          element={<NaverLoginHandler />}
-        />
-        {/* 구글 로그인페이지 */}
+          {/* 카카오 로그인페이지 */}
+          <Route
+            path='/oauth/kakao'
+            element={<KakaoLoginHandler />}
+          />
+          {/* 네이버 로그인페이지 */}
+          <Route
+            path='/oauth/naver'
+            element={<NaverLoginHandler />}
+          />
+          {/* 구글 로그인페이지 */}
 
-        {/* 렌트카, 충전소 선택페이지 */}
-        <Route path='/choose' element={<Choose />} />
-        <Route path='/car/home' element={<Carhome />} />
+          {/* 렌트카, 충전소 선택페이지 */}
+          <Route path='/choose' element={<Choose />} />
+          <Route path='/car/home' element={<Carhome />} />
 
-        {/* 충전소 페이지 */}
-        <Route
-          path='charge/list'
-          element={<ChargeStation />}
-        />
-        <Route
-          path='charge/reservation'
-          element={<ReservationCharge />}
-        />
+          {/* 충전소 페이지 */}
+          <Route
+            path='charge/list'
+            element={<ChargeStation />}
+          />
+          <Route
+            path='charge/reservation'
+            element={<ReservationCharge />}
+          />
 
-        {/* 차 렌트 페이지 */}
-        <Route path='/car/res' element={<Carres />} />
-        <Route path='/car/noti' element={<Carnoti />} />
-        <Route path='/car/event' element={<Carevent />} />
-        <Route path='/car/review' element={<Carreview />} />
+          {/* 차 렌트 페이지 */}
+          <Route path='/car/res' element={<Carres />} />
+          <Route path='/car/noti' element={<Carnoti />} />
+          <Route path='/car/event' element={<Carevent />} />
+          <Route
+            path='/car/review'
+            element={<Carreview />}
+          />
 
-        {/* 마이페이지 */}
-        <Route path='/mypage' element={<Mypage />} />
+          {/* 마이페이지 */}
+          <Route path='/mypage' element={<Mypage />} />
 
-        {/* 에러페이지 */}
-        <Route path='/*' element={<Error />} />
-      </Routes>
-    </div>
+          {/* 에러페이지 */}
+          <Route path='/*' element={<Error />} />
+        </Routes>
+      </div>
+    </AuthContextProvider>
   );
 };
 
