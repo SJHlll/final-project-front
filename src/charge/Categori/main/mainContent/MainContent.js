@@ -1,7 +1,7 @@
 import React from 'react';
 import './MainContent.scss';
 import backgroundVideo from '../../../assets/mp4/mainpage2.mp4'; // MP4 파일 경로
-import Header from '../../../Header/Header';
+import Header from '../../../Header/Chargeheader';
 
 const MainContent = () => {
   return (

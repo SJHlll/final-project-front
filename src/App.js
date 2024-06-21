@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router-dom';
-import Login from './components/user/Login';
 import KakaoLoginHandler from './components/user/KakaoLoginHandler';
 import NaverLoginHandler from './components/user/NaverLoginHandler';
 import React from 'react';
@@ -12,10 +11,8 @@ import Carres from './Car/components/CarHeader/Carres';
 import Mypage from './Car/components/Mainpage/Mypage';
 import Carreview from './Car/components/CarHeader/Carreview';
 import Error from '../src/Car/components/Errorpage/Error';
-import Testhome from './Car/components/Mainpage/testCarhome/Testhome';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Testmain from './Car/components/Mainpage/testCarhome/Testmain';
-import Loginpage from '../src/Car/components/Mainpage/Loginpage';
 // import Header from './charge/Header/Header';
 import ChargeMain from './charge/Categori/main/ChargeMain';
 import Test from './charge/Test';
@@ -70,7 +67,7 @@ const App = () => {
 
         {/* 충전소 메인 페이지 */}
         <Route
-          path='/charge/main'
+          path='/charge/home'
           element={<ChargeMain />}
         />
         <Route path='/charge/test' element={<Test />} />

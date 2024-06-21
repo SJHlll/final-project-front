@@ -2,7 +2,13 @@
     min-height: 50vh;
 }
 
+.modal-header {
+    justify-content: right;
+    height: 80px;
+}
+
 .modal-content {
+    width: auto;
     padding: 20px;
     position: fixed;
     top: 50%;
@@ -13,6 +19,7 @@
 }
 
 .modal-footer {
-    text-align: center;
-    margin-top: 20px
+    justify-content: center;
+    height: 80px;
+    padding: 16px;
 }

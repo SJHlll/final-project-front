@@ -1,5 +1,5 @@
 import React from 'react';
-import './Header.scss';
+import './Chargeheader.scss';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/img/logo_charge.png';
 
@@ -41,7 +41,7 @@ const Header = () => {
     <div className='Charge_header'>
       <div className='charge_logo'>
         <img
-          className='Logo'
+          className='chargeLogo'
           src={logo}
           onClick={() => click('/charge/main/')}
         />
