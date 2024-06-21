@@ -1,12 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
-import KakaoLoginHandler from './components/user/KakaoLoginHandler';
-import NaverLoginHandler from './components/user/NaverLoginHandler';
 import React from 'react';
 import './App.scss';
 import Mypage from './Car/components/Mainpage/Mypage';
 import Error from '../src/Car/components/Errorpage/Error';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Testmain from './Car/components/Mainpage/Testmain';
 import ChargeMain from './charge/Categori/main/ChargeMain';
 import Test from './charge/Test';
 import ChargeStation from './charge/components/charge_station/ChargeStation';
@@ -17,9 +14,14 @@ import Event from './Car/components/Mainpage/Event';
 import Review from './Car/components/Mainpage/Review';
 import Testheader from './Car/components/Mainpage/Testheader';
 import Testhome from './Car/components/Mainpage/Testhome';
+import { AuthContextProvider } from './util/AuthContext';
+import { ModalProvider } from '@lasbe/react-modal';
+import LoginSuccess from './components/user/LoginSuccess';
 
 const App = () => {
   return (
+    <ModalProvider>
+      <AuthContextProvider>
     <div className='App'>
       <Testheader />
       <Routes>
@@ -55,19 +57,22 @@ const App = () => {
         {/* 카카오 로그인페이지 */}
         <Route
           path='/oauth/kakao'
-          element={<KakaoLoginHandler />}
+          element={<LoginSuccess />} // 강아지 사진 나오면 로그인 성공
         />
         {/* 네이버 로그인페이지 */}
         <Route
           path='/oauth/naver'
-          element={<NaverLoginHandler />}
+          element={<LoginSuccess />} // 강아지 사진 나오면 로그인 성공
         />
+
         {/* 구글 로그인페이지 */}
 
         {/* 에러페이지 */}
         <Route path='/*' element={<Error />} />
       </Routes>
     </div>
+      </AuthContextProvider>
+    </ModalProvider>
   );
 };
 
