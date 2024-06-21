@@ -30,7 +30,7 @@ const ReservationList = () => {
       <div>
         {stations.map((station) => (
           <PlugAndGoStation
-            Id={station.id} // 데이터베이스 id
+            // Id={station.id} // 데이터베이스 id
             StationId={station.stationId} // 충전기 id
             Name={station.stationName} // 충전소 이름
             Address={station.address} // 충전소 주소
