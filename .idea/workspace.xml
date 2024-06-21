@@ -4,24 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="71373143-ef0f-4721-abc9-56f81679c9e1" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="71373143-ef0f-4721-abc9-56f81679c9e1" name="변경" comment="app.js 수정" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Dasom04 &lt;156872543+dasom04@users.noreply.github.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="branch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
     <option name="recentBranches">
       <RecentBranches>
         <option name="branchesForRepo">
@@ -30,12 +33,12 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="develop" />
-                    <option name="lastUsedInstant" value="1718673693" />
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1718963584" />
                   </RecentBranch>
                   <RecentBranch>
-                    <option name="branchName" value="master" />
-                    <option name="lastUsedInstant" value="1718673633" />
+                    <option name="branchName" value="branch" />
+                    <option name="lastUsedInstant" value="1718963552" />
                   </RecentBranch>
                 </list>
               </option>
@@ -48,6 +51,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -62,18 +68,17 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "branch",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/MyWorkSpace/final-project-front"
+    "last_opened_file_path": "C:/MyWorkSpace/final-project-front",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="디폴트 작업">
@@ -82,10 +87,96 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1718606098885</updated>
+      <workItem from="1718961843754" duration="1940000" />
     </task>
+    <task id="LOCAL-00001" summary="Car파일삭제 및 홈피구조 생성">
+      <option name="closed" value="true" />
+      <created>1718961913575</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1718961913575</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Car파일삭제 및 홈피구조 생성">
+      <option name="closed" value="true" />
+      <created>1718961945536</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1718961945536</updated>
+    </task>
+    <task id="LOCAL-00003" summary="이그노어추가">
+      <option name="closed" value="true" />
+      <created>1718962241703</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1718962241703</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Car파일삭제 및 새로운 구조 생성, 이그노어추가">
+      <option name="closed" value="true" />
+      <created>1718962494766</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1718962494766</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Car파일 삭제 및 새로운 구조 생성&#10;&#10;이그노어 파일에 동영상 추가">
+      <option name="closed" value="true" />
+      <created>1718962659308</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1718962659308</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Car파일 삭제 및 새로운 구조 생성&#10;&#10;이그노어 파일에 동영상 추가">
+      <option name="closed" value="true" />
+      <created>1718962952771</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1718962952771</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Car파일 삭제 및 새로운 구조 생성&#10;&#10;이그노어 파일에 동영상 추가">
+      <option name="closed" value="true" />
+      <created>1718963359417</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1718963359417</updated>
+    </task>
+    <task id="LOCAL-00008" summary="app.js 수정">
+      <option name="closed" value="true" />
+      <created>1718963860712</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1718963860712</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="Car파일삭제 및 홈피구조 생성" />
+    <MESSAGE value="이그노어추가" />
+    <MESSAGE value="Car파일삭제 및 새로운 구조 생성, 이그노어추가" />
+    <MESSAGE value="Merge pull request #25 from Yeom-SeungBin/master&#10;&#10;이그노어 파일에 동영상 추가" />
+    <MESSAGE value="Car파일 삭제 및 새로운 구조 생성&#10;&#10;이그노어 파일에 동영상 추가" />
+    <MESSAGE value="app.js 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="app.js 수정" />
   </component>
 </project>

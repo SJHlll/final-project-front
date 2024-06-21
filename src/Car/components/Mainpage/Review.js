@@ -1,7 +1,7 @@
 import React from 'react';
 import Tabline from './Tabline';
-import './Mypage.scss';
-const Mypage = () => {
+import './Review.scss';
+const Review = () => {
   return (
     <div className='maincontainer'>
       <div
@@ -10,7 +10,7 @@ const Mypage = () => {
           fontSize: '100px',
         }}
       >
-        마이페이지
+        이용후기
       </div>
 
       <Tabline />
@@ -18,4 +18,4 @@ const Mypage = () => {
   );
 };
 
-export default Mypage;
+export default Review;
