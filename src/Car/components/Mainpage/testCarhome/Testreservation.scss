@@ -1,0 +1,64 @@
+.testres{
+    width: 1300px;
+    height: 700px;
+    background-image: url(../../../assets/reservation.jpg);
+    background-size:contain;
+    background-repeat: no-repeat;
+    
+    overflow: hidden;
+    background-position: right;
+    animation: bright 8s forwards;
+    @keyframes bright {
+      0%{
+        filter: brightness(0.5);
+      }
+      100%{
+        filter: brightness(1);
+      }
+    }
+}
+.resheader{
+    font-Size: 150px;
+    text-align: center;display: inline-block;
+    padding: 40px;
+    font-weight: bold;
+    color: black;
+    position: relative;
+    right: 70px;
+    animation: text 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    @keyframes text {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(35%);
+        }
+      }
+}
+.rescontent {
+    font-size: 100px;
+    font-weight: bold;
+    color: red;
+    margin-left: 5%;
+    position: relative;
+    bottom: 150px;
+    display: inline-block;
+    animation: textarea 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    @keyframes textarea {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(10%);
+        }
+      }
+}
+
+.resbtn{
+  width: 180px;
+  height: 60px;
+  position: relative;
+  left: 55%;
+  bottom: 40%;
+  color: white;
+}

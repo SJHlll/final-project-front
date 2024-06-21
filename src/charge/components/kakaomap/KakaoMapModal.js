@@ -1,6 +1,12 @@
 // Modal.js
 import React from 'react';
 import styled from 'styled-components';
+import '../scss/KakaoMapModal.scss';
+import {
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from 'reactstrap';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -17,9 +23,11 @@ const ModalBackground = styled.div`
 
 const ModalContent = styled.div`
   background: white;
-  padding: 20px;
-  border-radius: 5px;
-  min-width: 300px;
+  padding: 0 15px 0;
+  border-radius: 10px;
+  width: 35%;
+  max-height: 90%;
+  overflow-y: auto;
 `;
 
 const KakaoMapModal = ({ isOpen, onClose, marker }) => {
@@ -28,31 +36,67 @@ const KakaoMapModal = ({ isOpen, onClose, marker }) => {
   return (
     <ModalBackground>
       <ModalContent onClick={(e) => e.stopPropagation()}>
-        <button onClick={onClose}>Close</button>
-        {marker && (
-          <div>
-            <h3 style={{ display: 'flex' }}>
-              <span>{marker.StationName}</span>
-              <a
-                href={`https://map.kakao.com/link/to/${marker.Address},${marker.lat},${marker.lng}`}
-                target='_blank'
-                rel='noreferrer'
-                style={{ marginLeft: 'auto' }}
-              >
-                길찾기
-              </a>
-            </h3>
-            <p>주소: {marker.Address}</p>
-            <p>충전 속도: {marker.Speed}</p>
-            <p>충전기 타입: {marker.Type}</p>
-            <p>관리 회사: {marker.Management}</p>
-            <p>이용 시설: {marker.areaIn}</p>
-            <p>이용 가능 여부: {marker.Available}</p>
-            <p>위도: {marker.lat}</p>
-            <p>경도: {marker.lng}</p>
-            <p>충전기 ID: {marker.StationId}</p>
+        <ModalHeader>
+          <div className='header'>
+            <span className='close-btn' onClick={onClose}>
+              X
+            </span>
           </div>
-        )}
+        </ModalHeader>
+        <ModalBody>
+          {marker && (
+            <>
+              <div className='station-container'>
+                <p className='station-name'>
+                  {marker.StationName}
+                </p>
+                <hr />
+                <div className='man-ava'>
+                  <p className='station-management'>
+                    운영기관 : {marker.Management}
+                  </p>
+                  <p
+                    className={
+                      marker.Available === '이용가능'
+                        ? 'able'
+                        : 'disable'
+                    }
+                  >
+                    충전 가능 여부 : {marker.Available}
+                  </p>
+                </div>
+                <div className='id-spe-typ'>
+                  <div className='station-id'>
+                    <div>충전기 ID</div>
+                    <div>{marker.StationId}</div>
+                  </div>
+                  <div className='station-speed'>
+                    <div>구분</div>
+                    <div>{marker.Speed}</div>
+                  </div>
+                  <div className='station-type'>
+                    <div>충전기 타입</div>
+                    <div>{marker.Type}</div>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+        </ModalBody>
+        <ModalFooter>
+          <div className='footer'>
+            <span className='station-address'>
+              상세 주소 : {marker.Address}
+            </span>
+            <a
+              href={`https://map.kakao.com/link/to/${marker.StationName},${marker.lat},${marker.lng}`}
+              target='_blank'
+              rel='noreferrer'
+            >
+              (길찾기)
+            </a>
+          </div>
+        </ModalFooter>
       </ModalContent>
     </ModalBackground>
   );
