@@ -56,7 +56,13 @@ const Station = ({
       {/* 오른쪽박스 */}
       <div className='Charger'>
         <div className='ChargerType'>{Type}</div>
-        <div className='ChargeAble'>{Available}</div>
+        <div
+          className={
+            Available === '이용가능' ? 'able' : 'disable'
+          }
+        >
+          {Available}
+        </div>
         <div>{StationId}</div>
       </div>
     </div>

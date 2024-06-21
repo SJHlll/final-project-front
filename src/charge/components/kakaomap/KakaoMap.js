@@ -53,7 +53,7 @@ const KakaoMap = () => {
         );
         setMarkers(
           uniqueStations.map((station) => ({
-            Id: station.id,
+            // Id: station.id,
             lat: station.latitude,
             lng: station.longitude,
             StationId: station.stationId,
@@ -134,7 +134,8 @@ const KakaoMap = () => {
         >
           {filteredMarkers.map((marker) => (
             <MapMarker
-              key={marker.id}
+              // key={marker.id}
+              key={marker.stationId}
               position={{
                 lat: marker.lat,
                 lng: marker.lng,

@@ -1,4 +1,5 @@
 import React from 'react';
+import '../scss/PlugAndGoStation.scss';
 
 const PlugAndGoStation = ({
   Id,
@@ -14,7 +15,7 @@ const PlugAndGoStation = ({
   Available,
 }) => {
   return (
-    <div style={{ float: 'right' }}>
+    <div className='station-box'>
       <div>{Name}</div>
       <div>{Address}</div>
       <div>{Speed}</div>
