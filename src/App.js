@@ -22,8 +22,10 @@ import { AuthContextProvider } from './util/AuthContext';
 
 const App = () => {
   return (
-    <div className='App'>
-      <Routes>
+
+    <AuthContextProvider>
+      <div className='App'>
+        <Routes>
         {/* 공통 로그인페이지 */}
         <Route exact path='/' element={<Testmain />} />
 
@@ -74,6 +76,7 @@ const App = () => {
         <Route path='/charge/test' element={<Test />} />
       </Routes>
     </div>
+  </AuthContextProvider>
   );
 };
 
