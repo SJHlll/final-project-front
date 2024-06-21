@@ -8,6 +8,9 @@ import styled from 'styled-components';
 import { MapContext } from '../contexts/MapContext';
 import { removeDuplicates } from '../utils/utils';
 import KakaoMapModal from './KakaoMapModal';
+import QuickMarker from '../../assets/img/marker-quick.png';
+import SlowMarker from '../../assets/img/marker-slow.png';
+import DisableMarker from '../../assets/img/marker-disable.png';
 
 // 카카오 지도 스타일
 const MapContainer = styled(Map)`
@@ -138,6 +141,24 @@ const KakaoMap = () => {
               }}
               clickable={true}
               onClick={() => handleMarkerClick(marker)}
+              image={{
+                src:
+                  marker.Available === '이용가능'
+                    ? marker.Speed === '급속'
+                      ? QuickMarker // 급속
+                      : SlowMarker // 완속
+                    : DisableMarker, // 이용자제한
+                size: {
+                  width: 35,
+                  height: 50,
+                },
+                options: {
+                  offset: {
+                    x: 17.5,
+                    y: 50,
+                  },
+                },
+              }}
             />
           ))}
         </MarkerClusterer>
