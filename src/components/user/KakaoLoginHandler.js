@@ -50,4 +50,3 @@ const KakaoLoginHandler = () => {
 };
 
 export default KakaoLoginHandler;
-
