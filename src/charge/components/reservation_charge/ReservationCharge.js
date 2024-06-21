@@ -9,6 +9,9 @@ import {
 import ReservationModal from './ReservationModal';
 import '../scss/ReservationCharge.scss';
 import styled from 'styled-components';
+import ReservationList from './ReservationList';
+import Header from '../../Header/Chargeheader';
+import { StationProvider } from '../contexts/StationContext';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -85,7 +88,15 @@ const ReservationCharge = () => {
     </ModalBackground>
   );
 
-  return <>{modal ? modalOpen : button}</>;
+  return (
+    <>
+      <Header />
+      {modal ? modalOpen : button}
+      <StationProvider>
+        <ReservationList />
+      </StationProvider>
+    </>
+  );
 };
 
 export default ReservationCharge;
