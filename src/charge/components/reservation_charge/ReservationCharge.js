@@ -25,11 +25,15 @@ const ModalBackground = styled.div`
 
 const ReservationCharge = () => {
   const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
 
-  const toggle = () => {
-    console.log('버튼 클릭중!');
-    setModal(!modal);
-  };
+  // const [reservations, setReservations] = useState([]);
+
+  // const reservationCharge = async (rentTime) => {
+  //   const newReservation = {
+  //     regDate: rentTime,
+  //   };
+  // };
 
   // Modal Open 버튼 활성화
   const button = (
@@ -49,23 +53,17 @@ const ReservationCharge = () => {
     setModal(!modal);
   };
 
+  const closeBtn = (
+    <Button color='success' size='large' onClick={toggle}>
+      &times;
+    </Button>
+  );
+
   // 예약하기 모달창 활성화
   const modalOpen = (
     <ModalBackground>
       <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader>
-          <Button
-            color='success'
-            variant='outlined'
-            onClick={toggle}
-            style={{
-              width: 'fit-content',
-              height: '30px',
-            }}
-          >
-            X
-          </Button>
-        </ModalHeader>
+        <ModalHeader toggle={toggle} close={closeBtn} />
         <ModalBody>
           <ReservationModal />
         </ModalBody>
