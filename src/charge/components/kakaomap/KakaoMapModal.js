@@ -57,13 +57,19 @@ const KakaoMapModal = ({ isOpen, onClose, marker }) => {
               </div>
               <div className='id-spe-typ'>
                 <p className='station-id'>
-                  {marker.StationId}
+                  <span>충전기 ID</span>
+                  <br />
+                  <span>{marker.StationId}</span>
                 </p>
                 <p className='station-speed'>
-                  {marker.Speed}
+                  <span>구분</span>
+                  <br />
+                  <span>{marker.Speed}</span>
                 </p>
                 <p className='station-type'>
-                  {marker.Type}
+                  <span>충전기 타입</span>
+                  <br />
+                  <span>{marker.Type}</span>
                 </p>
               </div>
               <p className='station-address'>
@@ -78,12 +84,6 @@ const KakaoMapModal = ({ isOpen, onClose, marker }) => {
                 길찾기
               </a>
             </div>
-            {/* 
-            충전기
-              DC차데모 : DC_ChadeMO.png
-              DC콤보 : DC_Combo.png
-              AC3상 : AC_3.png
-             */}
           </>
         )}
       </ModalContent>
