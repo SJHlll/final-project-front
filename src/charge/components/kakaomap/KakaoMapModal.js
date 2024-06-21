@@ -2,6 +2,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import '../scss/KakaoMapModal.scss';
+import {
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from 'reactstrap';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -18,7 +23,7 @@ const ModalBackground = styled.div`
 
 const ModalContent = styled.div`
   background: white;
-  padding: 20px;
+  padding: 0 15px 0;
   border-radius: 10px;
   width: 35%;
   max-height: 90%;
@@ -31,61 +36,67 @@ const KakaoMapModal = ({ isOpen, onClose, marker }) => {
   return (
     <ModalBackground>
       <ModalContent onClick={(e) => e.stopPropagation()}>
-        <span className='close-btn' onClick={onClose}>
-          X
-        </span>
-        {marker && (
-          <>
-            <div className='station-container'>
-              <p className='station-name'>
-                {marker.StationName}
-              </p>
-              <hr />
-              <div className='man-ava'>
-                <p className='station-management'>
-                  {marker.Management}
+        <ModalHeader>
+          <div className='header'>
+            <span className='close-btn' onClick={onClose}>
+              X
+            </span>
+          </div>
+        </ModalHeader>
+        <ModalBody>
+          {marker && (
+            <>
+              <div className='station-container'>
+                <p className='station-name'>
+                  {marker.StationName}
                 </p>
-                <p
-                  className={
-                    marker.Available === '이용가능'
-                      ? 'able'
-                      : 'disable'
-                  }
-                >
-                  {marker.Available}
-                </p>
+                <hr />
+                <div className='man-ava'>
+                  <p className='station-management'>
+                    운영기관 : {marker.Management}
+                  </p>
+                  <p
+                    className={
+                      marker.Available === '이용가능'
+                        ? 'able'
+                        : 'disable'
+                    }
+                  >
+                    충전 가능 여부 : {marker.Available}
+                  </p>
+                </div>
+                <div className='id-spe-typ'>
+                  <div className='station-id'>
+                    <div>충전기 ID</div>
+                    <div>{marker.StationId}</div>
+                  </div>
+                  <div className='station-speed'>
+                    <div>구분</div>
+                    <div>{marker.Speed}</div>
+                  </div>
+                  <div className='station-type'>
+                    <div>충전기 타입</div>
+                    <div>{marker.Type}</div>
+                  </div>
+                </div>
               </div>
-              <div className='id-spe-typ'>
-                <p className='station-id'>
-                  <span>충전기 ID</span>
-                  <br />
-                  <span>{marker.StationId}</span>
-                </p>
-                <p className='station-speed'>
-                  <span>구분</span>
-                  <br />
-                  <span>{marker.Speed}</span>
-                </p>
-                <p className='station-type'>
-                  <span>충전기 타입</span>
-                  <br />
-                  <span>{marker.Type}</span>
-                </p>
-              </div>
-              <p className='station-address'>
-                주소: {marker.Address}
-              </p>
-              <a
-                href={`https://map.kakao.com/link/to/${marker.StationName},${marker.lat},${marker.lng}`}
-                target='_blank'
-                rel='noreferrer'
-                style={{ marginLeft: 'auto' }}
-              >
-                길찾기
-              </a>
-            </div>
-          </>
-        )}
+            </>
+          )}
+        </ModalBody>
+        <ModalFooter>
+          <div className='footer'>
+            <span className='station-address'>
+              상세 주소 : {marker.Address}
+            </span>
+            <a
+              href={`https://map.kakao.com/link/to/${marker.StationName},${marker.lat},${marker.lng}`}
+              target='_blank'
+              rel='noreferrer'
+            >
+              (길찾기)
+            </a>
+          </div>
+        </ModalFooter>
       </ModalContent>
     </ModalBackground>
   );
