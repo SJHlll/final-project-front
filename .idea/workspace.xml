@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="71373143-ef0f-4721-abc9-56f81679c9e1" name="변경" comment="Car파일 삭제 및 새로운 구조 생성&#10;&#10;이그노어 파일에 동영상 추가">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-    </list>
+    <list default="true" id="71373143-ef0f-4721-abc9-56f81679c9e1" name="변경" comment="app.js 수정" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -90,7 +87,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1718606098885</updated>
-      <workItem from="1718961843754" duration="1903000" />
+      <workItem from="1718961843754" duration="1940000" />
     </task>
     <task id="LOCAL-00001" summary="Car파일삭제 및 홈피구조 생성">
       <option name="closed" value="true" />
@@ -148,7 +145,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718963359417</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="app.js 수정">
+      <option name="closed" value="true" />
+      <created>1718963860712</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1718963860712</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,6 +176,7 @@
     <MESSAGE value="Car파일삭제 및 새로운 구조 생성, 이그노어추가" />
     <MESSAGE value="Merge pull request #25 from Yeom-SeungBin/master&#10;&#10;이그노어 파일에 동영상 추가" />
     <MESSAGE value="Car파일 삭제 및 새로운 구조 생성&#10;&#10;이그노어 파일에 동영상 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="Car파일 삭제 및 새로운 구조 생성&#10;&#10;이그노어 파일에 동영상 추가" />
+    <MESSAGE value="app.js 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="app.js 수정" />
   </component>
 </project>
