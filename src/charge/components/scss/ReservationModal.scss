@@ -1,6 +1,6 @@
 .form-wrapper {
     width: 600px;
-    background-color: bisque;
+    border: 1px solid black;
 
     .flex {
         display: flex;
@@ -11,9 +11,17 @@
     .column {
         width: 200px;
     }
+
+    .date-picker {
+        width: 220px;
+    }
 }
 
 .reservation {
     width: 30%;
     justify-self: center;
+}
+
+.modal-content {
+    background-color: #fff;
 }

@@ -1,8 +1,9 @@
 import React from 'react';
 import KakaoMap from '../kakaomap/KakaoMap';
 import SearchList from './SearchList';
-import Header from '../../../Car/components/Header/Header';
+
 import { MapProvider } from '../contexts/MapContext';
+import Header from '../../Header/Chargeheader';
 import { StationProvider } from '../contexts/StationContext';
 import { SearchProvider } from '../contexts/SearchContext';
 
@@ -20,7 +21,6 @@ const ChargeStation = () => {
           </MapProvider>
         </SearchProvider>
       </StationProvider>
-      {/* <Footer /> 굳이 푸터를 안넣어도 될듯 */}
     </>
   );
 };

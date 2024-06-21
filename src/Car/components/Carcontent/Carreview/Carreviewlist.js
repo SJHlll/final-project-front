@@ -119,9 +119,7 @@ const Carreviewtlist = () => {
     },
   ];
 
-  return (
-    <>
-      <div className='carreviewlist'>
+  /* <Card className='carreviewlist'>
         {reviewlist.map((list) => (
           <div className='review' key={list.id}>
             <div className='reviewname'>{list.name}</div>
@@ -133,7 +131,13 @@ const Carreviewtlist = () => {
             <div className='reviewtext'>{list.text}</div>
           </div>
         ))}
-      </div>
+      </Card> */
+
+  return (
+    <>
+      {reviewlist.map((list) => (
+        <div className='review'></div>
+      ))}
     </>
   );
 };
