@@ -1,4 +1,5 @@
 import React from 'react';
+import Pic from './puppy.png';
 
 const LoginSuccess = () => {
   return (
@@ -11,7 +12,7 @@ const LoginSuccess = () => {
       }}
     >
       <img
-        src='../../Car/assets/loginPuppy.jpg'
+        src={Pic}
         alt='Logged In'
         style={{ width: '30%' }}
       />
