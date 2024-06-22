@@ -43,6 +43,7 @@ const ReservationModal = (reservationCharge) => {
             <DatePicker
               className='date-picker'
               selected={startDate}
+              showIcon
               onChange={(date) => setStartDate(date)}
               showTimeSelect
               filterTime={filterPassedTime}

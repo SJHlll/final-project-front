@@ -1,0 +1,22 @@
+.reservation-list {
+  border: 1px solid black;
+  padding: 10px;
+
+  .flex {
+    display: flex;
+    margin: 10px 5px;
+  }
+
+  .value {
+    width: 30%;
+    font-size: 15px;
+  }
+}
+
+.modal-footer {
+  justify-content: center;
+}
+
+.modify-btn {
+  width: 50%;
+}

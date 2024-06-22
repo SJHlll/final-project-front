@@ -39,7 +39,7 @@ const ReservationCharge = () => {
   // };
 
   // Modal Open 버튼 활성화
-  const button = (
+  const button = () => (
     <div className='button-wrapper'>
       <Button
         variant='outlined'
@@ -65,7 +65,7 @@ const ReservationCharge = () => {
   );
 
   // 예약하기 모달창 활성화
-  const modalOpen = (
+  const modalOpen = () => (
     <ModalBackground>
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle} close={closeBtn} />
@@ -91,7 +91,8 @@ const ReservationCharge = () => {
   return (
     <>
       <Header />
-      {modal ? modalOpen : button}
+      {button()}
+      {modal && modalOpen()}
       <StationProvider>
         <ReservationList />
       </StationProvider>
