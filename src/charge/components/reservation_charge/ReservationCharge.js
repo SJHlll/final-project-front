@@ -40,15 +40,17 @@ const ReservationCharge = () => {
 
   // Modal Open 버튼 활성화
   const button = (
-    <Button
-      variant='outlined'
-      color='success'
-      size='small'
-      style={{ width: '30%', justifySelf: 'center' }}
-      onClick={toggle}
-    >
-      Modal Open!
-    </Button>
+    <div className='button-wrapper'>
+      <Button
+        variant='outlined'
+        color='success'
+        size='small'
+        style={{ width: '20%' }}
+        onClick={toggle}
+      >
+        Modal Open!
+      </Button>
+    </div>
   );
 
   const reservationHandler = () => {
