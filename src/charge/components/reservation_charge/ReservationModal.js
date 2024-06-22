@@ -61,6 +61,12 @@ const ReservationModal = (reservationCharge) => {
             </div>
           </div>
           <div className='flex'>
+            <div className='column'>충전 타입</div>
+            <div className='data'>
+              DC차데모+AC3상+DC콤보 (급속 / 완속)
+            </div>
+          </div>
+          <div className='flex'>
             <div className='column'>가격</div>
             <div className='data'>20000원</div>
           </div>
