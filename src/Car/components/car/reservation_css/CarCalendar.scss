@@ -1,11 +1,3 @@
-// .content{
-//     // margin: 0px 100px 500px 100px;
-//     // border: 2px solid red;
-//     width: 500px;
-//     height: 650px;
-//     border-radius: 30px;
-//     background-color: red;
-// }
 /* General styles for selected dates */
 .react-datepicker__day--selected,
 .react-datepicker__day--in-selecting-range,
@@ -24,6 +16,13 @@
     color: #fff !important;
     border-radius: 0.3rem;
 }
+
+/* Override current date style */
+.react-datepicker__day--today {
+    background-color: transparent !important;
+    color: inherit !important;
+}
+
 .content {
     .react-datepicker {
       width: 100%;
@@ -37,4 +36,4 @@
     #returnTime {
       margin-top: 10px;
     }
-  }
+}

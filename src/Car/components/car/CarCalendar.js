@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DatePicker, {
   registerLocale,
 } from 'react-datepicker';
@@ -14,32 +14,32 @@ import {
 
 registerLocale('ko', ko); // 한국어 등록
 
-const CarCalendar = ({ closeModal }) => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(null);
-
-  const onChange = (dates) => {
+const CarCalendar = ({
+  startDate,
+  endDate,
+  onChangeStartDate,
+  onChangeEndDate,
+  startTime,
+  endTime,
+  onChangeStartTime,
+  onChangeEndTime,
+}) => {
+  const handleDateChange = (dates) => {
     const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
+    onChangeStartDate(start);
+    onChangeEndDate(end);
   };
 
-  console.log(startDate);
-  console.log(endDate);
+  const handleStartTimeChange = (time) => {
+    onChangeStartTime(time);
+  };
+
+  const handleEndTimeChange = (time) => {
+    onChangeEndTime(time);
+  };
 
   const minDate = new Date();
   const maxDate = endOfMonth(addMonths(new Date(), 1));
-
-  const [startTime, setStartTime] = useState(
-    setHours(setMinutes(new Date(), 30), 16),
-  );
-
-  const [endTime, setEndTime] = useState(
-    setHours(setMinutes(new Date(), 30), 16),
-  );
-
-  console.log(setStartTime);
-  console.log(setEndTime);
 
   return (
     <div className='content'>
@@ -64,9 +64,7 @@ const CarCalendar = ({ closeModal }) => {
                 }
                 onClick={decreaseMonth}
               >
-                <span className='react-datepicker__navigation-icon react-datepicker__navigation-icon--previous'>
-                  {'<'}
-                </span>
+                <span className='react-datepicker__navigation-icon react-datepicker__navigation-icon--previous'></span>
               </button>
               <span className='react-datepicker__current-month'>
                 {monthDate.toLocaleString('ko', {
@@ -84,13 +82,11 @@ const CarCalendar = ({ closeModal }) => {
                 }
                 onClick={increaseMonth}
               >
-                <span className='react-datepicker__navigation-icon react-datepicker__navigation-icon--next'>
-                  {'>'}
-                </span>
+                <span className='react-datepicker__navigation-icon react-datepicker__navigation-icon--next'></span>
               </button>
             </div>
           )}
-          onChange={onChange}
+          onChange={handleDateChange}
           startDate={startDate}
           endDate={endDate}
           minDate={minDate}
@@ -105,7 +101,7 @@ const CarCalendar = ({ closeModal }) => {
         <DatePicker
           id='pickupTime'
           selected={startTime}
-          onChange={(date) => setStartTime(date)}
+          onChange={handleStartTimeChange}
           showTimeSelect
           showTimeSelectOnly
           timeIntervals={30}
@@ -124,7 +120,7 @@ const CarCalendar = ({ closeModal }) => {
         <DatePicker
           id='returnTime'
           selected={endTime}
-          onChange={(date) => setEndTime(date)}
+          onChange={handleEndTimeChange}
           showTimeSelect
           showTimeSelectOnly
           timeIntervals={30}

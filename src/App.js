@@ -17,6 +17,7 @@ import Testhome from './Car/components/Mainpage/Testhome';
 import { AuthContextProvider } from './util/AuthContext';
 import { ModalProvider } from '@lasbe/react-modal';
 import LoginSuccess from './components/user/LoginSuccess';
+import Carres from './Car/components/CarHeader/Carres';
 
 const App = () => {
   return (
@@ -49,11 +50,15 @@ const App = () => {
               element={<ReservationCharge />}
             />
 
+            {/* 전기차 예약하기 */}
+            <Route path='/car/res' element={<Carres />} />
+
             {/* 마이페이지 */}
             <Route path='/mypage' element={<Mypage />} />
 
             {/* 공통 로그인페이지 */}
             <Route path='/Login' element={<Login />} />
+
             {/* 카카오 로그인페이지 */}
             <Route
               path='/oauth/kakao'

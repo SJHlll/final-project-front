@@ -19,7 +19,7 @@ const Tabline = () => {
       </button>
       <button
         className={State === '2' ? 'tabli active' : 'tabli'}
-        onClick={() => onClick(2, '/carres')}
+        onClick={() => onClick(2, '/car/res')}
       >
         전기차 렌트
       </button>
