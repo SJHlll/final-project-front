@@ -16,7 +16,14 @@ const customerKey = 'FI9S0TxYb6XywBtqaaL1m';
 export function Checkout() {
   const [paymentWidget, setPaymentWidget] = useState(null);
   const paymentMethodsWidgetRef = useRef(null);
-  const [price] = useState(100);
+
+  const getQueryParam = (param) => {
+    const urlParams = new URLSearchParams(
+      window.location.search,
+    );
+    return urlParams.get(param);
+  };
+  const [price] = useState(getQueryParam('totalPrice'));
 
   useEffect(() => {
     const fetchPaymentWidget = async () => {

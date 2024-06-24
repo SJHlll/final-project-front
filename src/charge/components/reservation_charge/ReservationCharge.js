@@ -12,7 +12,6 @@ import styled from 'styled-components';
 import ReservationList from './ReservationList';
 import Header from '../../Header/Chargeheader';
 import { StationProvider } from '../contexts/StationContext';
-import CommonPage from '../../../components/pay/CommonPage';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -97,7 +96,6 @@ const ReservationCharge = () => {
       <StationProvider>
         <ReservationList />
       </StationProvider>
-      <CommonPage />
     </>
   );
 };

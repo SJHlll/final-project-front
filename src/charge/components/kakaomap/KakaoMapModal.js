@@ -2,11 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import '../scss/KakaoMapModal.scss';
-import {
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-} from 'reactstrap';
+import { ModalBody, ModalFooter } from 'reactstrap';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -36,13 +32,11 @@ const KakaoMapModal = ({ isOpen, onClose, marker }) => {
   return (
     <ModalBackground>
       <ModalContent onClick={(e) => e.stopPropagation()}>
-        <ModalHeader>
-          <div className='header'>
-            <span className='close-btn' onClick={onClose}>
-              X
-            </span>
-          </div>
-        </ModalHeader>
+        <div className='header'>
+          <span className='close-btn' onClick={onClose}>
+            X
+          </span>
+        </div>
         <ModalBody>
           {marker && (
             <>
@@ -86,8 +80,9 @@ const KakaoMapModal = ({ isOpen, onClose, marker }) => {
         <ModalFooter>
           <div className='footer'>
             <span className='station-address'>
-              상세 주소 : {marker.Address}
+              {marker.Address}
             </span>
+            <br />
             <a
               href={`https://map.kakao.com/link/to/${marker.StationName},${marker.lat},${marker.lng}`}
               target='_blank'
