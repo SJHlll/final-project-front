@@ -1,15 +1,9 @@
 import React, { useState } from 'react';
 import '../scss/PlugAndGoStation.scss';
 import { Button } from '@mui/material';
-import {
-  Modal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-} from 'reactstrap';
+import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import styled from 'styled-components';
 import ReservationModal from './ReservationModal';
-import OpenTossPayments from '../../../components/pay/OpenTossPayments';
 
 const ModalBackground = styled.div`
   position: fixed;

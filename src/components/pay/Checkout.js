@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
   loadPaymentWidget,
-  ANONYMOUS,
+  // ANONYMOUS,
 } from '@tosspayments/payment-widget-sdk';
 import { nanoid } from 'nanoid';
 import './Pay.scss';
