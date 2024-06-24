@@ -32,7 +32,7 @@ const MyPageCharge = () => {
   };
 
   const closeBtn = (
-    <Button color='success' size='small' onClick={toggle}>
+    <Button color='success' size='large' onClick={toggle}>
       &times;
     </Button>
   );
@@ -40,10 +40,17 @@ const MyPageCharge = () => {
   const modifyOpen = () => {
     return (
       <ModalBackground>
-        <Modal isOpen={modifyModal}>
+        <Modal
+          isOpen={modifyModal}
+          style={{
+            position: 'absolute',
+            left: '50%',
+            transform: 'translate(-50%, 20%)',
+          }}
+        >
           <ModalHeader toggle={toggle} close={closeBtn} />
           <MyPageModifyCharge />
-          <ModalFooter>
+          <ModalFooter style={{ justifyContent: 'center' }}>
             <Button
               className='modify-btn'
               variant='outlined'
@@ -61,7 +68,9 @@ const MyPageCharge = () => {
   return (
     <>
       <div className='reservation-list'>
-        <h3>전기차 충전소 예약 내역</h3>
+        <h3 style={{ textAlign: 'center' }}>
+          전기차 충전소 예약 내역
+        </h3>
         <div className='flex'>
           <div className='value'>날짜</div>
           <div>2024년 06월 22일 PM 04:40</div>
