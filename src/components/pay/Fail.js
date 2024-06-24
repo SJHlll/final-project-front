@@ -1,0 +1,32 @@
+import {
+  useNavigate,
+  useSearchParams,
+} from 'react-router-dom';
+import './Pay.scss';
+
+export function Fail() {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  const handleBack = () => {
+    navigate('/pay');
+  };
+
+  return (
+    <div className='result wrapper'>
+      <div className='box_section'>
+        <h2>결제 실패</h2>
+        <p>{`에러 코드: ${searchParams.get('code')}`}</p>
+        <p>{`실패 사유: ${searchParams.get('message')}`}</p>
+
+        <p>
+          ▷
+          <span className='go-back' onClick={handleBack}>
+            결제 페이지로 돌아가기
+          </span>
+          ◁
+        </p>
+      </div>
+    </div>
+  );
+}

@@ -22,6 +22,9 @@ import { AuthContextProvider } from './util/AuthContext';
 import { ModalProvider } from '@lasbe/react-modal';
 import LoginSuccess from './components/user/LoginSuccess';
 import Login from './components/user/Login';
+import { Checkout } from './components/pay/Checkout';
+import { Success } from './components/pay/Success';
+import { Fail } from './components/pay/Fail';
 
 const App = () => {
   return (
@@ -87,6 +90,11 @@ const App = () => {
               element={<ChargeMain />}
             />
             <Route path='/charge/test' element={<Test />} />
+
+            {/* 결제 페이지 */}
+            <Route path='/pay' element={<Checkout />} />
+            <Route path='/success' element={<Success />} />
+            <Route path='/fail' element={<Fail />} />
           </Routes>
         </div>
       </AuthContextProvider>
