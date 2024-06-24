@@ -1,27 +1,27 @@
 .form-wrapper {
-    width: 600px;
-    border: 1px solid black;
+  width: 600px;
+  border: 1px solid black;
 
-    .flex {
-        display: flex;
-        width: 100%;
-        padding: 15px 15px 15px 10px;
-    }
+  .flex {
+    display: flex;
+    width: 100%;
+    padding: 15px 15px 15px 10px;
+  }
 
-    .column {
-        width: 200px;
-    }
+  .column {
+    width: 200px;
+  }
 
-    .date-picker {
-        width: 220px;
-    }
+  .date-picker {
+    width: 250px;
+  }
 }
 
 .reservation {
-    width: 30%;
-    justify-self: center;
+  width: 30%;
+  justify-self: center;
 }
 
 .modal-content {
-    background-color: #fff;
+  background-color: #fff;
 }

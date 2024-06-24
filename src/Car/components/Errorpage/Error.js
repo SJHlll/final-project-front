@@ -6,7 +6,7 @@ const Error = () => {
   const navigate = useNavigate();
 
   const click = () => {
-    navigate('/choose');
+    navigate('/');
   };
   return (
     <>

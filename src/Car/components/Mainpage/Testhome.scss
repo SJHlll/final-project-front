@@ -1,0 +1,21 @@
+.maincontainer{
+    background-color: white;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+}
+.covervideo{
+    width: 100%;
+    height: 100%;
+    
+}
+.contentline{
+    position: fixed;
+    width: 70%;
+    height: 760px;
+    background-size: contain;
+    margin-left: 3%;
+    border: 1px solid black;
+}

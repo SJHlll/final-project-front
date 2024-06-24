@@ -50,9 +50,9 @@ const Login = () => {
         </Grid>
         <Button
           className='testbtn'
-          onClick={() => click('/choose')}
+          onClick={() => click('/')}
         >
-          우선 넘기기
+          우선 돌아가기
         </Button>
       </Container>
     </>
