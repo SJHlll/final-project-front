@@ -1,4 +1,4 @@
-import { setHours, setMinutes } from 'date-fns';
+import { addDays, setHours, setMinutes } from 'date-fns';
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import '../scss/MyPageModifyCharge.scss';
@@ -25,6 +25,8 @@ const MyPageModifyCharge = () => {
           selected={startDate}
           onChange={(date) => setStartDate(date)}
           showTimeSelect
+          minDate={new Date()}
+          maxDate={addDays(new Date(), 2)}
           filterTime={filterPassedTime}
           timeIntervals={10} // 10분 단위
           // dateFormat={'yyyy년 MM월 dd일 aa hh:mm'}
@@ -35,8 +37,10 @@ const MyPageModifyCharge = () => {
         <DatePicker
           className='read-only-date'
           selected={startDate}
+          // showIcon
           onChange={(date) => setStartDate(date)}
-          placeholderText={(date) => setStartDate(date)}
+          // showTimeSelect
+          filterTime={filterPassedTime}
           dateFormat={'yyyy년 MM월 dd일 aa hh:mm'}
           readOnly
         />
