@@ -1,6 +1,11 @@
-.row{
-    width: 80%;
+@font-face {
+  font-family: 'font';
+  src: url(https://plugngo.s3.ap-northeast-2.amazonaws.com/WantedSans-Bold.woff2);
 }
-.active{
-    width: 100%;
+
+.row {
+  width: 80%;
+}
+.active {
+  width: 100%;
 }
