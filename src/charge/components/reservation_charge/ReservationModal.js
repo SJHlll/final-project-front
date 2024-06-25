@@ -4,7 +4,18 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.module.css';
 import '../scss/ReservationModal.scss';
 import SpeedSelect from './SpeedSelect';
+import { Button } from 'reactstrap';
+import OpenTossPayments from '../../../components/pay/OpenTossPayments';
 
+const ReservationModal = ({
+  name,
+  address,
+  speed,
+  type,
+  price,
+}) => {
+  const today = new Date();
+  
 const ReservationModal = () => {
   const [startDate, setStartDate] = useState(
     setHours(setMinutes(new Date(), 0), 9), // 오늘 날짜에 9시 0분으로
@@ -56,23 +67,31 @@ const ReservationModal = () => {
           <SpeedSelect />
           <div className='flex'>
             <div className='column'>충전소 이름</div>
-            <div className='data'>OOO 충전소</div>
+            <div className='data'>{name}</div>
           </div>
           <div className='flex'>
             <div className='column'>충전소 위치</div>
-            <div className='data'>
-              서울시 마포구 OOO로 OOOO길
-            </div>
+            <div className='data'>{address}</div>
           </div>
           <div className='flex'>
             <div className='column'>충전 타입</div>
             <div className='data'>
-              DC차데모+AC3상+DC콤보 (급속 / 완속)
+              {type} ({speed})
             </div>
           </div>
           <div className='flex'>
             <div className='column'>가격</div>
-            <div className='data'>20000원</div>
+            <div className='data'>
+              {price * 10}원 (##kWh)
+            </div>
+            <Button
+              variant='outlined'
+              color='success'
+              size='small'
+              style={{ marginLeft: 'auto' }}
+            >
+              <OpenTossPayments totalPrice={price * 10} />
+            </Button>
           </div>
         </form>
       </div>

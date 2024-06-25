@@ -11,15 +11,15 @@ const SmallScreen = ({ isSearchBoxVisible }) => {
     >
       <span>
         <img src={QuickMarker} alt='급속' />
-        <span> : 급속</span>
+        <span> 급속</span>
       </span>
       <span>
         <img src={SlowMarker} alt='완속' />
-        <span> : 완속</span>
+        <span> 완속</span>
       </span>
       <span>
         <img src={DisableMarker} alt='이용자 제한' />
-        <span> : 이용자 제한</span>
+        <span> 이용자 제한</span>
       </span>
     </div>
   );
