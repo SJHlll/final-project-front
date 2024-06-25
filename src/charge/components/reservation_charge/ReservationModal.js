@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.module.css';
 import '../scss/ReservationModal.scss';
-// import SpeedSelect from './SpeedSelect';
 import { Button } from 'reactstrap';
 import OpenTossPayments from '../../../components/pay/OpenTossPayments';
 
@@ -126,6 +125,18 @@ const ReservationModal = ({
             />
           </div>
           <div className='flex'>
+            <div className='column'>충전소 이름</div>
+            <div className='data'>{name}</div>
+          </div>
+          <div className='flex'>
+            <div className='column'>충전소 위치</div>
+            <div className='data'>{address}</div>
+          </div>
+          <div className='flex'>
+            <div className='column'>충전 타입</div>
+            <div className='data'>{type}</div>
+          </div>
+          <div className='flex'>
             <div className='column'>충전량</div>
             <div className='form-check form-check-inline'>
               <input
@@ -164,25 +175,23 @@ const ReservationModal = ({
               <SelectBox options={SLOW} defaultValue='1' />
             )}
           </div>
-          {/* 미친짓 끝 */}
-          <div className='flex'>
-            <div className='column'>충전소 이름</div>
-            <div className='data'>{name}</div>
-          </div>
-          <div className='flex'>
-            <div className='column'>충전소 위치</div>
-            <div className='data'>{address}</div>
-          </div>
-          <div className='flex'>
-            <div className='column'>충전 타입</div>
-            <div className='data'>{type}</div>
-          </div>
           <div className='flex'>
             <div className='column'>가격</div>
             <div className='data'>
-              {calculateTotalPrice()}원 (약{' '}
               {speed === '급속'
-                ? selectedValue * 1.7
+                ? Math.floor(
+                    calculateTotalPrice() * 0.1667,
+                  ) * 10
+                : calculateTotalPrice()}
+              원 (약{' '}
+              {speed === '급속'
+                ? parseFloat(
+                    (
+                      Math.floor(
+                        selectedValue * 1.667 * 10,
+                      ) / 10
+                    ).toFixed(1),
+                  )
                 : selectedValue}
               kWh)
             </div>
