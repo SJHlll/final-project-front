@@ -56,7 +56,7 @@ const KakaoMapModal = ({ isOpen, onClose, marker }) => {
                         : 'disable'
                     }
                   >
-                    충전 가능 여부 : {marker.Available}
+                    {marker.Available}
                   </p>
                 </div>
                 <div className='id-spe-typ'>

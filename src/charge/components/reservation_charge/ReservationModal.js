@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.module.css';
 import '../scss/ReservationModal.scss';
-import { Button } from 'reactstrap';
 
 import OpenTossPayments from '../../../components/pay/OpenTossPayments';
 import '../../../scss/Button.scss';

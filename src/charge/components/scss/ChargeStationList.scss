@@ -38,7 +38,8 @@
           text-decoration: none;
         }
         a:hover {
-          font-weight: bold;
+          color: blue;
+          text-decoration: underline;
         }
       }
     }
@@ -58,11 +59,11 @@
       }
 
       .able {
-        color: green;
+        color: #5298F2;
       }
 
       .disable {
-        color: red;
+        color: #F18D8A;
       }
     }
   }
