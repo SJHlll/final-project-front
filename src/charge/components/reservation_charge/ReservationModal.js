@@ -1,8 +1,9 @@
-import { setHours, setMinutes } from 'date-fns';
+import { addDays, setHours, setMinutes } from 'date-fns';
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.module.css';
 import '../scss/ReservationModal.scss';
+import SpeedSelect from './SpeedSelect';
 import { Button } from 'reactstrap';
 import OpenTossPayments from '../../../components/pay/OpenTossPayments';
 
@@ -14,15 +15,17 @@ const ReservationModal = ({
   price,
 }) => {
   const today = new Date();
-
+  
+const ReservationModal = () => {
   const [startDate, setStartDate] = useState(
     setHours(setMinutes(new Date(), 0), 9), // 오늘 날짜에 9시 0분으로
   );
 
   const filterPassedTime = (time) => {
+    const currentDate = new Date();
     const selectedDate = new Date(time);
 
-    return today.getTime() < selectedDate.getTime();
+    return currentDate.getTime() < selectedDate.getTime();
   };
 
   // submit 이벤트 핸들러
@@ -54,13 +57,14 @@ const ReservationModal = ({
               onChange={(date) => setStartDate(date)}
               showTimeSelect
               shouldCloseOnSelect
-              minDate={today}
-              // maxDate={new Date().getDate() + 3}
+              minDate={new Date()}
+              maxDate={addDays(new Date(), 2)}
               filterTime={filterPassedTime}
               timeIntervals={10} // 10분 단위
               dateFormat={'yyyy년 MM월 dd일 aa hh:mm'}
             />
           </div>
+          <SpeedSelect />
           <div className='flex'>
             <div className='column'>충전소 이름</div>
             <div className='data'>{name}</div>
