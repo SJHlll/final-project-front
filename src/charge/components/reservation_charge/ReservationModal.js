@@ -13,8 +13,9 @@ const ReservationModal = ({
   type,
   price,
 }) => {
+  const today = new Date();
   const [startDate, setStartDate] = useState(
-    setHours(setMinutes(new Date(), 0), 9), // 오늘 날짜에 9시 0분으로
+    setHours(setMinutes(today, 0), 9), // 오늘 날짜에 9시 0분으로
   );
 
   const [selectedValue, setSelectedValue] = useState(10);
@@ -97,7 +98,10 @@ const ReservationModal = ({
 
   return (
     <>
-      <div className='form-wrapper'>
+      <div
+        className='form-wrapper'
+        style={{ fontFamily: 'font2' }}
+      >
         <form
           className='reservation-charge'
           onSubmit={reservationHandler}
@@ -119,8 +123,8 @@ const ReservationModal = ({
               onChange={(date) => setStartDate(date)}
               showTimeSelect
               shouldCloseOnSelect
-              minDate={new Date()}
-              maxDate={addDays(new Date(), 2)}
+              minDate={today}
+              maxDate={addDays(today, 2)}
               filterTime={filterPassedTime}
               timeIntervals={10} // 10분 단위
               dateFormat={'yyyy년 MM월 dd일 aa hh:mm'}
