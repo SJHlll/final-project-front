@@ -4,8 +4,9 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.module.css';
 import '../scss/ReservationModal.scss';
 import SpeedSelect from './SpeedSelect';
-import { Button } from 'reactstrap';
+// import { Button } from 'reactstrap';
 import OpenTossPayments from '../../../components/pay/OpenTossPayments';
+import '../../../scss/Button.scss';
 
 const ReservationModal = ({
   name,
@@ -87,13 +88,13 @@ const ReservationModal = ({
               {price * 10}원 (##kWh)
             </div>
           </div>
-          <Button
-            variant='outlined'
-            color='success'
-            size='small'
+          <div
+            style={{ width: '100%', textAlign: 'center' }}
           >
-            <OpenTossPayments totalPrice={price * 10} />
-          </Button>
+            <button className='public-btn'>
+              <OpenTossPayments totalPrice={price * 10} />
+            </button>
+          </div>
         </form>
       </div>
     </>
