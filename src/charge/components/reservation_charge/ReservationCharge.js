@@ -10,7 +10,6 @@ import ReservationModal from './ReservationModal';
 import '../scss/ReservationCharge.scss';
 import styled from 'styled-components';
 import ReservationList from './ReservationList';
-import Header from '../../Header/Chargeheader';
 import { StationProvider } from '../contexts/StationContext';
 
 const ModalBackground = styled.div`
@@ -90,7 +89,6 @@ const ReservationCharge = () => {
 
   return (
     <>
-      <Header />
       {button()}
       {modal && modalOpen()}
       <StationProvider>

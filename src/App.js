@@ -6,17 +6,17 @@ import Error from '../src/Car/components/Errorpage/Error';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ChargeMain from './charge/Categori/main/ChargeMain';
 import Test from './charge/Test';
-import ChargeStation from './charge/components/charge_station/ChargeStation';
-import ReservationCharge from './charge/components/reservation_charge/ReservationCharge';
 import Login from './components/user/Login';
-import Noti from './Car/components/Mainpage/Noti';
-import Event from './Car/components/Mainpage/Event';
-import Review from './Car/components/Mainpage/Review';
+import Noti from './Car/components/Mainpage/noti/Noti';
+import Event from './Car/components/Mainpage/event/Event';
+import Review from './Car/components/Mainpage/review/Review';
 import Testheader from './Car/components/Mainpage/Testheader';
 import Testhome from './Car/components/Mainpage/Testhome';
 import { AuthContextProvider } from './util/AuthContext';
 import { ModalProvider } from '@lasbe/react-modal';
 import LoginSuccess from './components/user/LoginSuccess';
+import Chargeres from './Car/components/Mainpage/Chargeres';
+import Chargelist from './Car/components/Mainpage/Chargelist';
 
 const App = () => {
   return (
@@ -42,11 +42,11 @@ const App = () => {
             {/* 충전소 페이지 */}
             <Route
               path='charge/list'
-              element={<ChargeStation />}
+              element={<Chargelist />}
             />
             <Route
               path='charge/reservation'
-              element={<ReservationCharge />}
+              element={<Chargeres />}
             />
 
             {/* 마이페이지 */}
