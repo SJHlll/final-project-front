@@ -1,19 +1,20 @@
 import React from 'react';
-import Tabline from './Tabline';
 import './Event.scss';
+import Eventlist from './Eventlist';
+
 const Event = () => {
   return (
     <div className='maincontainer'>
       <div
         className='contentline'
         style={{
-          fontSize: '100px',
+          fontSize: '30px',
         }}
       >
-        이벤트
+        <div className='eventbody'>
+          <Eventlist />
+        </div>
       </div>
-
-      <Tabline />
     </div>
   );
 };
