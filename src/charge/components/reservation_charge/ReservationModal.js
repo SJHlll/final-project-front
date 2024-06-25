@@ -196,7 +196,8 @@ const ReservationModal = ({
                 : selectedValue}
               kWh)
             </div>
-            <Button
+          </div>
+         <Button
               variant='outlined'
               color='success'
               size='small'
@@ -206,7 +207,6 @@ const ReservationModal = ({
                 totalPrice={calculateTotalPrice()}
               />
             </Button>
-          </div>
         </form>
       </div>
     </>
