@@ -1,0 +1,31 @@
+#payment-button {
+    float: right;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+    color: white;
+    background-color: #007bff;
+    border-radius: 5px;
+}
+
+#payment-button:hover {
+    background-color: #0056b3;
+}
+
+
+
+// 결제버튼
+.pay-button {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+// 실패 페이지
+.go-back {
+    cursor: pointer;
+    color: blue;
+}

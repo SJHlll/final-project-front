@@ -25,13 +25,17 @@
 }
 
 .modal-footer {
-  justify-content: center;
-  height: 80px;
-  padding: 16px;
+    justify-content: center;
+    height: 80px;
+    padding: 16px;
 }
 
 .reservation {
   position: absolute;
   right: 50%;
   transform: translate(50%, 0%);
+}
+
+.toss-pay {
+  cursor: pointer;
 }
