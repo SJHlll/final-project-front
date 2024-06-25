@@ -20,7 +20,7 @@ const OpenTossPayments = ({ totalPrice }) => {
         className='pay-button'
         onClick={handleNavigation}
       >
-        결제 창 열기
+        결제하기
       </span>
     </div>
   );
