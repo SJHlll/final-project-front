@@ -203,7 +203,9 @@ const ReservationModal = ({
             style={{ width: '100%', textAlign: 'center' }}
           >
             <button className='public-btn'>
-              <OpenTossPayments totalPrice={calculateTotalPrice()} />
+              <OpenTossPayments
+                totalPrice={calculateTotalPrice()}
+              />
             </button>
           </div>
         </form>
