@@ -24,7 +24,10 @@ const ReservationModal = () => {
 
   return (
     <>
-      <div className='form-wrapper'>
+      <div
+        className='form-wrapper'
+        style={{ fontFamily: 'font2' }}
+      >
         <form
           className='reservation-charge'
           onSubmit={reservationHandler}

@@ -22,7 +22,10 @@ const App = () => {
   return (
     <ModalProvider>
       <AuthContextProvider>
-        <div className='App' style={{ fontFamily: 'font' }}>
+        <div
+          className='App'
+          style={{ fontFamily: 'font2' }}
+        >
           <Testheader />
           <Routes>
             {/* 메인 홈페이지 */}
