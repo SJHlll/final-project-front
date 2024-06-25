@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import '../scss/PlugAndGoStation.scss';
-import { Button } from '@mui/material';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import styled from 'styled-components';
 import ReservationModal from './ReservationModal';
+import '../../../scss/Button.scss';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -16,6 +16,16 @@ const ModalBackground = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 10;
+`;
+
+const HoverATag = styled.a`
+  color: black;
+  text-decoration: none;
+
+  &:hover {
+    color: blue;
+    text-decoration: underline;
+  }
 `;
 
 const PlugAndGoStation = ({
@@ -33,22 +43,19 @@ const PlugAndGoStation = ({
   // Modal Open 버튼 활성화
   const button = () => (
     <div>
-      <Button
-        className='reserve-button'
-        variant='outlined'
-        color='success'
-        size='small'
+      <button
+        className='public-btn reserve-button'
         onClick={toggle}
       >
         예약하기
-      </Button>
+      </button>
     </div>
   );
 
   const closeBtn = (
-    <Button color='success' size='large' onClick={toggle}>
+    <button className='public-btn' onClick={toggle}>
       &times;
-    </Button>
+    </button>
   );
 
   // 예약하기 모달창 활성화
@@ -71,30 +78,30 @@ const PlugAndGoStation = ({
 
   return (
     <div className='OurStation'>
-      {/* 왼쪽박스 */}
-      <div className='Status'>
+      <div className='content'>
         <div className='Name'>
           <span>
             ({Speed}) {Name}
           </span>
         </div>
+      </div>
+      <div className='content'>
         <div className='Address'>
-          <a
+          <HoverATag
             href={`https://map.kakao.com/link/to/${Address},${lat},${lng}`}
             target='_blank'
             rel='noreferrer'
           >
             {Address}
-          </a>
+          </HoverATag>
         </div>
       </div>
-      {/* 오른쪽박스 */}
-      <div className='Charger'>
+      <div className='foot content'>
         <div className='ChargerType'>{Type}</div>
-
+        <div className='Price'>{price}원</div>
         {button()}
-        {modal && modalOpen()}
       </div>
+      {modal && modalOpen()}
     </div>
   );
 };
