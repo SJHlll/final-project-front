@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 import '../scss/MyPageCharge.scss';
-import { Button } from '@mui/material';
 import styled from 'styled-components';
-import {
-  Modal,
-  ModalFooter,
-  ModalHeader,
-} from 'reactstrap';
-import MyPageModifyCharge from './MyPageModifyCharge';
+import { Modal, ModalBody } from 'reactstrap';
 import DatePicker from 'react-datepicker';
+import CancelChargeModal from './CancelChargeModal';
+import '../../../scss/Button.scss';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -24,83 +20,55 @@ const ModalBackground = styled.div`
 `;
 
 const MyPageCharge = () => {
-  const [modifyModal, setModifyModal] = useState(false);
-  const toggle = () => setModifyModal(!modifyModal);
-
-  const modifyReservation = () => {
-    alert('예약 변경 완료!');
-    setModifyModal(!modifyModal);
+  const [cancel, setCancel] = useState(false);
+  const toggle = () => {
+    setCancel(!cancel);
   };
 
-  const closeBtn = (
-    <Button color='success' size='large' onClick={toggle}>
-      &times;
-    </Button>
+  const button = () => (
+    <div>
+      <button className='public-btn' onClick={toggle}>
+        예약 취소
+      </button>
+    </div>
   );
 
-  const modifyOpen = () => {
-    return (
-      <ModalBackground>
-        <Modal
-          isOpen={modifyModal}
-          style={{
-            position: 'absolute',
-            left: '50%',
-            transform: 'translate(-50%, 20%)',
-          }}
-        >
-          <ModalHeader toggle={toggle} close={closeBtn} />
-          <MyPageModifyCharge />
-          <ModalFooter style={{ justifyContent: 'center' }}>
-            <Button
-              className='modify-btn'
-              variant='outlined'
-              color='success'
-              onClick={modifyReservation}
-            >
-              변경하기
-            </Button>
-          </ModalFooter>
-        </Modal>
-      </ModalBackground>
-    );
-  };
+  const CancelCharge = () => (
+    <ModalBackground>
+      <Modal isOpen={cancel} toggle={toggle}>
+        <ModalBody>
+          <CancelChargeModal />
+        </ModalBody>
+      </Modal>
+    </ModalBackground>
+  );
 
   return (
-    <>
-      <div className='reservation-list'>
-        <h3 style={{ textAlign: 'center' }}>
-          전기차 충전소 예약 내역
-        </h3>
-        <div className='flex'>
-          <div className='value'>날짜 및 시간</div>
-          <DatePicker
-            className='read-only-date'
-            showTimeSelect
-            dateFormat={'yyyy년 MM월 dd일 aa hh:mm'}
-            readOnly
-          />
-        </div>
-        <div className='flex'>
-          <div className='value'>충전소명</div>
-          <div>OOO 충전소</div>
-        </div>
-        <div className='flex'>
-          <div className='value'>예약번호</div>
-          <div>123456</div>
-        </div>
-        <div style={{ width: '100%', textAlign: 'center' }}>
-          <Button
-            variant='outlined'
-            color='success'
-            onClick={toggle}
-          >
-            예약 취소
-          </Button>
-        </div>
+    <div className='reservation-list'>
+      <h3 style={{ textAlign: 'center' }}>
+        전기차 충전소 예약 내역
+      </h3>
+      <div className='flex'>
+        <div className='value'>날짜 및 시간</div>
+        <DatePicker
+          className='read-only-date'
+          selected={new Date()}
+          showTimeSelect
+          dateFormat={'yyyy년 MM월 dd일 aa hh:mm'}
+          readOnly
+        />
       </div>
-      {modifyModal && modifyOpen()}
-    </>
+      <div className='flex'>
+        <div className='value'>충전소명</div>
+        <div>OOO 충전소</div>
+      </div>
+      <div className='flex'>
+        <div className='value'>예약번호</div>
+        <div>123456</div>
+      </div>
+      {button()}
+      {cancel && CancelCharge()}
+    </div>
   );
 };
 
