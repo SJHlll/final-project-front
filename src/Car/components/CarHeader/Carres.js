@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
   Button,
@@ -11,6 +11,8 @@ import { StationProvider } from '../../../charge/components/contexts/StationCont
 import CarCalendar from '../car/CarCalendar';
 import CarResInfo from './CarResInfo';
 import { setHours, setMinutes } from 'date-fns';
+import CarInfo from '../car/CarInfo';
+import '../CarHeader/CarHeaders_css/Carres.scss';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -29,14 +31,25 @@ const Carres = () => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const [startTime, setStartTime] = useState(
-    setHours(setMinutes(new Date(), 0), 9),
-  );
-  const [endTime, setEndTime] = useState(
-    setHours(setMinutes(new Date(), 0), 9),
-  );
+  const [pickup, setPickup] = useState({
+    date: new Date(),
+    time: setHours(setMinutes(new Date(), 0), 9),
+  });
+  const [returning, setReturning] = useState({
+    date: null,
+    time: setHours(setMinutes(new Date(), 0), 9),
+  });
+
+  // useEffect 훅을 사용하여 상태 값이 변경될 때마다 로그 출력
+  useEffect(() => {
+    console.log('픽업 날짜:', pickup.date);
+    console.log('픽업 시간:', pickup.time);
+  }, [pickup]);
+
+  useEffect(() => {
+    console.log('반납 날짜:', returning.date);
+    console.log('반납 시간:', returning.time);
+  }, [returning]);
 
   const saveReservation = async (reservationData) => {
     try {
@@ -60,19 +73,19 @@ const Carres = () => {
   };
 
   const reservationHandler = () => {
-    if (!startDate) {
+    if (!pickup.date) {
       alert('픽업 날짜를 선택하세요.');
       return;
     }
-    if (!endDate) {
+    if (!returning.date) {
       alert('반납 날짜를 선택하세요.');
       return;
     }
-    if (!startTime) {
+    if (!pickup.time) {
       alert('픽업 시간을 선택하세요.');
       return;
     }
-    if (!endTime) {
+    if (!returning.time) {
       alert('반납 시간을 선택하세요.');
       return;
     }
@@ -81,23 +94,20 @@ const Carres = () => {
     setModal(!modal);
 
     const reservationData = {
-      startDate,
-      endDate,
-      startTime,
-      endTime,
+      pickup,
+      returning,
     };
 
-    // 예약 데이터를 저장합니다.
     saveReservation(reservationData);
   };
 
   const button = (
-    <div>
+    <div className='resBtn'>
       <Button
         variant='outline'
         color='success'
         size='small'
-        style={{ width: '20%' }}
+        style={{ width: '54%' }}
         onClick={toggle}
       >
         예약 하기
@@ -119,10 +129,8 @@ const Carres = () => {
         </ModalHeader>
         <ModalBody>
           <CarResInfo
-            startDate={startDate}
-            endDate={endDate}
-            startTime={startTime}
-            endTime={endTime}
+            pickup={pickup}
+            returning={returning}
           />
         </ModalBody>
         <ModalFooter>
@@ -144,14 +152,22 @@ const Carres = () => {
   return (
     <>
       <CarCalendar
-        startDate={startDate}
-        endDate={endDate}
-        onChangeStartDate={setStartDate}
-        onChangeEndDate={setEndDate}
-        startTime={startTime}
-        endTime={endTime}
-        onChangeStartTime={setStartTime}
-        onChangeEndTime={setEndTime}
+        startDate={pickup.date}
+        endDate={returning.date}
+        onChangeStartDate={(date) =>
+          setPickup((prev) => ({ ...prev, date }))
+        }
+        onChangeEndDate={(date) =>
+          setReturning((prev) => ({ ...prev, date }))
+        }
+        startTime={pickup.time}
+        endTime={returning.time}
+        onChangeStartTime={(time) =>
+          setPickup((prev) => ({ ...prev, time }))
+        }
+        onChangeEndTime={(time) =>
+          setReturning((prev) => ({ ...prev, time }))
+        }
       />
       {modal ? modalOpen : button}
       <StationProvider />

@@ -46,6 +46,8 @@ const CarResInfo = ({
         <div className='time'>
           반납 시간: {formatTime(endTime)}
         </div>
+        <input type='text' />
+        비고
       </div>
     </>
   );

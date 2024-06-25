@@ -1,4 +1,4 @@
-/* General styles for selected dates */
+/* 선택된 날짜 스타일 */
 .react-datepicker__day--selected,
 .react-datepicker__day--in-selecting-range,
 .react-datepicker__day--in-range,
@@ -6,34 +6,66 @@
 .react-datepicker__day--selecting-range-end,
 .react-datepicker__day--range-start,
 .react-datepicker__day--range-end {
-    background-color: #216ba5 !important;
-    color: #fff !important;
+  background-color: #216ba5 !important;
+  color: #fff !important;
 }
 
-/* Specific style for end date */
+/* 종료 날짜에 대한 특정 스타일 */
 .react-datepicker__day--range-end {
-    background-color: #216ba5 !important;
-    color: #fff !important;
-    border-radius: 0.3rem;
+  background-color: #216ba5 !important;
+  color: #fff !important;
+  border-radius: 0.3rem;
 }
 
-/* Override current date style */
+/* 현재 날짜 스타일 무시 */
 .react-datepicker__day--today {
-    background-color: transparent !important;
-    color: inherit !important;
+  background-color: transparent !important;
+  color: inherit !important;
 }
 
 .content {
-    .react-datepicker {
-      width: 100%;
-    }
-  
-    #calendar {
-      width: 100%;
-    }
-  
-    #pickupTime,
-    #returnTime {
-      margin-top: 10px;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  margin-top: 40px;
+  margin-left: 600px;
+
+  .react-datepicker {
+    width: 100%;
+    border: 1px solid silver;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  #calendar {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .time-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .time-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+
+  #pickupTime,
+  #returnTime {
+    margin-top: 5px;
+    width: 150px;
+  }
 }
