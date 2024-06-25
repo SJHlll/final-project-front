@@ -18,13 +18,16 @@ export function Success() {
     };
 
     async function confirm() {
-      const response = await fetch('/confirm', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        'http://localhost:8181/api/tosspay/confirm',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestData),
         },
-        body: JSON.stringify(requestData),
-      });
+      );
 
       const json = await response.json();
 

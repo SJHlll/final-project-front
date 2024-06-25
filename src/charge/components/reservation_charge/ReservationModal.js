@@ -199,12 +199,11 @@ const ReservationModal = ({
               kWh)
             </div>
           </div>
-
           <div
             style={{ width: '100%', textAlign: 'center' }}
           >
             <button className='public-btn'>
-              <OpenTossPayments totalPrice={price * 10} />
+              <OpenTossPayments totalPrice={calculateTotalPrice()} />
             </button>
           </div>
         </form>
