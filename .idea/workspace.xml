@@ -18,7 +18,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="branch" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -33,12 +33,12 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="master" />
-                    <option name="lastUsedInstant" value="1718963584" />
+                    <option name="branchName" value="develop" />
+                    <option name="lastUsedInstant" value="1719190160" />
                   </RecentBranch>
                   <RecentBranch>
-                    <option name="branchName" value="branch" />
-                    <option name="lastUsedInstant" value="1718963552" />
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1719190116" />
                   </RecentBranch>
                 </list>
               </option>
@@ -87,7 +87,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1718606098885</updated>
-      <workItem from="1718961843754" duration="1940000" />
+      <workItem from="1718961843754" duration="2126000" />
+      <workItem from="1719190043040" duration="127000" />
+      <workItem from="1719196503466" duration="95000" />
     </task>
     <task id="LOCAL-00001" summary="Car파일삭제 및 홈피구조 생성">
       <option name="closed" value="true" />

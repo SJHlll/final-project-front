@@ -1,5 +1,5 @@
 import React from 'react';
-import Tabline from './Tabline';
+
 import './Mypage.scss';
 const Mypage = () => {
   return (
@@ -12,8 +12,6 @@ const Mypage = () => {
       >
         마이페이지
       </div>
-
-      <Tabline />
     </div>
   );
 };

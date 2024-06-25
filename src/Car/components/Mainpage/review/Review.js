@@ -1,7 +1,6 @@
 import React from 'react';
-import Tabline from './Tabline';
-import './Noti.scss';
-const Noti = () => {
+import './Review.scss';
+const Review = () => {
   return (
     <div className='maincontainer'>
       <div
@@ -10,12 +9,10 @@ const Noti = () => {
           fontSize: '100px',
         }}
       >
-        이용방법
+        이용후기
       </div>
-
-      <Tabline />
     </div>
   );
 };
 
-export default Noti;
+export default Review;

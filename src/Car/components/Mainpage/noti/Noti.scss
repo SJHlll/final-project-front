@@ -1,0 +1,19 @@
+.notiline{
+    padding: 1%;
+}
+.createnotilist{
+    width: 90px;
+    height: 40px;
+    font-size: 18px;
+    position: absolute;
+    border-radius: 15px;
+    bottom: 2%;
+    left: 2%;
+    color: #2c7fdf;
+    background-color: #ebf5ff;
+    &:hover{
+        cursor: pointer;
+        color: #2c7fdf;
+        background-color: #c2e1ff;
+    }
+}

@@ -5,6 +5,7 @@
     display: flex;
     justify-content: center;
     position: fixed;
+    
 }
 .covervideo{
     width: 100%;
@@ -16,6 +17,49 @@
     width: 70%;
     height: 760px;
     background-size: contain;
-    margin-left: 3%;
-    border: 1px solid black;
+    margin-right: 4%;
+    margin-top: 3%;
+    border: 1px solid #555555;
+    border-radius: 15px;
+    box-shadow: 18px 18px 1px -8px #555555;
 }
+.coverheader{
+    width: 100px;
+    height: 100px;
+    width: 1000px;
+    height: 800px;
+    z-index: 5;
+
+    position: relative;
+    top: 150px;     
+   
+}
+.covercon{
+font-size: 110px;
+animation: 3s text;
+color: red;
+font-weight: bold;
+}
+@keyframes text {
+    0%{
+        transform: translateX(30%);
+    }
+    100%{
+        transform: translateX(0px);
+    }
+}
+.covercontent{
+    font-size: 120px;
+    animation: 3s text2;
+    position: relative;
+    left: -10%;
+    bottom: 100px;
+    color: white;
+    @keyframes text2 {
+        0%{
+            transform: translatey(-30px)
+        }
+        100%{
+            transform: translatey(0)
+        }
+}}

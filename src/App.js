@@ -6,17 +6,17 @@ import Error from '../src/Car/components/Errorpage/Error';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ChargeMain from './charge/Categori/main/ChargeMain';
 import Test from './charge/Test';
-import ChargeStation from './charge/components/charge_station/ChargeStation';
-import ReservationCharge from './charge/components/reservation_charge/ReservationCharge';
 import Login from './components/user/Login';
-import Noti from './Car/components/Mainpage/Noti';
-import Event from './Car/components/Mainpage/Event';
-import Review from './Car/components/Mainpage/Review';
+import Noti from './Car/components/Mainpage/noti/Noti';
+import Event from './Car/components/Mainpage/event/Event';
+import Review from './Car/components/Mainpage/review/Review';
 import Testheader from './Car/components/Mainpage/Testheader';
 import Testhome from './Car/components/Mainpage/Testhome';
 import { AuthContextProvider } from './util/AuthContext';
 import { ModalProvider } from '@lasbe/react-modal';
 import LoginSuccess from './components/user/LoginSuccess';
+import Chargeres from './Car/components/Mainpage/Chargeres';
+import Chargelist from './Car/components/Mainpage/Chargelist';
 import { Checkout } from './components/pay/Checkout';
 import { Success } from './components/pay/Success';
 import { Fail } from './components/pay/Fail';
@@ -75,18 +75,6 @@ const App = () => {
 
             {/* 에러페이지 */}
             <Route path='/*' element={<Error />} />
-
-            {/* 충전소 메인 페이지 */}
-            <Route
-              path='/charge/home'
-              element={<ChargeMain />}
-            />
-            <Route path='/charge/test' element={<Test />} />
-
-            {/* 결제 페이지 */}
-            <Route path='/pay' element={<Checkout />} />
-            <Route path='/success' element={<Success />} />
-            <Route path='/fail' element={<Fail />} />
           </Routes>
         </div>
       </AuthContextProvider>
