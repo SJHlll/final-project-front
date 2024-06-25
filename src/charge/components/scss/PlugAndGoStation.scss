@@ -1,5 +1,47 @@
-.station-box {
-    float: right;
-    border: 1px solid red;
-    
+.OurStation {
+  width: 400px;
+  height: 110px;
+  border: 1px solid #aaa;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+
+  .content {
+    height: 30px;
+    align-items: center;
+  }
+
+  .foot {
+    display: flex;
+  }
+
+  .Name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    // margin-top: 5px;
+  }
+
+  .Address {
+    font-size: 0.75rem;
+    position: absolute;
+    bottom: 5px;
+    cursor: pointer;
+  }
+
+  .ChargerType {
+    font-size: 0.8rem;
+    width: 65%;
+  }
+
+  .Price {
+    width: 15%;
+    text-align: end;
+  }
+
+  .reserve-button {
+    position: relative;
+    height: 30px;
+    margin-left: 5px;
+    border-radius: 5px;
+  }
 }

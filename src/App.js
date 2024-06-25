@@ -17,12 +17,18 @@ import { ModalProvider } from '@lasbe/react-modal';
 import LoginSuccess from './components/user/LoginSuccess';
 import Chargeres from './Car/components/Mainpage/Chargeres';
 import Chargelist from './Car/components/Mainpage/Chargelist';
+import { Checkout } from './components/pay/Checkout';
+import { Success } from './components/pay/Success';
+import { Fail } from './components/pay/Fail';
 
 const App = () => {
   return (
     <ModalProvider>
       <AuthContextProvider>
-        <div className='App'>
+        <div
+          className='App'
+          style={{ fontFamily: 'font2' }}
+        >
           <Testheader />
           <Routes>
             {/* 메인 홈페이지 */}
@@ -42,11 +48,11 @@ const App = () => {
             {/* 충전소 페이지 */}
             <Route
               path='charge/list'
-              element={<Chargelist />}
+              element={<ChargeStation />}
             />
             <Route
               path='charge/reservation'
-              element={<Chargeres />}
+              element={<ReservationCharge />}
             />
 
             {/* 마이페이지 */}

@@ -8,6 +8,7 @@ import {
   ModalHeader,
 } from 'reactstrap';
 import MyPageModifyCharge from './MyPageModifyCharge';
+import DatePicker from 'react-datepicker';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -72,8 +73,13 @@ const MyPageCharge = () => {
           전기차 충전소 예약 내역
         </h3>
         <div className='flex'>
-          <div className='value'>날짜</div>
-          <div>2024년 06월 22일 PM 04:40</div>
+          <div className='value'>날짜 및 시간</div>
+          <DatePicker
+            className='read-only-date'
+            showTimeSelect
+            dateFormat={'yyyy년 MM월 dd일 aa hh:mm'}
+            readOnly
+          />
         </div>
         <div className='flex'>
           <div className='value'>충전소명</div>
@@ -89,7 +95,7 @@ const MyPageCharge = () => {
             color='success'
             onClick={toggle}
           >
-            예약 변경
+            예약 취소
           </Button>
         </div>
       </div>
