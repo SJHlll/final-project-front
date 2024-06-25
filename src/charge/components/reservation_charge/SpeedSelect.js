@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../scss/SpeedSelect.scss';
 
-const SpeedSelect = () => {
+const SpeedSelect = ({ speed }) => {
   const [selectedOption, setSelectedOption] =
     useState('option1');
 
   const handlerRadioChange = (e) => {
     setSelectedOption(e.target.value);
   };
+
+  useEffect(() => {
+    if (speed === '급속') {
+      setSelectedOption('option1');
+    } else if (speed === '완속') {
+      setSelectedOption('option2');
+    }
+  }, [speed]);
 
   const FAST = [
     { value: '10', name: '10분' },
@@ -59,6 +67,7 @@ const SpeedSelect = () => {
             value='option1'
             checked={selectedOption === 'option1'}
             onChange={handlerRadioChange}
+            disabled
           />
           <label className='check-label'>급속</label>
         </div>
@@ -71,6 +80,7 @@ const SpeedSelect = () => {
             value='option2'
             checked={selectedOption === 'option2'}
             onChange={handlerRadioChange}
+            disabled
           />
           <label className='check-label'>완속</label>
         </div>

@@ -14,9 +14,6 @@ const ReservationModal = ({
   type,
   price,
 }) => {
-  const today = new Date();
-  
-const ReservationModal = () => {
   const [startDate, setStartDate] = useState(
     setHours(setMinutes(new Date(), 0), 9), // 오늘 날짜에 9시 0분으로
   );
@@ -64,7 +61,7 @@ const ReservationModal = () => {
               dateFormat={'yyyy년 MM월 dd일 aa hh:mm'}
             />
           </div>
-          <SpeedSelect />
+          <SpeedSelect speed={speed} />
           <div className='flex'>
             <div className='column'>충전소 이름</div>
             <div className='data'>{name}</div>
@@ -75,22 +72,18 @@ const ReservationModal = () => {
           </div>
           <div className='flex'>
             <div className='column'>충전 타입</div>
-            <div className='data'>
-              {type} ({speed})
-            </div>
+            <div className='data'>{type}</div>
           </div>
           <div className='flex'>
             <div className='column'>가격</div>
-            <div className='data'>
-              {price * 10}원 (##kWh)
-            </div>
+            <div className='data'>{price}원 (##kWh)</div>
             <Button
               variant='outlined'
               color='success'
               size='small'
               style={{ marginLeft: 'auto' }}
             >
-              <OpenTossPayments totalPrice={price * 10} />
+              <OpenTossPayments totalPrice={price} />
             </Button>
           </div>
         </form>
