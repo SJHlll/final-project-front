@@ -90,7 +90,9 @@ const ReservationModal = ({
   };
 
   const calculateTotalPrice = () => {
-    return price * selectedValue;
+    return speed === '급속'
+      ? Math.floor(price * selectedValue * 0.1667) * 10
+      : price * selectedValue;
   };
 
   return (
@@ -178,12 +180,7 @@ const ReservationModal = ({
           <div className='flex'>
             <div className='column'>가격</div>
             <div className='data'>
-              {speed === '급속'
-                ? Math.floor(
-                    calculateTotalPrice() * 0.1667,
-                  ) * 10
-                : calculateTotalPrice()}
-              원 (약{' '}
+              {calculateTotalPrice()}원 (약{' '}
               {speed === '급속'
                 ? parseFloat(
                     (
