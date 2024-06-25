@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {
-  GoogleLogin,
   googleLogout,
   useGoogleLogin,
 } from '@react-oauth/google';
 import axios from 'axios';
 import { redirect } from 'react-router-dom';
-import { Button } from '@mui/material';
 import {
   API_BASE_URL,
   USER,

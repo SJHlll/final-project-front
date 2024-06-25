@@ -20,6 +20,8 @@ import LoginSuccess from './components/user/LoginSuccess';
 import { Checkout } from './components/pay/Checkout';
 import { Success } from './components/pay/Success';
 import { Fail } from './components/pay/Fail';
+import Join from './components/user/Join';
+import RegisterPage from './components/user/RegisterPage';
 
 const App = () => {
   return (
@@ -72,6 +74,14 @@ const App = () => {
             />
 
             {/* 구글 로그인페이지 */}
+
+            {/* 회원가입 */}
+            <Route path='/register' element={<Join />} />
+            {/* 회원가입2 */}
+            <Route
+              path='/register2'
+              element={<RegisterPage />}
+            />
 
             {/* 에러페이지 */}
             <Route path='/*' element={<Error />} />

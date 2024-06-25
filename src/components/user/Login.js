@@ -1,16 +1,12 @@
-import { Grid, TextField } from '@mui/material';
+import { Grid, Link, TextField } from '@mui/material';
 import React from 'react';
 import { Button, Container } from 'reactstrap';
 // import '../../scss/Login.scss';
 import { KAKAO_AUTH_URL } from '../../config/kakao-config';
 import { NAVER_AUTH_URL } from '../../config/naver-config';
 import { useNavigate } from 'react-router-dom';
-import { GOOGLE_URL } from '../../config/google-config';
-import {
-  GoogleLogin,
-  GoogleOAuthProvider,
-} from '@react-oauth/google';
 import GoogleAuthLogin from './GoogleAuthLogin';
+import LoginText from './LoginText';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,11 +16,46 @@ const Login = () => {
     navigate(text);
   };
 
-  const clientId = process.env.REACT_APP_GOOGLE_CLIENT_KEY;
+  const goToRegister = () => {
+    navigate('/register');
+  };
+
   return (
     <>
       <Container className='body-top'>
-        <TextField />
+        <Grid container spacing={2}>
+          <Grid>
+            <TextField
+              variant='outlined'
+              required
+              fullWidth
+              id='email'
+              label='Email'
+              name='email'
+              autoComplete='email'
+            />
+          </Grid>
+          <Grid>
+            <TextField
+              variant='outlined'
+              required
+              fullWidth
+              name='password'
+              label='Password'
+              type='password'
+              id='password'
+              autoComplete='current-password'
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Button
+              type='submit'
+              fullWidth
+              variant='contained'
+              color='#007bfff'
+            />
+          </Grid>
+        </Grid>
       </Container>
       <Container className='body-bottom'>
         <Grid item xs={12}>
@@ -53,6 +84,14 @@ const Login = () => {
           onClick={() => click('/')}
         >
           우선 돌아가기
+        </Button>
+        <Button variant='contained' onClick={goToRegister}>
+          {' '}
+          회원가입 내꺼
+        </Button>
+        <Button variant='contained' onClick={goToRegister}>
+          {' '}
+          회원가입 쌤
         </Button>
       </Container>
     </>
