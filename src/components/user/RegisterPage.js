@@ -182,6 +182,52 @@ const RegisterPage = () => {
     );
   };
 
+  const birthdayCheckHandler = (e) => {
+    const inputValue = e.target.value;
+    console.log(inputValue);
+    const birthdayRegex =
+      /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/;
+
+    let msg;
+    let flag = false;
+
+    if (!inputValue) {
+      msg = '생년월일 필수입니다.';
+    } else if (!birthdayRegex.test(inputValue)) {
+      msg = '생년월일 다시 입력해주세요';
+    } else {
+      msg = '사용 가능한 생년월일 입니다';
+      flag = true;
+    }
+
+    debouncedUpdateState('birthday', inputValue, msg, flag);
+  };
+
+  const phoneCheckHandler = (e) => {
+    const inputValue = e.target.value;
+    console.log(inputValue);
+    const phoneRegex = /^[0-9\b -]{0,13}$/;
+
+    let msg;
+    let flag = false;
+
+    if (!inputValue) {
+      msg = '전화번호 필수입니다.';
+    } else if (!phoneRegex.test(inputValue)) {
+      msg = '전화번호를 다시 입력해주세요.';
+    } else {
+      msg = '사용 가능한 전화번호 입니다.';
+      flag = true;
+    }
+
+    debouncedUpdateState(
+      'phonenumber',
+      inputValue,
+      msg,
+      flag,
+    );
+  };
+
   // 4개의 입력창이 모두 검증에 통과했는지 여부를 검사
   const isValid = () => {
     for (let key in correct) {
@@ -423,23 +469,42 @@ const RegisterPage = () => {
               required
               fullWidth
               name='birthday'
-              label='생년월일'
-              type='birthday'
+              type='date'
               id='birthday'
               autoComplete='birthday'
+              onChange={birthdayCheckHandler}
             />
+            <span
+              style={
+                correct.birthday
+                  ? { color: 'green' }
+                  : { color: 'red' }
+              }
+            >
+              {message.birthday}
+            </span>
           </Grid>
           <Grid item xs={12}>
             <TextField
               variant='outlined'
               required
               fullWidth
-              name='phone-number'
+              name='phonenumber'
               label='전화번호'
-              type='phone-number'
-              id='phone-number'
-              autoComplete='phone-number'
+              type='phonenumber'
+              id='phonenumber'
+              autoComplete='phonenumber'
+              onChange={phoneCheckHandler}
             />
+            <span
+              style={
+                correct.phonenumber
+                  ? { color: 'green' }
+                  : { color: 'red' }
+              }
+            >
+              {message.phonenumber}
+            </span>
           </Grid>
           <Grid item xs={12}>
             <Button
