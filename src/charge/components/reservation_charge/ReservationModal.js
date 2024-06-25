@@ -197,16 +197,16 @@ const ReservationModal = ({
               kWh)
             </div>
           </div>
-         <Button
-              variant='outlined'
-              color='success'
-              size='small'
-              style={{ marginLeft: 'auto' }}
-            >
-              <OpenTossPayments
-                totalPrice={calculateTotalPrice()}
-              />
-            </Button>
+          <Button
+            variant='outlined'
+            color='success'
+            size='small'
+            style={{ marginLeft: 'auto' }}
+          >
+            <OpenTossPayments
+              totalPrice={calculateTotalPrice()}
+            />
+          </Button>
         </form>
       </div>
     </>
