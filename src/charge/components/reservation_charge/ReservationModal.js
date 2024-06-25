@@ -15,10 +15,9 @@ const ReservationModal = ({
   price,
 }) => {
   const today = new Date();
-  
-const ReservationModal = () => {
+
   const [startDate, setStartDate] = useState(
-    setHours(setMinutes(new Date(), 0), 9), // 오늘 날짜에 9시 0분으로
+    setHours(setMinutes(today, 0), 9), // 오늘 날짜에 9시 0분으로
   );
 
   const filterPassedTime = (time) => {
@@ -35,7 +34,10 @@ const ReservationModal = () => {
 
   return (
     <>
-      <div className='form-wrapper'>
+      <div
+        className='form-wrapper'
+        style={{ fontFamily: 'font2' }}
+      >
         <form
           className='reservation-charge'
           onSubmit={reservationHandler}
@@ -58,7 +60,7 @@ const ReservationModal = () => {
               showTimeSelect
               shouldCloseOnSelect
               minDate={new Date()}
-              maxDate={addDays(new Date(), 2)}
+              maxDate={addDays(today, 2)}
               filterTime={filterPassedTime}
               timeIntervals={10} // 10분 단위
               dateFormat={'yyyy년 MM월 dd일 aa hh:mm'}
@@ -84,15 +86,14 @@ const ReservationModal = () => {
             <div className='data'>
               {price * 10}원 (##kWh)
             </div>
-            <Button
-              variant='outlined'
-              color='success'
-              size='small'
-              style={{ marginLeft: 'auto' }}
-            >
-              <OpenTossPayments totalPrice={price * 10} />
-            </Button>
           </div>
+          <Button
+            variant='outlined'
+            color='success'
+            size='small'
+          >
+            <OpenTossPayments totalPrice={price * 10} />
+          </Button>
         </form>
       </div>
     </>

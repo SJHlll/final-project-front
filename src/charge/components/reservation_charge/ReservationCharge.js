@@ -30,29 +30,6 @@ const ReservationCharge = () => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
-  // const [reservations, setReservations] = useState([]);
-
-  // const reservationCharge = async (rentTime) => {
-  //   const newReservation = {
-  //     regDate: rentTime,
-  //   };
-  // };
-
-  // Modal Open 버튼 활성화
-  const button = () => (
-    <div className='button-wrapper'>
-      <Button
-        variant='outlined'
-        color='success'
-        size='small'
-        style={{ width: '20%' }}
-        onClick={toggle}
-      >
-        Modal Open!
-      </Button>
-    </div>
-  );
-
   const reservationHandler = () => {
     alert('예약이 완료되었습니다.');
     setModal(!modal);
@@ -91,7 +68,6 @@ const ReservationCharge = () => {
   return (
     <>
       <Header />
-      {button()}
       {modal && modalOpen()}
       <StationProvider>
         <ReservationList />
