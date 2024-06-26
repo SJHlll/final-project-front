@@ -1,10 +1,28 @@
-// Modal.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import '../scss/KakaoMapModal.scss';
 import { ModalBody, ModalFooter } from 'reactstrap';
 
 const KakaoMapModal = ({ isOpen, onClose, marker }) => {
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener(
+        'keydown',
+        handleKeyDown,
+      );
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
