@@ -1,4 +1,8 @@
-import { Route, Routes } from 'react-router-dom';
+import {
+  Route,
+  Routes,
+  useLocation,
+} from 'react-router-dom';
 import React from 'react';
 import './App.scss';
 import Mypage from './Car/components/Mainpage/Mypage';
@@ -23,6 +27,9 @@ import { Fail } from './components/pay/Fail';
 import Carres from './Car/components/car/Carres';
 
 const App = () => {
+  const location = useLocation();
+  // 헤더가 안보여도 되는 페이지 경로
+  const hideHeaderPaths = ['/pay', '/success', '/fail'];
   return (
     <ModalProvider>
       <AuthContextProvider>
@@ -30,7 +37,9 @@ const App = () => {
           className='App'
           style={{ fontFamily: 'font2' }}
         >
-          <Testheader />
+          {!hideHeaderPaths.includes(location.pathname) && (
+            <Testheader />
+          )}
           <Routes>
             {/* 메인 홈페이지 */}
             <Route exact path='/' element={<Testhome />} />
