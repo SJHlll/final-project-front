@@ -8,7 +8,19 @@ const ReservationCharge = () => {
   return (
     <>
       <StationProvider>
-        <ReservationList />
+        <div className='maincontainer'>
+          <div className='contentline'>
+            <div
+              style={{
+                textAlign: 'right',
+                padding: '20px',
+              }}
+            >
+              단위 : 1kWh
+            </div>
+            <ReservationList />
+          </div>
+        </div>
       </StationProvider>
     </>
   );
