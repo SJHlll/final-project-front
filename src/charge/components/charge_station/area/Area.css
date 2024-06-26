@@ -22,7 +22,7 @@
 }
 
 .search-input {
-    width: 53%;
+    width: 55%;
     padding: 5px;
     margin: 5px;
 }
@@ -69,6 +69,6 @@
 
 .checkbox-content {
     font-size: 0.75rem;
-    color: #333;
+    color: #666;
     line-height: 20px;
 }
