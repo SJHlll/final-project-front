@@ -1,8 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import {
-  loadPaymentWidget,
-  // ANONYMOUS,
-} from '@tosspayments/payment-widget-sdk';
+import { loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
 import { nanoid } from 'nanoid';
 import './Pay.scss';
 
@@ -10,8 +7,7 @@ import './Pay.scss';
 // 이메일・전화번호와 같이 유추가 가능한 값은 안전하지 않습니다.
 const widgetClientKey =
   'test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm';
-const customerKey = 'FI9S0TxYb6XywBtqaaL1m';
-// const paymentWidget = PaymentWidget(widgetClientKey, PaymentWidget.ANONYMOUS) // 비회원 결제
+const customerKey = nanoid();
 
 export function Checkout() {
   const [paymentWidget, setPaymentWidget] = useState(null);
@@ -69,12 +65,12 @@ export function Checkout() {
     try {
       await paymentWidget?.requestPayment({
         orderId: nanoid(),
-        orderName: 'Plug & Go',
-        customerName: '김토스',
-        customerEmail: 'customer123@gmail.com',
-        customerMobilePhone: '01012341234',
-        successUrl: `${window.location.origin}/success`,
-        failUrl: `${window.location.origin}/fail`,
+        orderName: 'Plug & Go', // 상품명
+        customerName: '서준혁', // 손님 이름
+        customerEmail: 'white4x@naver.com', // 손님 이메일
+        customerMobilePhone: '01054983553', // 손님 전화번호
+        successUrl: `${window.location.origin}/success`, // http://localhost:3000/success
+        failUrl: `${window.location.origin}/fail`, // http://localhost:3000/fail
       });
     } catch (error) {
       console.error('Error requesting payment:', error);

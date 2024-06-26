@@ -10,7 +10,7 @@ const Tabline = () => {
     Setstate(index.toString());
   };
   return (
-    <div className='tabline' style={{ fontFamily: 'font' }}>
+    <div className='tabline'>
       <button
         className={State === '1' ? 'tabli active' : 'tabli'}
         onClick={() => onClick(1, '/')}
@@ -19,7 +19,7 @@ const Tabline = () => {
       </button>
       <button
         className={State === '2' ? 'tabli active' : 'tabli'}
-        onClick={() => onClick(2, '/carres')}
+        onClick={() => onClick(2, '/car/res')}
       >
         전기차 렌트
       </button>

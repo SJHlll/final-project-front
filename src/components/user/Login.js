@@ -125,7 +125,11 @@ const Login = () => {
         <Grid item xs={12}>
           <a href={KAKAO_AUTH_URL}>
             <img
-              style={{ width: '70%', height: '50%' }}
+              style={{
+                width: '208px',
+                height: '44px',
+                margin: '5px',
+              }}
               alt='kakaobtn'
               src={require('../../Car/assets/kakaoLogin.png')}
             />
@@ -134,7 +138,11 @@ const Login = () => {
         <Grid>
           <a href={NAVER_AUTH_URL}>
             <img
-              style={{ width: '70%', height: '10%' }}
+              style={{
+                width: '208px',
+                height: '40px',
+                margin: '5px',
+              }}
               alt='naverbtn'
               src={require('../../Car/assets/naverLogin.png')}
             />
@@ -146,6 +154,7 @@ const Login = () => {
         <Button
           className='testbtn'
           onClick={() => click('/')}
+          style={{ margin: '5px' }}
         >
           우선 돌아가기
         </Button>

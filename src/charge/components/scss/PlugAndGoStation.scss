@@ -1,62 +1,52 @@
 .OurStation {
+  width: 400px;
+  height: 110px;
+  border: 1px solid #aaa;
+  border-radius: 15px;
+  margin: 10px;
+  padding: 10px;
+
+  .station-content {
+    height: 30px;
+    align-items: center;
+  }
+
+  .foot {
     display: flex;
-    justify-content: space-between;
-    width: 400px;
-    height: 94px;
-    border: 1px solid #aaa;
-    margin-left: 10px;
+  }
 
-    .Status {
-      margin-left: 10px;
-      width: 66%;
-      position: relative;
+  .Name {
+    font-size: 1.1rem;
+    text-align: left;
 
-      .Name {
-        font-size: 1.1rem;
-        font-weight: bold;
-        margin-top: 5px;
-      }
-
-      .Address {
-        font-size: 0.75rem;
-        position: absolute;
-        bottom: 5px;
-        cursor: pointer;
-
-        a {
-          color: black;
-          text-decoration: none;
-        }
-        a:hover {
-          font-weight: bold;
-        }
-      }
+    .name-detail {
+      cursor: pointer;
     }
-
-    .Charger {
-      margin-top: 10px;
-      margin-right: 10px;
-      text-align: right;
-      width: 34%;
-      font-weight: bold;
-      position: relative;
-
-      .ChargerType {
-        font-size: 0.8rem;
-      }
-
-      .reserve-button {
-        position: absolute;
-        right: 0;
-        bottom: 10px;
-        border: none;
-        color: white;
-        background-color: #007bff;
-        border-radius: 5px;
-      }
-
-      .reserve-button:hover {
-        background-color: #0056b3;
-      }
+    .name-detail:hover {
+      color: blue;
     }
   }
+
+  .Address {
+    font-size: 0.75rem;
+    bottom: 5px;
+  }
+
+  .ChargerType {
+    font-size: 0.8rem;
+    width: 65%;
+    text-align: left;
+  }
+
+  .Price {
+    width: 15%;
+    text-align: end;
+  }
+
+  .reserve-button {
+    position: relative;
+    height: 30px;
+    margin-left: 5px;
+    border-radius: 5px;
+  }
+}

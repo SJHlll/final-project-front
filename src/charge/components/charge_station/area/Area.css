@@ -15,14 +15,14 @@
 }
 
 .select-box {
-    width: 45%;
+    width: 35%;
     padding: 5px;
     margin: 7.5px;
     margin-top: 5px;
 }
 
 .search-input {
-    width: 57%;
+    width: 55%;
     padding: 5px;
     margin: 5px;
 }
@@ -53,4 +53,22 @@
 
 .reset-btn:hover {
     background-color: #c2e1ff;
+}
+
+.checkbox-box {
+    margin-top: 10px;
+    display: flex;
+}
+
+.able-checkbox {
+    width: 30px;
+    height: 20px;
+    margin-right: 2px;
+    
+}
+
+.checkbox-content {
+    font-size: 0.75rem;
+    color: #666;
+    line-height: 20px;
 }

@@ -5,6 +5,11 @@
     position: absolute;
     z-index: 1;
     top: 0;
+    // 드래그 못하게
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
   }
   
   .search-list-container.visible {
@@ -38,12 +43,17 @@
     border-bottom-right-radius: 15px;
     top: 37vh;
     transition: left 0.5s ease;
+    // 드래그 못하게
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
   }
   
   .open-btn.visible {
-    left: 500px;
+    left: 501px;
   }
 
   .open-btn.hidden {
-    left: 0;
+    left: 1px;
   }

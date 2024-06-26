@@ -4,7 +4,7 @@ import React, {
   useContext,
 } from 'react';
 import { areas } from './cities';
-import { SearchContext } from '../../contexts/SearchContext';
+import { SearchContext } from '../../../../contexts/SearchContext';
 import './Area.css';
 
 const Area = () => {
@@ -13,6 +13,8 @@ const Area = () => {
     useState('');
   const [subAreas, setSubAreas] = useState([]);
   const [facilitySearch, setFacilitySearch] = useState('');
+  const [isAvailableOnly, setIsAvailableOnly] =
+    useState(true);
 
   const { setSearchConditions } = useContext(SearchContext);
 
@@ -40,8 +42,13 @@ const Area = () => {
   };
 
   // 키워드 검색 기능
-  const handleFacilitySearchChange = (event) => {
-    setFacilitySearch(event.target.value);
+  const handleFacilitySearchChange = (e) => {
+    setFacilitySearch(e.target.value);
+  };
+
+  // 이용가능 체크박스
+  const handleAvailabilityChange = (e) => {
+    setIsAvailableOnly(e.target.checked);
   };
 
   // 검색 버튼
@@ -50,6 +57,7 @@ const Area = () => {
       selectedArea,
       selectedSubArea,
       facilitySearch,
+      isAvailableOnly,
       isSearchClicked: true,
     });
   };
@@ -59,10 +67,12 @@ const Area = () => {
     setSelectedArea('');
     setSelectedSubArea('');
     setFacilitySearch('');
+    setIsAvailableOnly(true);
     setSearchConditions({
       selectedArea: '',
       selectedSubArea: '',
       facilitySearch: '',
+      isAvailableOnly: true,
       isSearchClicked: false,
     });
   };
@@ -103,6 +113,19 @@ const Area = () => {
             </option>
           ))}
         </select>
+        <label>
+          <div className='checkbox-box'>
+            <input
+              type='checkbox'
+              className='able-checkbox'
+              checked={isAvailableOnly}
+              onChange={handleAvailabilityChange}
+            />
+            <span className='checkbox-content'>
+              이용가능
+            </span>
+          </div>
+        </label>
       </div>
       <div className='search-box'>
         <input
