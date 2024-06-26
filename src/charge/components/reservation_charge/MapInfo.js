@@ -10,7 +10,7 @@ const MapInfo = ({ m }) => {
       <hr />
       <MapBody>
         <div>규격 : {m.chargerType}</div>
-        <div>가격 : {m.chargingPrice}원(1kWh)</div>
+        <div>가격 : {m.chargingPrice}원 (1kWh)</div>
       </MapBody>
     </MapWrapper>
   );
