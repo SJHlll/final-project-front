@@ -5,12 +5,7 @@ import DatePicker, {
 import 'react-datepicker/dist/react-datepicker.css';
 import '../car/reservation_css/CarCalendar.scss';
 import { ko } from 'date-fns/locale';
-import {
-  addMonths,
-  endOfMonth,
-  setHours,
-  setMinutes,
-} from 'date-fns';
+import { addMonths, setHours, setMinutes } from 'date-fns';
 
 registerLocale('ko', ko); // 한국어 등록
 
@@ -27,120 +22,124 @@ const CarCalendar = ({
   // 날짜 변경 핸들러
   const handleDateChange = (dates) => {
     const [start, end] = dates;
+    console.log('Selected Dates:', { start, end }); // 디버깅용 콘솔 출력
     onChangeStartDate(start);
     onChangeEndDate(end);
+
     // 픽업 날짜 변경 시 픽업 시간을 해당 날짜로 설정
     if (start) {
       onChangeStartTime(
-        setHours(setMinutes(new Date(start), 0), 9),
-      ); // 선택전 고정 시간 9:00
+        setHours(
+          setMinutes(
+            new Date(start),
+            startTime.getMinutes(),
+          ),
+          startTime.getHours(),
+        ),
+      );
     }
+
     // 반납 날짜 변경 시 반납 시간을 해당 날짜로 설정
     if (end) {
       onChangeEndTime(
-        setHours(setMinutes(new Date(end), 0), 9),
-      ); // 선택전 고정 시간 9:00
+        setHours(
+          setMinutes(new Date(end), endTime.getMinutes()),
+          endTime.getHours(),
+        ),
+      );
     }
   };
 
-  // 시작 시간 변경 핸들러
   const handleStartTimeChange = (time) => {
-    // 시간 변경 시 날짜와 동일하게 맞춤
-    const newStartTime = new Date(startDate);
-    newStartTime.setHours(time.getHours());
-    newStartTime.setMinutes(time.getMinutes());
-    onChangeStartTime(newStartTime);
+    console.log('Selected Start Time:', time); // 디버깅용 콘솔 출력
+    if (startDate) {
+      const newStartTime = new Date(startDate);
+      newStartTime.setHours(time.getHours());
+      newStartTime.setMinutes(time.getMinutes());
+      onChangeStartTime(newStartTime);
+    } else {
+      onChangeStartTime(time);
+    }
   };
 
-  // 종료 시간 변경 핸들러
   const handleEndTimeChange = (time) => {
-    // 시간 변경 시 날짜와 동일하게 맞춤
-    const newEndTime = new Date(endDate);
-    newEndTime.setHours(time.getHours());
-    newEndTime.setMinutes(time.getMinutes());
-    onChangeEndTime(newEndTime);
+    console.log('Selected End Time:', time); // 디버깅용 콘솔 출력
+    if (endDate) {
+      const newEndTime = new Date(endDate);
+      newEndTime.setHours(time.getHours());
+      newEndTime.setMinutes(time.getMinutes());
+      onChangeEndTime(newEndTime);
+    } else {
+      onChangeEndTime(time);
+    }
   };
 
-  // 상태 변경 시 로그 출력
   useEffect(() => {
-    console.log('픽업 날짜:', startDate);
-  }, [startDate]);
+    console.log(
+      '픽업 날짜: ',
+      startDate,
+      '픽업시간: ',
+      startTime,
+    ); // startDate 상태 변경 추적
+  }, [startDate, startTime]);
 
   useEffect(() => {
-    console.log('반납 날짜:', endDate);
-  }, [endDate]);
-
-  useEffect(() => {
-    console.log('픽업 시간:', startTime);
-  }, [startTime]);
-
-  useEffect(() => {
-    console.log('반납 시간:', endTime);
-  }, [endTime]);
+    console.log(
+      '반납날짜: ',
+      endDate,
+      '반납시간: ',
+      endTime,
+    ); // endDate 상태 변경 추적
+  }, [endDate, endTime]);
 
   const minDate = new Date(); // 최소 날짜는 오늘 날짜로 설정합니다.
   const maxDate = addMonths(new Date(), 12); // 최대 날짜를 12개월 후로 설정합니다.
 
-  // document
-  //   .querySelectorAll('.react-datepicker__day')
-  //   .forEach((day) => {
-  //     day.addEventListener('click', () => {
-  //       console.log(day.classList); // 선택된 날짜의 클래스 확인
-  //     });
-  //   });
-
-  // return (
-  //   <div className='content'>
-  //     <div>
-  //       <DatePicker
-  //         id='calendar'
-  //         locale={ko}
-  //         renderCustomHeader={({
-  //           monthDate,
-  //           customHeaderCount,
-  //           decreaseMonth,
-  //           increaseMonth,
-  //         }) => (
-  //           <div>
-  //             <button
-  //               aria-label='Previous Month'
-  //               className='react-datepicker__navigation react-datepicker__navigation--previous'
-  //               style={
-  //                 customHeaderCount === 1
-  //                   ? { visibility: 'hidden' }
-  //                   : null
-  //               }
-  //               onClick={decreaseMonth}
-  //             >
-  //               <span className='react-datepicker__navigation-icon react-datepicker__navigation-icon--previous'></span>
-  //             </button>
-  //             <span className='react-datepicker__current-month'>
-  //               {monthDate.toLocaleString('ko', {
-  //                 month: 'long',
-  //                 year: 'numeric',
-  //               })}
-  //             </span>
-  //             <button
-  //               aria-label='Next Month'
-  //               className='react-datepicker__navigation react-datepicker__navigation--next'
-  //               style={
-  //                 customHeaderCount === 0
-  //                   ? { visibility: 'hidden' }
-  //                   : null
-  //               }
-  //               onClick={increaseMonth}
-  //             >
-  //               <span className='react-datepicker__navigation-icon react-datepicker__navigation-icon--next'></span>
-  //             </button>
-  //           </div>
-  //         )}
   return (
     <div className='content'>
       <div>
         <DatePicker
           id='calendar'
           locale={ko}
-          selected={startDate || new Date()} // 시작 날짜를 선택하지 않았을 경우 기본 값으로 오늘 날짜 설정
+          renderCustomHeader={({
+            monthDate,
+            customHeaderCount,
+            decreaseMonth,
+            increaseMonth,
+          }) => (
+            <div>
+              <button
+                aria-label='Previous Month'
+                className='react-datepicker__navigation react-datepicker__navigation--previous'
+                style={
+                  customHeaderCount === 1
+                    ? { visibility: 'hidden' }
+                    : null
+                }
+                onClick={decreaseMonth}
+              >
+                <span className='react-datepicker__navigation-icon react-datepicker__navigation-icon--previous'></span>
+              </button>
+              <span className='react-datepicker__current-month'>
+                {monthDate.toLocaleString('ko', {
+                  month: 'long',
+                  year: 'numeric',
+                })}
+              </span>
+              <button
+                aria-label='Next Month'
+                className='react-datepicker__navigation react-datepicker__navigation--next'
+                style={
+                  customHeaderCount === 0
+                    ? { visibility: 'hidden' }
+                    : null
+                }
+                onClick={increaseMonth}
+              >
+                <span className='react-datepicker__navigation-icon react-datepicker__navigation-icon--next'></span>
+              </button>
+            </div>
+          )}
           onChange={handleDateChange} // 날짜 변경 핸들러 연결
           startDate={startDate} // 시작 날짜
           endDate={endDate} // 종료 날짜
@@ -152,9 +151,11 @@ const CarCalendar = ({
           monthsShown={2} // 화면에 보여주는 월 갯수
         />
       </div>
+
       <div className='time-container'>
         <div className='time-block'>
-          <div className='pickup'>픽업 시간</div>
+          <div className='pickupTitle' />
+          픽업 시간
           <DatePicker
             id='pickupTime'
             selected={startTime}
@@ -173,8 +174,10 @@ const CarCalendar = ({
             timeCaption='픽업 시간'
           />
         </div>
+
         <div className='time-block'>
-          <div>반납 시간</div>
+          <div className='returnTitle' />
+          반납 시간
           <DatePicker
             id='returnTime'
             selected={endTime}
