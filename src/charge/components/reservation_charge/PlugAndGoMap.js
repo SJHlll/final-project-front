@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import PlugAndGoMarker from '../../assets/img/marker-plug-and-go.png';
 import MapInfo from './MapInfo';
 import styled from 'styled-components';
+import { SecondMapContext } from '../contexts/SecondMapContext';
 
 const MapContainer = styled(Map)`
   width: 450px;
@@ -16,7 +21,15 @@ const MapContainer = styled(Map)`
 
 const PlugAndGoMap = ({ markers }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { selectedStation, mapLevel, setMapLevel } =
+    useContext(SecondMapContext);
 
+  const [center, setCenter] = useState({
+    lat: 36.34,
+    lng: 127.77,
+  });
+
+  // 마커클릭 - 인포윈도우 열기
   const handleMarkerClick = (marker) => {
     if (isOpen === marker) {
       setIsOpen(null);
@@ -25,21 +38,31 @@ const PlugAndGoMap = ({ markers }) => {
     }
   };
 
+  // 배경클릭 - 인포윈도우 닫기
   const handleBackgroundClick = () => {
     setIsOpen(null);
   };
 
+  // 휠 올리고 내릴 시 실시간 맵 레벨 업데이트
+  const handleZoomChanged = (map) => {
+    const level = map.getLevel();
+    setMapLevel(level);
+  };
+
+  // 위치 보여주기
+  useEffect(() => {
+    if (selectedStation) {
+      setCenter(selectedStation);
+    }
+  }, [selectedStation]);
   return (
     <>
       <MapContainer
         id='map'
-        center={{
-          // 지도의 중심좌표
-          lat: 36.34,
-          lng: 127.77,
-        }}
-        level={13}
+        center={center}
+        level={mapLevel}
         onClick={handleBackgroundClick}
+        onZoomChanged={handleZoomChanged}
       >
         {markers.map((marker) => (
           <MapMarker

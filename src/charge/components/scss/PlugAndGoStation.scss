@@ -17,15 +17,16 @@
 
   .Name {
     font-size: 1.1rem;
-    font-weight: bold;
-    // margin-top: 5px;
     text-align: left;
+
+    .name-detail {
+      cursor: pointer;
+    }
   }
 
   .Address {
     font-size: 0.75rem;
     bottom: 5px;
-    cursor: pointer;
   }
 
   .ChargerType {
