@@ -1,8 +1,22 @@
 import React, { useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import PlugAndGoMarker from '../../assets/img/marker-plug-and-go.png';
+import MapInfo from './MapInfo';
 
 const PlugAndGoMap = ({ markers }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleMarkerClick = (marker) => {
+    if (isOpen === marker) {
+      setIsOpen(null);
+    } else {
+      setIsOpen(marker);
+    }
+  };
+
+  const handleBackgroundClick = () => {
+    setIsOpen(null);
+  };
 
   return (
     <>
@@ -14,10 +28,11 @@ const PlugAndGoMap = ({ markers }) => {
           lng: 127.77,
         }}
         style={{
-          width: '350px',
-          height: '350px',
+          width: '700px',
+          height: '700px',
         }}
         level={13}
+        onClick={handleBackgroundClick}
       >
         {markers.map((marker) => (
           <MapMarker
@@ -26,10 +41,25 @@ const PlugAndGoMap = ({ markers }) => {
               lat: marker.latitude,
               lng: marker.longitude,
             }}
+            image={{
+              src: PlugAndGoMarker,
+              size: {
+                width: 35,
+                height: 50,
+              },
+              options: {
+                offset: {
+                  x: 17.5,
+                  y: 50,
+                },
+              },
+            }}
             clickable={true}
-            onClick={() => setIsOpen(true)}
+            onClick={() =>
+              handleMarkerClick(marker.stationId)
+            }
           >
-            {isOpen && <div>ㅎㅇ</div>}
+            {isOpen === marker.stationId && <MapInfo />}
           </MapMarker>
         ))}
       </Map>
