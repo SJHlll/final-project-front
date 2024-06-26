@@ -3,18 +3,24 @@ export const initialState = {
     userName: '',
     password: '',
     email: '',
+    birthday: '',
+    phoneNumber: '',
   },
   message: {
     userName: '',
     password: '',
     passwordCheck: '',
     email: '',
+    birthday: '',
+    phoneNumber: '',
   },
   correct: {
     userName: false,
     password: false,
     passwordCheck: false,
     email: false,
+    birthday: false,
+    phoneNumber: false,
   },
 };
 

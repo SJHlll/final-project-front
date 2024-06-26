@@ -221,7 +221,7 @@ const RegisterPage = () => {
     }
 
     debouncedUpdateState(
-      'phonenumber',
+      'phoneNumber',
       inputValue,
       msg,
       flag,
@@ -239,18 +239,6 @@ const RegisterPage = () => {
 
   // 회원 가입 처리 서버 요청
   const fetchSignUpPost = async () => {
-    /*
-      기존 회원가입은 단순히 텍스트를 객체로 모은 후 JSON으로 변환해서 요청 보내주면 끝.
-      이제는 프로필 이미지가 추가됨. -> 파일 첨부 요청은 multipart/form-data로 전송해야 함.
-      FormData 객체를 활용해서 Content-type을 multipart/form-data로 지정한 후 전송하려 함.
-      그럼 JSON 데이터는? Content-type이 application/json이다. 
-      Content-type이 서로 다른 데이터를 한번에 FormData에 감싸서 보내면 
-      415(unsupported Media Type) 에러가 발생함.
-      그렇다면 -> JSON을 Blob으로 바꿔서 함께 보내자. 
-      Blob은 이미지, 사운드, 비디오 같은 멀티미디어 파일을 바이트 단위로 쪼개어 파일 손상을 방지하게 
-      해 주는 타입. -> multipart/form-data에도 허용됨.
-    */
-
     // JSON을 Blob 타입으로 변경.
     const userJsonBlob = new Blob(
       [JSON.stringify(userValue)],
@@ -264,19 +252,22 @@ const RegisterPage = () => {
     const userFormData = new FormData();
     userFormData.append('user', userJsonBlob);
     userFormData.append(
-      'profileImage',
+      'profilePicture',
       $fileTag.current.files[0],
     );
 
-    const res = await fetch(API_BASE_URL + USER, {
-      method: 'POST',
-      body: userFormData,
-    });
+    const res = await fetch(
+      API_BASE_URL + USER + '/signup',
+      {
+        method: 'POST',
+        body: userFormData,
+      },
+    );
 
     if (res.status === 200) {
       const data = await res.json();
       alert(
-        `${data.userName}(${data.email})님 회원가입에 성공했습니다.`,
+        `${data.name}(${data.email})님 회원가입에 성공했습니다.`,
       );
       // 로그인 페이지로 리다이렉트
       navigate('/login');
@@ -377,11 +368,11 @@ const RegisterPage = () => {
           <Grid item xs={12}>
             <TextField
               autoComplete='fname'
-              name='username'
+              name='name'
               variant='outlined'
               required
               fullWidth
-              id='username'
+              id='name'
               label='유저 이름'
               autoFocus
               onChange={nameHandler}
@@ -489,11 +480,11 @@ const RegisterPage = () => {
               variant='outlined'
               required
               fullWidth
-              name='phonenumber'
+              name='phoneNumber'
               label='전화번호'
-              type='phonenumber'
-              id='phonenumber'
-              autoComplete='phonenumber'
+              type='phoneNumber'
+              id='phoneNumber'
+              autoComplete='phoneNumber'
               onChange={phoneCheckHandler}
             />
             <span
