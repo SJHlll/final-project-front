@@ -9,16 +9,6 @@ import MapInfo from './MapInfo';
 import styled from 'styled-components';
 import { SecondMapContext } from '../contexts/SecondMapContext';
 
-const MapContainer = styled(Map)`
-  width: 450px;
-  height: 726px;
-  border: 2px solid black;
-  border-radius: 15px;
-  position: absolute;
-  right: 15px;
-  top: 15px;
-`;
-
 const PlugAndGoMap = ({ markers }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { selectedStation, mapLevel, setMapLevel } =
@@ -102,3 +92,13 @@ const PlugAndGoMap = ({ markers }) => {
 };
 
 export default PlugAndGoMap;
+
+const MapContainer = styled(Map)`
+  width: 450px;
+  height: 726px;
+  border: 2px solid black;
+  border-radius: 15px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+`;

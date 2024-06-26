@@ -4,34 +4,6 @@ import PlugAndGoStation from './PlugAndGoStation';
 import PlugAndGoMap from './PlugAndGoMap';
 import styled from 'styled-components';
 
-const PlugAndGoStationContainer = styled.div`
-  width: 850px;
-  display: flex;
-  flex-wrap: wrap;
-  max-height: 676px;
-  overflow-y: auto;
-
-  // 스크롤바 몸통
-  &::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  // 스크롤바 배경
-  &::-webkit-scrollbar-track {
-    background: #c2e1ff;
-  }
-
-  // 스크롤바 위치
-  &::-webkit-scrollbar-thumb {
-    background: #2c7fdf;
-  }
-
-  // 스크롤바 호버
-  &::-webkit-scrollbar-thumb:hover {
-    background: #0056b3;
-  }
-`;
-
 const ReservationList = () => {
   const { stations, setStations } =
     useContext(StationContext);
@@ -82,3 +54,31 @@ const ReservationList = () => {
 };
 
 export default ReservationList;
+
+const PlugAndGoStationContainer = styled.div`
+  width: 850px;
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 676px;
+  overflow-y: auto;
+
+  // 스크롤바 몸통
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  // 스크롤바 배경
+  &::-webkit-scrollbar-track {
+    background: #c2e1ff;
+  }
+
+  // 스크롤바 위치
+  &::-webkit-scrollbar-thumb {
+    background: #2c7fdf;
+  }
+
+  // 스크롤바 호버
+  &::-webkit-scrollbar-thumb:hover {
+    background: #0056b3;
+  }
+`;

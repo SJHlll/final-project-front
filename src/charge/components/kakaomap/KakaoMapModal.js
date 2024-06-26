@@ -4,28 +4,6 @@ import styled from 'styled-components';
 import '../scss/KakaoMapModal.scss';
 import { ModalBody, ModalFooter } from 'reactstrap';
 
-const ModalBackground = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-`;
-
-const ModalContent = styled.div`
-  background: white;
-  padding: 0 15px 0;
-  border-radius: 10px;
-  width: 35%;
-  max-height: 90%;
-  overflow-y: auto;
-`;
-
 const KakaoMapModal = ({ isOpen, onClose, marker }) => {
   if (!isOpen) return null;
 
@@ -98,3 +76,25 @@ const KakaoMapModal = ({ isOpen, onClose, marker }) => {
 };
 
 export default KakaoMapModal;
+
+const ModalBackground = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+`;
+
+const ModalContent = styled.div`
+  background: white;
+  padding: 0 15px 0;
+  border-radius: 10px;
+  width: 35%;
+  max-height: 90%;
+  overflow-y: auto;
+`;
