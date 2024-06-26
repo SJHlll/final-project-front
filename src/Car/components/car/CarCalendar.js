@@ -1,45 +1,99 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import DatePicker, {
   registerLocale,
 } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../car/reservation_css/CarCalendar.scss';
 import { ko } from 'date-fns/locale';
-import {
-  addMonths,
-  endOfMonth,
-  setHours,
-  setMinutes,
-} from 'date-fns';
+import { addMonths, setHours, setMinutes } from 'date-fns';
 
 registerLocale('ko', ko); // 한국어 등록
 
-const CarCalendar = ({ closeModal }) => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(null);
-
-  const onChange = (dates) => {
+const CarCalendar = ({
+  startDate,
+  endDate,
+  onChangeStartDate,
+  onChangeEndDate,
+  startTime,
+  endTime,
+  onChangeStartTime,
+  onChangeEndTime,
+}) => {
+  // 날짜 변경 핸들러
+  const handleDateChange = (dates) => {
     const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
+    console.log('Selected Dates:', { start, end }); // 디버깅용 콘솔 출력
+    onChangeStartDate(start);
+    onChangeEndDate(end);
+
+    // 픽업 날짜 변경 시 픽업 시간을 해당 날짜로 설정
+    if (start) {
+      onChangeStartTime(
+        setHours(
+          setMinutes(
+            new Date(start),
+            startTime.getMinutes(),
+          ),
+          startTime.getHours(),
+        ),
+      );
+    }
+
+    // 반납 날짜 변경 시 반납 시간을 해당 날짜로 설정
+    if (end) {
+      onChangeEndTime(
+        setHours(
+          setMinutes(new Date(end), endTime.getMinutes()),
+          endTime.getHours(),
+        ),
+      );
+    }
   };
 
-  console.log(startDate);
-  console.log(endDate);
+  const handleStartTimeChange = (time) => {
+    console.log('Selected Start Time:', time); // 디버깅용 콘솔 출력
+    if (startDate) {
+      const newStartTime = new Date(startDate);
+      newStartTime.setHours(time.getHours());
+      newStartTime.setMinutes(time.getMinutes());
+      onChangeStartTime(newStartTime);
+    } else {
+      onChangeStartTime(time);
+    }
+  };
 
-  const minDate = new Date();
-  const maxDate = endOfMonth(addMonths(new Date(), 1));
+  const handleEndTimeChange = (time) => {
+    console.log('Selected End Time:', time); // 디버깅용 콘솔 출력
+    if (endDate) {
+      const newEndTime = new Date(endDate);
+      newEndTime.setHours(time.getHours());
+      newEndTime.setMinutes(time.getMinutes());
+      onChangeEndTime(newEndTime);
+    } else {
+      onChangeEndTime(time);
+    }
+  };
 
-  const [startTime, setStartTime] = useState(
-    setHours(setMinutes(new Date(), 30), 16),
-  );
+  useEffect(() => {
+    console.log(
+      '픽업 날짜: ',
+      startDate,
+      '픽업시간: ',
+      startTime,
+    ); // startDate 상태 변경 추적
+  }, [startDate, startTime]);
 
-  const [endTime, setEndTime] = useState(
-    setHours(setMinutes(new Date(), 30), 16),
-  );
+  useEffect(() => {
+    console.log(
+      '반납날짜: ',
+      endDate,
+      '반납시간: ',
+      endTime,
+    ); // endDate 상태 변경 추적
+  }, [endDate, endTime]);
 
-  console.log(setStartTime);
-  console.log(setEndTime);
+  const minDate = new Date(); // 최소 날짜는 오늘 날짜로 설정합니다.
+  const maxDate = addMonths(new Date(), 12); // 최대 날짜를 12개월 후로 설정합니다.
 
   return (
     <div className='content'>
@@ -64,9 +118,7 @@ const CarCalendar = ({ closeModal }) => {
                 }
                 onClick={decreaseMonth}
               >
-                <span className='react-datepicker__navigation-icon react-datepicker__navigation-icon--previous'>
-                  {'<'}
-                </span>
+                <span className='react-datepicker__navigation-icon react-datepicker__navigation-icon--previous'></span>
               </button>
               <span className='react-datepicker__current-month'>
                 {monthDate.toLocaleString('ko', {
@@ -84,59 +136,65 @@ const CarCalendar = ({ closeModal }) => {
                 }
                 onClick={increaseMonth}
               >
-                <span className='react-datepicker__navigation-icon react-datepicker__navigation-icon--next'>
-                  {'>'}
-                </span>
+                <span className='react-datepicker__navigation-icon react-datepicker__navigation-icon--next'></span>
               </button>
             </div>
           )}
-          onChange={onChange}
-          startDate={startDate}
-          endDate={endDate}
-          minDate={minDate}
-          maxDate={maxDate}
+          onChange={handleDateChange} // 날짜 변경 핸들러 연결
+          startDate={startDate} // 시작 날짜
+          endDate={endDate} // 종료 날짜
+          minDate={minDate} // 최소 날짜 설정
+          maxDate={maxDate} // 최대 날짜 설정
           selectsRange
           inline
           showDisabledMonthNavigation
           monthsShown={2} // 화면에 보여주는 월 갯수
         />
       </div>
-      <div>
-        <DatePicker
-          id='pickupTime'
-          selected={startTime}
-          onChange={(date) => setStartTime(date)}
-          showTimeSelect
-          showTimeSelectOnly
-          timeIntervals={30}
-          excludeTimes={[
-            setHours(setMinutes(new Date(), 0), 17),
-            setHours(setMinutes(new Date(), 0), 17),
-            setHours(setMinutes(new Date(), 30), 18),
-            setHours(setMinutes(new Date(), 30), 19),
-            setHours(setMinutes(new Date(), 30), 17),
-          ]}
-          dateFormat='h:mm aa'
-          timeCaption='픽업 시간'
-        />
-      </div>
-      <div>
-        <DatePicker
-          id='returnTime'
-          selected={endTime}
-          onChange={(date) => setEndTime(date)}
-          showTimeSelect
-          showTimeSelectOnly
-          timeIntervals={30}
-          excludeTimes={[
-            setHours(setMinutes(new Date(), 0), 17),
-            setHours(setMinutes(new Date(), 30), 18),
-            setHours(setMinutes(new Date(), 30), 19),
-            setHours(setMinutes(new Date(), 30), 17),
-          ]}
-          dateFormat='h:mm aa'
-          timeCaption='반납 시간'
-        />
+
+      <div className='time-container'>
+        <div className='time-block'>
+          <div className='pickupTitle' />
+          픽업 시간
+          <DatePicker
+            id='pickupTime'
+            selected={startTime}
+            onChange={handleStartTimeChange} // 시작 시간 변경 핸들러 연결
+            showTimeSelect
+            showTimeSelectOnly
+            timeIntervals={30}
+            excludeTimes={[
+              setHours(setMinutes(new Date(), 0), 17),
+              setHours(setMinutes(new Date(), 0), 17),
+              setHours(setMinutes(new Date(), 30), 18),
+              setHours(setMinutes(new Date(), 30), 19),
+              setHours(setMinutes(new Date(), 30), 17),
+            ]}
+            dateFormat='h:mm aa'
+            timeCaption='픽업 시간'
+          />
+        </div>
+
+        <div className='time-block'>
+          <div className='returnTitle' />
+          반납 시간
+          <DatePicker
+            id='returnTime'
+            selected={endTime}
+            onChange={handleEndTimeChange} // 종료 시간 변경 핸들러 연결
+            showTimeSelect
+            showTimeSelectOnly
+            timeIntervals={30}
+            excludeTimes={[
+              setHours(setMinutes(new Date(), 0), 17),
+              setHours(setMinutes(new Date(), 30), 18),
+              setHours(setMinutes(new Date(), 30), 19),
+              setHours(setMinutes(new Date(), 30), 17),
+            ]}
+            dateFormat='h:mm aa'
+            timeCaption='반납 시간'
+          />
+        </div>
       </div>
     </div>
   );
