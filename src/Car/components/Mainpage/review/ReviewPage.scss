@@ -3,7 +3,7 @@
     max-width: 1200px;
     margin: 0 auto;
 
-    .type-selection {
+    .type-switch {
         display: flex;
         justify-content: center;
         margin: 20px 0;
@@ -19,7 +19,7 @@
             border-radius: 5px;
             transition: background-color 0.3s ease;
 
-            &.selected {
+            &.active {
                 background-color: #4597ee;
                 color: white;
             }
@@ -30,14 +30,35 @@
         }
     }
 
-    .reviews-container {
+    .write-review-button {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        // border: none;
+        background-color: #b8d1ec;
+        color: black;
+        border-radius: 5px;
+
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #3792e2;
+        }
+    }
+
+    .review-list {
         display: flex;
         justify-content: flex-start;
         flex-wrap: wrap;
-        margin: 0 50px;
+        margin: 0 100px;
         animation: fade-in 0.5s ease;
 
         .review-item {
+            border: 1px solid rgb(111, 0, 255);
             width: 300px;
             max-height: 350px;
             min-height: 350px;
@@ -96,7 +117,6 @@
                     font-size: 12px;
                     color: #999;
                     margin-bottom: 5px;
-                    // border: 1px dashed blue;
                     position: absolute;
                 }
 
@@ -106,7 +126,6 @@
                     font-size: 14px;
                     line-height: 1.5;
                     color: #666;
-                    // border: 1px dashed blue;
                 }
             }
         }
@@ -149,7 +168,6 @@
         animation: fade-in 0.3s ease;
 
         .modal-content {
-
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
@@ -157,13 +175,13 @@
             position: relative;
             width: 80%;
             max-width: 600px;
-            height: 70vh;
+            max-height: 70vh;
+            min-height: 70vh;
             overflow-y: auto;
-            // border: 1px dashed black;
 
             .close {
                 position: absolute;
-                top: 18px;
+                top: 28px;
                 right: 23px;
                 font-size: 23px;
                 font-weight: bold;
@@ -178,16 +196,13 @@
 
             .modal-image-container {
                 position: relative;
-                // border: 1px dashed black;
 
                 img {
-                    // border: 1px solid black;
                     width: 100%;
-                    height: auto;
+                    height: 320px;
                     object-fit: cover;
                     border-radius: 5px;
                     margin-bottom: 10px;
-
                 }
 
                 .review-date {
@@ -204,16 +219,12 @@
 
             h3 {
                 font-size: 24px;
-
-                // border: 1px dashed black;
             }
 
             .rating {
                 position: absolute;
                 font-size: 20px;
-                bottom: 203px;
-
-                // border: 1px dashed black;
+                bottom: 230px;
 
                 span {
                     color: #ffc107;
@@ -224,16 +235,12 @@
                 font-size: 16px;
                 line-height: 1.5;
                 width: 100%;
-                // border: 1px dashed black;
-                min-height: 172px;
-                max-height: 125px;
+                height: 170px;
                 overflow: auto;
-
             }
 
             p::-webkit-scrollbar {
                 width: 0px;
-                /* 스크롤바의 너비 */
             }
         }
     }

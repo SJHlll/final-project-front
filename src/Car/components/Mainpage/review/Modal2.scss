@@ -1,0 +1,159 @@
+.modal2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .modal2-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        width: 900px;
+        height: 79vh;
+        // overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        // border: 1px dashed black;
+
+        .close {
+            align-self: flex-end;
+            font-size: 24px;
+            cursor: pointer;
+            // border: 1px dashed blue;
+        }
+
+        form {
+            width: 100%;
+            // border: 1px dashed green;
+
+            .selection-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                margin-bottom: 20px;
+                border-bottom: 1px solid #ccc;
+                padding-bottom: 10px;
+
+                // border: 1px dashed yellow;
+
+                &>div {
+                    flex: 1;
+                    display: flex;
+                    align-items: center;
+
+                    label {
+                        margin-right: 10px;
+                        font-size: 20px;
+                    }
+
+                    select {
+                        padding: 8px;
+                        font-size: 16px;
+                        width: 300px;
+                    }
+                }
+            }
+
+            .image-upload {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 20px;
+                border-bottom: 1px solid lightgray;
+
+                label {
+                    font-size: 16px;
+                    padding-bottom: 15px;
+                    display: block;
+                    border-bottom: 1px solid lightgray;
+                }
+
+                input[type='file'] {
+                    display: none;
+                }
+
+                .photo-preview {
+                    margin-top: 10px;
+                    height: 300px;
+                    /* 이미지 미리보기의 높이를 300px로 지정 */
+                    overflow: hidden;
+                    /* 오버플로우 처리 */
+                    position: relative;
+
+                    img.preview-image {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        /* 이미지가 미리보기 영역에 맞춰 cover 되도록 설정 */
+                        border-radius: 5px;
+                    }
+                }
+
+                .upload-btn {
+                    padding: 6px 12px;
+                    /* 작은 버튼으로 크기 조정 */
+                    background-color: #007bff;
+                    color: white;
+                    border: none;
+                    cursor: pointer;
+                    font-size: 14px;
+                    /* 작은 글자 크기 */
+                    outline: none;
+                    transition: background-color 0.3s;
+                    margin-top: 10px;
+
+                    &:hover {
+                        background-color: #0056b3;
+                    }
+                }
+            }
+
+            .review-textarea {
+                width: 100%;
+                // margin-bottom: 20px;
+
+                textarea {
+                    width: 100%;
+                    height: 150px;
+                    padding: 10px;
+                    font-size: 16px;
+                    resize: vertical;
+                    display: block;
+                }
+            }
+
+            .error {
+                color: red;
+                margin-bottom: 10px;
+                font-size: 16px;
+            }
+
+            .submit-button {
+                width: 100%;
+                text-align: center;
+
+                button {
+                    padding: 10px 20px;
+                    background-color: #007bff;
+                    color: white;
+                    border: none;
+                    cursor: pointer;
+                    font-size: 16px;
+                    outline: none;
+                    transition: background-color 0.3s;
+                    width: 100%;
+
+                    &:hover {
+                        background-color: #0056b3;
+                    }
+                }
+            }
+        }
+    }
+}
