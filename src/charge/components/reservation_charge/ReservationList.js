@@ -8,9 +8,23 @@ const PlugAndGoStationContainer = styled.div`
   width: 860px;
   display: flex;
   flex-wrap: wrap;
-  place-content: space-between;
   max-height: 676px;
   overflow-y: auto;
+
+  // 스크롤바 몸통
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  // 스크롤바 배경
+  &::-webkit-scrollbar-track {
+    background: #c2e1ff;
+  }
+
+  // 스크롤바 위치
+  &::-webkit-scrollbar-thumb {
+    background: #2c7fdf;
+  }
 `;
 
 const ReservationList = () => {
