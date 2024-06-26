@@ -77,31 +77,35 @@ const PlugAndGoStation = ({
   );
 
   return (
-    <div className='OurStation'>
-      <div className='content'>
-        <div className='Name'>
-          <span>
-            ({Speed}) {Name}
-          </span>
+    <div className='maincontainer'>
+      <div className='contentline'>
+        <div className='OurStation'>
+          <div className='content'>
+            <div className='Name'>
+              <span>
+                ({Speed}) {Name}
+              </span>
+            </div>
+          </div>
+          <div className='content'>
+            <div className='Address'>
+              <HoverATag
+                href={`https://map.kakao.com/link/to/${Address},${lat},${lng}`}
+                target='_blank'
+                rel='noreferrer'
+              >
+                {Address}
+              </HoverATag>
+            </div>
+          </div>
+          <div className='foot content'>
+            <div className='ChargerType'>{Type}</div>
+            <div className='Price'>{price}원</div>
+            {button()}
+          </div>
+          {modal && modalOpen()}
         </div>
       </div>
-      <div className='content'>
-        <div className='Address'>
-          <HoverATag
-            href={`https://map.kakao.com/link/to/${Address},${lat},${lng}`}
-            target='_blank'
-            rel='noreferrer'
-          >
-            {Address}
-          </HoverATag>
-        </div>
-      </div>
-      <div className='foot content'>
-        <div className='ChargerType'>{Type}</div>
-        <div className='Price'>{price}원</div>
-        {button()}
-      </div>
-      {modal && modalOpen()}
     </div>
   );
 };

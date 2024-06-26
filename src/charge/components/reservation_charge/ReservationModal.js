@@ -199,7 +199,11 @@ const ReservationModal = ({
             </div>
           </div>
           <div
-            style={{ width: '100%', textAlign: 'center' }}
+            style={{
+              width: '100%',
+              textAlign: 'center',
+              marginBottom: '10px',
+            }}
           >
             <button className='public-btn'>
               <OpenTossPayments
