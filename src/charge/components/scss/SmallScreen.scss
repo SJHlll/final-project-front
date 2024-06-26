@@ -1,10 +1,11 @@
 .small-screen {
     z-index: 1;
     position: absolute;
-    left: 10px;
-    bottom: 10px;
+    right: 10px;
+    bottom: 30px;
     background-color: white;
     border: 1px solid #aaa;
+    border-radius: 10px;
     width: 400px;
     height: 50px;
     transition: left 0.5s ease;
@@ -27,7 +28,7 @@
 
     
     
-}
-.small-screen.visible {
-    left: 510px;
-}
+ }
+// .small-screen.visible {
+//     left: 510px;
+// }

@@ -15,13 +15,13 @@ import Testhome from './Car/components/Mainpage/Testhome';
 import { AuthContextProvider } from './util/AuthContext';
 import { ModalProvider } from '@lasbe/react-modal';
 import LoginSuccess from './components/user/LoginSuccess';
-import ChargeStation from './charge/components/charge_station/ChargeStation';
-import ReservationCharge from './charge/components/reservation_charge/ReservationCharge';
 import { Checkout } from './components/pay/Checkout';
 import { Success } from './components/pay/Success';
 import { Fail } from './components/pay/Fail';
-import Carres from './Car/components/CarHeader/Carres';
-
+import Chargelist from './Car/components/Mainpage/Chargelist';
+import Chargereservation from './Car/components/Mainpage/chargereservation/Chargereservation';
+import Carreservation from './Car/components/Mainpage/carreservation/Carreservation';
+import ReservationCharge from './charge/components/reservation_charge/ReservationCharge';
 
 const App = () => {
   return (
@@ -35,6 +35,21 @@ const App = () => {
           <Routes>
             {/* 메인 홈페이지 */}
             <Route exact path='/' element={<Testhome />} />
+            {/* 전기차 예약하기 */}
+            <Route
+              path='/car/res'
+              element={<Carreservation />}
+            />
+            {/* 충전소 조회 페이지 */}
+            <Route
+              path='charge/list'
+              element={<Chargelist />}
+            />
+            {/* 충전소 예약 페이지 */}
+            <Route
+              path='charge/reservation'
+              element={<ReservationCharge />}
+            />
             {/* 이용방법 페이지 */}
             <Route path='/noti' element={<Noti />} />
             {/* 이벤트 페이지 */}
@@ -47,19 +62,6 @@ const App = () => {
               element={<ChargeMain />}
             />
             <Route path='/charge/test' element={<Test />} />
-            {/* 충전소 조회 페이지 */}
-            <Route
-              path='charge/list'
-              element={<Chargelist />}
-            />
-            {/* 충전소 예약 페이지 */}
-            <Route
-              path='charge/reservation'
-              element={<Chargereservation />}
-            />
-
-            {/* 전기차 예약하기 */}
-            <Route path='/car/res' element={<Carres />} />
 
             {/* 마이페이지 */}
             <Route path='/mypage' element={<Mypage />} />

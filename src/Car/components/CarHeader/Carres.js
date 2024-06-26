@@ -13,7 +13,6 @@ import CarResInfo from './CarResInfo';
 import { setHours, setMinutes } from 'date-fns';
 import CarInfo from '../car/CarInfo';
 import '../CarHeader/CarHeaders_css/Carres.scss';
-
 const ModalBackground = styled.div`
   position: fixed;
   top: 0;
@@ -102,7 +101,7 @@ const Carres = () => {
   };
 
   const button = (
-    <div className='resBtn'>
+    <div className='resBtn .public-btn'>
       <Button
         variant='outline'
         color='success'

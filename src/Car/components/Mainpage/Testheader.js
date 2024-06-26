@@ -32,7 +32,7 @@ const Testheader = () => {
         </button>
         <button
           className={State === 2 ? 'tabliactive' : 'tabli'}
-          onClick={() => onClick(2, '/carres')}
+          onClick={() => onClick(2, '/car/res')}
         >
           전기차 렌트
         </button>

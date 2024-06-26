@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 import { areas } from './cities';
 import { SearchContext } from '../../contexts/SearchContext';
-import './Area.css';
+import './Area.scss';
 
 const Area = () => {
   const [selectedArea, setSelectedArea] = useState('');

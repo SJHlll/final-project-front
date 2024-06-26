@@ -11,11 +11,11 @@ export function Fail() {
   return (
     <div className='result-wrapper'>
       <div className='box_section'>
-        <h2>결제 실패</h2>
-        <p>{`에러 코드: ${searchParams.get('code')}`}</p>
-        <p>{`실패 사유: ${searchParams.get('message')}`}</p>
+        <h2 className='payh2'>결제 실패</h2>
+        <p className='payp'>{`에러 코드: ${searchParams.get('code')}`}</p>
+        <p className='payp'>{`실패 사유: ${searchParams.get('message')}`}</p>
         <p
-          className='public-btn'
+          className='public-btn payp'
           onClick={handleCloseWindow}
         >
           창 닫기

@@ -79,7 +79,7 @@ const Eventlist = () => {
                 objectFit: 'cover',
               }}
             />
-            <p>{item.content}</p>
+            <p className='eventp'>{item.content}</p>
           </div>
         ))}
       </div>
