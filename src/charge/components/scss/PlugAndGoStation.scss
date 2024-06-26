@@ -22,6 +22,9 @@
     .name-detail {
       cursor: pointer;
     }
+    .name-detail:hover {
+      color: blue;
+    }
   }
 
   .Address {
