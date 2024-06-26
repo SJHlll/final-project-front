@@ -47,7 +47,7 @@ const PlugAndGoStation = ({
 
   // 위치 찾기 버튼 클릭 시 발동하는 함수
   const handleLocateClick = () => {
-    setSelectedStation({ lat, lng, StationId }); // 선택된 좌표 업데이트
+    setSelectedStation({ lat, lng, StationId }); // 선택된 좌표 업데이트, 충전기 아이디 전송
     setMapLevel(5); // 지도 레벨 설정
   };
 
