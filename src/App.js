@@ -15,11 +15,8 @@ import Testhome from './Car/components/Mainpage/Testhome';
 import { AuthContextProvider } from './util/AuthContext';
 import { ModalProvider } from '@lasbe/react-modal';
 import LoginSuccess from './components/user/LoginSuccess';
-import Chargeres from './Car/components/Mainpage/Chargeres';
-import Chargelist from './Car/components/Mainpage/Chargelist';
-import { Checkout } from './components/pay/Checkout';
-import { Success } from './components/pay/Success';
-import { Fail } from './components/pay/Fail';
+import ChargeStation from './charge/components/charge_station/ChargeStation';
+import ReservationCharge from './charge/components/reservation_charge/ReservationCharge';
 
 const App = () => {
   return (

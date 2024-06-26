@@ -1,18 +1,16 @@
 import React from 'react';
-
 import './Mypage.scss';
+import MyPageCharge from '../../../charge/components/mypage/MyPageCharge';
+
 const Mypage = () => {
   return (
-    <div className='maincontainer'>
-      <div
-        className='contentline'
-        style={{
-          fontSize: '100px',
-        }}
-      >
-        마이페이지
+    <>
+      <div className='maincontainer'>
+        <div className='contentline'>
+          <MyPageCharge />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
