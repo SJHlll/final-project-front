@@ -20,7 +20,7 @@ import ReservationCharge from './charge/components/reservation_charge/Reservatio
 import { Checkout } from './components/pay/Checkout';
 import { Success } from './components/pay/Success';
 import { Fail } from './components/pay/Fail';
-import Carres from './Car/components/CarHeader/Carres';
+import Carres from './Car/components/car/Carres';
 
 const App = () => {
   return (
