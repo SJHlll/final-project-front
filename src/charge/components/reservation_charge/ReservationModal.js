@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.module.css';
 import '../scss/ReservationModal.scss';
-import { Button } from 'reactstrap';
 
 import OpenTossPayments from '../../../components/pay/OpenTossPayments';
 import '../../../scss/Button.scss';
@@ -200,10 +199,16 @@ const ReservationModal = ({
             </div>
           </div>
           <div
-            style={{ width: '100%', textAlign: 'center' }}
+            style={{
+              width: '100%',
+              textAlign: 'center',
+              marginBottom: '10px',
+            }}
           >
             <button className='public-btn'>
-              <OpenTossPayments totalPrice={calculateTotalPrice()} />
+              <OpenTossPayments
+                totalPrice={calculateTotalPrice()}
+              />
             </button>
           </div>
         </form>

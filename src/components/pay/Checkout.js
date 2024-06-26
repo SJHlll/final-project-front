@@ -66,9 +66,9 @@ export function Checkout() {
       await paymentWidget?.requestPayment({
         orderId: nanoid(),
         orderName: 'Plug & Go', // 상품명
-        customerName: '김토스', // 손님 이름
-        customerEmail: 'customer123@gmail.com', // 손님 이메일
-        customerMobilePhone: '01012341234', // 손님 전화번호
+        customerName: '서준혁', // 손님 이름
+        customerEmail: 'white4x@naver.com', // 손님 이메일
+        customerMobilePhone: '01054983553', // 손님 전화번호
         successUrl: `${window.location.origin}/success`, // http://localhost:3000/success
         failUrl: `${window.location.origin}/fail`, // http://localhost:3000/fail
       });

@@ -1,12 +1,13 @@
 
 .header {
     float: right;
+    margin-top: 10px;
+    margin-right: 10px;
 
     .close-btn {
         cursor: pointer;
         font-weight: bold;
         font-size: 32px;
-        margin-right: 10px;
     }
 
 }
@@ -30,8 +31,15 @@
             margin: 0;
             padding: 5px;
             border-radius: 5px;
-            width: 45%;
             font-size: 1rem;
+        }
+
+        p:first-child {
+            width: 60%;
+        }
+
+        p:last-child {
+            width: 30%;
         }
 
         .station-management {
@@ -39,11 +47,11 @@
         }  
 
         .able { // 이용가능
-            border: 2px solid green;
+            border: 2px solid #5298F2;
         }
 
-        .disable { // 이용가능X
-            border: 2px solid red;
+        .disable { // 이용자제한
+            border: 2px solid #F18D8A;
         }
 
     }
@@ -74,16 +82,16 @@
         .station-id {
             width: 35%;
             border-right: 1px solid black;
-            }
+        }
     
         .station-speed {
             width: 15%;
             border-right: 1px solid black;
-            }
+        }
     
         .station-type {
             width: 50%;
-            }
+        }
 
     }
 }
