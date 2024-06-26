@@ -32,6 +32,7 @@ const HoverATag = styled.a`
 const PlugAndGoStation = ({
   lat,
   lng,
+  StationId,
   Name,
   Address,
   Speed,
@@ -46,9 +47,8 @@ const PlugAndGoStation = ({
 
   // 위치 찾기 버튼 클릭 시 발동하는 함수
   const handleLocateClick = () => {
-    setSelectedStation({ lat, lng }); // 선택된 좌표 업데이트
+    setSelectedStation({ lat, lng, StationId }); // 선택된 좌표 업데이트
     setMapLevel(5); // 지도 레벨 설정
-    console.log(Name, Address, Speed, Type, lat, lng);
   };
 
   // Modal Open 버튼 활성화

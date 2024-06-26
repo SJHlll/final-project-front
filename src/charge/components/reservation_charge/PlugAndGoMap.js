@@ -52,9 +52,11 @@ const PlugAndGoMap = ({ markers }) => {
   // 위치 보여주기
   useEffect(() => {
     if (selectedStation) {
-      setCenter(selectedStation);
+      setCenter(selectedStation); // 중심 이동
+      setIsOpen(selectedStation.StationId); // 인포윈도우 열기
     }
   }, [selectedStation]);
+
   return (
     <>
       <MapContainer
