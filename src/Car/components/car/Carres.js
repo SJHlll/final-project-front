@@ -8,11 +8,12 @@ import {
   ModalHeader,
 } from 'reactstrap';
 import { StationProvider } from '../../../charge/components/contexts/StationContext';
-import CarCalendar from '../car/CarCalendar';
+import CarCalendar from './CarCalendar';
 import CarResInfo from './CarResInfo';
 import { setHours, setMinutes } from 'date-fns';
-import CarInfo from '../car/CarInfo';
-import '../CarHeader/CarHeaders_css/Carres.scss';
+import CarInfo from './CarInfo';
+import './reservation_css/Carres.scss';
+
 const ModalBackground = styled.div`
   position: fixed;
   top: 0;
@@ -101,7 +102,7 @@ const Carres = () => {
   };
 
   const button = (
-    <div className='resBtn .public-btn'>
+    <div className='resBtn'>
       <Button
         variant='outline'
         color='success'

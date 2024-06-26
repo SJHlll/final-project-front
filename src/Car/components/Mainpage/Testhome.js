@@ -1,6 +1,6 @@
 import React from 'react';
 import './Testhome.scss';
-import mainback from '../../assets/mainback.mp4';
+// import mainback from '../../assets/mainback';
 
 const Testhome = () => {
   return (

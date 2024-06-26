@@ -78,14 +78,14 @@ const PlugAndGoStation = ({
 
   return (
     <div className='OurStation'>
-      <div className='content'>
+      <div className='station-content'>
         <div className='Name'>
           <span>
             ({Speed}) {Name}
           </span>
         </div>
       </div>
-      <div className='content'>
+      <div className='station-content'>
         <div className='Address'>
           <HoverATag
             href={`https://map.kakao.com/link/to/${Address},${lat},${lng}`}
@@ -96,7 +96,7 @@ const PlugAndGoStation = ({
           </HoverATag>
         </div>
       </div>
-      <div className='foot content'>
+      <div className='foot station-content'>
         <div className='ChargerType'>{Type}</div>
         <div className='Price'>{price}원</div>
         {button()}
