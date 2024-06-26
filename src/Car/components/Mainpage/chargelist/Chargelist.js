@@ -1,17 +1,16 @@
 import React from 'react';
-import './Event.scss';
-import Eventlist from './Eventlist';
+import ChargeStation from '../../../../charge/components/charge_station/ChargeStation';
 
-const Event = () => {
+const Chargelist = () => {
   return (
     <div className='maincontainer'>
       <div className='contentline'>
         <div className='eventbody'>
-          <Eventlist />
+          <ChargeStation />
         </div>
       </div>
     </div>
   );
 };
 
-export default Event;
+export default Chargelist;

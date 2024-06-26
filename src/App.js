@@ -45,14 +45,15 @@ const App = () => {
               element={<ChargeMain />}
             />
             <Route path='/charge/test' element={<Test />} />
-            {/* 충전소 페이지 */}
+            {/* 충전소 조회 페이지 */}
             <Route
               path='charge/list'
-              element={<ChargeStation />}
+              element={<Chargelist />}
             />
+            {/* 충전소 예약 페이지 */}
             <Route
               path='charge/reservation'
-              element={<ReservationCharge />}
+              element={<Chargereservation />}
             />
 
             {/* 마이페이지 */}

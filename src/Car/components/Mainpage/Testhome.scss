@@ -22,6 +22,8 @@
     border: 1px solid #555555;
     border-radius: 15px;
     box-shadow: 18px 18px 1px -8px #555555;
+    overflow: hidden;
+ 
 }
 .coverheader{
     width: 100px;
@@ -63,3 +65,12 @@ font-weight: bold;
             transform: translatey(0)
         }
 }}
+
+
+.iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
