@@ -1,0 +1,28 @@
+.contentline {
+    overflow: auto;
+
+}
+
+.contentline::-webkit-scrollbar {
+    width: 0px; //스크롤 막대 가로 두께
+}
+
+.contentline::-webkit-scrollbar-track {
+    background-color: #fff;
+}
+
+.contentline::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 167, 8, 0.555);
+    border-radius: 10px;
+}
+
+.contentline::-webkit-scrollbar-button {
+    display: none;
+}
+
+/* hover 효과 */
+.contentline::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(14, 194, 53);
+    transition: all 0.2s;
+    /* 작동 안 됨 */
+}
