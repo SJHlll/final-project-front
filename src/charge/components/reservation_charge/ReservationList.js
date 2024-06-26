@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { StationContext } from '../contexts/StationContext';
 import PlugAndGoStation from './PlugAndGoStation';
+import PlugAndGoMap from './PlugAndGoMap';
 
 const ReservationList = () => {
   const { stations, setStations } =
@@ -27,6 +28,7 @@ const ReservationList = () => {
 
   return (
     <>
+      <PlugAndGoMap markers={stations} />
       {/* 우리 충전소 목록(카드) 정리 */}
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {stations.map((station) => (

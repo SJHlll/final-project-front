@@ -1,3 +1,4 @@
+// checkout.js
 #payment-button {
     float: right;
     margin-right: 20px;
@@ -15,17 +16,41 @@
     background-color: #0056b3;
 }
 
-
-
-// 결제버튼
+// OpenTossPayments.js
 .pay-button {
     cursor: pointer;
     font-weight: bold;
     font-size: 18px;
 }
 
-// 실패 페이지
-.go-back {
+// Success.js, Fail.js
+.result-wrapper {
+    background-color: #fff;
+    border: 1px solid #007bff;
+    border-radius: 8px;
+    margin: 100px auto 0;
+    padding: 20px;
+    padding-bottom: 5px;
+    max-width: 400px;
+    width: 100%;
+}
+.box_section {
+  text-align: center;
+}
+h2 {
+  color: #007bff;
+  margin-bottom: 20px;
+}
+p {
+  color: #333;
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+p:last-child {
     cursor: pointer;
-    color: blue;
+    text-align: center;
+    width: 60px;
+    padding: 5px;
+    margin-left: auto;
 }
