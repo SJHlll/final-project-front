@@ -17,6 +17,24 @@ const SearchList = ({ visible }) => {
     setIsVisible(!isVisible);
   };
 
+  // // ESC 닫기 (작동됨, 주석처리)
+  // useEffect(() => {
+  //   const handleKeyDown = (e) => {
+  //     if (e.key === 'Escape') {
+  //       setIsVisible(false);
+  //     }
+  //   };
+
+  //   document.addEventListener('keydown', handleKeyDown);
+
+  //   return () => {
+  //     document.removeEventListener(
+  //       'keydown',
+  //       handleKeyDown,
+  //     );
+  //   };
+  // }, []);
+
   return (
     <>
       <div

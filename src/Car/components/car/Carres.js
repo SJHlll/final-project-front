@@ -7,7 +7,7 @@ import {
   ModalFooter,
   ModalHeader,
 } from 'reactstrap';
-import { StationProvider } from '../../../charge/components/contexts/StationContext';
+import { StationProvider } from '../../../contexts/StationContext';
 import CarCalendar from './CarCalendar';
 import CarResInfo from './CarResInfo';
 import { setHours, setMinutes } from 'date-fns';
