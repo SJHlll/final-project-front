@@ -24,7 +24,9 @@ import ReservationCharge from './charge/components/reservation_charge/Reservatio
 import { Checkout } from './components/pay/Checkout';
 import { Success } from './components/pay/Success';
 import { Fail } from './components/pay/Fail';
+import RegisterPage from './components/user/RegisterPage';
 import Carres from './Car/components/car/Carres';
+
 
 const App = () => {
   const location = useLocation();
@@ -87,6 +89,12 @@ const App = () => {
             />
 
             {/* 구글 로그인페이지 */}
+
+            {/* 회원가입 */}
+            <Route
+              path='/register'
+              element={<RegisterPage />}
+            />
 
             {/* 토스페이먼츠 */}
             <Route path='/pay' element={<Checkout />} />
