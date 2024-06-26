@@ -5,7 +5,7 @@ import PlugAndGoMap from './PlugAndGoMap';
 import styled from 'styled-components';
 
 const PlugAndGoStationContainer = styled.div`
-  width: 860px;
+  width: 850px;
   display: flex;
   flex-wrap: wrap;
   max-height: 676px;
@@ -13,7 +13,7 @@ const PlugAndGoStationContainer = styled.div`
 
   // 스크롤바 몸통
   &::-webkit-scrollbar {
-    width: 5px;
+    width: 8px;
   }
 
   // 스크롤바 배경
@@ -24,6 +24,11 @@ const PlugAndGoStationContainer = styled.div`
   // 스크롤바 위치
   &::-webkit-scrollbar-thumb {
     background: #2c7fdf;
+  }
+
+  // 스크롤바 호버
+  &::-webkit-scrollbar-thumb:hover {
+    background: #0056b3;
   }
 `;
 

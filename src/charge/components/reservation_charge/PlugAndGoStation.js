@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import '../scss/PlugAndGoStation.scss';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import styled from 'styled-components';
 import ReservationModal from './ReservationModal';
 import '../../../scss/Button.scss';
+import { SecondMapContext } from '../contexts/SecondMapContext';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -39,6 +40,16 @@ const PlugAndGoStation = ({
 }) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
+  const { setSelectedStation, setMapLevel } = useContext(
+    SecondMapContext,
+  );
+
+  // 위치 찾기 버튼 클릭 시 발동하는 함수
+  const handleLocateClick = () => {
+    setSelectedStation({ lat, lng }); // 선택된 좌표 업데이트
+    setMapLevel(5); // 지도 레벨 설정
+    console.log(Name, Address, Speed, Type, lat, lng);
+  };
 
   // Modal Open 버튼 활성화
   const button = () => (
@@ -80,20 +91,25 @@ const PlugAndGoStation = ({
     <div className='OurStation'>
       <div className='station-content'>
         <div className='Name'>
-          <span>
+          <span
+            className='name-detail'
+            onClick={handleLocateClick}
+          >
             ({Speed}) {Name}
           </span>
         </div>
       </div>
       <div className='station-content'>
         <div className='Address'>
-          <HoverATag
-            href={`https://map.kakao.com/link/to/${Address},${lat},${lng}`}
-            target='_blank'
-            rel='noreferrer'
-          >
-            {Address}
-          </HoverATag>
+          <span className='address-detail'>
+            <HoverATag
+              href={`https://map.kakao.com/link/to/${Address},${lat},${lng}`}
+              target='_blank'
+              rel='noreferrer'
+            >
+              {Address}
+            </HoverATag>
+          </span>
         </div>
       </div>
       <div className='foot station-content'>
