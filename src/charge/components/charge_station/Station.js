@@ -22,16 +22,6 @@ const Station = ({
   const handleLocateClick = () => {
     setSelectedStation({ lat, lng }); // 선택된 좌표 업데이트
     setMapLevel(2); // 지도 레벨 설정
-    console.log(
-      StationId,
-      Name,
-      Address,
-      Speed,
-      Type,
-      Available,
-      lat,
-      lng,
-    );
   };
 
   return (
