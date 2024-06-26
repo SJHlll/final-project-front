@@ -2,6 +2,17 @@ import React, { useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import PlugAndGoMarker from '../../assets/img/marker-plug-and-go.png';
 import MapInfo from './MapInfo';
+import styled from 'styled-components';
+
+const MapContainer = styled(Map)`
+  width: 450px;
+  height: 726px;
+  border: 2px solid black;
+  border-radius: 15px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+`;
 
 const PlugAndGoMap = ({ markers }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,16 +31,12 @@ const PlugAndGoMap = ({ markers }) => {
 
   return (
     <>
-      <Map
+      <MapContainer
         id='map'
         center={{
           // 지도의 중심좌표
           lat: 36.34,
           lng: 127.77,
-        }}
-        style={{
-          width: '700px',
-          height: '700px',
         }}
         level={13}
         onClick={handleBackgroundClick}
@@ -59,10 +66,12 @@ const PlugAndGoMap = ({ markers }) => {
               handleMarkerClick(marker.stationId)
             }
           >
-            {isOpen === marker.stationId && <MapInfo />}
+            {isOpen === marker.stationId && (
+              <MapInfo m={marker} />
+            )}
           </MapMarker>
         ))}
-      </Map>
+      </MapContainer>
     </>
   );
 };

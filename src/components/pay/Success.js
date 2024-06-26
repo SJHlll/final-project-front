@@ -50,14 +50,14 @@ export function Success() {
   return (
     <div className='result-wrapper'>
       <div className='box_section'>
-        <h2>결제 성공</h2>
-        <p>{`주문번호: ${searchParams.get('orderId')}`}</p>
-        <p>{`결제 금액: ${Number(
+        <h2 className='pay-head'>결제 성공</h2>
+        <p className='pay-body'>{`주문번호: ${searchParams.get('orderId')}`}</p>
+        <p className='pay-body'>{`결제 금액: ${Number(
           searchParams.get('amount'),
         ).toLocaleString()}원`}</p>
-        <p>{`paymentKey: ${searchParams.get('paymentKey')}`}</p>
+        <p className='pay-body'>{`paymentKey: ${searchParams.get('paymentKey')}`}</p>
         <p
-          className='public-btn'
+          className='public-btn pay-button'
           onClick={handleCloseWindow}
         >
           창 닫기

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../CarHeader/CarHeaders_css/CarResInfo.scss';
+import './reservation_css/CarResInfo.scss';
 
 const CarResInfo = ({
   startDate,
