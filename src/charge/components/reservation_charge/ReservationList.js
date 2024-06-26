@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { StationContext } from '../contexts/StationContext';
+import { StationContext } from '../../../contexts/StationContext';
 import PlugAndGoStation from './PlugAndGoStation';
 import PlugAndGoMap from './PlugAndGoMap';
 import styled from 'styled-components';

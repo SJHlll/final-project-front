@@ -5,7 +5,7 @@ import {
   MarkerClusterer,
 } from 'react-kakao-maps-sdk';
 import styled from 'styled-components';
-import { MapContext } from '../contexts/MapContext';
+import { MapContext } from '../../../contexts/MapContext';
 import { removeDuplicates } from '../utils/utils';
 import KakaoMapModal from './KakaoMapModal';
 import QuickMarker from '../../assets/img/marker-quick.png';

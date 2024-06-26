@@ -1,8 +1,8 @@
 import React from 'react';
 import '../scss/ReservationCharge.scss';
 import ReservationList from './ReservationList';
-import { StationProvider } from '../contexts/StationContext';
-import { SecondMapProvider } from '../contexts/SecondMapContext';
+import { StationProvider } from '../../../contexts/StationContext';
+import { SecondMapProvider } from '../../../contexts/SecondMapContext';
 import styled from 'styled-components';
 
 const ReservationCharge = () => {

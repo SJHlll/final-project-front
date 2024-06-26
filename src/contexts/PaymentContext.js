@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { createContext, useState } from 'react';
 
-const PaymentContext = () => {
-  return <div>PaymentContext</div>;
+export const PaymentContext = createContext();
+
+export const PaymentProvider = ({ children }) => {
+  const [paymentSuccess, setPaymentSuccess] =
+    useState(false);
+
+  return (
+    <PaymentContext.Provider
+      value={{ paymentSuccess, setPaymentSuccess }}
+    >
+      {children}
+    </PaymentContext.Provider>
+  );
 };
-
-export default PaymentContext;

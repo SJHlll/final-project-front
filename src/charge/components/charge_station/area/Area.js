@@ -4,7 +4,7 @@ import React, {
   useContext,
 } from 'react';
 import { areas } from './cities';
-import { SearchContext } from '../../contexts/SearchContext';
+import { SearchContext } from '../../../../contexts/SearchContext';
 import './Area.css';
 
 const Area = () => {

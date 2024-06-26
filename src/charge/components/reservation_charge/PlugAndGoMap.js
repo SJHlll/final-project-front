@@ -7,7 +7,7 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import PlugAndGoMarker from '../../assets/img/marker-plug-and-go.png';
 import MapInfo from './MapInfo';
 import styled from 'styled-components';
-import { SecondMapContext } from '../contexts/SecondMapContext';
+import { SecondMapContext } from '../../../contexts/SecondMapContext';
 
 const PlugAndGoMap = ({ markers }) => {
   const [isOpen, setIsOpen] = useState(false);

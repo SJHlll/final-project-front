@@ -1,12 +1,14 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import {
   useNavigate,
   useSearchParams,
 } from 'react-router-dom';
+import { PaymentContext } from '../../contexts/PaymentContext';
 
 export function Success() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const { setPaymentSuccess } = useContext(PaymentContext);
 
   const handleCloseWindow = () => {
     window.close();
@@ -23,7 +25,7 @@ export function Success() {
 
     async function confirm() {
       const response = await fetch(
-        'http://localhost:8181/api/tosspay/confirm',
+        'http://localhost:8181/confirm',
         {
           method: 'POST',
           headers: {
@@ -40,12 +42,14 @@ export function Success() {
         navigate(
           `/fail?message=${json.message}&code=${json.code}`,
         );
+      } else {
+        // 결제 성공 비즈니스 로직을 구현하세요.
+        setPaymentSuccess(true);
+        console.log('결제 성공 로직 들어감');
       }
-
-      // 결제 성공 비즈니스 로직을 구현하세요.
     }
     confirm();
-  }, []);
+  }, [searchParams, setPaymentSuccess, navigate]);
 
   return (
     <div className='result-wrapper'>
