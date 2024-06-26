@@ -30,6 +30,7 @@ const App = () => {
   const location = useLocation();
   // 헤더가 안보여도 되는 페이지 경로
   const hideHeaderPaths = ['/pay', '/success', '/fail'];
+
   return (
     <ModalProvider>
       <AuthContextProvider>
