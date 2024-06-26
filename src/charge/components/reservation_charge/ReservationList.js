@@ -2,6 +2,16 @@ import React, { useContext, useEffect } from 'react';
 import { StationContext } from '../contexts/StationContext';
 import PlugAndGoStation from './PlugAndGoStation';
 import PlugAndGoMap from './PlugAndGoMap';
+import styled from 'styled-components';
+
+const PlugAndGoStationContainer = styled.div`
+  width: 860px;
+  display: flex;
+  flex-wrap: wrap;
+  place-content: space-between;
+  max-height: 676px;
+  overflow-y: auto;
+`;
 
 const ReservationList = () => {
   const { stations, setStations } =
@@ -28,15 +38,8 @@ const ReservationList = () => {
 
   return (
     <>
-      <PlugAndGoMap markers={stations} />
       {/* 우리 충전소 목록(카드) 정리 */}
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          placeContent: 'space-between',
-        }}
-      >
+      <PlugAndGoStationContainer>
         {stations.map((station) => (
           <PlugAndGoStation
             // Id={station.id} // 데이터베이스 id
@@ -53,7 +56,8 @@ const ReservationList = () => {
             lng={station.longitude} // 경도
           />
         ))}
-      </div>
+      </PlugAndGoStationContainer>
+      <PlugAndGoMap markers={stations} />
     </>
   );
 };
