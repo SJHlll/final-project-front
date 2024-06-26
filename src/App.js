@@ -22,7 +22,6 @@ import { Success } from './components/pay/Success';
 import { Fail } from './components/pay/Fail';
 import Carres from './Car/components/CarHeader/Carres';
 
-
 const App = () => {
   return (
     <ModalProvider>
