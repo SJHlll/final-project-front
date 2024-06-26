@@ -1,14 +1,12 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import {
   useNavigate,
   useSearchParams,
 } from 'react-router-dom';
-import { PaymentContext } from '../../contexts/PaymentContext';
 
 export function Success() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { setPaymentSuccess } = useContext(PaymentContext);
 
   const handleCloseWindow = () => {
     window.close();
@@ -44,22 +42,30 @@ export function Success() {
         );
       } else {
         // 결제 성공 비즈니스 로직을 구현하세요.
-        setPaymentSuccess(true);
         console.log('결제 성공 로직 들어감');
+        console.log(
+          '주문번호 : ' + searchParams.get('orderId'),
+        );
+        console.log(
+          '주문내용 : ' + searchParams.get('paymentKey'),
+        );
+        console.log(
+          '결제금액 : ' + searchParams.get('amount') + '원',
+        );
       }
     }
     confirm();
-  }, [searchParams, setPaymentSuccess, navigate]);
+  }, [searchParams, navigate]);
 
   return (
     <div className='result-wrapper'>
       <div className='box_section'>
         <h2 className='pay-head'>결제 성공</h2>
         <p className='pay-body'>{`주문번호: ${searchParams.get('orderId')}`}</p>
-        <p className='pay-body'>{`결제 금액: ${Number(
+        <p className='pay-body'>{`paymentKey: ${searchParams.get('paymentKey')}`}</p>
+        <p className='pay-body pay-amount'>{`결제 금액: ${Number(
           searchParams.get('amount'),
         ).toLocaleString()}원`}</p>
-        <p className='pay-body'>{`paymentKey: ${searchParams.get('paymentKey')}`}</p>
         <p
           className='public-btn pay-button'
           onClick={handleCloseWindow}

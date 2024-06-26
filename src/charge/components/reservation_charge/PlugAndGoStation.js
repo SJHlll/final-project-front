@@ -1,15 +1,10 @@
-import React, {
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, { useContext, useState } from 'react';
 import '../scss/PlugAndGoStation.scss';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import styled from 'styled-components';
 import ReservationModal from './ReservationModal';
 import '../../../scss/Button.scss';
 import { SecondMapContext } from '../../../contexts/SecondMapContext';
-import { PaymentContext } from '../../../contexts/PaymentContext';
 
 const PlugAndGoStation = ({
   lat,
@@ -26,7 +21,6 @@ const PlugAndGoStation = ({
   const { setSelectedStation, setMapLevel } = useContext(
     SecondMapContext,
   );
-  const { paymentSuccess } = useContext(PaymentContext);
 
   // 위치 찾기 버튼 클릭 시 발동하는 함수
   const handleLocateClick = () => {
@@ -69,14 +63,6 @@ const PlugAndGoStation = ({
       </Modal>
     </ModalBackground>
   );
-
-  // 결제 성공 시 모달 닫기
-  useEffect(() => {
-    if (paymentSuccess) {
-      console.log('모달머시기뜸?');
-      setModal(false);
-    }
-  }, [paymentSuccess]);
 
   return (
     <div className='OurStation'>
