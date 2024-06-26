@@ -15,7 +15,7 @@ export function Fail() {
         <p className='pay-body'>{`에러 코드: ${searchParams.get('code')}`}</p>
         <p className='pay-body'>{`실패 사유: ${searchParams.get('message')}`}</p>
         <p
-          className='public-btn'
+          className='public-btn pay-button'
           onClick={handleCloseWindow}
         >
           창 닫기

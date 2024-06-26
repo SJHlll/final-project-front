@@ -10,6 +10,11 @@
     color: white;
     background-color: #007bff;
     border-radius: 5px;
+    // 드래그 못하게
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 }
 
 #payment-button:hover {
@@ -21,6 +26,11 @@
     cursor: pointer;
     font-weight: bold;
     font-size: 18px;
+    // 드래그 못하게
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 }
 
 // Success.js, Fail.js
@@ -33,6 +43,11 @@
     padding-bottom: 5px;
     max-width: 400px;
     width: 100%;
+    // 드래그 못하게
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 }
 
 .box_section {
@@ -48,6 +63,11 @@
   color: #333;
   font-size: 16px;
   margin: 10px 0;
+}
+
+.pay-amount {
+  margin-top: 20px;
+  font-size: 1.3rem;
 }
 
 .pay-button {
