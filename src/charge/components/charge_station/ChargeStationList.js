@@ -17,6 +17,7 @@ const ChargeStationList = () => {
     selectedArea,
     selectedSubArea,
     facilitySearch,
+    isAvailableOnly,
     isSearchClicked,
   } = searchConditions;
   const {
@@ -78,7 +79,15 @@ const ChargeStationList = () => {
     const isFacilityMatch = facilitySearch
       ? station.stationName.includes(facilitySearch)
       : true;
-    return isAreaMatch && isSubAreaMatch && isFacilityMatch;
+    const isAvailableMatch = isAvailableOnly
+      ? station.available === '이용가능'
+      : true;
+    return (
+      isAreaMatch &&
+      isSubAreaMatch &&
+      isFacilityMatch &&
+      isAvailableMatch
+    );
   });
 
   // 검색을 안한 초기 상태
