@@ -1,33 +1,44 @@
 .small-screen {
-    z-index: 1;
+    z-index: 10;
     position: absolute;
-    left: 10px;
+    right: 260px;
     bottom: 10px;
     background-color: white;
     border: 1px solid #aaa;
     width: 400px;
     height: 50px;
-    transition: left 0.5s ease;
     display: flex;
     justify-content: space-around;
     opacity: 0.95;
+    
+    // 드래그 못하게
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 
-    span {
+    .marker-list {
         line-height: 45px;
+        
+        &.active {
+            opacity: 1;
+        }
+      
+        &.inactive {
+            opacity: 0.5;
+        }
+
         img {
             width: 28px;
             height: 40px;
+            margin-right: 5px;
         }
 
-        span {
-            font-weight: bold;
-            font-size: 1rem;
+        .marker-checkbox {
+            margin-left: 5px;
         }
     }
 
     
     
-}
-.small-screen.visible {
-    left: 510px;
 }
