@@ -11,6 +11,7 @@ import KakaoMapModal from './KakaoMapModal';
 import QuickMarker from '../../assets/img/marker-quick.png';
 import SlowMarker from '../../assets/img/marker-slow.png';
 import DisableMarker from '../../assets/img/marker-disable.png';
+import SmallScreen from './SmallScreen';
 
 // 카카오 지도 스타일
 const MapContainer = styled(Map)`
@@ -30,6 +31,7 @@ const KakaoMap = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMarker, setSelectedMarker] =
     useState(null);
+  const [filter, setFilter] = useState('disable');
 
   // 지도 초기 위도, 경도
   const [center, setCenter] = useState({
@@ -53,7 +55,6 @@ const KakaoMap = () => {
         );
         setMarkers(
           uniqueStations.map((station) => ({
-            // Id: station.id,
             lat: station.latitude,
             lng: station.longitude,
             StationId: station.stationId,
@@ -80,7 +81,7 @@ const KakaoMap = () => {
       handleBoundsChanged(mapInstance);
       mapInstance.setMaxLevel(5); // 확대 축소 레벨 제한
     }
-  }, [mapInstance, markers]);
+  }, [mapInstance, markers, filter]);
 
   // 지도 경계 변경 시 필터링된 마커 업데이트
   const handleBoundsChanged = (map) => {
@@ -93,7 +94,9 @@ const KakaoMap = () => {
         marker.lat >= sw.getLat() &&
         marker.lat <= ne.getLat() &&
         marker.lng >= sw.getLng() &&
-        marker.lng <= ne.getLng(),
+        marker.lng <= ne.getLng() &&
+        (filter !== 'disable' ||
+          marker.Available !== '이용자제한'),
     );
     setFilteredMarkers(filtered);
   };
@@ -117,8 +120,19 @@ const KakaoMap = () => {
     setIsModalOpen(true);
   };
 
+  // SmallScreen 이용자제한 마커 표시 토글
+  const handleToggleFilter = (filterType) => {
+    setFilter((prevFilter) =>
+      prevFilter === filterType ? '' : filterType,
+    );
+  };
+
   return (
     <>
+      <SmallScreen
+        onToggle={handleToggleFilter}
+        filter={filter}
+      />
       <MapContainer
         id='map'
         center={center}
@@ -130,7 +144,7 @@ const KakaoMap = () => {
         <MarkerClusterer
           averageCenter={true}
           minLevel={4}
-          gridSize={120}
+          gridSize={80}
         >
           {filteredMarkers.map((marker) => (
             <MapMarker
