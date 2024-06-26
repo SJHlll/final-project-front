@@ -28,7 +28,13 @@ const ReservationList = () => {
   return (
     <>
       {/* 우리 충전소 목록(카드) 정리 */}
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          placeContent: 'space-between',
+        }}
+      >
         {stations.map((station) => (
           <PlugAndGoStation
             // Id={station.id} // 데이터베이스 id
