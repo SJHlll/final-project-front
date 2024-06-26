@@ -4,6 +4,7 @@ import '../scss/KakaoMapModal.scss';
 import { ModalBody, ModalFooter } from 'reactstrap';
 
 const KakaoMapModal = ({ isOpen, onClose, marker }) => {
+  // ESC 닫기
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
