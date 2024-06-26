@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReviewItem from './ReviewItem';
 import Modal from './Modal';
-import ReviewForm from './ReviewForm';
+import Modal2 from './Modal2'; // Modal2 가져오기
 import './ReviewPage.scss';
 
 const ReviewPage = () => {
@@ -16,7 +16,7 @@ const ReviewPage = () => {
     for (let i = 1; i <= count; i++) {
       reviews.push({
         id: i,
-        imageUrl: `${baseImageUrl}`,
+        imageUrl: baseImageUrl,
         name: `${type === 'rental' ? '렌트카' : '충전소'} ${i}`,
         rating: Math.floor(Math.random() * (5 - 1 + 1)) + 1, // 1부터 5까지의 랜덤 평점
         content: `후기 내용 ${type === 'rental' ? '렌트카' : '충전소'} ${i}`,
@@ -39,6 +39,7 @@ const ReviewPage = () => {
     charging: generateDummyReviews('charging', 50),
   }); // 리뷰 데이터
   const reviewsPerPage = 12; // 페이지당 리뷰 수
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
 
   // 리뷰 타입 변경 핸들러
   const handleTypeChange = (type) => {
@@ -54,6 +55,7 @@ const ReviewPage = () => {
   // 모달 닫기 핸들러
   const handleCloseModal = () => {
     setSelectedReview(null);
+    setIsModalOpen(false); // 모달 닫기
   };
 
   // 리뷰 저장 핸들러
@@ -80,9 +82,11 @@ const ReviewPage = () => {
       ...prevReviews,
       [selectedType]: [
         newReview,
-        ...prevReviews[selectedType], // 이전 후기들을 그 뒤에 추가
-      ],
+        ...prevReviews[selectedType],
+      ], // 이전 후기들을 그 뒤에 추가
     }));
+
+    setIsModalOpen(false); // 모달 닫기
   };
 
   // 현재 페이지에 표시할 리뷰를 계산
@@ -91,81 +95,76 @@ const ReviewPage = () => {
     currentPage * reviewsPerPage,
   );
 
-  // 총 페이지 수 계산
-  const totalPages = Math.ceil(
-    reviews[selectedType].length / reviewsPerPage,
-  );
-
-  // 페이지 변경 핸들러
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
   return (
-    <>
-      <div className='review-page'>
-        <div className='type-selection'>
-          {/* 렌트카 버튼 */}
-          <button
-            className={
-              selectedType === 'rental' ? 'selected' : ''
-            }
-            onClick={() => handleTypeChange('rental')}
-          >
-            렌트카
-          </button>
-          {/* 충전소 버튼 */}
-          <button
-            className={
-              selectedType === 'charging' ? 'selected' : ''
-            }
-            onClick={() => handleTypeChange('charging')}
-          >
-            충전소
-          </button>
-        </div>
-
-        {/* 리뷰 폼 */}
-        <ReviewForm
-          onSave={handleSaveReview}
-          selectedType={selectedType}
-        />
-
-        {/* 리뷰 목록 */}
-        <div className='reviews-container'>
-          {currentReviews.map((review) => (
-            <ReviewItem
-              key={review.id}
-              review={review}
-              onMoreClick={handleMoreClick}
-            />
-          ))}
-        </div>
-
-        {/* 페이지 네비게이션 */}
-        <div className='pagination'>
-          {[...Array(totalPages)].map((_, index) => (
+    <div className='review-page'>
+      <div className='type-switch'>
+        <button
+          onClick={() => handleTypeChange('rental')}
+          className={
+            selectedType === 'rental' ? 'active' : ''
+          }
+        >
+          렌트카 리뷰
+        </button>
+        <button
+          onClick={() => handleTypeChange('charging')}
+          className={
+            selectedType === 'charging' ? 'active' : ''
+          }
+        >
+          충전소 리뷰
+        </button>
+      </div>
+      <button
+        onClick={() => setIsModalOpen(true)}
+        className='write-review-button'
+      >
+        후기 작성
+      </button>{' '}
+      {/* 후기 작성 버튼 */}
+      <div className='review-list'>
+        {currentReviews.map((review) => (
+          <ReviewItem
+            key={review.id}
+            review={review}
+            onMoreClick={handleMoreClick}
+          />
+        ))}
+      </div>
+      <div className='pagination'>
+        {Array.from(
+          {
+            length: Math.ceil(
+              reviews[selectedType].length / reviewsPerPage,
+            ),
+          },
+          (_, index) => (
             <button
-              key={index + 1}
+              key={index}
+              onClick={() => setCurrentPage(index + 1)}
               className={
                 currentPage === index + 1 ? 'active' : ''
               }
-              onClick={() => handlePageChange(index + 1)}
             >
               {index + 1}
             </button>
-          ))}
-        </div>
-
-        {/* 리뷰 상세 모달 */}
-        {selectedReview && (
-          <Modal
-            review={selectedReview}
-            onClose={handleCloseModal}
-          />
+          ),
         )}
       </div>
-    </>
+      {selectedReview && (
+        <Modal
+          review={selectedReview}
+          onClose={handleCloseModal}
+        />
+      )}
+      {isModalOpen && (
+        <Modal2
+          onClose={handleCloseModal}
+          onSave={handleSaveReview}
+          selectedType={selectedType} // 현재 선택된 타입을 전달
+        />
+      )}
+    </div>
   );
 };
 

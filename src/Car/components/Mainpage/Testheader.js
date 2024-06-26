@@ -8,6 +8,7 @@ import {
   API_BASE_URL,
   USER,
 } from '../../../config/host-config';
+import ChargeFooter from '../car/logoBtn/ChargeFooter';
 
 const Testheader = () => {
   const navigate = useNavigate();
@@ -127,6 +128,7 @@ const Testheader = () => {
           />
         </div> */}
       </div>
+      <ChargeFooter />
     </div>
   );
 };
