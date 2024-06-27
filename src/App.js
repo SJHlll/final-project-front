@@ -21,6 +21,7 @@ import { Checkout } from './components/pay/Checkout';
 import { Success } from './components/pay/Success';
 import { Fail } from './components/pay/Fail';
 import Carres from './Car/components/car/Carres';
+import UserInfoSave from './charge/components/mypage/UserInfoSave';
 
 const App = () => {
   return (
@@ -85,6 +86,11 @@ const App = () => {
 
             {/* 에러페이지 */}
             <Route path='/*' element={<Error />} />
+
+            <Route
+              path='/info'
+              element={<UserInfoSave />}
+            />
           </Routes>
         </div>
       </AuthContextProvider>

@@ -11,10 +11,12 @@ const ReservationCharge = () => {
           <div className='contentline'>
             <div
               style={{
-                padding: '20px',
+                width: '840px',
+                padding: '20px 15px 0px 15px',
+                textAlign: 'right',
               }}
             >
-              가격단위 : 1kWh
+              가격 단위 : 1kWh
             </div>
             <ReservationList />
           </div>
