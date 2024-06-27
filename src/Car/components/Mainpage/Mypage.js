@@ -1,7 +1,8 @@
 import React from 'react';
 import './Mypage.scss';
-import MyPageCharge from '../../../charge/components/mypage/MyPageCharge';
+
 import Frame from './Frame';
+import MyPageCharge from '../charge/mypage/MyPageCharge';
 
 const Mypage = () => {
   return (

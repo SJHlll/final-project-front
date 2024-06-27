@@ -1,7 +1,11 @@
 import React from 'react';
 import './Eventlist.scss';
+import { useNavigate } from 'react-router-dom';
 
 const Eventlist = () => {
+
+  const navigate = useNavigate();
+
   const eventlistdummy = [
     {
       id: 1,
@@ -35,8 +39,11 @@ const Eventlist = () => {
     },
   ];
 
-  const onClick = () => {
-    console.log('Button clicked');
+  // 상세보기 들어감
+  const handleClick = (item) => {
+    navigate(`/event/${item.id}`, {
+      state: { img: item.img, content: item.content },
+    });
   };
 
   return (
@@ -68,7 +75,7 @@ const Eventlist = () => {
           <div
             className='eventlist'
             style={styles}
-            onClick={onClick}
+            onClick={() => handleClick(item)}
             key={item.id}
           >
             <img
@@ -95,4 +102,5 @@ const styles = {
   height: '300px',
   textAlign: 'center',
   marginTop: '1%',
+  cursor: 'pointer',
 };

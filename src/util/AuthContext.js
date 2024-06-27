@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 const AuthContext = React.createContext({
   isLoggedIn: false, // 로그인 했는지의 여부
   userName: '',
+  email: '',
+  phoneNumber: '',
   onLogout: () => {},
   onLogin: () => {},
 });
@@ -13,9 +15,17 @@ const AuthContext = React.createContext({
 export const AuthContextProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   // 로그인 핸들러
-  const loginHandler = (token, userName, role) => {
+  const loginHandler = (
+    token,
+    userName,
+    email,
+    phoneNumber,
+    role,
+  ) => {
     // json에 담긴 인증 정보를 클라이언트에 보관
     // 1. 로컬 스토리지 - 브라우저가 종료 되어도 유지됨.
     // 2. 세션 스토리지 - 브라우저가 종료 되면 사라짐.
@@ -28,9 +38,13 @@ export const AuthContextProvider = (props) => {
       token.refresh_token,
     );
     localStorage.setItem('LOGIN_USERNAME', userName);
+    localStorage.setItem('USER_EMAIL', email);
+    localStorage.setItem('USER_PHONENUMBER', phoneNumber);
     localStorage.setItem('USER_ROLE', role);
     setIsLoggedIn(true);
     setUserName(userName);
+    setEmail(email);
+    setPhoneNumber(phoneNumber);
   };
 
   // 로그아웃 핸들러
@@ -38,12 +52,18 @@ export const AuthContextProvider = (props) => {
     localStorage.clear(); // 로컬스토리지 내용 전체 삭제(하나만 지우고 싶으면 -> remove)
     setIsLoggedIn(false);
     setUserName('');
+    setEmail('');
+    setPhoneNumber('');
   };
 
   useEffect(() => {
     if (localStorage.getItem('ACCESS_TOKEN')) {
       setIsLoggedIn(true);
       setUserName(localStorage.getItem('LOGIN_USERNAME'));
+      setEmail(localStorage.getItem('USER_EMAIL'));
+      setPhoneNumber(
+        localStorage.getItem('USER_PHONENUMBER'),
+      );
     }
   }, []);
 
@@ -52,6 +72,8 @@ export const AuthContextProvider = (props) => {
       value={{
         isLoggedIn,
         userName,
+        email,
+        phoneNumber,
         onLogout: logoutHandler,
         onLogin: loginHandler,
       }}
