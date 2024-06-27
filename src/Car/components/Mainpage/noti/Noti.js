@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import './Noti.scss';
 import Notilist from './Notilist';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
 import Frame from '../Frame';
 
 const Noti = () => {
