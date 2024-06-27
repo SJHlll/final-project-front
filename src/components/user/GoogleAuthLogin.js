@@ -1,6 +1,4 @@
 import { GoogleOAuthProvider } from '@react-oauth/google';
-
-import GoogleHandler from './GoogleHandler';
 import GoogleLoginHandler from './GoogleLoginHandler';
 
 const GoogleAuthLogin = () => {

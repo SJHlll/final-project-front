@@ -19,16 +19,23 @@ import Testhome from './Car/components/Mainpage/Testhome';
 import { AuthContextProvider } from './util/AuthContext';
 import { ModalProvider } from '@lasbe/react-modal';
 import LoginSuccess from './components/user/LoginSuccess';
+import ChargeStation from './charge/components/charge_station/ChargeStation';
+import ReservationCharge from './charge/components/reservation_charge/ReservationCharge';
 import { Checkout } from './components/pay/Checkout';
 import { Success } from './components/pay/Success';
 import { Fail } from './components/pay/Fail';
+import RegisterPage from './components/user/RegisterPage';
+import Carres from './Car/components/car/Carres';
 import Chargelist from './Car/components/Mainpage/Chargelist';
 import Carreservation from './Car/components/Mainpage/carreservation/Carreservation';
 import ReservationCharge from './charge/components/reservation_charge/ReservationCharge';
 
+
 const App = () => {
   const location = useLocation();
-  const hideHeaderRoutes = ['/pay', '/success', 'fail'];
+  // 헤더가 안보여도 되는 페이지 경로
+  const hideHeaderPaths = ['/pay', '/success', '/fail'];
+
   return (
     <ModalProvider>
       <AuthContextProvider>
@@ -36,9 +43,10 @@ const App = () => {
           className='App'
           style={{ fontFamily: 'font2' }}
         >
-          {!hideHeaderRoutes.includes(
+          {!hideHeaderPaths.includes(
             location.pathname,
           ) && <Testheader />}
+
           <Routes>
             {/* 메인 홈페이지 */}
             <Route exact path='/' element={<Testhome />} />
@@ -69,6 +77,18 @@ const App = () => {
               element={<ChargeMain />}
             />
             <Route path='/charge/test' element={<Test />} />
+            {/* 충전소 페이지 */}
+            <Route
+              path='charge/list'
+              element={<ChargeStation />}
+            />
+            <Route
+              path='charge/reservation'
+              element={<ReservationCharge />}
+            />
+
+            {/* 전기차 예약하기 */}
+            <Route path='/car/res' element={<Carres />} />
 
             {/* 마이페이지 */}
             <Route path='/mypage' element={<Mypage />} />
@@ -88,6 +108,12 @@ const App = () => {
             />
 
             {/* 구글 로그인페이지 */}
+
+            {/* 회원가입 */}
+            <Route
+              path='/register'
+              element={<RegisterPage />}
+            />
 
             {/* 토스페이먼츠 */}
             <Route path='/pay' element={<Checkout />} />

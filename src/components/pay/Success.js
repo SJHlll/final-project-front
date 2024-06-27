@@ -23,7 +23,7 @@ export function Success() {
 
     async function confirm() {
       const response = await fetch(
-        'http://localhost:8181/api/tosspay/confirm',
+        'http://localhost:8181/confirm',
         {
           method: 'POST',
           headers: {
@@ -40,22 +40,32 @@ export function Success() {
         navigate(
           `/fail?message=${json.message}&code=${json.code}`,
         );
+      } else {
+        // 결제 성공 비즈니스 로직을 구현하세요.
+        console.log('결제 성공 로직 들어감');
+        console.log(
+          '주문번호 : ' + searchParams.get('orderId'),
+        );
+        console.log(
+          '주문내용 : ' + searchParams.get('paymentKey'),
+        );
+        console.log(
+          '결제금액 : ' + searchParams.get('amount') + '원',
+        );
       }
-
-      // 결제 성공 비즈니스 로직을 구현하세요.
     }
     confirm();
-  }, []);
+  }, [searchParams, navigate]);
 
   return (
     <div className='result-wrapper'>
       <div className='box_section'>
         <h2 className='pay-head'>결제 성공</h2>
         <p className='pay-body'>{`주문번호: ${searchParams.get('orderId')}`}</p>
-        <p className='pay-body'>{`결제 금액: ${Number(
+        <p className='pay-body'>{`paymentKey: ${searchParams.get('paymentKey')}`}</p>
+        <p className='pay-body pay-amount'>{`결제 금액: ${Number(
           searchParams.get('amount'),
         ).toLocaleString()}원`}</p>
-        <p className='pay-body'>{`paymentKey: ${searchParams.get('paymentKey')}`}</p>
         <p
           className='public-btn pay-button'
           onClick={handleCloseWindow}

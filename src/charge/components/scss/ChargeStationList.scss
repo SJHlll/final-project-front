@@ -4,6 +4,26 @@
   // background-color: rgb(143, 178, 255);
   overflow-y: auto;
 
+  // 스크롤바 몸통
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  // 스크롤바 배경
+  &::-webkit-scrollbar-track {
+    background: #c2e1ff;
+  }
+
+  // 스크롤바 위치
+  &::-webkit-scrollbar-thumb {
+    background: #2c7fdf;
+  }
+
+  // 스크롤바 호버
+  &::-webkit-scrollbar-thumb:hover {
+    background: #0056b3;
+  }
+
   .Station {
     display: flex;
     justify-content: space-between;

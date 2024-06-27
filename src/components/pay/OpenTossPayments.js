@@ -5,7 +5,7 @@ import './Pay.scss';
 const OpenTossPayments = ({ totalPrice }) => {
   const handleNavigation = () => {
     const width = 700;
-    const height = 900;
+    const height = 800;
     const left = window.screen.width / 2 - width / 2;
     const top = window.screen.height / 2 - height / 2;
     window.open(

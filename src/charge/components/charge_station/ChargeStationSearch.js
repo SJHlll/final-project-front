@@ -5,7 +5,9 @@ import '../scss/ChargeStationSearch.scss';
 const ChargeStationSearch = () => {
   return (
     <div className='SearchContainer'>
-      <div className='One'>충전소 위치 찾기</div>
+      <div className='One'>
+        <span>충전소 위치 찾기</span>
+      </div>
       <Area />
     </div>
   );
