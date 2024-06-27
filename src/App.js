@@ -53,12 +53,6 @@ const App = () => {
             />
             {/* 이용후기 페이지 */}
             <Route path='/review' element={<Review />} />
-            {/* 충전소 메인 페이지 */}
-            <Route
-              path='/charge/home'
-              element={<ChargeMain />}
-            />
-            <Route path='/charge/test' element={<Test />} />
             {/* 충전소 페이지 */}
             <Route
               path='charge/list'
@@ -90,12 +84,6 @@ const App = () => {
             />
 
             {/* 구글 로그인페이지 */}
-
-            {/* 회원가입 */}
-            <Route
-              path='/register'
-              element={<RegisterPage />}
-            />
 
             {/* 토스페이먼츠 */}
             <Route path='/pay' element={<Checkout />} />

@@ -15,12 +15,11 @@ import {
   GoogleOAuthProvider,
 } from '@react-oauth/google';
 import GoogleAuthLogin from './GoogleAuthLogin';
-import LoginText from './LoginText';
 import {
   API_BASE_URL as BASE,
   USER,
-} from '../../config/host-config';
-import AuthContext from '../../util/AuthContext';
+} from '../../../config/host-config';
+import AuthContext from '../../../util/AuthContext';
 import axios from 'axios';
 
 const Login = () => {
