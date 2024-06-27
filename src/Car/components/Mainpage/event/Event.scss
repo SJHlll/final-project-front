@@ -2,3 +2,21 @@
 .eventbody{
     padding: 1%;
 }
+
+
+
+
+// 이벤트 디테일
+.event-detail-header {
+    border: 5px solid red;
+}
+
+.event-detail-body {
+    border: 5px solid green;
+
+    .event-detail-img {
+        max-width: 80%;
+        margin: 0 auto;
+        display: block;
+    }
+}

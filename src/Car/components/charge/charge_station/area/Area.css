@@ -1,0 +1,74 @@
+/* AreaSelector.css */
+
+.area-selector {
+    width: 500px;
+    align-items: center;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.search-box {
+    width: 450px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.select-box {
+    width: 35%;
+    padding: 5px;
+    margin: 7.5px;
+    margin-top: 5px;
+}
+
+.search-input {
+    width: 55%;
+    padding: 5px;
+    margin: 5px;
+}
+
+.search-btn {
+    padding: 8px 16px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+.search-btn:hover {
+    background-color: #0056b3;
+}
+
+.reset-btn {
+    padding: 8px 16px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: #ebf5ff;
+    color: #2c7fdf;
+    border: 1px solid #2c7fdf;
+    border-radius: 5px;
+}
+
+.reset-btn:hover {
+    background-color: #c2e1ff;
+}
+
+.checkbox-box {
+    margin-top: 10px;
+    display: flex;
+}
+
+.able-checkbox {
+    width: 30px;
+    height: 20px;
+    margin-right: 2px;
+    
+}
+
+.checkbox-content {
+    font-size: 0.75rem;
+    color: #666;
+    line-height: 20px;
+}

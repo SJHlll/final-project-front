@@ -5,9 +5,14 @@ import './Error.scss';
 const Error = () => {
   const navigate = useNavigate();
 
-  const click = () => {
+  const mainUrl = () => {
     navigate('/');
   };
+
+  const returnUrl = () => {
+    navigate(-1);
+  };
+
   return (
     <>
       <div
@@ -24,9 +29,18 @@ const Error = () => {
             width: 300,
             height: 300,
           }}
-          onClick={click}
+          onClick={mainUrl}
         >
-          돌아가기
+          메인 페이지로
+        </button>
+        <button
+          style={{
+            width: 300,
+            height: 300,
+          }}
+          onClick={returnUrl}
+        >
+          이전 페이지로
         </button>
       </div>
       ;

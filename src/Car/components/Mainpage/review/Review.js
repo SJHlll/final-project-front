@@ -1,5 +1,6 @@
 import React from 'react';
 import './Review.scss';
+import ReviewPage from './ReviewPage';
 const Review = () => {
   return (
     <div className='maincontainer'>
@@ -9,7 +10,7 @@ const Review = () => {
           fontSize: '100px',
         }}
       >
-        이용후기
+        <ReviewPage />
       </div>
     </div>
   );

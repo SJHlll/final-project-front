@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Testheader.scss';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import AuthContext from '../../../util/AuthContext';
+import {
+  API_BASE_URL,
+  USER,
+} from '../../../config/host-config';
+import ChargeFooter from '../car/logoBtn/ChargeFooter';
 
 const Testheader = () => {
   const navigate = useNavigate();
@@ -18,6 +24,28 @@ const Testheader = () => {
   const click = () => {
     navigate('/Login');
   };
+
+  const { isLoggedIn, userName, onLogout } =
+    useContext(AuthContext);
+
+  // 로그아웃 핸들러
+  const logoutHandler = async () => {
+    const res = await fetch(
+      `${API_BASE_URL}${USER}/logout`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization:
+            'Bearer ' +
+            localStorage.getItem('ACCESS_TOKEN'),
+        },
+      },
+    );
+
+    // AuthContext의 onLogout 함수를 호출하여 로그인 상태를 업데이트 합니다.
+    onLogout();
+  };
+
   return (
     <div className='Testheader'>
       <div className='logo' onClick={onclick} />
@@ -70,9 +98,26 @@ const Testheader = () => {
           className={State === 8 ? 'tabliactive' : 'tabli'}
           onClick={() => onClick(8, '/mypage')}
         >
-          마이페이지
+          마이페이지 {userName}
         </button>
-        <button className='loginbtn' onClick={click}>
+        {!isLoggedIn ? (
+          <button className='loginbtn' onClick={click}>
+            로그인
+          </button>
+        ) : (
+          <button
+            className='logoutbtn'
+            onClick={logoutHandler}
+          >
+            <p>Logout</p>
+            <FontAwesomeIcon
+              icon={faRightToBracket}
+              className='logouticon'
+            />
+          </button>
+        )}
+
+        {/* <button className='loginbtn' onClick={click}>
           로그인
         </button>
         <div className='logoutbtn'>
@@ -81,8 +126,9 @@ const Testheader = () => {
             icon={faRightToBracket}
             className='logouticon'
           />
-        </div>
+        </div> */}
       </div>
+      <ChargeFooter />
     </div>
   );
 };

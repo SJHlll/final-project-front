@@ -1,12 +1,14 @@
-import { Route, Routes } from 'react-router-dom';
+import {
+  Route,
+  Routes,
+  useLocation,
+} from 'react-router-dom';
 import React from 'react';
 import './App.scss';
 import Mypage from './Car/components/Mainpage/Mypage';
 import Error from '../src/Car/components/Errorpage/Error';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ChargeMain from './charge/Categori/main/ChargeMain';
-import Test from './charge/Test';
-import Login from './components/user/Login';
+import Login from './Car/components/user/Login';
 import Noti from './Car/components/Mainpage/noti/Noti';
 import Event from './Car/components/Mainpage/event/Event';
 import Review from './Car/components/Mainpage/review/Review';
@@ -14,15 +16,21 @@ import Testheader from './Car/components/Mainpage/Testheader';
 import Testhome from './Car/components/Mainpage/Testhome';
 import { AuthContextProvider } from './util/AuthContext';
 import { ModalProvider } from '@lasbe/react-modal';
-import LoginSuccess from './components/user/LoginSuccess';
-import ChargeStation from './charge/components/charge_station/ChargeStation';
-import ReservationCharge from './charge/components/reservation_charge/ReservationCharge';
-import { Checkout } from './components/pay/Checkout';
-import { Success } from './components/pay/Success';
-import { Fail } from './components/pay/Fail';
+import LoginSuccess from './Car/components/user/LoginSuccess';
+import ChargeStation from './Car/components/charge/charge_station/ChargeStation';
+import ReservationCharge from './Car/components/charge/reservation_charge/ReservationCharge';
+import { Checkout } from './Car/components/pay/Checkout';
+import { Success } from './Car/components/pay/Success';
+import { Fail } from './Car/components/pay/Fail';
 import Carres from './Car/components/car/Carres';
+import UserInfoSave from './charge/components/mypage/UserInfoSave';
+import EventDetail from './Car/components/Mainpage/event/EventDetail';
 
 const App = () => {
+  const location = useLocation();
+  // 헤더가 안보여도 되는 페이지 경로
+  const hideHeaderPaths = ['/pay', '/success', '/fail'];
+
   return (
     <ModalProvider>
       <AuthContextProvider>
@@ -30,7 +38,9 @@ const App = () => {
           className='App'
           style={{ fontFamily: 'font2' }}
         >
-          <Testheader />
+          {!hideHeaderPaths.includes(location.pathname) && (
+            <Testheader />
+          )}
           <Routes>
             {/* 메인 홈페이지 */}
             <Route exact path='/' element={<Testhome />} />
@@ -38,14 +48,12 @@ const App = () => {
             <Route path='/noti' element={<Noti />} />
             {/* 이벤트 페이지 */}
             <Route path='/event' element={<Event />} />
+            <Route
+              path='/event/:id'
+              element={<EventDetail />}
+            />
             {/* 이용후기 페이지 */}
             <Route path='/review' element={<Review />} />
-            {/* 충전소 메인 페이지 */}
-            <Route
-              path='/charge/home'
-              element={<ChargeMain />}
-            />
-            <Route path='/charge/test' element={<Test />} />
             {/* 충전소 페이지 */}
             <Route
               path='charge/list'
@@ -85,6 +93,11 @@ const App = () => {
 
             {/* 에러페이지 */}
             <Route path='/*' element={<Error />} />
+
+            <Route
+              path='/info'
+              element={<UserInfoSave />}
+            />
           </Routes>
         </div>
       </AuthContextProvider>
