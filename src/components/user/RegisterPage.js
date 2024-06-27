@@ -211,7 +211,7 @@ const RegisterPage = () => {
   const phoneCheckHandler = (e) => {
     const inputValue = e.target.value;
     console.log(inputValue);
-    const phoneRegex = /^(010)-[0-9]{3,4}-[0,9]{4}$/;
+    const phoneRegex = /^(010)-[0-9]{3,4}-[0-9]{4}$/;
 
     let msg;
     let flag = false;
@@ -272,6 +272,7 @@ const RegisterPage = () => {
 
     if (res.status === 200) {
       const data = await res.json();
+      console.log(data);
       alert(
         `${data.name}(${data.email})님 회원가입에 성공했습니다.`,
       );
