@@ -4,13 +4,10 @@ import ReviewPage from './ReviewPage';
 const Review = () => {
   return (
     <div className='maincontainer'>
-      <div
-        className='contentline'
-        style={{
-          fontSize: '100px',
-        }}
-      >
-        <ReviewPage />
+      <div className='contentline'>
+        <div className='reviewbody'>
+          <ReviewPage />
+        </div>
       </div>
     </div>
   );

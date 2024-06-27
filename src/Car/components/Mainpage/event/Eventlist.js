@@ -1,7 +1,8 @@
 import React from 'react';
+import './Eventlist.scss';
 
 const Eventlist = () => {
-  const Notilist = [
+  const eventlistdummy = [
     {
       id: 1,
       img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/eventbanner1.png',
@@ -56,16 +57,16 @@ const Eventlist = () => {
         이벤트
       </div>
       <div
-        className='notiparent'
+        className='eventparent'
         style={{
           display: 'flex',
           flexWrap: 'wrap',
           justifyContent: 'space-around',
         }}
       >
-        {Notilist.map((item) => (
+        {eventlistdummy.map((item) => (
           <div
-            className='notilist'
+            className='eventlist'
             style={styles}
             onClick={onClick}
             key={item.id}

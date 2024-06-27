@@ -1,5 +1,5 @@
 import React from 'react';
-import Carres from '../../CarHeader/Carres';
+import Carres from './Carres';
 
 const Carreservation = () => {
   return (

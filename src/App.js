@@ -1,4 +1,8 @@
-import { Route, Routes } from 'react-router-dom';
+import {
+  Route,
+  Routes,
+  useLocation,
+} from 'react-router-dom';
 import React from 'react';
 import './App.scss';
 import Mypage from './Car/components/Mainpage/Mypage';
@@ -19,11 +23,12 @@ import { Checkout } from './components/pay/Checkout';
 import { Success } from './components/pay/Success';
 import { Fail } from './components/pay/Fail';
 import Chargelist from './Car/components/Mainpage/Chargelist';
-import Chargereservation from './Car/components/Mainpage/chargereservation/Chargereservation';
 import Carreservation from './Car/components/Mainpage/carreservation/Carreservation';
 import ReservationCharge from './charge/components/reservation_charge/ReservationCharge';
 
 const App = () => {
+  const location = useLocation();
+  const hideHeaderRoutes = ['/pay', '/success', 'fail'];
   return (
     <ModalProvider>
       <AuthContextProvider>
@@ -31,7 +36,9 @@ const App = () => {
           className='App'
           style={{ fontFamily: 'font2' }}
         >
-          <Testheader />
+          {!hideHeaderRoutes.includes(
+            location.pathname,
+          ) && <Testheader />}
           <Routes>
             {/* 메인 홈페이지 */}
             <Route exact path='/' element={<Testhome />} />

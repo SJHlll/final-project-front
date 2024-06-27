@@ -92,12 +92,13 @@
                     }
                 }
 
+                
                 .review-date {
                     font-size: 12px;
                     color: #999;
                     margin-bottom: 5px;
                     // border: 1px dashed blue;
-                    position: absolute;
+                    position: relative;
                 }
 
                 p {
@@ -191,7 +192,7 @@
                 }
 
                 .review-date {
-                    position: absolute;
+                    position: relative;
                     top: 10px;
                     left: 10px;
                     background-color: rgba(0, 0, 0, 0.5);

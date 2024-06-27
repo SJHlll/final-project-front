@@ -1,18 +1,24 @@
 import React from 'react';
 import './Testhome.scss';
-// import mainback from '../../assets/mainback';
 
 const Testhome = () => {
   return (
     <>
-      <div className='maincontainer'>
+      <div
+        className='maincontainer'
+        style={{
+          border: '1px solid white',
+        }}
+      >
         <div className='contentline'>
           <video
             className='covervideo'
             muted
             autoPlay
             loop
-            src={mainback}
+            src={
+              'https://plugngo.s3.ap-northeast-2.amazonaws.com/mainback.mp4'
+            }
             type='video/mp4'
           >
             <strong>
