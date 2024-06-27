@@ -19,7 +19,7 @@ import {
   API_BASE_URL,
   USER,
 } from '../../../config/host-config';
-import '../../scss/RegisterPage.scss';
+import '../../../scss/RegisterPage.scss';
 
 const RegisterPage = () => {
   // useRef를 사용해서 태그 참조하기
