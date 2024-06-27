@@ -96,7 +96,7 @@ const CarCalendar = ({
   const maxDate = addMonths(new Date(), 12); // 최대 날짜를 12개월 후로 설정합니다.
 
   return (
-    <div className='content'>
+    <div className='car-calendar-content'>
       <div>
         <DatePicker
           id='calendar'

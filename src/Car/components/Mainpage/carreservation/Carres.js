@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import styled from 'styled-components';
 import { ModalBody, ModalFooter } from 'reactstrap';
 import CarCalendar from './CarCalendar';
 import CarResInfo from './CarResInfo';
 import { setHours, setMinutes } from 'date-fns';
 import '../../../../scss/Button.scss';
-import { StationProvider } from '../../../../contexts/StationContext';
 import styles from './reservation_css/Carres.modul.scss';
+import CarInfo from './CarInfo';
+import { CarContext } from './../../../../contexts/CarContext';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -155,30 +160,57 @@ const Carres = () => {
     </ModalBackground>
   );
 
+  const { rentCar, setRentCar } = useContext(CarContext);
+
+  useEffect(() => {
+    const fetchStations = async () => {
+      try {
+        const response = await fetch(
+          'http://localhost:8181/car/res',
+        );
+        if (!response.ok) {
+          throw new Error('Failed to fetch stations');
+        }
+        const data = await response.json();
+        console.log(data); // 데이터 형식 확인
+        setRentCar(data.carList || []); // 올바른 데이터 설정
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchStations();
+  }, []);
+
   return (
     <>
-      <CarCalendar
-        startDate={pickup.date}
-        endDate={returning.date}
-        onChangeStartDate={(date) =>
-          setPickup((prev) => ({ ...prev, date }))
-        }
-        onChangeEndDate={(date) =>
-          setReturning((prev) => ({ ...prev, date }))
-        }
-        startTime={pickup.time}
-        endTime={returning.time}
-        onChangeStartTime={(time) =>
-          setPickup((prev) => ({ ...prev, time }))
-        }
-        onChangeEndTime={(time) =>
-          setReturning((prev) => ({ ...prev, time }))
-        }
-      />
-      {modal ? modalOpen : button}
-      <StationProvider />
+      <CarInfo rentCar={rentCar} />
+      <RightContent>
+        <CarCalendar
+          startDate={pickup.date}
+          endDate={returning.date}
+          onChangeStartDate={(date) =>
+            setPickup((prev) => ({ ...prev, date }))
+          }
+          onChangeEndDate={(date) =>
+            setReturning((prev) => ({ ...prev, date }))
+          }
+          startTime={pickup.time}
+          endTime={returning.time}
+          onChangeStartTime={(time) =>
+            setPickup((prev) => ({ ...prev, time }))
+          }
+          onChangeEndTime={(time) =>
+            setReturning((prev) => ({ ...prev, time }))
+          }
+        />
+        {modal ? modalOpen : button}
+      </RightContent>
     </>
   );
 };
 
 export default Carres;
+
+const RightContent = styled.div`
+  margin-top: 20px;
+`;

@@ -10,31 +10,31 @@ const Eventlist = () => {
     {
       id: 1,
       img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/eventbanner1.png',
-      title: '충전하는 순간, 행운의 커피를!',
+      title: '렌트카 하면 커피',
       status: '진행중',
     },
     {
       id: 2,
       img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/eventbanner2.png',
-      title: '충전할 때마다 할인 혜택!',
+      title: '우리차+우리충전소 할인',
       status: '진행중',
     },
     {
       id: 3,
       img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/eventbanner1.png',
-      title: '10번 충전하면 기프티콘이 내 손에!',
+      title: '열번충전 -> 기프티콘',
       status: '진행중',
     },
     {
       id: 4,
       img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/eventbanner2.png',
-      title: '렌트카 하루 무료 이용권의 기회!',
+      title: '이용후기 남기면 확률1일이용권',
       status: '진행중',
     },
     {
       id: 5,
       img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/eventbanner1.png',
-      title: 'SNS로 나누면 더 커지는 혜택!',
+      title: '인스타 홍보 시 확률1일이용권',
       status: '진행중',
     },
     {

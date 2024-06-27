@@ -1,30 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import './reservation_css/CarInfo.scss';
 
-const CarInfo = () => {
-  const [carsData, setCarsData] = useState([]);
-
-  useEffect(() => {
-    fetch('/carsData.json')
-      .then((response) => response.json())
-      .then((data) => setCarsData(data))
-      .catch((error) =>
-        console.error('Error fetching data:', error),
-      );
-  }, []);
-
+const CarInfo = ({ rentCar }) => {
   return (
     <>
-      {carsData.map((data) => (
-        <div key={data.id} className='carDataContainer'>
-          <img src={data.img} />
-          <div className='carData'>
-            <h2>{data.name}</h2>
-            <p>브랜드: {data.brand}</p>
-            <p>승객 수: {data.passenger}</p>
-            <p>연식: {data.year}</p>
-            <p>편의옵션: {data.ConvinOp}</p>
-            <p>안전옵션: {data.safetyOp}</p>
-          </div>
+      <div className='car-info-container'>ㅎㅇ</div>
+      {rentCar.map((car) => (
+        <div>
+          {/* <div>{car.id}</div> 전기차 고유 id */}
+          <div>{car.carName}</div> {/* 전기차 이름 */}
+          <div>{car.carCompany}</div> {/* 제조회사 */}
+          <div>{car.maximumPassenger}</div> {/* 탑승인원 */}
+          <div>{car.carYear}</div> {/* 전기차 연식 */}
+          <div>{car.carPrice}</div> {/* 전기차 가격 */}
+          <div>
+            {car.carPicture}자동차 사진 아직 안들어감
+          </div>{' '}
+          {/* 전기차 사진 */}
+          <div>{car.carOptions}</div> {/* 안전/편의 */}
         </div>
       ))}
     </>
