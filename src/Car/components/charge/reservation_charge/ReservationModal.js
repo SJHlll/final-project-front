@@ -23,7 +23,11 @@ const ReservationModal = ({
     setHours(setMinutes(today, 0), 9), // 오늘 날짜에 9시 0분으로
   );
 
-  const { userName } = useContext(AuthContext);
+  const { userName, phoneNumber, email, role } =
+    useContext(AuthContext);
+  const log = () => {
+    console.log(userName, phoneNumber, email, role);
+  };
 
   const [selectedValue, setSelectedValue] = useState(10);
 
@@ -113,13 +117,14 @@ const ReservationModal = ({
           className='reservation-charge'
           onSubmit={reservationHandler}
         >
+          <div onClick={log}>로그보기</div>
           <div className='flex'>
             <div className='column'>이름</div>
             <div className='data'>{userName}</div>
           </div>
           <div className='flex'>
             <div className='column'>핸드폰 번호</div>
-            <div className='data'>010-0000-0000</div>
+            <div className='data'>{phoneNumber}</div>
           </div>
           <div className='flex'>
             <div className='column'>충전소 이름</div>
