@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { ModalBody, ModalFooter } from 'reactstrap';
-import { StationProvider } from '../../../charge/components/contexts/StationContext';
+
 import {
   Button,
   Modal,
@@ -9,13 +8,12 @@ import {
   ModalFooter,
   ModalHeader,
 } from 'reactstrap';
-import { StationProvider } from '../../../../contexts/StationContext';
 import CarCalendar from './CarCalendar';
 import CarResInfo from './CarResInfo';
 import { setHours, setMinutes } from 'date-fns';
-import styles from './reservation_css/Carres.modul.scss';
-import '../../../scss/Button.scss';
+import '../../../../scss/Button.scss';
 import './reservation_css/Carres.scss';
+import { StationProvider } from '../../../../contexts/StationContext';
 
 const ModalBackground = styled.div`
   position: fixed;

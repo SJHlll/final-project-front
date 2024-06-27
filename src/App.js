@@ -22,13 +22,12 @@ import ReservationCharge from './Car/components/charge/reservation_charge/Reserv
 import { Checkout } from './Car/components/pay/Checkout';
 import { Success } from './Car/components/pay/Success';
 import { Fail } from './Car/components/pay/Fail';
-import Carres from './Car/components/car/Carres';
-import UserInfoSave from './charge/components/mypage/UserInfoSave';
-import UserInfoSave from './Car/components/charge/mypage/UserInfoSave';
+
 import Chargelist from './Car/components/Mainpage/Chargelist';
 import Carreservation from './Car/components/Mainpage/carreservation/Carreservation';
-import Carres from './Car/components/Mainpage/carreservation/Carres';
 import EventDetail from './Car/components/Mainpage/event/EventDetail';
+import Carres from './Car/components/Mainpage/carreservation/Carres';
+import UserInfoSave from './Car/components/charge/mypage/UserInfoSave';
 
 const App = () => {
   const location = useLocation();
