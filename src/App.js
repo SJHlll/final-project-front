@@ -25,7 +25,7 @@ import { Checkout } from './components/pay/Checkout';
 import { Success } from './components/pay/Success';
 import { Fail } from './components/pay/Fail';
 import Carres from './Car/components/car/Carres';
-import EventDetail from './Car/components/Mainpage/event/EventDetil';
+import EventDetail from './Car/components/Mainpage/event/EventDetail';
 
 const App = () => {
   const location = useLocation();
