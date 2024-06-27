@@ -1,15 +1,14 @@
 import React from 'react';
 import Carres from './Carres';
+import Frame from '../Frame';
 
 const Carreservation = () => {
   return (
-    <div className='maincontainer'>
-      <div className='contentline'>
-        <div className='carreservationbody'>
-          <Carres />
-        </div>
+    <Frame>
+      <div className='carreservationbody'>
+        <Carres />
       </div>
-    </div>
+    </Frame>
   );
 };
 

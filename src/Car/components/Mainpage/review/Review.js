@@ -1,15 +1,14 @@
 import React from 'react';
 import './Review.scss';
 import ReviewPage from './ReviewPage';
+import Frame from '../Frame';
 const Review = () => {
   return (
-    <div className='maincontainer'>
-      <div className='contentline'>
-        <div className='reviewbody'>
-          <ReviewPage />
-        </div>
+    <Frame>
+      <div className='reviewbody'>
+        <ReviewPage />
       </div>
-    </div>
+    </Frame>
   );
 };
 

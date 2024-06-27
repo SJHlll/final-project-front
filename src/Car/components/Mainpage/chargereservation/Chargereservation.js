@@ -1,15 +1,14 @@
 import React from 'react';
 import ReservationCharge from '../../../../charge/components/reservation_charge/ReservationCharge';
 import './Chargereservation.scss';
+import Frame from '../Frame';
 const Chargereservation = () => {
   return (
-    <div className='maincontainer'>
-      <div className='contentline'>
-        <div className='charegeresbody'>
-          <ReservationCharge />
-        </div>
+    <Frame>
+      <div className='charegeresbody'>
+        <ReservationCharge />
       </div>
-    </div>
+    </Frame>
   );
 };
 export default Chargereservation;

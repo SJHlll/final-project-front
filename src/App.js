@@ -25,11 +25,10 @@ import { Checkout } from './components/pay/Checkout';
 import { Success } from './components/pay/Success';
 import { Fail } from './components/pay/Fail';
 import RegisterPage from './components/user/RegisterPage';
-import Carres from './Car/components/car/Carres';
+
 import Chargelist from './Car/components/Mainpage/Chargelist';
 import Carreservation from './Car/components/Mainpage/carreservation/Carreservation';
-import ReservationCharge from './charge/components/reservation_charge/ReservationCharge';
-
+import Carres from './Car/components/Mainpage/carreservation/Carres';
 
 const App = () => {
   const location = useLocation();
@@ -43,9 +42,9 @@ const App = () => {
           className='App'
           style={{ fontFamily: 'font2' }}
         >
-          {!hideHeaderPaths.includes(
-            location.pathname,
-          ) && <Testheader />}
+          {!hideHeaderPaths.includes(location.pathname) && (
+            <Testheader />
+          )}
 
           <Routes>
             {/* 메인 홈페이지 */}

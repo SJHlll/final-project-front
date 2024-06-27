@@ -4,12 +4,7 @@ import './Testhome.scss';
 const Testhome = () => {
   return (
     <>
-      <div
-        className='maincontainer'
-        style={{
-          border: '1px solid white',
-        }}
-      >
+      <div className='maincontainer'>
         <div className='contentline'>
           <video
             className='covervideo'

@@ -1,0 +1,84 @@
+/* 선택된 날짜 스타일 */
+.react-datepicker__day--selected,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--in-range,
+.react-datepicker__day--selecting-range-start,
+.react-datepicker__day--selecting-range-end,
+.react-datepicker__day--range-start,
+.react-datepicker__day--range-end {
+  background-color: #216ba5 !important;
+  color: #fff !important;
+}
+
+/* 종료 날짜에 대한 특정 스타일 */
+.react-datepicker__day--range-end {
+  background-color: #216ba5 !important;
+  color: #fff !important;
+  border-radius: 0.3rem;
+}
+
+/* 오늘 날짜가 선택된 경우 스타일 추가 */
+.react-datepicker__day--today.react-datepicker__day--selected,
+.react-datepicker__day--today.react-datepicker__day--in-range,
+.react-datepicker__day--today.react-datepicker__day--range-start,
+.react-datepicker__day--today.react-datepicker__day--range-end {
+    background-color: #216ba5 !important;
+    color: #fff !important;
+}
+
+.content { // 달력전체
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin: 0; // 전체 컨테이너의 외부 여백 제거
+  margin-top: 40px;
+  margin-left: 60px;
+
+  .react-datepicker {
+    width: 100%; // 부모 요소에 맞게 100%로 설정
+    border: 1px solid silver; // 테두리 설정
+    padding: 0; // 내부 여백 제거
+    margin: 0; // 외부 여백 제거
+    box-sizing: border-box; // 테두리와 패딩을 포함한 박스 크기 설정
+  }
+
+  #calendar {
+    width: 100%;
+    padding: 0; // 내부 여백 제거
+    margin: 0; // 외부 여백 제거
+  }
+
+  .time-container {
+    display: flex;
+    // justify-content: center; // 요소를 중앙으로 정렬
+    // align-items: center;
+    gap: 20px; // 요소 간의 간격을 조정
+    margin-top: 10px;
+    width: 100%; // 부모 요소에 맞게 100%로 설정
+    
+  }
+
+  .pickupTitle,
+  .returnTitle {
+    flex-wrap: wrap-reverse;
+    font-size: 18px;
+     margin-bottom: 5px;
+  }
+
+  .time-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+
+  #pickupTime,
+  #returnTime {
+    margin-top: 5px;
+    width: 150px; // 적절한 너비 설정
+  }
+  
+}

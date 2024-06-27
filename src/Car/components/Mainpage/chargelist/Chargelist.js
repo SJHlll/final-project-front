@@ -1,15 +1,14 @@
 import React from 'react';
 import ChargeStation from '../../../../charge/components/charge_station/ChargeStation';
+import Frame from '../Frame';
 
 const Chargelist = () => {
   return (
-    <div className='maincontainer'>
-      <div className='contentline'>
-        <div className='eventbody'>
-          <ChargeStation />
-        </div>
+    <Frame>
+      <div className='eventbody'>
+        <ChargeStation />
       </div>
-    </div>
+    </Frame>
   );
 };
 

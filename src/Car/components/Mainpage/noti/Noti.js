@@ -3,6 +3,7 @@ import './Noti.scss';
 import Notilist from './Notilist';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Frame from '../Frame';
 
 const Noti = () => {
   const [show, setShow] = useState(false);
@@ -47,20 +48,18 @@ const Noti = () => {
         </Modal.Body>
       </Modal> */}
 
-      <div className='maincontainer'>
-        <div className='contentline'>
-          <div className='notiline'>
-            <Notilist />
+      <Frame>
+        <div className='notiline'>
+          <Notilist />
 
-            <button
-              className='createnotilist'
-              onClick={handleShow}
-            >
-              등록
-            </button>
-          </div>
+          <button
+            className='createnotilist'
+            onClick={handleShow}
+          >
+            등록
+          </button>
         </div>
-      </div>
+      </Frame>
     </>
   );
 };
