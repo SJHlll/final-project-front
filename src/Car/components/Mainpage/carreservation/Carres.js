@@ -1,19 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-} from 'reactstrap';
+import { ModalBody, ModalFooter } from 'reactstrap';
 import CarCalendar from './CarCalendar';
 import CarResInfo from './CarResInfo';
 import { setHours, setMinutes } from 'date-fns';
 import '../../../../scss/Button.scss';
-import './reservation_css/Carres.scss';
 import { StationProvider } from '../../../../contexts/StationContext';
+import styles from './reservation_css/Carres.modul.scss';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -112,50 +105,53 @@ const Carres = () => {
   };
 
   const button = (
-    <div className='resBtn'>
-      <Button
-        variant='outline'
-        color='success'
-        size='small'
-        style={{ width: '54%' }}
-        onClick={toggle}
-      >
-        예약 하기
-      </Button>
-    </div>
+    <button className='resBtn public-btn' onClick={toggle}>
+      예약 하기
+    </button>
   );
 
   const closeBtn = (
-    <Button color='success' size='large' onClick={toggle}>
+    <button
+      className='public-btn closeBtn'
+      onClick={toggle}
+    >
       &times;
-    </Button>
+    </button>
   );
 
   const modalOpen = (
     <ModalBackground>
-      <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle} close={closeBtn}>
-          예약확인
-        </ModalHeader>
-        <ModalBody>
-          <CarResInfo
-            pickup={pickup}
-            returning={returning}
-          />
-        </ModalBody>
-        <ModalFooter>
-          <Button
-            className='reservation'
-            variant='outlined'
-            color='success'
-            size='small'
-            style={{ width: '30%', height: '30px' }}
-            onClick={reservationHandler}
-          >
-            결제 하기
-          </Button>
-        </ModalFooter>
-      </Modal>
+      <ModalContent>
+        <div className='reservation-container'>
+          <div className={styles.myComponent} id='big'>
+            <h1 className='resTitle'>예약 확인</h1>
+            <span className='close-Btn' onClick={toggle}>
+              X
+            </span>
+          </div>
+
+          <ModalBody>
+            <div className='resinfo-container'>
+              <hr />
+              <div className='resinfo-body'>
+                <CarResInfo
+                  pickup={pickup}
+                  returning={returning}
+                />
+              </div>
+            </div>
+          </ModalBody>
+          <hr />
+          <ModalFooter>
+            <button
+              className='public-btn payBtn'
+              onClick={reservationHandler}
+            >
+              결제 하기
+            </button>
+          </ModalFooter>
+        </div>
+      </ModalContent>
     </ModalBackground>
   );
 
