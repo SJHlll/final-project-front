@@ -38,8 +38,10 @@ const Eventlist = () => {
   ];
 
   // 상세보기 들어감
-  const handleClick = (id) => {
-    navigate(`/event/${id}`);
+  const handleClick = (item) => {
+    navigate(`/event/${item.id}`, {
+      state: { img: item.img, content: item.content },
+    });
   };
 
   return (
@@ -71,7 +73,7 @@ const Eventlist = () => {
           <div
             className='notilist'
             style={styles}
-            onClick={() => handleClick(item.id)}
+            onClick={() => handleClick(item)}
             key={item.id}
           >
             <img
