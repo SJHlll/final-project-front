@@ -1,13 +1,13 @@
 export const initialState = {
   userValue: {
-    userName: '',
+    name: '',
     password: '',
     email: '',
     birthday: '',
     phoneNumber: '',
   },
   message: {
-    userName: '',
+    name: '',
     password: '',
     passwordCheck: '',
     email: '',
@@ -15,7 +15,7 @@ export const initialState = {
     phoneNumber: '',
   },
   correct: {
-    userName: false,
+    name: false,
     password: false,
     passwordCheck: false,
     email: false,

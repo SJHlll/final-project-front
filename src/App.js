@@ -27,7 +27,6 @@ import { Fail } from './components/pay/Fail';
 import RegisterPage from './components/user/RegisterPage';
 import Carres from './Car/components/car/Carres';
 
-
 const App = () => {
   const location = useLocation();
   // 헤더가 안보여도 되는 페이지 경로

@@ -88,9 +88,10 @@ const RegisterPage = () => {
     } else {
       msg = '사용 가능한 이름입니다.';
       flag = true;
+      console.log(flag);
     }
 
-    debouncedUpdateState('userName', inputValue, msg, flag);
+    debouncedUpdateState('name', inputValue, msg, flag);
   };
 
   // 이메일 중복 체크 서버 통신 함수
@@ -107,6 +108,7 @@ const RegisterPage = () => {
         } else {
           msg = '사용 가능한 이메일 입니다.';
           flag = true;
+          console.log(flag);
         }
         debouncedUpdateState('email', email, msg, flag);
       });
@@ -155,6 +157,7 @@ const RegisterPage = () => {
     } else {
       msg = '사용 가능한 비밀번호 입니다.';
       flag = true;
+      console.log(flag);
     }
 
     debouncedUpdateState('password', inputValue, msg, flag);
@@ -172,6 +175,7 @@ const RegisterPage = () => {
     } else {
       msg = '비밀번호가 일치합니다.';
       flag = true;
+      console.log(flag);
     }
 
     debouncedUpdateState(
@@ -198,6 +202,7 @@ const RegisterPage = () => {
     } else {
       msg = '사용 가능한 생년월일 입니다';
       flag = true;
+      console.log(flag);
     }
 
     debouncedUpdateState('birthday', inputValue, msg, flag);
@@ -206,7 +211,7 @@ const RegisterPage = () => {
   const phoneCheckHandler = (e) => {
     const inputValue = e.target.value;
     console.log(inputValue);
-    const phoneRegex = /^[0-9\b -]{0,13}$/;
+    const phoneRegex = /^(010)-[0-9]{3,4}-[0,9]{4}$/;
 
     let msg;
     let flag = false;
@@ -218,6 +223,7 @@ const RegisterPage = () => {
     } else {
       msg = '사용 가능한 전화번호 입니다.';
       flag = true;
+      console.log(flag);
     }
 
     debouncedUpdateState(
@@ -379,12 +385,12 @@ const RegisterPage = () => {
             />
             <span
               style={
-                correct.userName
+                correct.name
                   ? { color: 'green' }
                   : { color: 'red' }
               }
             >
-              {message.userName}
+              {message.name}
             </span>
           </Grid>
           <Grid item xs={12}>
@@ -489,12 +495,12 @@ const RegisterPage = () => {
             />
             <span
               style={
-                correct.phonenumber
+                correct.phoneNumber
                   ? { color: 'green' }
                   : { color: 'red' }
               }
             >
-              {message.phonenumber}
+              {message.phoneNumber}
             </span>
           </Grid>
           <Grid item xs={12}>
