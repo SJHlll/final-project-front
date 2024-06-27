@@ -102,7 +102,15 @@ const Eventlist = () => {
             >
               <img src={item.img} alt={item.title} />
               <span>
-                <span>{item.status}</span>
+                <span
+                  className={
+                    item.status === '진행중'
+                      ? 'active'
+                      : 'done'
+                  }
+                >
+                  {item.status}
+                </span>
                 {item.title}
               </span>
             </div>

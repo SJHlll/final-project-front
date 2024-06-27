@@ -122,6 +122,18 @@ const ReservationModal = ({
             <div className='data'>010-0000-0000</div>
           </div>
           <div className='flex'>
+            <div className='column'>충전소 이름</div>
+            <div className='data'>{name}</div>
+          </div>
+          <div className='flex'>
+            <div className='column'>충전소 위치</div>
+            <div className='data'>{address}</div>
+          </div>
+          <div className='flex'>
+            <div className='column'>충전 타입</div>
+            <div className='data'>{type}</div>
+          </div>
+          <div className='flex'>
             <div className='column'>예약 날짜 및 시간</div>
             <DatePicker
               className='date-picker'
@@ -138,20 +150,17 @@ const ReservationModal = ({
             />
           </div>
           <div className='flex'>
-            <div className='column'>충전소 이름</div>
-            <div className='data'>{name}</div>
-          </div>
-          <div className='flex'>
-            <div className='column'>충전소 위치</div>
-            <div className='data'>{address}</div>
-          </div>
-          <div className='flex'>
-            <div className='column'>충전 타입</div>
-            <div className='data'>{type}</div>
-          </div>
-          <div className='flex'>
-            <div className='column'>충전량</div>
-            <div className='form-check form-check-inline'>
+            <div className='column'>충전시간</div>
+            {selectedOption === 'option1' && (
+              <SelectBox options={FAST} defaultValue='10' />
+            )}
+            {selectedOption === 'option2' && (
+              <SelectBox options={SLOW} defaultValue='1' />
+            )}
+            <div
+              className='form-check form-check-inline'
+              style={{ marginLeft: '16px' }}
+            >
               <input
                 className='form-check-input'
                 type='radio'
@@ -177,16 +186,6 @@ const ReservationModal = ({
               />
               <label className='check-label'>완속</label>
             </div>
-          </div>
-
-          <div className='flex'>
-            <div className='column'>충전시간</div>
-            {selectedOption === 'option1' && (
-              <SelectBox options={FAST} defaultValue='10' />
-            )}
-            {selectedOption === 'option2' && (
-              <SelectBox options={SLOW} defaultValue='1' />
-            )}
           </div>
           <div className='flex'>
             <div className='column'>가격</div>
