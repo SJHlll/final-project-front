@@ -160,8 +160,9 @@ const Carres = () => {
     </ModalBackground>
   );
 
+  // DB에서 전기차 목록 불러오기
+  // rentCar = 전기차 목록 배열
   const { rentCar, setRentCar } = useContext(CarContext);
-
   useEffect(() => {
     const fetchStations = async () => {
       try {
@@ -173,7 +174,8 @@ const Carres = () => {
         }
         const data = await response.json();
         console.log(data); // 데이터 형식 확인
-        setRentCar(data.carList || []); // 올바른 데이터 설정
+        // setRentCar = 백엔드에서 불러온 전기차들 rentCar에 집어넣음
+        setRentCar(data.carList || []); // CarListResponseDTO -> private List<CarDetailResponseDTO> carList;
       } catch (error) {
         console.error(error);
       }
@@ -183,7 +185,8 @@ const Carres = () => {
 
   return (
     <>
-      <CarInfo rentCar={rentCar} />
+      <CarInfo rentCar={rentCar} />{' '}
+      {/* 백엔드에 불러온 rentCar를 CarInfo로 보냄 */}
       <RightContent>
         <CarCalendar
           startDate={pickup.date}
