@@ -28,11 +28,7 @@ const SmallScreen = ({ onToggle, filter }) => {
         style={{ cursor: 'pointer' }}
       >
         <img src={DisableMarker} alt='이용자 제한' />
-        <span>
-          {filter === 'disable'
-            ? '이용 제한 충전소 보기'
-            : '이용 제한 충전소 숨기기'}
-        </span>
+        <span>이용 제한 충전소 표시하기</span>
         <input
           type='checkbox'
           className='marker-checkbox'

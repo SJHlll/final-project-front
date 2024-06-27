@@ -1,7 +1,8 @@
 .search-list-container {
+    width: 30%;
     height: 86vh;
     background-color: white;
-    border: 1px solid #888;
+    border-right: 1px solid #888;
     position: absolute;
     z-index: 1;
     top: 0;
@@ -14,15 +15,13 @@
   
   .search-list-container.visible {
     left: 0;
-    opacity: 1;
-    transition: left 0.5s ease, opacity 0.3s ease;
-    width: 30%
+    transition: left 0.5s ease;
+    width: 30%;
   }
   
   .search-list-container.hidden {
-    left: -500px;
-    opacity: 0;
-    transition: left 0.5s ease, opacity 0.7s ease;
+    left: -30%;
+    transition: left 0.5s ease;
   }
 
   
@@ -42,7 +41,7 @@
     border-left-color: #ddd;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
-    top: 37vh;
+    top: 34vh;
     transition: left 0.5s ease;
     // 드래그 못하게
     -webkit-user-select:none;
@@ -52,9 +51,9 @@
   }
   
   .open-btn.visible {
-    left: 30%;
+    left: 29.8%;
   }
 
   .open-btn.hidden {
-    left: 0;
+    left: -0.2%;
   }

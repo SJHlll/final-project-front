@@ -11,7 +11,7 @@ const OpenBtn = ({
         className={`open-btn ${isSearchBoxVisible ? 'hidden' : 'visible'}`}
         onClick={toggleSearchBox}
       >
-        {isSearchBoxVisible ? '<' : '>'}
+        {isSearchBoxVisible ? '>' : '<'}
       </div>
     </>
   );
