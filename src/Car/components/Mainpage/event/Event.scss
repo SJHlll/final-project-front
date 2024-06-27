@@ -52,7 +52,6 @@
     .noti-item {
         width: 30%;
         height: 280px;
-        text-align: center;
         margin-top: 1%;
         cursor: pointer;
         border: 1px solid #ccc;
@@ -74,14 +73,15 @@
 
         span {
             font-size: 18px;
-            margin: 10px 0 0;
+            display: inline-block;
+            margin: 6px 10px 0 10px;
 
             span {
-                padding: 3px;
+                font-size: 0.9em;
+                padding: 3px 6px;
                 background-color: #ebf5ff;
                 border: 1px solid #2c7fdf;
-                border-radius: 10px;
-                margin-right: 10px;
+                border-radius: 15px;
             }
         }
     }

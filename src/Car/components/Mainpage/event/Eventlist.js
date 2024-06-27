@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './Eventlist.scss';
 import './Event.scss';
 import { useNavigate } from 'react-router-dom';
 
