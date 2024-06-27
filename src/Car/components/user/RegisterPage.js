@@ -18,7 +18,7 @@ import { initialState, joinReducer } from './joinReducer';
 import {
   API_BASE_URL,
   USER,
-} from '../../config/host-config';
+} from '../../../config/host-config';
 import '../../scss/RegisterPage.scss';
 
 const RegisterPage = () => {
