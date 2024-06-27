@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import styled from 'styled-components';
 import { ModalBody, ModalFooter } from 'reactstrap';
 import CarCalendar from './CarCalendar';
 import CarResInfo from './CarResInfo';
 import { setHours, setMinutes } from 'date-fns';
 import '../../../../scss/Button.scss';
-import { StationProvider } from '../../../../contexts/StationContext';
 import styles from './reservation_css/Carres.modul.scss';
 import CarInfo from './CarInfo';
 import Rent from '../Rent/Rent.js';
+import { CarContext } from './../../../../contexts/CarContext';
+
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -157,32 +162,62 @@ const Carres = () => {
     </ModalBackground>
   );
 
+  // DB에서 전기차 목록 불러오기
+  // rentCar = 전기차 목록 배열
+  const { rentCar, setRentCar } = useContext(CarContext);
+  useEffect(() => {
+    const fetchStations = async () => {
+      try {
+        const response = await fetch(
+          'http://localhost:8181/car/res',
+        );
+        if (!response.ok) {
+          throw new Error('Failed to fetch stations');
+        }
+        const data = await response.json();
+        console.log(data); // 데이터 형식 확인
+        // setRentCar = 백엔드에서 불러온 전기차들 rentCar에 집어넣음
+        setRentCar(data.carList || []); // CarListResponseDTO -> private List<CarDetailResponseDTO> carList;
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchStations();
+  }, []);
+
   return (
     <>
-      <CarCalendar
-        startDate={pickup.date}
-        endDate={returning.date}
-        onChangeStartDate={(date) =>
-          setPickup((prev) => ({ ...prev, date }))
-        }
-        onChangeEndDate={(date) =>
-          setReturning((prev) => ({ ...prev, date }))
-        }
-        startTime={pickup.time}
-        endTime={returning.time}
-        onChangeStartTime={(time) =>
-          setPickup((prev) => ({ ...prev, time }))
-        }
-        onChangeEndTime={(time) =>
-          setReturning((prev) => ({ ...prev, time }))
-        }
-      />
-      {modal ? modalOpen : button}
-
-      <Rent />
-      <StationProvider />
+      <CarInfo rentCar={rentCar} />{' '}
+      {/* 백엔드에 불러온 rentCar를 CarInfo로 보냄 */}
+      <RightContent>
+        <CarCalendar
+          startDate={pickup.date}
+          endDate={returning.date}
+          onChangeStartDate={(date) =>
+            setPickup((prev) => ({ ...prev, date }))
+          }
+          onChangeEndDate={(date) =>
+            setReturning((prev) => ({ ...prev, date }))
+          }
+          startTime={pickup.time}
+          endTime={returning.time}
+          onChangeStartTime={(time) =>
+            setPickup((prev) => ({ ...prev, time }))
+          }
+          onChangeEndTime={(time) =>
+            setReturning((prev) => ({ ...prev, time }))
+          }
+        />
+        {modal ? modalOpen : button}
+        <Rent />
+      </RightContent>
+    <StationProvider />
     </>
   );
 };
 
 export default Carres;
+
+const RightContent = styled.div`
+  margin-top: 20px;
+`;
