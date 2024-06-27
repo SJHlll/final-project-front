@@ -27,13 +27,13 @@
 }
 
 .content { // 달력전체
-  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: center;
   margin: 0; // 전체 컨테이너의 외부 여백 제거
-  margin-top: 40px;
-  margin-left: 60px;
+  //margin-top: 40px;
+  margin-left: 250px;
+  padding-top: 120px;
 
   .react-datepicker {
     width: 100%; // 부모 요소에 맞게 100%로 설정
@@ -51,8 +51,8 @@
 
   .time-container {
     display: flex;
-    // justify-content: center; // 요소를 중앙으로 정렬
-    // align-items: center;
+    justify-content: center; // 요소를 중앙으로 정렬
+    align-items: center;
     gap: 20px; // 요소 간의 간격을 조정
     margin-top: 10px;
     width: 100%; // 부모 요소에 맞게 100%로 설정
