@@ -24,7 +24,6 @@ import { Success } from './Car/components/pay/Success';
 import { Fail } from './Car/components/pay/Fail';
 import Carres from './Car/components/car/Carres';
 import UserInfoSave from './charge/components/mypage/UserInfoSave';
-
 import EventDetail from './Car/components/Mainpage/event/EventDetail';
 
 const App = () => {
