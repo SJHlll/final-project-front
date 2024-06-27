@@ -77,11 +77,21 @@
             margin: 6px 10px 0 10px;
 
             span {
-                font-size: 0.9em;
+                font-size: 0.8em;
+                width: 55px;
+                text-align: center;
                 padding: 3px 6px;
+                border-radius: 15px;
+            }
+
+            .active {
                 background-color: #ebf5ff;
                 border: 1px solid #2c7fdf;
-                border-radius: 15px;
+            }
+
+            .done {
+                background-color: #ffebeb;
+                border: 1px solid #df2c2c;
             }
         }
     }
