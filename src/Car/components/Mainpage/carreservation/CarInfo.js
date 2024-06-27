@@ -20,17 +20,19 @@ const CarInfo = ({ rentCar }) => {
          */}
         {rentCar.map((car) => (
           <div>
-            <div>{car.carName}</div> {/* 전기차 이름 */}
-            <div>{car.carCompany}</div> {/* 제조회사 */}
-            <div>{car.maximumPassenger}</div>{' '}
-            {/* 탑승인원 */}
-            <div>{car.carYear}</div> {/* 전기차 연식 */}
-            <div>{car.carPrice}</div> {/* 전기차 가격 */}
+            <div>차종 : {car.carName}</div>
+            <div>제조회사 : {car.carCompany}</div>
             <div>
-              {car.carPicture}자동차 사진 아직 안들어감
-            </div>{' '}
-            {/* 전기차 사진 */}
-            <div>{car.carOptions}</div> {/* 안전/편의 */}
+              탑승인원 : 최대 {car.maximumPassenger}명
+            </div>
+            <div>연식 : {car.carYear}년</div>
+            <div>
+              가격 : {car.carPrice}원 (렌트가격아님)
+            </div>
+            <div>
+              {car.carPicture}자동차 사진 칸 (아직 안들어감)
+            </div>
+            <div>차량 옵션 : {car.carOptions}</div>
             <div>===================</div>
           </div>
         ))}
