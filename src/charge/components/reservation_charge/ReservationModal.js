@@ -103,11 +103,6 @@ const ReservationModal = ({
       : price * selectedValue;
   };
 
-  const phoneNumber = () => {
-    const number = localStorage.getItem('USER_PHONENUMBER');
-    console.log(number);
-  };
-
   return (
     <>
       <div
@@ -124,7 +119,7 @@ const ReservationModal = ({
           </div>
           <div className='flex'>
             <div className='column'>핸드폰 번호</div>
-            <div className='data'>{phoneNumber()}</div>
+            <div className='data'>010-0000-0000</div>
           </div>
           <div className='flex'>
             <div className='column'>예약 날짜 및 시간</div>
@@ -213,7 +208,7 @@ const ReservationModal = ({
             style={{
               width: '100%',
               textAlign: 'center',
-              marginBottom: '10px',
+              margin: '10px',
             }}
           >
             <button className='public-btn'>

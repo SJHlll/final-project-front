@@ -1,0 +1,28 @@
+@font-face {
+  font-family: 'font2';
+  src: url(https://plugngo.s3.ap-northeast-2.amazonaws.com/WantedSans-SemiBold.woff2);
+}
+
+.update-user-info {
+  width: 450px;
+
+  .flex2 {
+    display: flex;
+    padding: 5px;
+    margin: 10px;
+
+    .key {
+      width: 35%;
+    }
+
+    .input-info {
+      width: 65%;
+    }
+  }
+}
+
+.effectiveness {
+  width: 100%;
+  text-align-last: center;
+  font-size: 0.8rem;
+}

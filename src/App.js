@@ -26,6 +26,7 @@ import { Success } from './components/pay/Success';
 import { Fail } from './components/pay/Fail';
 import RegisterPage from './components/user/RegisterPage';
 import Carres from './Car/components/car/Carres';
+import UserInfoSave from './charge/components/mypage/UserInfoSave';
 
 
 const App = () => {
@@ -103,6 +104,11 @@ const App = () => {
 
             {/* 에러페이지 */}
             <Route path='/*' element={<Error />} />
+
+            <Route
+              path='/info'
+              element={<UserInfoSave />}
+            />
           </Routes>
         </div>
       </AuthContextProvider>

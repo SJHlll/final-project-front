@@ -12,11 +12,15 @@ const ReservationCharge = () => {
         <SecondMapProvider>
           <div className='maincontainer'>
             <div className='contentline'>
-              <ReserveHeader>
-                <BigSpan>Plug & Go 충전소</BigSpan>
-                <span>가격단위 : 1kWh</span>
-              </ReserveHeader>
-              <ReservationList />
+              <div
+                style={{
+                  width: '840px',
+                  padding: '20px 15px 0px 15px',
+                  textAlign: 'right',
+                }}
+              >
+                가격 단위 : 1kWh
+              </div>
             </div>
           </div>
         </SecondMapProvider>
