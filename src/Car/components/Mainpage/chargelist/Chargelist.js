@@ -1,6 +1,6 @@
 import React from 'react';
-import ChargeStation from '../../../../charge/components/charge_station/ChargeStation';
 import Frame from '../Frame';
+import ChargeStation from './../../charge/charge_station/ChargeStation';
 
 const Chargelist = () => {
   return (

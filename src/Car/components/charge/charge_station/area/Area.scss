@@ -11,13 +11,13 @@
     width: 400px;
     margin: 0 auto;
     display: flex;
-    justify-content: center;
 }
 
 .select-box {
-    width: 46%;
-    padding: 5px;
-    margin: 7.5px;
+    width: 39%;
+    padding: 4px;
+    margin-right: 3px;
+    margin-left: 5px;
     margin-top: 5px;
 }
 
@@ -53,4 +53,7 @@
 
 .reset-btn:hover {
     background-color: #c2e1ff;
+}
+.checkbox-box{
+    margin-top: 15%;
 }
