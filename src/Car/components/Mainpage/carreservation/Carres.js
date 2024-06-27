@@ -8,6 +8,7 @@ import '../../../../scss/Button.scss';
 import { StationProvider } from '../../../../contexts/StationContext';
 import styles from './reservation_css/Carres.modul.scss';
 import CarInfo from './CarInfo';
+import Rent from '../Rent/Rent.js';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -177,7 +178,8 @@ const Carres = () => {
         }
       />
       {modal ? modalOpen : button}
-      <CarInfo />
+
+      <Rent />
       <StationProvider />
     </>
   );
