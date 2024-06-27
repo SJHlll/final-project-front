@@ -5,12 +5,7 @@ import Eventlist from './Eventlist';
 const Event = () => {
   return (
     <div className='maincontainer'>
-      <div
-        className='contentline'
-        style={{
-          fontSize: '30px',
-        }}
-      >
+      <div className='contentline'>
         <div className='eventbody'>
           <Eventlist />
         </div>

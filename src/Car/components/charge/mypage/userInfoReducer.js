@@ -29,7 +29,7 @@ export const initialState = {
 // action.type: 어떠한 상태값을 변경하는지에 대한 값.
 // action.key: 입력창이 어디인지.
 // action.value: 입력값이 무엇인지.
-export const joinReducer = (state, action) => {
+export const userInfoReducer = (state, action) => {
   switch (action.type) {
     case 'SET_USER_VALUE':
       return {

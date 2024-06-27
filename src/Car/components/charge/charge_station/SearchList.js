@@ -37,7 +37,7 @@ const SearchList = ({ visible }) => {
   return (
     <>
       <div
-        className={`search-list-container ${isVisible ? 'visible' : 'hidden'}`}
+        className={`search-list-container ${isVisible ? 'hidden' : 'visible'}`}
       >
         <div className='search-list-content'>
           <ChargeStationSearch />

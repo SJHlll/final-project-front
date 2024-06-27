@@ -1,13 +1,12 @@
 import React from 'react';
 import ReservationCharge from '../../../charge/components/reservation_charge/ReservationCharge';
+import Frame from './Frame';
 
 const Chargeres = () => {
   return (
-    <div className='maincontainer'>
-      <div className='contentline'>
-        <ReservationCharge />
-      </div>
-    </div>
+    <Frame>
+      <ReservationCharge />
+    </Frame>
   );
 };
 

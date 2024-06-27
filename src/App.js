@@ -22,9 +22,12 @@ import ReservationCharge from './Car/components/charge/reservation_charge/Reserv
 import { Checkout } from './Car/components/pay/Checkout';
 import { Success } from './Car/components/pay/Success';
 import { Fail } from './Car/components/pay/Fail';
-import Carres from './Car/components/car/Carres';
-import UserInfoSave from './charge/components/mypage/UserInfoSave';
+
+import Chargelist from './Car/components/Mainpage/Chargelist';
+import Carreservation from './Car/components/Mainpage/carreservation/Carreservation';
 import EventDetail from './Car/components/Mainpage/event/EventDetail';
+import Carres from './Car/components/Mainpage/carreservation/Carres';
+import UserInfoSave from './Car/components/charge/mypage/UserInfoSave';
 
 const App = () => {
   const location = useLocation();
@@ -44,6 +47,21 @@ const App = () => {
           <Routes>
             {/* 메인 홈페이지 */}
             <Route exact path='/' element={<Testhome />} />
+            {/* 전기차 예약하기 */}
+            <Route
+              path='/car/res'
+              element={<Carreservation />}
+            />
+            {/* 충전소 조회 페이지 */}
+            <Route
+              path='charge/list'
+              element={<Chargelist />}
+            />
+            {/* 충전소 예약 페이지 */}
+            <Route
+              path='charge/reservation'
+              element={<ReservationCharge />}
+            />
             {/* 이용방법 페이지 */}
             <Route path='/noti' element={<Noti />} />
             {/* 이벤트 페이지 */}
@@ -85,6 +103,12 @@ const App = () => {
             />
 
             {/* 구글 로그인페이지 */}
+
+            {/* 회원가입 */}
+            {/* // <Route
+              // path='/register'
+              // element={<RegisterPage />}
+            // /> */}
 
             {/* 토스페이먼츠 */}
             <Route path='/pay' element={<Checkout />} />

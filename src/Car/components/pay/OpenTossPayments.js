@@ -1,4 +1,5 @@
 import React from 'react';
+import './Pay.scss';
 
 // 토스페이먼트 여는 컴포넌트
 const OpenTossPayments = ({ totalPrice }) => {

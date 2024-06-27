@@ -1,10 +1,12 @@
 import React from 'react';
+import './Eventlist.scss';
 import { useNavigate } from 'react-router-dom';
 
 const Eventlist = () => {
+
   const navigate = useNavigate();
 
-  const Notilist = [
+  const eventlistdummy = [
     {
       id: 1,
       img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/eventbanner1.png',
@@ -62,16 +64,16 @@ const Eventlist = () => {
         이벤트
       </div>
       <div
-        className='notiparent'
+        className='eventparent'
         style={{
           display: 'flex',
           flexWrap: 'wrap',
           justifyContent: 'space-around',
         }}
       >
-        {Notilist.map((item) => (
+        {eventlistdummy.map((item) => (
           <div
-            className='notilist'
+            className='eventlist'
             style={styles}
             onClick={() => handleClick(item)}
             key={item.id}
@@ -85,7 +87,7 @@ const Eventlist = () => {
                 objectFit: 'cover',
               }}
             />
-            <p>{item.content}</p>
+            <p className='eventp'>{item.content}</p>
           </div>
         ))}
       </div>

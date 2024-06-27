@@ -8,7 +8,7 @@ import {
   API_BASE_URL,
   USER,
 } from '../../../config/host-config';
-import ChargeFooter from '../car/logoBtn/ChargeFooter';
+import ChargeFooter from '../charge/footer/ChargeFooter';
 
 const Testheader = () => {
   const navigate = useNavigate();
@@ -60,7 +60,7 @@ const Testheader = () => {
         </button>
         <button
           className={State === 2 ? 'tabliactive' : 'tabli'}
-          onClick={() => onClick(2, '/carres')}
+          onClick={() => onClick(2, '/car/res')}
         >
           전기차 렌트
         </button>

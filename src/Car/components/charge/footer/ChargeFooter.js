@@ -1,8 +1,8 @@
 import React from 'react';
-import git from '../assets/img/git-logo.png';
-import notion from '../assets/img/notion-logo.png';
-import erd from '../assets/img/erdcloud-logo.png';
-import kakao from '../assets/img/talklogo.png';
+import git from '../../../assets/git-logo.png';
+import notion from '../../../assets/notion-logo.png';
+import erd from '../../../assets/erdcloud-logo.png';
+import kakao from '../../../assets/talklogo.png';
 import { useNavigate } from 'react-router-dom';
 import './ChargeFooter.scss';
 

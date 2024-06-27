@@ -21,6 +21,7 @@ const ReservationCharge = () => {
               >
                 가격 단위 : 1kWh
               </div>
+              <ReservationList />
             </div>
           </div>
         </SecondMapProvider>

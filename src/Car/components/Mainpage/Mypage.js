@@ -1,15 +1,15 @@
 import React from 'react';
 import './Mypage.scss';
+
+import Frame from './Frame';
 import MyPageCharge from '../charge/mypage/MyPageCharge';
 
 const Mypage = () => {
   return (
     <>
-      <div className='maincontainer'>
-        <div className='contentline'>
-          <MyPageCharge />
-        </div>
-      </div>
+      <Frame>
+        <MyPageCharge />
+      </Frame>
     </>
   );
 };

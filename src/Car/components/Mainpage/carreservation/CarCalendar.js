@@ -3,7 +3,7 @@ import DatePicker, {
   registerLocale,
 } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import '../car/reservation_css/CarCalendar.scss';
+import './reservation_css/CarCalendar.scss';
 import { ko } from 'date-fns/locale';
 import { addMonths, setHours, setMinutes } from 'date-fns';
 

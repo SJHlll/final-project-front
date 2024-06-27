@@ -1,16 +1,17 @@
 .small-screen {
     z-index: 10;
     position: absolute;
-    right: 260px;
-    bottom: 10px;
+    right: 10px;
+    bottom: 30px;
     background-color: white;
     border: 1px solid #aaa;
+    border-radius: 10px;
     width: 400px;
     height: 50px;
     display: flex;
     justify-content: space-around;
     opacity: 0.95;
-    
+
     // 드래그 못하게
     -webkit-user-select:none;
     -moz-user-select:none;
@@ -19,11 +20,11 @@
 
     .marker-list {
         line-height: 45px;
-        
+
         &.active {
             opacity: 1;
         }
-      
+
         &.inactive {
             opacity: 0.5;
         }

@@ -10,13 +10,13 @@ import {
   initialState,
   userInfoReducer,
 } from './userInfoReducer';
-import AuthContext from '../../../util/AuthContext';
 import { Grid, TextField, debounce } from '@mui/material';
 import {
   API_BASE_URL,
   USER,
-} from '../../../config/host-config';
+} from '../../../../config/host-config';
 import { useNavigate } from 'react-router-dom';
+import AuthContext from '../../../../util/AuthContext';
 
 const UserInfoSave = () => {
   const navigate = useNavigate();

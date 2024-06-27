@@ -16,6 +16,7 @@
     left: 0;
     opacity: 1;
     transition: left 0.5s ease, opacity 0.3s ease;
+    width: 30%
   }
   
   .search-list-container.hidden {
@@ -51,9 +52,9 @@
   }
   
   .open-btn.visible {
-    left: 501px;
+    left: 30%;
   }
 
   .open-btn.hidden {
-    left: 1px;
+    left: 0;
   }
