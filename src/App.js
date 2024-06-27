@@ -25,6 +25,7 @@ import { Checkout } from './components/pay/Checkout';
 import { Success } from './components/pay/Success';
 import { Fail } from './components/pay/Fail';
 import Carres from './Car/components/car/Carres';
+import EventDetail from './Car/components/Mainpage/event/EventDetil';
 
 const App = () => {
   const location = useLocation();
@@ -48,6 +49,10 @@ const App = () => {
             <Route path='/noti' element={<Noti />} />
             {/* 이벤트 페이지 */}
             <Route path='/event' element={<Event />} />
+            <Route
+              path='/event/:id'
+              element={<EventDetail />}
+            />
             {/* 이용후기 페이지 */}
             <Route path='/review' element={<Review />} />
             {/* 충전소 메인 페이지 */}
