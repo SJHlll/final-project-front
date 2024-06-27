@@ -1,0 +1,62 @@
+.rent-slide {
+    height: 300px; // 슬라이드 이미지 높이 설정
+    // border: 1px solid gray;
+    margin: 10px;
+
+    img {
+        width: 100%; // 이미지를 부모 요소에 맞게 30%로 설정
+        height: 100%; // 이미지를 부모 요소에 맞게 100%로 설정
+        object-fit: cover; // 이미지를 화면에 꽉 채우도록 설정 (가로세로 비율 유지)
+        // border: 1px solid red;
+        // margin-left: 34%; // 왼쪽 마진 추가
+        cursor: pointer; // 포인터 커서 추가
+    }
+}
+
+.rent-slider {
+    position: relative;
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        color: #fff;
+        background-color: #007bff;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        font-size: 20px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .swiper-button-prev {
+        left: 10px;
+    }
+
+    .swiper-button-next {
+        right: 10px;
+    }
+
+    .selected-image-container {
+        position: absolute;
+        top: 50%; // 아래에서 20px 떨어지도록 설정
+        left: 50%; // 중앙 정렬을 위해 왼쪽 50% 위치
+        transform: translateX(-50%); // 왼쪽 50%만큼 이동
+        width: 400px; // 너비 500px로 설정
+        height: 400px; // 높이 500px로 설정
+        background-color: #fff;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000; // 다른 요소 위에 오도록 z-index 설정
+
+        .selected-image {
+            width: 100%; // 이미지를 부모 요소에 맞게 100%로 설정
+            height: 100%; // 이미지를 부모 요소에 맞게 100%로 설정
+            object-fit: cover; // 이미지를 화면에 꽉 채우도록 설정 (가로세로 비율 유지)
+        }
+    }
+}
