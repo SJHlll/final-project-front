@@ -22,12 +22,12 @@ import ReservationCharge from './Car/components/charge/reservation_charge/Reserv
 import { Checkout } from './Car/components/pay/Checkout';
 import { Success } from './Car/components/pay/Success';
 import { Fail } from './Car/components/pay/Fail';
-
 import Chargelist from './Car/components/Mainpage/Chargelist';
 import Carreservation from './Car/components/Mainpage/carreservation/Carreservation';
 import EventDetail from './Car/components/Mainpage/event/EventDetail';
 import Carres from './Car/components/Mainpage/carreservation/Carres';
 import UserInfoSave from './Car/components/charge/mypage/UserInfoSave';
+import RegisterPage from './Car/components/user/RegisterPage';
 
 const App = () => {
   const location = useLocation();
@@ -105,10 +105,10 @@ const App = () => {
             {/* 구글 로그인페이지 */}
 
             {/* 회원가입 */}
-            {/* // <Route
-              // path='/register'
-              // element={<RegisterPage />}
-            // /> */}
+            <Route
+              path='/register'
+              element={<RegisterPage />}
+            />
 
             {/* 토스페이먼츠 */}
             <Route path='/pay' element={<Checkout />} />
