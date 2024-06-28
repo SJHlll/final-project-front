@@ -16,7 +16,6 @@ import Testheader from './Car/components/Mainpage/Testheader';
 import Testhome from './Car/components/Mainpage/Testhome';
 import { AuthContextProvider } from './util/AuthContext';
 import { ModalProvider } from '@lasbe/react-modal';
-import LoginSuccess from './Car/components/user/LoginSuccess';
 import ChargeStation from './Car/components/charge/charge_station/ChargeStation';
 import ReservationCharge from './Car/components/charge/reservation_charge/ReservationCharge';
 import { Checkout } from './Car/components/pay/Checkout';
@@ -28,6 +27,7 @@ import EventDetail from './Car/components/Mainpage/event/EventDetail';
 import Carres from './Car/components/Mainpage/carreservation/Carres';
 import UserInfoSave from './Car/components/charge/mypage/UserInfoSave';
 import RegisterPage from './Car/components/user/RegisterPage';
+import NotiPage from './Car/components/Mainpage/noti/Notipage';
 
 const App = () => {
   const location = useLocation();
@@ -64,6 +64,11 @@ const App = () => {
             />
             {/* 이용방법 페이지 */}
             <Route path='/noti' element={<Noti />} />
+
+            <Route
+              path='/noti/:id'
+              element={<NotiPage />}
+            />
             {/* 이벤트 페이지 */}
             <Route path='/event' element={<Event />} />
             <Route
@@ -117,7 +122,6 @@ const App = () => {
 
             {/* 에러페이지 */}
             <Route path='/*' element={<Error />} />
-
             <Route
               path='/info'
               element={<UserInfoSave />}

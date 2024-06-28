@@ -3,7 +3,6 @@ import './Eventlist.scss';
 import { useNavigate } from 'react-router-dom';
 
 const Eventlist = () => {
-
   const navigate = useNavigate();
 
   const eventlistdummy = [
