@@ -25,7 +25,7 @@ const Testheader = () => {
     navigate('/Login');
   };
 
-  const { isLoggedIn, userName, onLogout } =
+  const { isLoggedIn, name, onLogout } =
     useContext(AuthContext);
 
   // 로그아웃 핸들러
@@ -98,7 +98,7 @@ const Testheader = () => {
           className={State === 8 ? 'tabliactive' : 'tabli'}
           onClick={() => onClick(8, '/mypage')}
         >
-          마이페이지 {userName}
+          마이페이지 {name}
         </button>
         {!isLoggedIn ? (
           <button className='loginbtn' onClick={click}>

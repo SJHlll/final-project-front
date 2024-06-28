@@ -78,7 +78,7 @@ const UserInfoSave = () => {
 
   const phoneNumberHandler = (e) => {
     const inputValue = e.target.value;
-    const phoneRegex = /^(010)-[0-9]{3,4}-[0,9]{4}$/;
+    const phoneRegex = /^(010)-[0-9]{3,4}-[0-9]{4}$/;
 
     let msg; // 검증 메세지를 저장할 변수
     let flag = false; // 입력값 검증 여부 체크 변수
@@ -88,6 +88,7 @@ const UserInfoSave = () => {
     } else if (!phoneRegex.test(inputValue)) {
       msg = '핸드폰 번호 형식이 올바르지 않습니다.';
     } else {
+      msg = 'good!';
       flag = true;
     }
 
@@ -112,6 +113,7 @@ const UserInfoSave = () => {
     } else if (!birthRegex.test(inputValue)) {
       msg = '생년월일(8자리) 형식이 올바르지 않습니다.';
     } else {
+      msg = 'good!';
       flag = true;
     }
 
@@ -122,6 +124,8 @@ const UserInfoSave = () => {
   const isValid = () => {
     for (let key in correct) {
       const flag = correct[key];
+      console.log('key : ', userValue);
+      console.log('correct : ', correct[key]);
       if (!flag) return false;
     }
     return true;
@@ -130,11 +134,18 @@ const UserInfoSave = () => {
   // 회원정보 수정 처리 서버 요청
   const updateUserInfoPost = async () => {
     try {
-      const res = await fetch(API_BASE_URL + USER, {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(userValue),
-      });
+      const res = await fetch(
+        API_BASE_URL + USER + '/update',
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`,
+          },
+          body: JSON.stringify(userValue),
+        },
+        console.log(userValue),
+      );
 
       if (res.ok) {
         const data = await res.json();
@@ -143,8 +154,7 @@ const UserInfoSave = () => {
         );
         navigate('/');
       } else {
-        // 상태 코드가 200이 아닌 경우
-        const errData = await res.json();
+        const errData = await res.text();
         console.log(
           'Error response from server : ',
           errData,
@@ -265,22 +275,23 @@ const UserInfoSave = () => {
             </span>
           </div>
         </Grid>
-      </form>
-      <div
-        style={{
-          width: '100%',
-          textAlign: 'center',
-          padding: '10px 0px',
-        }}
-      >
-        <button
-          type='submit'
-          className='public-btn updating'
-          onClick={updateButtonClickHandler}
+
+        <div
+          style={{
+            width: '100%',
+            textAlign: 'center',
+            padding: '10px 0px',
+          }}
         >
-          수정하기
-        </button>
-      </div>
+          <button
+            type='submit'
+            className='public-btn updating'
+            onClick={updateButtonClickHandler}
+          >
+            수정하기
+          </button>
+        </div>
+      </form>
     </Modal>
   );
 
