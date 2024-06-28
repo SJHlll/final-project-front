@@ -17,6 +17,7 @@ export const AuthContextProvider = (props) => {
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [loginMethod, setLoginMethod] = useState('');
 
   // 로그인 핸들러
   const loginHandler = (
@@ -45,6 +46,21 @@ export const AuthContextProvider = (props) => {
     setUserName(userName);
     setEmail(email);
     setPhoneNumber(phoneNumber);
+
+    console.log(localStorage.getItem('LOGIN_USERNAME'));
+    console.log(localStorage.getItem('USER_EMAIL'));
+    console.log(
+      '핸드폰번호 : ',
+      localStorage.getItem('USER_PHONENUMBER'),
+    );
+    console.log(
+      '권한 : ',
+      localStorage.getItem('USER_ROLE'),
+    );
+    console.log(
+      '로그인 : ',
+      localStorage.getItem('LOGIN_METHOD'),
+    );
   };
 
   // 로그아웃 핸들러
@@ -54,6 +70,7 @@ export const AuthContextProvider = (props) => {
     setUserName('');
     setEmail('');
     setPhoneNumber('');
+    setLoginMethod('');
   };
 
   useEffect(() => {
@@ -64,6 +81,7 @@ export const AuthContextProvider = (props) => {
       setPhoneNumber(
         localStorage.getItem('USER_PHONENUMBER'),
       );
+      setLoginMethod(localStorage.getItem('LOGIN_METHOD'));
     }
   }, []);
 
@@ -74,6 +92,7 @@ export const AuthContextProvider = (props) => {
         userName,
         email,
         phoneNumber,
+        loginMethod,
         onLogout: logoutHandler,
         onLogin: loginHandler,
       }}
