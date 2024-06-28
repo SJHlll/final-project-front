@@ -14,7 +14,6 @@ import CarInfo from './CarInfo';
 import Rent from '../Rent/Rent.js';
 import { CarContext } from './../../../../contexts/CarContext';
 
-
 const ModalBackground = styled.div`
   position: fixed;
   top: 0;
@@ -211,7 +210,6 @@ const Carres = () => {
         {modal ? modalOpen : button}
         <Rent />
       </RightContent>
-    <StationProvider />
     </>
   );
 };
