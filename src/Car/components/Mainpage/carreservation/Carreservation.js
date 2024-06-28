@@ -1,15 +1,25 @@
 import React from 'react';
 import Carres from './Carres';
 import Frame from '../Frame';
+import styled from 'styled-components';
+import { CarProvider } from '../../../../contexts/CarContext';
 
 const Carreservation = () => {
   return (
-    <Frame>
-      <div className='carreservationbody'>
-        <Carres />
-      </div>
-    </Frame>
+    <CarProvider>
+      <Frame>
+        <CarReservationBody>
+          <Carres />
+        </CarReservationBody>
+      </Frame>
+    </CarProvider>
   );
 };
 
 export default Carreservation;
+
+const CarReservationBody = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;

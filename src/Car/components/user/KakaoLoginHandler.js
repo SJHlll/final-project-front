@@ -2,8 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import {
   API_BASE_URL,
   USER,
-} from '../../config/host-config';
-import AuthContext from '../../util/AuthContext';
+} from '../../../config/host-config';
+import AuthContext from '../../../util/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const KakaoLoginHandler = () => {
@@ -37,7 +37,7 @@ const KakaoLoginHandler = () => {
         // Context API를 사용하여 로그인 상태를 업데이트 합니다.
         onLogin(token, userName, role);
 
-        redirection('/login-success'); // 카카오 로그인 성공 시 이동 화면
+        redirection('/'); // 카카오 로그인 성공 시 메인으로 이동
       } catch (error) {
         console.error('Error during Kakao login:', error);
       }

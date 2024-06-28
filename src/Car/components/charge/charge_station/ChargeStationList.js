@@ -92,15 +92,21 @@ const ChargeStationList = () => {
 
   // 검색을 안한 초기 상태
   if (!isSearchClicked) {
-    return <p>검색 조건을 입력해주세요.</p>;
+    return (
+      <p className='list-content'>
+        검색 조건을 입력해주세요.
+      </p>
+    );
   }
 
   // 충전소 데이터 불러오는 상태
   if (isLoading) {
     return (
       <div>
-        <p>충전소 정보를 불러오는 중...</p>
-        <p>
+        <p className='list-content'>
+          충전소 정보를 불러오는 중...
+        </p>
+        <p className='list-content'>
           <img
             className='loading'
             src={loadingImg}
@@ -113,7 +119,7 @@ const ChargeStationList = () => {
 
   // 에러
   if (error) {
-    return <p>Error: {error}</p>;
+    return <p className='list-content'>Error: {error}</p>;
   }
 
   // 더 보기 버튼 클릭 시 20개씩 더 보여주는 함수
@@ -166,7 +172,7 @@ const ChargeStationList = () => {
           )}
         </>
       ) : (
-        <p>
+        <p className='list-content'>
           조건에 맞는 충전소가 없습니다. 검색을 다시
           진행해주세요.
         </p>
