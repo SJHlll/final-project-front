@@ -7,7 +7,7 @@ import SwiperCore, {
   Autoplay,
 } from 'swiper';
 
-import './Rent.scss';
+import './reservation_css/CarResSwiper.scss';
 
 import Logo from '../../../assets/Logo.png'; // 기본 이미지
 import EventBanner1 from '../../../assets/eventbanner1.png'; // 추가 이미지

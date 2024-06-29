@@ -8,7 +8,7 @@ import '../../../../scss/Button.scss';
 import { StationProvider } from '../../../../contexts/StationContext';
 import styles from './reservation_css/Carres.modul.scss';
 import CarInfo from './CarInfo';
-import Rent from '../Rent/Rent';
+import CarResSwiper from './CarResSwiper';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -179,7 +179,7 @@ const Carres = () => {
       />
       {modal ? modalOpen : button}
       <StationProvider />
-      <Rent />
+      <CarResSwiper />
     </>
   );
 };

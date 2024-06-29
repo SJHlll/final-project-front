@@ -85,7 +85,7 @@ const App = () => {
             />
 
             {/* 전기차 예약하기 */}
-            <Route path='/carres' element={<Carres />} />
+            <Route path='/car/res' element={<Carres />} />
 
             {/* 마이페이지 */}
             <Route path='/mypage' element={<Mypage />} />
