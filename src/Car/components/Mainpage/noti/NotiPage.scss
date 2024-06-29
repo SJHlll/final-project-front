@@ -1,0 +1,50 @@
+.categoriheader{
+    font-size: 24px;
+    font-weight: bold;
+    border: 1px solid black;
+    width: 150px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 1%;
+}
+.backnoti{
+    width: 150px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    position: relative;
+    left: 89%;
+    top: -100px;
+    &:hover{
+        background-color: #c2e1ff;
+        color: #2c7fdf;
+        border: 1px solid #2c7fdf;
+    }
+}
+.Notiheader{
+    border-radius: 15px;
+    border: 1px solid black;
+    padding: 1%;
+    padding-left: 2%;
+}
+
+.Notihits{
+    width: 100px;
+   position: relative;
+   left: 1200px;
+   margin-top: 0px;
+   bottom: 60px;
+}
+
+.Notibody{
+    height: 550px;
+    border: 1px solid black;
+    border-radius: 15px;
+    margin-top: 0px;
+    position: relative;
+    bottom: 40px;
+    font-size: 24px;
+    text-align: start;
+    padding: 2%;
+}

@@ -28,8 +28,6 @@ import EventDetail from './Car/components/Mainpage/event/EventDetail';
 import Carres from './Car/components/Mainpage/carreservation/Carres';
 import UserInfoSave from './Car/components/charge/mypage/UserInfoSave';
 import RegisterPage from './Car/components/user/RegisterPage';
-import KakaoLoginHandler from './Car/components/user/KakaoLoginHandler';
-import NaverLoginHandler from './Car/components/user/NaverLoginHandler';
 
 const App = () => {
   const location = useLocation();
@@ -66,6 +64,11 @@ const App = () => {
             />
             {/* 이용방법 페이지 */}
             <Route path='/noti' element={<Noti />} />
+
+            <Route
+              path='/noti/:id'
+              element={<NotiPage />}
+            />
             {/* 이벤트 페이지 */}
             <Route path='/event' element={<Event />} />
             <Route
@@ -96,12 +99,12 @@ const App = () => {
             {/* 카카오 로그인페이지 */}
             <Route
               path='/oauth/kakao'
-              element={<KakaoLoginHandler />} // 로그아웃 아이콘 나오면 성공
+              element={<Testhome />} // 강아지 사진 나오면 로그인 성공
             />
             {/* 네이버 로그인페이지 */}
             <Route
               path='/oauth/naver'
-              element={<NaverLoginHandler />} // 로그아웃 아이콘 나오면 성공
+              element={<Testhome />} // 강아지 사진 나오면 로그인 성공
             />
 
             {/* 구글 로그인페이지 */}
