@@ -7,7 +7,7 @@ import SwiperCore, {
   Autoplay,
 } from 'swiper';
 
-import './reservation_css/CarResSwiper.scss';
+import './reservation_css/CarSwiper.scss';
 
 import Logo from '../../../assets/Logo.png'; // 기본 이미지
 import EventBanner1 from '../../../assets/eventbanner1.png'; // 추가 이미지
@@ -15,7 +15,7 @@ import NewLogo from '../../../assets/newlogo.png'; // 세 번째 슬라이드 �
 
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 
-const Rent = () => {
+const CarSwiper = () => {
   const [selectedImageIndex, setSelectedImageIndex] =
     useState(null);
 
@@ -109,4 +109,4 @@ const Rent = () => {
   );
 };
 
-export default Rent;
+export default CarSwiper;

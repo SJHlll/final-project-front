@@ -16,7 +16,6 @@ import Testheader from './Car/components/Mainpage/Testheader';
 import Testhome from './Car/components/Mainpage/Testhome';
 import { AuthContextProvider } from './util/AuthContext';
 import { ModalProvider } from '@lasbe/react-modal';
-import LoginSuccess from './Car/components/user/LoginSuccess';
 import ChargeStation from './Car/components/charge/charge_station/ChargeStation';
 import ReservationCharge from './Car/components/charge/reservation_charge/ReservationCharge';
 import { Checkout } from './Car/components/pay/Checkout';
