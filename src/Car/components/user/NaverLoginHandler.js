@@ -38,11 +38,24 @@ const NaverLoginHandler = () => {
           '&state=' +
           state,
       );
-      const { token, userName, email, phoneNumber, role } =
-        await res.json(); // 서버에서 온 json 읽기
+      const {
+        token,
+        userName,
+        email,
+        phoneNumber,
+        role,
+        birthDay,
+      } = await res.json(); // 서버에서 온 json 읽기
 
       // Context API를 사용하여 로그인 상태를 업데이트 합니다.
-      onLogin(token, userName, email, phoneNumber, role);
+      onLogin(
+        token,
+        userName,
+        email,
+        phoneNumber,
+        role,
+        birthDay,
+      );
 
       redirection('/'); // 네이버 로그인 성공 시 메인화면 이동
     };
