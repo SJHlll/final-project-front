@@ -6,6 +6,9 @@ const AuthContext = React.createContext({
   userName: '',
   email: '',
   phoneNumber: '',
+  role: '',
+  birthDay: '',
+  loginMethod: '',
   onLogout: () => {},
   onLogin: () => {},
 });
@@ -17,6 +20,8 @@ export const AuthContextProvider = (props) => {
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [role, setRole] = useState('');
+  const [birthDay, setBirthDay] = useState('');
   const [loginMethod, setLoginMethod] = useState('');
 
   // 로그인 핸들러
@@ -26,6 +31,8 @@ export const AuthContextProvider = (props) => {
     email,
     phoneNumber,
     role,
+    birthDay,
+    loginMethod,
   ) => {
     // json에 담긴 인증 정보를 클라이언트에 보관
     // 1. 로컬 스토리지 - 브라우저가 종료 되어도 유지됨.
@@ -42,24 +49,18 @@ export const AuthContextProvider = (props) => {
     localStorage.setItem('USER_EMAIL', email);
     localStorage.setItem('USER_PHONENUMBER', phoneNumber);
     localStorage.setItem('USER_ROLE', role);
+    localStorage.setItem('USER_BIRTHDAY', birthDay);
     setIsLoggedIn(true);
     setUserName(userName);
     setEmail(email);
     setPhoneNumber(phoneNumber);
+    setRole(role);
+    setBirthDay(birthDay);
+    setLoginMethod(loginMethod);
 
-    console.log(localStorage.getItem('LOGIN_USERNAME'));
-    console.log(localStorage.getItem('USER_EMAIL'));
     console.log(
-      '핸드폰번호 : ',
-      localStorage.getItem('USER_PHONENUMBER'),
-    );
-    console.log(
-      '권한 : ',
-      localStorage.getItem('USER_ROLE'),
-    );
-    console.log(
-      '로그인 : ',
-      localStorage.getItem('LOGIN_METHOD'),
+      '생일 : ',
+      localStorage.getItem('USER_BIRTHDAY'),
     );
   };
 
@@ -70,6 +71,8 @@ export const AuthContextProvider = (props) => {
     setUserName('');
     setEmail('');
     setPhoneNumber('');
+    setRole('');
+    setBirthDay('');
     setLoginMethod('');
   };
 
@@ -81,6 +84,8 @@ export const AuthContextProvider = (props) => {
       setPhoneNumber(
         localStorage.getItem('USER_PHONENUMBER'),
       );
+      setRole(localStorage.getItem('USER_ROLE'));
+      setBirthDay(localStorage.getItem('USER_BIRTHDAY'));
       setLoginMethod(localStorage.getItem('LOGIN_METHOD'));
     }
   }, []);
@@ -92,6 +97,8 @@ export const AuthContextProvider = (props) => {
         userName,
         email,
         phoneNumber,
+        role,
+        birthDay,
         loginMethod,
         onLogout: logoutHandler,
         onLogin: loginHandler,

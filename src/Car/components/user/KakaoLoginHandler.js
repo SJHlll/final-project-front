@@ -32,11 +32,25 @@ const KakaoLoginHandler = () => {
           REQUEST_URL + '/kakaoLogin?code=' + code,
         );
 
-        const { token, userName, role } = await res.json(); // 서버에서 온 json 읽기
+        const {
+          token,
+          userName,
+          email,
+          phoneNumber,
+          role,
+          birthDay,
+        } = await res.json(); // 서버에서 온 json 읽기
 
         // Context API를 사용하여 로그인 상태를 업데이트 합니다.
-        onLogin(token, userName, role);
-
+        onLogin(
+          token,
+          userName,
+          email,
+          phoneNumber,
+          role,
+          birthDay,
+        );
+        console.log('birth: ', birthDay);
         redirection('/'); // 카카오 로그인 성공 시 메인으로 이동
       } catch (error) {
         console.error('Error during Kakao login:', error);

@@ -150,7 +150,7 @@ const UserInfoSave = () => {
       if (res.ok) {
         const data = await res.json();
         alert(
-          `${data.userName}님 회원정보 수정이 완료되었습니다!`,
+          `${userValue.userName}님 회원정보 수정이 완료되었습니다!`,
         );
         navigate('/');
       } else {
@@ -185,7 +185,8 @@ const UserInfoSave = () => {
 
   const [modalOpen, setModalOpen] = useState(false);
 
-  const { userName, email } = useContext(AuthContext);
+  const { userName, email, phoneNumber, birthDay } =
+    useContext(AuthContext);
 
   const toggle = () => setModalOpen(!modalOpen);
 
@@ -239,6 +240,7 @@ const UserInfoSave = () => {
               id='outl'
               variant='standard'
               size='small'
+              defaultValue={phoneNumber}
               onChange={phoneNumberHandler}
             />
           </Grid>
@@ -260,6 +262,7 @@ const UserInfoSave = () => {
               id='outl'
               variant='standard'
               size='small'
+              defaultValue={birthDay}
               onChange={birthDayHandler}
             />
           </Grid>

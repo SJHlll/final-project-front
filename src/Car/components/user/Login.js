@@ -65,11 +65,24 @@ const Login = () => {
       console.log('res,', res);
       console.log('Response Data ', res.data);
 
-      const { token, userName, email, phoneNumber, role } =
-        await res.data;
+      const {
+        token,
+        userName,
+        email,
+        phoneNumber,
+        role,
+        birthDay,
+      } = await res.data;
 
       // Context API를 사용하여 로그인 상태를 업데이트 합니다.
-      onLogin(token, userName, email, phoneNumber, role);
+      onLogin(
+        token,
+        userName,
+        email,
+        phoneNumber,
+        role,
+        birthDay,
+      );
 
       // 홈으로 리다이렉트
       redirection('/');
