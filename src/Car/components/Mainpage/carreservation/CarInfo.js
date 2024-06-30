@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './reservation_css/CarInfo.scss';
 
 // Carres.js에서 불러온 rentCar를 집어넣음
 const CarInfo = ({ rentCar }) => {
+  //const [clickCat, setClickCar] = useState(false);
+  const [carList, setCarList] = useState(null);
+
+  useEffect(() => {
+    fetch('http://lacalhost:3000/car/res')
+      .then((response) => response.json())
+      .then((data) => setCarList(data));
+  }, []);
+
   return (
     <>
       <div className='car-info-container'>
