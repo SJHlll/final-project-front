@@ -27,6 +27,7 @@ import EventDetail from './Car/components/Mainpage/event/EventDetail';
 import Carres from './Car/components/Mainpage/carreservation/Carres';
 import UserInfoSave from './Car/components/charge/mypage/UserInfoSave';
 import RegisterPage from './Car/components/user/RegisterPage';
+import NotiPage from './Car/components/Mainpage/noti/Notipage';
 
 const App = () => {
   const location = useLocation();
