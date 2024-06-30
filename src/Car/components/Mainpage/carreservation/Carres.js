@@ -9,7 +9,6 @@ import { StationProvider } from '../../../../contexts/StationContext';
 import styles from './reservation_css/Carres.modul.scss';
 import CarInfo from './CarInfo';
 import CarSwiper from './CarSwiper';
-import { CarContext } from './../../../../contexts/CarContext';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -35,6 +34,7 @@ const ModalContent = styled.div`
 
 const Carres = () => {
   const [modal, setModal] = useState(false);
+  const [selectedCar, setSelectedCar] = useState(null); // 선택된 차의 정보를 저장할 상태
   const toggle = () => setModal(!modal);
 
   const [pickup, setPickup] = useState({
@@ -180,7 +180,8 @@ const Carres = () => {
       />
       {modal ? modalOpen : button}
       <StationProvider />
-      <CarSwiper />
+      <CarSwiper onSelectCar={selectedCar} />
+      {selectedCar && <CarInfo rentCar={[selectedCar]} />}
     </>
   );
 };
