@@ -7,7 +7,7 @@ import React, {
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.module.css';
 import '../scss/ReservationModal.scss';
-import OpenTossPayments from '../../pay/OpenTossPayments';
+// import OpenTossPayments from '../../pay/OpenTossPayments';
 import '../../../../scss/Button.scss';
 import AuthContext from '../../../../util/AuthContext';
 import axios from 'axios';
@@ -148,8 +148,25 @@ const ReservationModal = ({
       );
       console.log(response.data);
       console.log(1);
+
+      // 이상 없으면 새 결제창 염.
+      const width = 700;
+      const height = 800;
+      const left = window.screen.width / 2 - width / 2;
+      const top = window.screen.height / 2 - height / 2;
+
+      window.open(
+        `/pay?totalPrice=${calculateTotalPrice()}`,
+        '_blank',
+        `width=${width},height=${height},top=${top},left=${left}`,
+      );
+      // 에러 발생 시 새 결제창 안염.
     } catch (error) {
-      console.error(error);
+      if (error.response && error.response.status === 400) {
+        alert('더 이상 충전소를 예약할 수 없습니다.');
+      } else {
+        console.error(error);
+      }
       console.log(2);
     }
   };
@@ -262,9 +279,9 @@ const ReservationModal = ({
             }}
           >
             <button className='public-btn'>
-              <OpenTossPayments
-                totalPrice={calculateTotalPrice()}
-              />
+              <div>
+                <span className='pay-button'>결제하기</span>
+              </div>
             </button>
           </div>
         </form>
