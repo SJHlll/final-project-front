@@ -165,6 +165,7 @@ const ReservationModal = ({
       // 에러 발생 시 새 결제창 안염.
     } catch (error) {
       if (error.response && error.response.status === 400) {
+        console.error(error);
         alert(
           `'${userName}' 회원님은 이미 예약하신 충전소가 있어\n'${stationName}' 충전소를 예약할 수 없습니다.`,
         );
@@ -175,6 +176,7 @@ const ReservationModal = ({
         }
       } else {
         console.error(error);
+        alert(error);
       }
       console.log(2);
     }
