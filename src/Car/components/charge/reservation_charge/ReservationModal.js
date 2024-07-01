@@ -101,7 +101,7 @@ const ReservationModal = ({
       : price * selectedValue;
   };
 
-  // submit 이벤트 핸들러
+  // 모달창 결제버튼 함수
   const reservationHandler = async (e) => {
     e.preventDefault();
 
@@ -127,6 +127,7 @@ const ReservationModal = ({
     const { adjustedPrice, adjustedSelectedValue } =
       adjustValues(speed, price, selectedValue);
 
+    // 백엔드에서 데이터 가져오기
     const requestDTO = {
       chargeId,
       name: userName,
@@ -141,6 +142,7 @@ const ReservationModal = ({
     };
     console.log(requestDTO);
 
+    // 시도
     try {
       const response = await axios.post(
         'http://localhost:8181/charge/reservation',
