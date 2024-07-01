@@ -10,7 +10,6 @@ import styles from './reservation_css/Carres.modul.scss';
 import CarInfo from './CarInfo';
 import Rent from '../Rent/Rent.js';
 import { CarContext } from './../../../../contexts/CarContext';
-import { StationProvider } from '../../../../contexts/StationContext';
 
 const ModalBackground = styled.div`
   position: fixed;

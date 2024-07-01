@@ -16,7 +16,6 @@ import Testheader from './Car/components/Mainpage/Testheader';
 import Testhome from './Car/components/Mainpage/Testhome';
 import { AuthContextProvider } from './util/AuthContext';
 import { ModalProvider } from '@lasbe/react-modal';
-import LoginSuccess from './Car/components/user/LoginSuccess';
 import ChargeStation from './Car/components/charge/charge_station/ChargeStation';
 import ReservationCharge from './Car/components/charge/reservation_charge/ReservationCharge';
 import { Checkout } from './Car/components/pay/Checkout';
@@ -28,6 +27,9 @@ import EventDetail from './Car/components/Mainpage/event/EventDetail';
 import Carres from './Car/components/Mainpage/carreservation/Carres';
 import UserInfoSave from './Car/components/charge/mypage/UserInfoSave';
 import RegisterPage from './Car/components/user/RegisterPage';
+import NotiPage from './Car/components/Mainpage/noti/Notipage';
+import KakaoLoginHandler from './Car/components/user/KakaoLoginHandler';
+import NaverLoginHandler from './Car/components/user/NaverLoginHandler';
 
 const App = () => {
   const location = useLocation();
@@ -99,12 +101,12 @@ const App = () => {
             {/* 카카오 로그인페이지 */}
             <Route
               path='/oauth/kakao'
-              element={<Testhome />} // 강아지 사진 나오면 로그인 성공
+              element={<KakaoLoginHandler />} // 강아지 사진 나오면 로그인 성공
             />
             {/* 네이버 로그인페이지 */}
             <Route
               path='/oauth/naver'
-              element={<Testhome />} // 강아지 사진 나오면 로그인 성공
+              element={<NaverLoginHandler />} // 강아지 사진 나오면 로그인 성공
             />
 
             {/* 구글 로그인페이지 */}
