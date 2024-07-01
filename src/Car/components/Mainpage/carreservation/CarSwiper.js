@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.min.css';
 import SwiperCore, {
@@ -7,17 +7,34 @@ import SwiperCore, {
   Autoplay,
 } from 'swiper';
 
-import './Rent.scss';
+import './reservation_css/CarSwiper.scss';
 
 import Logo from '../../../assets/Logo.png'; // 기본 이미지
 import EventBanner1 from '../../../assets/eventbanner1.png'; // 추가 이미지
 import NewLogo from '../../../assets/newlogo.png'; // 세 번째 슬라이드 이미지
+import axios from 'axios';
 
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 
-const Rent = () => {
-  const [selectedImageIndex, setSelectedImageIndex] =
+const CarSwiper = ({ onSelectCar }) => {
+  const [carList, setCarList] = useState([]); // 스위퍼에 차 이미지들
+
+  const [selectedImageIndex, setSelectedImageIndex] = // 선택한 차 이미지
     useState(null);
+
+  useEffect(() => {
+    // 데이터를 DB에서 가져옵니다.
+    const fetchCarData = async () => {
+      try {
+        const response = await axios.get('/api/car-data'); // 실제 API 엔드포인트로 변경해야 합니다.
+        setCarList(response.data);
+      } catch (error) {
+        console.error('Error fetching car data:', error);
+      }
+    };
+
+    fetchCarData();
+  }, []);
 
   // 이미지 클릭 시 선택된 이미지 설정
   const handleImageClick = (index) => {
@@ -30,41 +47,18 @@ const Rent = () => {
   };
 
   // 슬라이드들을 맵핑하여 SwiperSlide로 반환
-  const slides = Array.from({ length: 10 }).map(
-    (_, index) => (
-      <SwiperSlide key={index}>
-        <div className='rent-slide'>
-          {index === selectedImageIndex ? (
-            // 선택된 이미지
-            <img
-              src={
-                index === 1
-                  ? EventBanner1
-                  : index === 2
-                    ? NewLogo
-                    : Logo
-              }
-              alt={`Slide ${index + 1}`}
-              onClick={() => handleImageClick(index)}
-            />
-          ) : (
-            // 기본 이미지 (슬라이드 버튼 옆에 보여질 이미지)
-            <img
-              src={
-                index === 1
-                  ? EventBanner1
-                  : index === 2
-                    ? NewLogo
-                    : Logo
-              }
-              alt={`Slide ${index + 1}`}
-              onClick={() => handleImageClick(index)}
-            />
-          )}
-        </div>
-      </SwiperSlide>
-    ),
-  );
+  const slides = carList.map((car, index) => (
+    <SwiperSlide key={car.id}>
+      <div className='rent-slide'>
+        {/* 선택된 이미지 */}
+        <img
+          src={car.img}
+          alt={`Slide ${index + 1}`}
+          onClick={() => handleImageClick(index)}
+        />
+      </div>
+    </SwiperSlide>
+  ));
 
   return (
     <div className='rent-slider'>
@@ -85,13 +79,7 @@ const Rent = () => {
         <div className='selected-image-container'>
           {/* 선택된 이미지 */}
           <img
-            src={
-              selectedImageIndex === 1
-                ? EventBanner1
-                : selectedImageIndex === 2
-                  ? NewLogo
-                  : Logo
-            }
+            src={carList[selectedImageIndex].img}
             alt='Selected Slide'
             className='selected-image'
           />
@@ -109,4 +97,4 @@ const Rent = () => {
   );
 };
 
-export default Rent;
+export default CarSwiper;

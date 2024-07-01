@@ -31,6 +31,10 @@
   flex-direction: column;
   align-items: center;
   margin: 0; // 전체 컨테이너의 외부 여백 제거
+  margin-left: 600px;
+  margin-top: 50px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
 
   .react-datepicker {
     width: 100%; // 부모 요소에 맞게 100%로 설정
@@ -53,14 +57,13 @@
     gap: 20px; // 요소 간의 간격을 조정
     margin-top: 10px;
     width: 100%; // 부모 요소에 맞게 100%로 설정
-    
   }
 
   .pickupTitle,
   .returnTitle {
     flex-wrap: wrap-reverse;
     font-size: 18px;
-     margin-bottom: 5px;
+     margin-bottom: 0px;
   }
 
   .time-block {
@@ -77,5 +80,6 @@
     margin-top: 5px;
     width: 150px; // 적절한 너비 설정
   }
-  
+
 }
+

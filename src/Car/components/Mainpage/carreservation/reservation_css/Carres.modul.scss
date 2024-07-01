@@ -1,7 +1,15 @@
+#big {
+    display: flex;
+    align-items: center; /* 자식 요소들을 수평 중앙에 정렬 */
+    width: 100%;
+}
+
 .resBtn { // 예약하기 버튼
-    display: block;
+    margin-left: 735px;
     width: 480px;
-    margin: 10px auto 0;
+    margin-top: 20px;
+    height: 30px;
+    align-self: center; /* 부모의 정렬 속성을 무시하고 중앙에 정렬 */
 }
 
 .resTitle { // 예약확인 글자
@@ -14,8 +22,8 @@
 }
 
 .close-Btn { // 모달 닫기 버튼 
-    // width: 20px;
-    // height: 20px;
+    width: 20px;
+    height: 20px;
     font-size: 25px;
     margin-top: 15px;
     color: #2c7fdf;
@@ -26,13 +34,13 @@
 
 .close-Btn:hover { 
     color: #c2e1ff;
+    flex-direction: column;
+}
+
+.reservation-container {
+    margin-left: 10px;
 }
 
 
-#big {
-    display: flex;
-    justify-content: space-between; /* 요소들을 양쪽 끝으로 정렬 */
-    align-items: center;
-    width: 100%;
-}
+
 

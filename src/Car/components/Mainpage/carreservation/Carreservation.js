@@ -8,9 +8,7 @@ const Carreservation = () => {
   return (
     <CarProvider>
       <Frame>
-        <CarReservationBody>
-          <Carres />
-        </CarReservationBody>
+        <Carres />
       </Frame>
     </CarProvider>
   );
@@ -18,8 +16,8 @@ const Carreservation = () => {
 
 export default Carreservation;
 
-const CarReservationBody = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-`;
+// const CarReservationBody = styled.div`
+//   width: 100%;
+//   display: flex;
+//   flex-direction: column;
+// `;

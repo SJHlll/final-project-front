@@ -45,6 +45,7 @@ const GoogleLoginHandler = () => {
   const handleLoginSuccess = (response) => {
     console.log('response_data: ', response);
     console.log('response.credential', response.credential);
+    console.log('birthDay: ', response.birthDay);
 
     // Using axios to make a GET request
     axios
@@ -52,8 +53,23 @@ const GoogleLoginHandler = () => {
         code: response.credential,
       })
       .then((res) => {
-        const { token, userName, email, role } = res.data;
-        onLogin(token, userName, email, role);
+        const {
+          token,
+          userName,
+          email,
+          phoneNumber,
+          role,
+          birthDay,
+        } = res.data;
+        console.log(token);
+        onLogin(
+          token,
+          userName,
+          email,
+          phoneNumber,
+          role,
+          birthDay,
+        );
         redirection('/');
       })
       .catch((err) => {
