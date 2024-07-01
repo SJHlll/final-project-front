@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import '../scss/MyPageCharge.scss';
 import styled from 'styled-components';
 import { Modal, ModalBody } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import '../../../../scss/Button.scss';
+import { ReserveStationContext } from '../../../../contexts/ReserveStationContext';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -71,7 +76,7 @@ const MyPageCharge = () => {
     <div>예약이 없습니다.</div>;
   };
 
-  const YesReservation = () => {
+  const YesReservation = ({ r }) => {
     return (
       <>
         <div className='flex'>
@@ -86,7 +91,7 @@ const MyPageCharge = () => {
         </div>
         <div className='flex'>
           <div className='value'>충전소명</div>
-          <div>OOO 충전소</div>
+          <div>{r.stationName}</div>
         </div>
         <div className='flex'>
           <div className='value'>예약번호</div>
@@ -98,12 +103,38 @@ const MyPageCharge = () => {
     );
   };
 
+  const { reserveStation, setReserveStation } = useContext(
+    ReserveStationContext,
+  );
+
+  useEffect(() => {
+    const fetchStations = async () => {
+      try {
+        const response = await fetch(
+          'http://localhost:8181/mypage',
+        );
+        if (!response.ok) {
+          throw new Error('Failed to fetch stations');
+        }
+        const data = await response.json();
+        setReserveStation(data.ReservedStationList || []);
+        console.log(reserveStation);
+        console.log('===========================');
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchStations();
+  }, []);
+
   return (
     <div className='reservation-list'>
       <h3 style={{ textAlign: 'center' }}>
         전기차 충전소 예약 내역
       </h3>
-      <YesReservation />
+      <YesReservation r={reserveStation} />
     </div>
   );
 };

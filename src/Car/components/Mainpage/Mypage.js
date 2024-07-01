@@ -3,13 +3,16 @@ import './Mypage.scss';
 
 import Frame from './Frame';
 import MyPageCharge from '../charge/mypage/MyPageCharge';
+import { ReserveStationProvider } from '../../../contexts/ReserveStationContext';
 
 const Mypage = () => {
   return (
     <>
-      <Frame>
-        <MyPageCharge />
-      </Frame>
+      <ReserveStationProvider>
+        <Frame>
+          <MyPageCharge />
+        </Frame>
+      </ReserveStationProvider>
     </>
   );
 };
