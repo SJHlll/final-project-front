@@ -214,14 +214,47 @@ const ReservationModal = ({
           className='reservation-charge'
           onSubmit={reservationHandler}
         >
-          <div className='flex'>
-            <div className='column'>이름</div>
-            <div className='data'>{userName}</div>
-          </div>
-          <div className='flex'>
-            <div className='column'>핸드폰 번호</div>
-            <div className='data'>{phoneNumber}</div>
-          </div>
+          {userName ? (
+            <>
+              <div className='flex'>
+                <div className='column'>이름</div>
+                <div className='data'>{userName}</div>
+              </div>
+              <div className='flex'>
+                <div className='column'>핸드폰 번호</div>
+                <div className='data'>{phoneNumber}</div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className='flex'>
+                <div className='column'>이름</div>
+                <div
+                  className='data'
+                  style={{
+                    color: '#F18D8A',
+                    cursor: 'pointer',
+                  }}
+                  onClick={() => navigate('/Login')}
+                >
+                  회원 정보 없음!
+                </div>
+              </div>
+              <div className='flex'>
+                <div className='column'>핸드폰 번호</div>
+                <div
+                  className='data'
+                  style={{
+                    color: '#F18D8A',
+                    cursor: 'pointer',
+                  }}
+                  onClick={() => navigate('/Login')}
+                >
+                  로그인을 진행해주세요.
+                </div>
+              </div>
+            </>
+          )}
           <div className='flex'>
             <div className='column'>충전소 이름</div>
             <div className='data'>{stationName}</div>
