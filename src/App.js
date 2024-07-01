@@ -29,6 +29,9 @@ import UserInfoSave from './Car/components/charge/mypage/UserInfoSave';
 import RegisterPage from './Car/components/user/RegisterPage';
 import NotiPage from './Car/components/Mainpage/noti/Notipage';
 
+import KakaoLoginHandler from './Car/components/user/KakaoLoginHandler';
+import NaverLoginHandler from './Car/components/user/NaverLoginHandler';
+
 const App = () => {
   const location = useLocation();
   // 헤더가 안보여도 되는 페이지 경로
@@ -99,12 +102,12 @@ const App = () => {
             {/* 카카오 로그인페이지 */}
             <Route
               path='/oauth/kakao'
-              element={<Testhome />} // 강아지 사진 나오면 로그인 성공
+              element={<KakaoLoginHandler />} // 강아지 사진 나오면 로그인 성공
             />
             {/* 네이버 로그인페이지 */}
             <Route
               path='/oauth/naver'
-              element={<Testhome />} // 강아지 사진 나오면 로그인 성공
+              element={<NaverLoginHandler />} // 강아지 사진 나오면 로그인 성공
             />
 
             {/* 구글 로그인페이지 */}
