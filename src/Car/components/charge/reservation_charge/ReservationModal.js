@@ -164,15 +164,37 @@ const ReservationModal = ({
       );
       // 에러 발생 시 새 결제창 안염.
     } catch (error) {
+      // 400에러
       if (error.response && error.response.status === 400) {
-        console.error(error);
-        alert(
-          `'${userName}' 회원님은 이미 예약하신 충전소가 있어\n'${stationName}' 충전소를 예약할 수 없습니다.`,
-        );
         if (
-          window.confirm('마이페이지로 이동하시겠습니까?')
+          // 이미 예약한 충전소가 있음
+          error.response.data ===
+          '이미 예약하신 충전소가 있습니다.'
         ) {
-          navigate('/mypage');
+          console.error(error);
+          alert(
+            `'${userName}' 회원님은 이미 예약하신 충전소가 있어\n'${stationName}' 충전소를 예약할 수 없습니다.`,
+          );
+          if (
+            window.confirm('마이페이지로 이동하시겠습니까?')
+          ) {
+            navigate('/mypage');
+          }
+        } else if (
+          // 로그인 안함
+          error.response.data === '회원 정보가 없습니다.'
+        ) {
+          console.error(error);
+          alert(
+            '회원 정보를 찾을 수 없습니다.\n로그인 후 예약 신청을 해주세요..',
+          );
+          if (
+            window.confirm(
+              '로그인 페이지로 이동하시겠습니까?',
+            )
+          ) {
+            navigate('/Login');
+          }
         }
       } else {
         console.error(error);
