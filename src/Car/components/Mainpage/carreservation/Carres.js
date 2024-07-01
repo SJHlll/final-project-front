@@ -5,11 +5,11 @@ import CarCalendar from './CarCalendar';
 import CarResInfo from './CarResInfo';
 import { setHours, setMinutes } from 'date-fns';
 import '../../../../scss/Button.scss';
-import { StationProvider } from '../../../../contexts/StationContext';
 import styles from './reservation_css/Carres.modul.scss';
 import CarInfo from './CarInfo';
 import Rent from '../Rent/Rent.js';
 import { CarContext } from './../../../../contexts/CarContext';
+
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -35,6 +35,7 @@ const ModalContent = styled.div`
 
 const Carres = () => {
   const [modal, setModal] = useState(false);
+  const [selectedCar, setSelectedCar] = useState(null); // 선택된 차의 정보를 저장할 상태
   const toggle = () => setModal(!modal);
 
   const [pickup, setPickup] = useState({
@@ -179,7 +180,8 @@ const Carres = () => {
         }
       />
       {modal ? modalOpen : button}
-      <StationProvider />
+      <CarSwiper onSelectCar={selectedCar} />
+      {selectedCar && <CarInfo rentCar={[selectedCar]} />}
     </>
   );
 };
