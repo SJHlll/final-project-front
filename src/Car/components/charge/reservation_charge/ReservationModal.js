@@ -10,9 +10,11 @@ import '../scss/ReservationModal.scss';
 import OpenTossPayments from '../../pay/OpenTossPayments';
 import '../../../../scss/Button.scss';
 import AuthContext from '../../../../util/AuthContext';
+import axios from 'axios';
 
 const ReservationModal = ({
-  name,
+  chargeId,
+  stationName,
   address,
   speed,
   type,
@@ -23,7 +25,8 @@ const ReservationModal = ({
     setHours(setMinutes(today, 0), 9), // 오늘 날짜에 9시 0분으로
   );
 
-  const { userName } = useContext(AuthContext);
+  const { userName, phoneNumber, email } =
+    useContext(AuthContext);
 
   const [selectedValue, setSelectedValue] = useState(10);
 
@@ -32,11 +35,6 @@ const ReservationModal = ({
     const selectedDate = new Date(time);
 
     return currentDate.getTime() < selectedDate.getTime();
-  };
-
-  // submit 이벤트 핸들러
-  const reservationHandler = (e) => {
-    e.preventDefault();
   };
 
   // 시간, 분 정하기
@@ -103,6 +101,59 @@ const ReservationModal = ({
       : price * selectedValue;
   };
 
+  // submit 이벤트 핸들러
+  const reservationHandler = async (e) => {
+    e.preventDefault();
+
+    // price와 selectedValue 값을 조정하는 함수
+    const adjustValues = (speed, price, selectedValue) => {
+      let adjustedPrice = price;
+      let adjustedSelectedValue = selectedValue;
+
+      if (speed === '급속') {
+        adjustedPrice =
+          Math.floor(price * selectedValue * 0.1667) * 10;
+      } else if (speed === '완속') {
+        adjustedPrice = price * selectedValue;
+        adjustedSelectedValue = Math.floor(
+          selectedValue * 6,
+        );
+      }
+
+      return { adjustedPrice, adjustedSelectedValue };
+    };
+
+    // 조정된 값 가져오기
+    const { adjustedPrice, adjustedSelectedValue } =
+      adjustValues(speed, price, selectedValue);
+
+    const requestDTO = {
+      chargeId,
+      name: userName,
+      address,
+      phoneNumber,
+      stationName,
+      speed,
+      price: adjustedPrice,
+      startDate,
+      selectedValue: adjustedSelectedValue,
+      email,
+    };
+    console.log(requestDTO);
+
+    try {
+      const response = await axios.post(
+        'http://localhost:8181/charge/reservation',
+        requestDTO,
+      );
+      console.log(response.data);
+      console.log(1);
+    } catch (error) {
+      console.error(error);
+      console.log(2);
+    }
+  };
+
   return (
     <>
       <div
@@ -119,11 +170,11 @@ const ReservationModal = ({
           </div>
           <div className='flex'>
             <div className='column'>핸드폰 번호</div>
-            <div className='data'>010-0000-0000</div>
+            <div className='data'>{phoneNumber}</div>
           </div>
           <div className='flex'>
             <div className='column'>충전소 이름</div>
-            <div className='data'>{name}</div>
+            <div className='data'>{stationName}</div>
           </div>
           <div className='flex'>
             <div className='column'>충전소 위치</div>

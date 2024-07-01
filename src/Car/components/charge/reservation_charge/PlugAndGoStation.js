@@ -53,7 +53,8 @@ const PlugAndGoStation = ({
         <ModalHeader toggle={toggle} close={closeBtn} />
         <ModalBody>
           <ReservationModal
-            name={Name}
+            chargeId={StationId}
+            stationName={Name}
             address={Address}
             speed={Speed}
             type={Type}

@@ -5,7 +5,6 @@ import CarCalendar from './CarCalendar';
 import CarResInfo from './CarResInfo';
 import { setHours, setMinutes } from 'date-fns';
 import '../../../../scss/Button.scss';
-import { StationProvider } from '../../../../contexts/StationContext';
 import styles from './reservation_css/Carres.modul.scss';
 import CarInfo from './CarInfo';
 import CarSwiper from './CarSwiper';
@@ -179,7 +178,6 @@ const Carres = () => {
         }
       />
       {modal ? modalOpen : button}
-      <StationProvider />
       <CarSwiper onSelectCar={selectedCar} />
       {selectedCar && <CarInfo rentCar={[selectedCar]} />}
     </>
