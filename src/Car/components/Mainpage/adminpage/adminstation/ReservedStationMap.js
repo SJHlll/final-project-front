@@ -1,10 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import { ReserveStationContext } from '../../../../../contexts/ReserveStationContext';
+import AuthContext from '../../../../../util/AuthContext';
 
 const ReservedStationMap = () => {
   const { reserveStation, setReserveStation } = useContext(
     ReserveStationContext,
   );
+  const { role } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchStations = async () => {
@@ -125,7 +127,7 @@ const ReservedStationMap = () => {
 
   return (
     <>
-      {reserveStation.length > 0 ? (
+      {role === 'ADMIN' && reserveStation.length > 0 ? (
         <>
           <AdminContents />
         </>
