@@ -131,7 +131,7 @@ const ReservedStationMap = () => {
         </>
       ) : (
         <div style={{ textAlign: 'center' }}>
-          예약된 충전소가 없어요
+          예약된 충전소가 없습니다.
         </div>
       )}
     </>
