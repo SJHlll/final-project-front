@@ -21,8 +21,6 @@ const CarSwiperReal = () => {
   const { rentCar, setRentCar, setSelectedCar } =
     useContext(CarContext); // 전기차 목록
 
-  //const [selectedCar, setSelectedCar] = useState(null); // 선택한 자동차
-
   useEffect(() => {
     const fetchCars = async () => {
       try {
@@ -66,7 +64,11 @@ const CarSwiperReal = () => {
           <img
             src={car.carPicture}
             alt={`Car ${index}`}
-            style={{ width: '100%', height: 'auto' }}
+            style={{
+              width: '100%',
+              height: 'auto',
+              marginTop: '20px',
+            }}
           />
           <div>차종 : {car.carName}</div>
         </SwiperSlide>
