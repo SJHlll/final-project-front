@@ -7,16 +7,14 @@ import { Modal, ModalBody } from 'reactstrap';
 const MyPageInfo = () => {
   const [updateInfo, setUpdateInfo] = useState(false);
 
-  const toggle = () => {
-    setUpdateInfo(!updateInfo);
-  };
+  const toggle = () => setUpdateInfo(!updateInfo);
 
   // 회원정보 수정하기 모달창 활성화
   const ModalOpen = () => (
     <Modal
       isOpen={updateInfo}
       toggle={toggle}
-      style={{ top: '25%' }}
+      style={{ top: '25%', fontFamily: 'font2' }}
     >
       <ModalBody>
         <UserInfoSave />

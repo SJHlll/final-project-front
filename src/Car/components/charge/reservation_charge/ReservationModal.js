@@ -25,7 +25,8 @@ const ReservationModal = ({
     setHours(setMinutes(today, 0), 9), // 오늘 날짜에 9시 0분으로
   );
 
-  const { userName, phoneNumber } = useContext(AuthContext);
+  const { userName, phoneNumber, email } =
+    useContext(AuthContext);
 
   const [selectedValue, setSelectedValue] = useState(10);
 

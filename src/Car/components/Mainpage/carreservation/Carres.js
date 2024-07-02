@@ -10,8 +10,8 @@ import CarResInfo from './CarResInfo';
 import { setHours, setMinutes } from 'date-fns';
 import '../../../../scss/Button.scss';
 import styles from './reservation_css/Carres.modul.scss';
-import { CarContext } from '../../../../contexts/CarContext';
-import axios from 'axios';
+import CarInfo from './CarInfo';
+import { CarContext } from './../../../../contexts/CarContext';
 import CarSwiperReal from './CarSwiperReal';
 import { StationProvider } from '../../../../contexts/StationContext';
 
