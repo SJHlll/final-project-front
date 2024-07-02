@@ -84,7 +84,9 @@ const MyPageCharge = () => {
         throw new Error('Failed to cancel reservation');
       }
 
-      alert('예약이 취소되었습니다.');
+      alert(
+        '예약이 취소되었습니다. 환불은 24시간 이내로 이루어집니다.',
+      );
       setCancel(!cancel);
       setReserveStation((prev) =>
         prev.filter(
