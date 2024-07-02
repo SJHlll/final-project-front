@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './reservation_css/CarInfo.scss';
+import { id } from 'date-fns/locale';
+import CarSwiperReal from './CarSwiperReal';
 
 // Carres.js에서 불러온 rentCar를 집어넣음
 const CarInfo = ({ rentCar }) => {
-  //const [clickCat, setClickCar] = useState(false);
+  const [clickCat, setClickCar] = useState(false);
   const [carList, setCarList] = useState(null);
 
   useEffect(() => {
-    fetch('http://lacalhost:3000/car/res')
+    fetch('http://localhost:3000/car/res')
       .then((response) => response.json())
       .then((data) => setCarList(data));
   }, []);
@@ -27,24 +29,31 @@ const CarInfo = ({ rentCar }) => {
           private CarOptions carOptions;
           여기 적힌 값을 그대로 오타 없이 가져와야 함
          */}
-        {rentCar.map((car) => (
-          <div>
-            <div>차종 : {car.carName}</div>
-            <div>제조회사 : {car.carCompany}</div>
-            <div>
-              탑승인원 : 최대 {car.maximumPassenger}명
+        <CarSwiperReal>
+          {rentCar.map((car) => (
+            <div key={car.carId}>
+              <img
+                src='https://plugngo.s3.ap-northeast-2.amazonaws.com/947efdc5-bf6f-43e5-b9d9-ae73076a08c9_chun+(2).png'
+                alt='차 이미지'
+              ></img>
+              <div>차종 : {car.carName}</div>
+              <div>제조회사 : {car.carCompany}</div>
+              <div>
+                탑승인원 : 최대 {car.maximumPassenger}명
+              </div>
+              <div>연식 : {car.carYear}년</div>
+              <div>
+                가격 : {car.carPrice}원 (렌트가격아님)
+              </div>
+              <div>
+                {car.carPicture}자동차 사진 칸 (아직
+                안들어감)
+              </div>
+              <div>차량 옵션 : {car.carOptions}</div>
+              <div>===================</div>
             </div>
-            <div>연식 : {car.carYear}년</div>
-            <div>
-              가격 : {car.carPrice}원 (렌트가격아님)
-            </div>
-            <div>
-              {car.carPicture}자동차 사진 칸 (아직 안들어감)
-            </div>
-            <div>차량 옵션 : {car.carOptions}</div>
-            <div>===================</div>
-          </div>
-        ))}
+          ))}
+        </CarSwiperReal>
       </div>
     </>
   );
