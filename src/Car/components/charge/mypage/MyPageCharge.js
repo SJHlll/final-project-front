@@ -182,21 +182,6 @@ const MyPageCharge = () => {
           return (
             <div key={r.id}>
               <div className='flex'>
-                <div className='value'>예약자명</div>
-                <div>{r.name}</div>
-              </div>
-
-              <div className='flex'>
-                <div className='value'>전화번호</div>
-                <div>{r.phoneNumber}</div>
-              </div>
-
-              <div className='flex'>
-                <div className='value'>이메일</div>
-                <div>{r.email}</div>
-              </div>
-
-              <div className='flex'>
                 <div className='value'>충전소명</div>
                 <div>{r.stationName}</div>
               </div>
