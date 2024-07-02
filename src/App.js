@@ -102,20 +102,12 @@ const App = () => {
             {/* 카카오 로그인페이지 */}
             <Route
               path='/oauth/kakao'
-<<<<<<< HEAD
               element={<KakaoLoginHandler />} // 로그아웃 아이콘 나오면 성공
-=======
-              element={<KakaoLoginHandler />} // 강아지 사진 나오면 로그인 성공
->>>>>>> 473a22a492881da9e5e2be70095af58a0f711dd7
             />
             {/* 네이버 로그인페이지 */}
             <Route
               path='/oauth/naver'
-<<<<<<< HEAD
               element={<NaverLoginHandler />} // 로그아웃 아이콘 나오면 성공
-=======
-              element={<NaverLoginHandler />} // 강아지 사진 나오면 로그인 성공
->>>>>>> 473a22a492881da9e5e2be70095af58a0f711dd7
             />
 
             {/* 구글 로그인페이지 */}
