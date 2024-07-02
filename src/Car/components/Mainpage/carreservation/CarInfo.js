@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './reservation_css/CarInfo.scss';
 import { id } from 'date-fns/locale';
-import Swiper from 'swiper';
-import CarSwiper from './CarSwiper';
+import CarSwiperReal from './CarSwiperReal';
 
 // Carres.js에서 불러온 rentCar를 집어넣음
 const CarInfo = ({ rentCar }) => {
@@ -30,7 +29,7 @@ const CarInfo = ({ rentCar }) => {
           private CarOptions carOptions;
           여기 적힌 값을 그대로 오타 없이 가져와야 함
          */}
-        <CarSwiper>
+        <CarSwiperReal>
           {rentCar.map((car) => (
             <div key={car.carId}>
               <img
@@ -54,7 +53,7 @@ const CarInfo = ({ rentCar }) => {
               <div>===================</div>
             </div>
           ))}
-        </CarSwiper>
+        </CarSwiperReal>
       </div>
     </>
   );
