@@ -1,4 +1,8 @@
-import React, { useContext, useEffect } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -14,7 +18,10 @@ import { CarContext } from '../../../../contexts/CarContext';
 const CarSwiperReal = () => {
   // DB에서 전기차 목록 불러오기
   // rentCar = 전기차 목록 배열
-  const { rentCar, setRentCar } = useContext(CarContext);
+  const { rentCar, setRentCar, setSelectedCar } =
+    useContext(CarContext); // 전기차 목록
+
+  //const [selectedCar, setSelectedCar] = useState(null); // 선택한 자동차
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -36,6 +43,11 @@ const CarSwiperReal = () => {
     fetchCars();
   }, [setRentCar]);
 
+  // 차 이미지 를 클릭시 선택되는 자동차
+  const clickCarHandler = (car) => {
+    setSelectedCar(car);
+  };
+
   return (
     <Swiper
       modules={[Navigation, Pagination, Autoplay]}
@@ -47,7 +59,10 @@ const CarSwiperReal = () => {
       autoplay={{ delay: 2000 }}
     >
       {rentCar.map((car, index) => (
-        <SwiperSlide key={index}>
+        <SwiperSlide
+          key={index}
+          onClick={() => clickCarHandler(car)}
+        >
           <img
             src={car.carPicture}
             alt={`Car ${index}`}
