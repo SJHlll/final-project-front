@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './reservation_css/CarInfo.scss';
 import { id } from 'date-fns/locale';
 import Swiper from 'swiper';
-import CarSwiper from './CarSwiper';
+import CarSwiper from './CarSwiperReal';
 
 // Carres.js에서 불러온 rentCar를 집어넣음
 const CarInfo = ({ rentCar }) => {

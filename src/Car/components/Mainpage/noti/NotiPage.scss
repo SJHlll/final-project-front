@@ -28,29 +28,33 @@
     }
 }
 .Notiheader{
-margin-top: 2%;
+    line-height: 1;
+    height: 70px;
+    margin-top: 2%;
     border-radius: 15px;
     border: 1px solid black;
     padding: 1%;
     padding-left: 2%;
+    width: 100%;
+    font-size: 2.5rem;
 }
 
 .Notihits{
     width: 100px;
-   position: relative;
-   left: 1200px;
-   margin-top: 0px;
-   bottom: 60px;
+    position: relative;
+    left: 1200px;
+    margin-top: 0px;
+    bottom: 60px;
 }
 
 .Notibody{
+    width: 100%;
     height: 500px;
     border: 1px solid black;
     border-radius: 15px;
-    margin-top: 0px;
     position: relative;
     margin-top: -40px;
-    font-size: 24px;
+    font-size: 2.5rem;
     text-align: start;
     padding: 2%;
     overflow: auto;
@@ -61,4 +65,34 @@ margin-top: 2%;
     background-color: #ebf5ff;
     border-radius: 15px;
     margin-right: 5px;
+
+    &:hover{
+        background-color: #c2e1ff;
+        color: #2c7fdf;
+        border: 1px solid black;
+    }
+}
+
+.Notitheader{
+    height: 70px;
+    margin-top: 10px;
+    border-radius: 15px;
+    border: 1px solid black;
+    padding: 1%;
+    padding-left: 2%;
+    width: 100%;
+    font-size: 2.5rem;
+}
+.Notitbody{
+    
+    width: 100%;
+    height: 500px;
+    border: 1px solid black;
+    border-radius: 15px;
+    position: relative;
+    margin-top: 8px;
+    font-size: 2.5rem;
+    text-align: start;
+    padding: 2%;
+    overflow: auto;
 }
