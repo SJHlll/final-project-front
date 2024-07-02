@@ -1,0 +1,117 @@
+.admin-page-select {
+    width: 80%;
+    margin: 50px auto;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    font-size: 1.5em;
+
+    .admin-select {
+        width: 30%;
+        padding: 5px 0;
+    }
+
+    .reserve-station {
+        border: 1px solid red;
+    }
+
+    .reserve-car {
+        border: 1px solid blue;
+    }
+
+    .review {
+        border: 1px solid green;
+    }
+}
+
+.admin-page-list {
+    width: 80%;
+    height: 600px;
+    margin: 0 auto;
+
+    .no-select {
+        padding: 10px 10px;
+        border: 1px solid black;
+    }
+
+    .admin-list {
+        font-size: 1em;
+
+        .list-header {
+            display: flex;
+            padding: 10px 10px;
+            font-size: 1.3em;
+            text-align: center;
+
+            .res-no {
+                width: 10%;
+            }
+
+            .res-user-name {
+                width: 15%;
+            }
+
+            .res-station-name {
+                width: 35%;
+            }
+
+            .res-station-time {
+                width: 30%;
+            }
+
+            .hidden-text {
+                width: 10%;
+            }
+        }
+
+        .list-body {
+            display: flex;
+            padding: 10px 10px;
+            text-align: center;
+            align-items: center;
+            border-top: 1px solid green;
+
+            .res-no {
+                width: 10%;
+            }
+
+            .res-user-name {
+                width: 15%;
+            }
+
+            .res-station-name {
+                width: 35%;
+            }
+
+            .res-station-time {
+                width: 30%;
+            }
+
+            .res-cancel-btn {
+                width: 60px;
+                padding: 5px 0;
+                border-radius: 10px;
+                margin-left: auto;
+                background-color: #ebf5ff;
+                color: #2c7fdf;
+                border: 1px solid #2c7fdf;
+            }
+
+            .res-cancel-btn:hover {
+                background-color: #c2e1ff;
+            }
+        }
+    }
+
+    .reserve-station {
+        border: 1px solid red;
+    }
+
+    .reserve-car {
+        border: 1px solid blue;
+    }
+
+    .review {
+        border: 1px solid green;
+    }
+}
