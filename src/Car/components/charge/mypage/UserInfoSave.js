@@ -206,7 +206,7 @@ const UserInfoSave = () => {
         <Grid item xs={12} style={{ display: 'flex' }}>
           <div style={{ width: '30%' }}>이름</div>
           <TextField
-            id='outline'
+            id='user-info'
             variant='standard'
             fullWidth
             defaultValue={userName}
@@ -228,7 +228,7 @@ const UserInfoSave = () => {
         <Grid item xs={12} style={{ display: 'flex' }}>
           <div style={{ width: '30%' }}>이메일</div>
           <TextField
-            id='outl'
+            id='user-info'
             variant='standard'
             fullWidth
             InputProps={{
@@ -241,7 +241,7 @@ const UserInfoSave = () => {
         <Grid item xs={12} style={{ display: 'flex' }}>
           <div style={{ width: '30%' }}>연락처</div>
           <TextField
-            id='outl'
+            id='user-info'
             variant='standard'
             fullWidth
             defaultValue={phoneNumber}
@@ -263,7 +263,7 @@ const UserInfoSave = () => {
         <Grid item xs={12} style={{ display: 'flex' }}>
           <div style={{ width: '30%' }}>생년월일</div>
           <TextField
-            id='outlined'
+            id='user-info'
             variant='standard'
             type='date'
             autoComplete='birthday'

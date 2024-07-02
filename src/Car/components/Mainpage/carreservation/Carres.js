@@ -7,9 +7,8 @@ import { setHours, setMinutes } from 'date-fns';
 import '../../../../scss/Button.scss';
 import styles from './reservation_css/Carres.modul.scss';
 import CarInfo from './CarInfo';
-import Rent from '../Rent/Rent.js';
 import { CarContext } from './../../../../contexts/CarContext';
-
+import CarSwiper from './CarSwiper.js';
 
 const ModalBackground = styled.div`
   position: fixed;
