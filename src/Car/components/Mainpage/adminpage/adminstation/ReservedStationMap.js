@@ -33,6 +33,37 @@ const ReservedStationMap = () => {
     fetchStations();
   }, [setReserveStation]);
 
+  const handleCancelReservation = async (reservationNo) => {
+    try {
+      const token = localStorage.getItem('ACCESS_TOKEN');
+      const response = await fetch(
+        // 마이페이지에 예약번호 기준으로 예약 취소되는거 훔쳐옴.
+        `http://localhost:8181/mypage?reservationNo=${reservationNo}`,
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+      if (!response.ok) {
+        throw new Error('Failed to cancel reservation');
+      }
+
+      // 예약 취소가 성공하면 UI에서 해당 예약을 제거
+      setReserveStation((prevStations) =>
+        prevStations.filter(
+          (station) =>
+            station.reservationNo !== reservationNo,
+        ),
+      );
+    } catch (error) {
+      console.error(error);
+      alert('예약 취소에 실패했습니다.');
+    }
+  };
+
   const formatRentTime = (rentTime) => {
     const date = new Date(rentTime);
     return date.toLocaleString('ko-KR', {
@@ -78,7 +109,14 @@ const ReservedStationMap = () => {
                 ~ {formatRentEndTime(e.rentTime, e.time)}
               </div>
             </div>
-            <button className='res-cancel-btn'>취소</button>
+            <button
+              className='res-cancel-btn'
+              onDoubleClick={() =>
+                handleCancelReservation(e.reservationNo)
+              }
+            >
+              취소
+            </button>
           </div>
         ))}
       </>
@@ -88,9 +126,13 @@ const ReservedStationMap = () => {
   return (
     <>
       {reserveStation.length > 0 ? (
-        <AdminContents />
+        <>
+          <AdminContents />
+        </>
       ) : (
-        <div>예약된 충전소가 없어요</div>
+        <div style={{ textAlign: 'center' }}>
+          예약된 충전소가 없어요
+        </div>
       )}
     </>
   );
