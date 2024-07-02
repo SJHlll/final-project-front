@@ -10,7 +10,6 @@ import Error from '../src/Car/components/Errorpage/Error';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './Car/components/user/Login';
 import Noti from './Car/components/Mainpage/noti/Noti';
-import NotiPage from './Car/components/Mainpage/noti/Notipage';
 import Event from './Car/components/Mainpage/event/Event';
 import Review from './Car/components/Mainpage/review/Review';
 import Testheader from './Car/components/Mainpage/Testheader';
@@ -28,6 +27,10 @@ import EventDetail from './Car/components/Mainpage/event/EventDetail';
 import Carres from './Car/components/Mainpage/carreservation/Carres';
 import UserInfoSave from './Car/components/charge/mypage/UserInfoSave';
 import RegisterPage from './Car/components/user/RegisterPage';
+import NotiPage from './Car/components/Mainpage/noti/Notipage';
+import Loginpage from './Car/components/Mainpage/Loginpage';
+import KakaoLoginHandler from './Car/components/user/KakaoLoginHandler';
+import NaverLoginHandler from './Car/components/user/NaverLoginHandler';
 
 const App = () => {
   const location = useLocation();
@@ -94,17 +97,17 @@ const App = () => {
             <Route path='/mypage' element={<Mypage />} />
 
             {/* 공통 로그인페이지 */}
-            <Route path='/Login' element={<Login />} />
+            <Route path='/Login' element={<Loginpage />} />
 
             {/* 카카오 로그인페이지 */}
             <Route
               path='/oauth/kakao'
-              element={<Testhome />} // 강아지 사진 나오면 로그인 성공
+              element={<KakaoLoginHandler />} // 로그아웃 아이콘 나오면 성공
             />
             {/* 네이버 로그인페이지 */}
             <Route
               path='/oauth/naver'
-              element={<Testhome />} // 강아지 사진 나오면 로그인 성공
+              element={<NaverLoginHandler />} // 로그아웃 아이콘 나오면 성공
             />
 
             {/* 구글 로그인페이지 */}

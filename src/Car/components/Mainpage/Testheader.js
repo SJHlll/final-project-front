@@ -106,27 +106,18 @@ const Testheader = () => {
           </button>
         ) : (
           <button
-            className='logoutbtn'
+            className='loginbtn'
             onClick={logoutHandler}
           >
-            <p>Logout</p>
-            <FontAwesomeIcon
-              icon={faRightToBracket}
-              className='logouticon'
-            />
+            <p
+              style={{
+                marginTop: '10px',
+              }}
+            >
+              로그아웃
+            </p>
           </button>
         )}
-
-        {/* <button className='loginbtn' onClick={click}>
-          로그인
-        </button>
-        <div className='logoutbtn'>
-          <p>Logout</p>
-          <FontAwesomeIcon
-            icon={faRightToBracket}
-            className='logouticon'
-          />
-        </div> */}
       </div>
       <ChargeFooter />
     </div>

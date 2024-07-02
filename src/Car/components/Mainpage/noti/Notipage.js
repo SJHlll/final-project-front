@@ -62,7 +62,26 @@ const NotiPage = () => {
             <br />
             내용은 내용입니다 내용이지요 내용내용내용내용
             <br />
+            내용은 내용입니다 내용이지요 내용내용내용내용
+            <br />
+            내용은 내용입니다 내용이지요 내용내용내용내용
+            <br />
+            내용은 내용입니다 내용이지요 내용내용내용내용
+            <br />
+            내용은 내용입니다 내용이지요 내용내용내용내용
+            <br />
           </p>
+          <div
+            style={{
+              display: 'flex',
+              width: '100%',
+              height: '50px',
+              flexDirection: 'row-reverse',
+            }}
+          >
+            <button className='notibtn'>삭제</button>
+            <button className='notibtn'>수정</button>
+          </div>
         </div>
       </div>
     </Frame>
