@@ -1,4 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import styled from 'styled-components';
 import { ModalBody, ModalFooter } from 'reactstrap';
 import CarCalendar from './CarCalendar';
@@ -9,6 +13,9 @@ import { StationProvider } from '../../../../contexts/StationContext';
 import styles from './reservation_css/Carres.modul.scss';
 import CarInfo from './CarInfo';
 import CarSwiper from './CarSwiper';
+import { CarContext } from '../../../../contexts/CarContext';
+import axios from 'axios';
+import CarSwiperReal from './CarSwiperReal';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -160,6 +167,9 @@ const Carres = () => {
 
   return (
     <>
+      {/* <div>
+        <CarInfo rentCar={rentCar} />
+      </div> */}
       <CarCalendar
         startDate={pickup.date}
         endDate={returning.date}
@@ -180,8 +190,8 @@ const Carres = () => {
       />
       {modal ? modalOpen : button}
       <StationProvider />
-      <CarSwiper onSelectCar={selectedCar} />
-      {selectedCar && <CarInfo rentCar={[selectedCar]} />}
+      <CarSwiperReal />
+      {/* {selectedCar && <CarInfo rentCar={[selectedCar]} />} */}
     </>
   );
 };
