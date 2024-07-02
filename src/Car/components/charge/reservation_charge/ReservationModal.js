@@ -7,11 +7,11 @@ import React, {
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.module.css';
 import '../scss/ReservationModal.scss';
-// import OpenTossPayments from '../../pay/OpenTossPayments';
 import '../../../../scss/Button.scss';
 import AuthContext from '../../../../util/AuthContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import ModalModal from './ModalModal';
 
 const ReservationModal = ({
   chargeId,
@@ -39,6 +39,9 @@ const ReservationModal = ({
     return currentDate.getTime() < selectedDate.getTime();
   };
 
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+  const [onConfirm, setOnConfirm] = useState(null);
   // 시간, 분 정하기
   const [selectedOption, setSelectedOption] =
     useState('option1');
@@ -169,45 +172,41 @@ const ReservationModal = ({
       // 400에러
       if (error.response && error.response.status === 400) {
         if (
-          // 이미 예약한 충전소가 있음
           error.response.data ===
           '이미 예약하신 충전소가 있습니다.'
         ) {
-          console.error(error);
-          alert(
-            `'${userName}' 회원님은 이미 예약하신 충전소가 있어\n'${stationName}' 충전소를 예약할 수 없습니다.`,
+          setModalMessage(
+            `'${userName}' 회원님은 이미 예약하신 충전소가 있어 추가 예약이 불가능합니다.
+            \n마이페이지로 이동하시겠습니까?`,
           );
-          if (
-            window.confirm('마이페이지로 이동하시겠습니까?')
-          ) {
-            navigate('/mypage');
-          }
+          setOnConfirm(() => () => navigate('/mypage'));
+          setModalOpen(true);
         } else if (
-          // 로그인 안함
           error.response.data === '회원 정보가 없습니다.'
         ) {
-          console.error(error);
-          alert(
-            '회원 정보를 찾을 수 없습니다.\n로그인 후 예약 신청을 해주세요..',
+          setModalMessage(
+            `회원 정보를 찾을 수 없습니다. 로그인 후 예약 신청을 해주세요.
+            \n로그인 페이지로 이동하시겠습니까?`,
           );
-          if (
-            window.confirm(
-              '로그인 페이지로 이동하시겠습니까?',
-            )
-          ) {
-            navigate('/Login');
-          }
+          setOnConfirm(() => () => navigate('/Login'));
+          setModalOpen(true);
         }
       } else {
-        console.error(error);
-        alert(error);
+        setModalMessage(error.message);
+        setOnConfirm(null);
+        setModalOpen(true);
       }
-      console.log(2);
     }
   };
 
   return (
     <>
+      <ModalModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onConfirm={onConfirm}
+        message={modalMessage}
+      />
       <div
         className='form-wrapper'
         style={{ fontFamily: 'font2' }}
