@@ -96,7 +96,6 @@ const MyPageCharge = () => {
       );
     } catch (error) {
       console.error(error);
-      alert('예약 취소에 실패했습니다.');
     }
   };
 
@@ -105,10 +104,10 @@ const MyPageCharge = () => {
       <Modal isOpen={cancel} toggle={toggle}>
         <ModalBody>
           <div style={{ fontFamily: 'font2' }}>
-            <div className='content'>
+            <div className='my-charge-content'>
               <div>예약을 취소하시겠습니까?</div>
             </div>
-            <div className='flex modal-button'>
+            <div className='flex my-charge-modal-button'>
               <button
                 className='public-btn cancel-charge-btn'
                 onClick={cancelReservation}
@@ -135,7 +134,7 @@ const MyPageCharge = () => {
         {phoneNumber.length > 1 ? (
           // 로그인은 했는지
           <div className='no-reserve'>
-            <div>예약안햇습니다.</div>
+            <div>예약하신 충전소가 없습니다.</div>
             <div>
               <span
                 onClick={() =>
@@ -153,7 +152,7 @@ const MyPageCharge = () => {
         ) : (
           // 로그인도 안했는지
           <div className='no-reserve'>
-            <div>로그인안햇습니다.</div>
+            <div>로그인을 안한 상태입니다.</div>
             <div>
               <span
                 onClick={() => navigate('/Login')}
