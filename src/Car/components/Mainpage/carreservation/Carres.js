@@ -1,19 +1,14 @@
-import React, {
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ModalBody, ModalFooter } from 'reactstrap';
 import CarCalendar from './CarCalendar';
 import CarResInfo from './CarResInfo';
 import { setHours, setMinutes } from 'date-fns';
 import '../../../../scss/Button.scss';
-import styles from './reservation_css/Carres.modul.scss';
-import CarInfo from './CarInfo';
-import { CarContext } from './../../../../contexts/CarContext';
-import CarSwiperReal from './CarSwiperReal';
 import { StationProvider } from '../../../../contexts/StationContext';
+import styles from './reservation_css/Carres.modul.scss';
+import CarSwiperReal from './CarSwiperReal';
+import CarInfo from './CarInfo';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -165,9 +160,9 @@ const Carres = () => {
 
   return (
     <>
-      {/* <div>
-        <CarInfo rentCar={rentCar} />
-      </div> */}
+      <div className='selectCar'>
+        <CarInfo selectedCar={selectedCar} />
+      </div>
       <CarCalendar
         startDate={pickup.date}
         endDate={returning.date}
@@ -186,10 +181,14 @@ const Carres = () => {
           setReturning((prev) => ({ ...prev, time }))
         }
       />
-      {modal ? modalOpen : button}
+      {selectedCar && <CarInfo rentCar={[selectedCar]} />}
+      {/* 선택된 차가 있을 때만 CarInfo 컴포넌트 렌더링 */}
+      <div className='reservationBtn'>
+        {modal ? modalOpen : button}
+      </div>
       <StationProvider />
-      <CarSwiperReal />
-      {/* {selectedCar && <CarInfo rentCar={[selectedCar]} />} */}
+      <CarSwiperReal setSelectedCar={setSelectedCar} />
+      {/* CarSwiperReal 컴포넌트에 setSelectedCar 함수 전달 */}
     </>
   );
 };
