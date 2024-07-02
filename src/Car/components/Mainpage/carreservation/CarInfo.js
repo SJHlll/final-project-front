@@ -30,7 +30,6 @@ const CarInfo = () => {
           private String category;
           여기 적힌 값을 그대로 오타 없이 가져와야 함
          */}
-        {/* {rentCar.map((car) => ( */}
         <div key={selectedCar.carId}>
           <img
             src={selectedCar.carPicture}
@@ -48,7 +47,6 @@ const CarInfo = () => {
             가격 : {selectedCar.carPrice}원 (렌트가격)
           </div>
         </div>
-        {/* ))} */}
       </div>
     </>
   );

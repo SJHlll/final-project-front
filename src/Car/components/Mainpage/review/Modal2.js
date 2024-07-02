@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Modal2.scss';
+import axios from 'axios';
 
 const Modal2 = ({ onClose, onSave, selectedType }) => {
   const [content, setContent] = useState('');
@@ -9,18 +10,18 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
   const [photo, setPhoto] = useState(null);
   const [photoPreview, setPhotoPreview] = useState(null);
 
-  const items =
+  const reviewSelect =
     selectedType === 'rental'
       ? ['차량 1', '차량 2', '차량 3']
       : ['충전소 1', '충전소 2', '충전소 3'];
 
   const handleChange = (e) => {
     const inputValue = e.target.value;
-    if (inputValue.length <= 300) {
+    if (inputValue.length <= 350) {
       setContent(inputValue);
       setError('');
     } else {
-      setError('300자 이상 작성할 수 없습니다.');
+      setError('350자 이상 작성할 수 없습니다.');
     }
   };
 
@@ -47,8 +48,9 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (selectedItem === '') {
       window.alert(
         `${selectedType === 'rental' ? '차량' : '충전소'}를 선택해주세요.`,
@@ -66,13 +68,33 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
       return;
     }
 
-    onSave(content, selectedItem, rating, photo);
-    setContent('');
-    setSelectedItem('');
-    setRating(1);
-    setPhoto(null);
-    setPhotoPreview(null);
-    onClose();
+    const requestDTO = {
+      content,
+      selectedItem,
+      rating,
+      photo: photo ? photo.name : null, // 사진 이름만 전송, 서버에서 실제 파일 처리 필요
+    };
+
+    try {
+      const response = await axios.post(
+        'http://localhost:3000/review',
+        requestDTO,
+      );
+      console.log(response.data);
+      console.log('전송완료');
+      onSave(content, selectedItem, rating, photo);
+      setContent('');
+      setSelectedItem('');
+      setRating(1);
+      setPhoto(null);
+      setPhotoPreview(null);
+      onClose();
+    } catch (error) {
+      console.error('Error saving review:', error);
+      window.alert(
+        '리뷰를 저장하는 동안 오류가 발생했습니다. 다시 시도해주세요.',
+      );
+    }
   };
 
   return (
@@ -91,7 +113,7 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
                 onChange={handleItemChange}
               >
                 <option value=''>선택하세요</option>
-                {items.map((item, index) => (
+                {reviewSelect.map((item, index) => (
                   <option key={index} value={item}>
                     {item}
                   </option>

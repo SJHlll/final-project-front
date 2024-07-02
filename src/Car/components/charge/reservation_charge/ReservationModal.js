@@ -7,23 +7,28 @@ import React, {
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.module.css';
 import '../scss/ReservationModal.scss';
-import OpenTossPayments from '../../pay/OpenTossPayments';
+// import OpenTossPayments from '../../pay/OpenTossPayments';
 import '../../../../scss/Button.scss';
 import AuthContext from '../../../../util/AuthContext';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const ReservationModal = ({
-  name,
+  chargeId,
+  stationName,
   address,
   speed,
   type,
   price,
 }) => {
+  const navigate = useNavigate();
   const today = new Date();
   const [startDate, setStartDate] = useState(
     setHours(setMinutes(today, 0), 9), // 오늘 날짜에 9시 0분으로
   );
 
-  const { userName } = useContext(AuthContext);
+  const { userName, phoneNumber, email } =
+    useContext(AuthContext);
 
   const [selectedValue, setSelectedValue] = useState(10);
 
@@ -32,11 +37,6 @@ const ReservationModal = ({
     const selectedDate = new Date(time);
 
     return currentDate.getTime() < selectedDate.getTime();
-  };
-
-  // submit 이벤트 핸들러
-  const reservationHandler = (e) => {
-    e.preventDefault();
   };
 
   // 시간, 분 정하기
@@ -103,6 +103,109 @@ const ReservationModal = ({
       : price * selectedValue;
   };
 
+  // 모달창 결제버튼 함수
+  const reservationHandler = async (e) => {
+    e.preventDefault();
+
+    // price와 selectedValue 값을 조정하는 함수
+    const adjustValues = (speed, price, selectedValue) => {
+      let adjustedPrice = price;
+      let adjustedSelectedValue = selectedValue;
+
+      if (speed === '급속') {
+        adjustedPrice =
+          Math.floor(price * selectedValue * 0.1667) * 10;
+      } else if (speed === '완속') {
+        adjustedPrice = price * selectedValue;
+        adjustedSelectedValue = Math.floor(
+          selectedValue * 6,
+        );
+      }
+
+      return { adjustedPrice, adjustedSelectedValue };
+    };
+
+    // 조정된 값 가져오기
+    const { adjustedPrice, adjustedSelectedValue } =
+      adjustValues(speed, price, selectedValue);
+
+    // 백엔드에서 데이터 가져오기
+    const requestDTO = {
+      chargeId,
+      name: userName,
+      address,
+      phoneNumber,
+      stationName,
+      speed,
+      price: adjustedPrice,
+      startDate,
+      selectedValue: adjustedSelectedValue,
+      email,
+    };
+    console.log(requestDTO);
+
+    // 시도
+    try {
+      const response = await axios.post(
+        'http://localhost:8181/charge/reservation',
+        requestDTO,
+      );
+      console.log(response.data);
+      console.log(1);
+
+      // 이상 없으면 새 결제창 염.
+      const width = 700;
+      const height = 800;
+      const left = window.screen.width / 2 - width / 2;
+      const top = window.screen.height / 2 - height / 2;
+
+      window.open(
+        `/pay?totalPrice=${calculateTotalPrice()}`,
+        '_blank',
+        `width=${width},height=${height},top=${top},left=${left}`,
+      );
+      // 에러 발생 시 새 결제창 안염.
+    } catch (error) {
+      // 400에러
+      if (error.response && error.response.status === 400) {
+        if (
+          // 이미 예약한 충전소가 있음
+          error.response.data ===
+          '이미 예약하신 충전소가 있습니다.'
+        ) {
+          console.error(error);
+          alert(
+            `'${userName}' 회원님은 이미 예약하신 충전소가 있어\n'${stationName}' 충전소를 예약할 수 없습니다.`,
+          );
+          if (
+            window.confirm('마이페이지로 이동하시겠습니까?')
+          ) {
+            navigate('/mypage');
+          }
+        } else if (
+          // 로그인 안함
+          error.response.data === '회원 정보가 없습니다.'
+        ) {
+          console.error(error);
+          alert(
+            '회원 정보를 찾을 수 없습니다.\n로그인 후 예약 신청을 해주세요..',
+          );
+          if (
+            window.confirm(
+              '로그인 페이지로 이동하시겠습니까?',
+            )
+          ) {
+            navigate('/Login');
+          }
+        }
+      } else {
+        console.error(error);
+        alert(error);
+      }
+      console.log(2);
+    }
+  };
+
   return (
     <>
       <div
@@ -113,17 +216,50 @@ const ReservationModal = ({
           className='reservation-charge'
           onSubmit={reservationHandler}
         >
-          <div className='flex'>
-            <div className='column'>이름</div>
-            <div className='data'>{userName}</div>
-          </div>
-          <div className='flex'>
-            <div className='column'>핸드폰 번호</div>
-            <div className='data'>010-0000-0000</div>
-          </div>
+          {userName ? (
+            <>
+              <div className='flex'>
+                <div className='column'>이름</div>
+                <div className='data'>{userName}</div>
+              </div>
+              <div className='flex'>
+                <div className='column'>핸드폰 번호</div>
+                <div className='data'>{phoneNumber}</div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className='flex'>
+                <div className='column'>이름</div>
+                <div
+                  className='data'
+                  style={{
+                    color: '#F18D8A',
+                    cursor: 'pointer',
+                  }}
+                  onClick={() => navigate('/Login')}
+                >
+                  회원 정보 없음!
+                </div>
+              </div>
+              <div className='flex'>
+                <div className='column'>핸드폰 번호</div>
+                <div
+                  className='data'
+                  style={{
+                    color: '#F18D8A',
+                    cursor: 'pointer',
+                  }}
+                  onClick={() => navigate('/Login')}
+                >
+                  로그인을 진행해주세요.
+                </div>
+              </div>
+            </>
+          )}
           <div className='flex'>
             <div className='column'>충전소 이름</div>
-            <div className='data'>{name}</div>
+            <div className='data'>{stationName}</div>
           </div>
           <div className='flex'>
             <div className='column'>충전소 위치</div>
@@ -211,9 +347,9 @@ const ReservationModal = ({
             }}
           >
             <button className='public-btn'>
-              <OpenTossPayments
-                totalPrice={calculateTotalPrice()}
-              />
+              <div>
+                <span className='pay-button'>결제하기</span>
+              </div>
             </button>
           </div>
         </form>

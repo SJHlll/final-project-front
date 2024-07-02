@@ -5,7 +5,7 @@ import React, {
   useState,
 } from 'react';
 import { Button, Container } from 'reactstrap';
-// import '../../scss/Login.scss';
+import '../../../scss/Login.scss';
 import { KAKAO_AUTH_URL } from '../../../config/kakao-config';
 import { NAVER_AUTH_URL } from '../../../config/naver-config';
 import { useNavigate } from 'react-router-dom';
@@ -102,85 +102,115 @@ const Login = () => {
 
   return (
     <>
-      <form noValidate onSubmit={loginHandler}>
+      <form
+        className='loginform'
+        noValidate
+        onSubmit={loginHandler}
+      >
         <Container className='body-top'>
           <Grid container spacing={2}>
-            <Grid>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                id='email'
-                label='Email'
-                name='email'
-                autoComplete='email'
-              />
-            </Grid>
-            <Grid>
-              <TextField
-                variant='outlined'
-                required
-                fullWidth
-                name='password'
-                label='Password'
-                type='password'
-                id='password'
-                autoComplete='current-password'
-              />
-            </Grid>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                position: 'relative',
+                left: '42%',
+              }}
+            >
+              <Grid>
+                <TextField
+                  variant='outlined'
+                  required
+                  fullWidth
+                  id='email'
+                  label='Email'
+                  name='email'
+                  autoComplete='email'
+                />
+              </Grid>
+              <Grid>
+                <TextField
+                  variant='outlined'
+                  required
+                  fullWidth
+                  name='password'
+                  label='Password'
+                  type='password'
+                  id='password'
+                  autoComplete='current-password'
+                />
+              </Grid>
+            </div>
             <Grid item xs={12}>
               <Button
                 type='submit'
                 fullWidth
                 variant='contained'
                 color='#007bfff'
-              />
+                style={{
+                  width: '208px',
+                  height: '44px',
+                  margin: '5px',
+                  backgroundColor: 'skyblue',
+                }}
+              >
+                로그인
+              </Button>
             </Grid>
           </Grid>
         </Container>
+
+        <Container className='body-bottom'>
+          <Button
+            style={{
+              width: '208px',
+              height: '44px',
+              margin: '5px',
+            }}
+            variant='contained'
+            onClick={goToRegister}
+          >
+            회원가입
+          </Button>
+          <Grid item xs={12}>
+            <a href={KAKAO_AUTH_URL}>
+              <img
+                style={{
+                  width: '208px',
+                  height: '44px',
+                  margin: '5px',
+                }}
+                alt='kakaobtn'
+                src={require('../../assets/kakaoLogin.png')}
+              />
+            </a>
+          </Grid>
+          <Grid>
+            <a href={NAVER_AUTH_URL}>
+              <img
+                style={{
+                  width: '208px',
+                  height: '40px',
+                  margin: '5px',
+                }}
+                alt='naverbtn'
+                src={require('../../assets/naverLogin.png')}
+              />
+            </a>
+          </Grid>
+          <Grid
+            style={{
+              width: '210px',
+              height: '40px',
+              margin: '5px',
+              position: 'relative',
+              left: '41.5%',
+            }}
+          >
+            <GoogleAuthLogin />
+          </Grid>
+        </Container>
       </form>
-      <Container className='body-bottom'>
-        <Grid item xs={12}>
-          <a href={KAKAO_AUTH_URL}>
-            <img
-              style={{
-                width: '208px',
-                height: '44px',
-                margin: '5px',
-              }}
-              alt='kakaobtn'
-              src={require('../../assets/kakaoLogin.png')}
-            />
-          </a>
-        </Grid>
-        <Grid>
-          <a href={NAVER_AUTH_URL}>
-            <img
-              style={{
-                width: '208px',
-                height: '40px',
-                margin: '5px',
-              }}
-              alt='naverbtn'
-              src={require('../../assets/naverLogin.png')}
-            />
-          </a>
-        </Grid>
-        <Grid>
-          <GoogleAuthLogin />
-        </Grid>
-        <Button
-          className='testbtn'
-          onClick={() => click('/')}
-          style={{ margin: '5px' }}
-        >
-          우선 돌아가기
-        </Button>
-        <Button variant='contained' onClick={goToRegister}>
-          {' '}
-          회원가입
-        </Button>
-      </Container>
     </>
   );
 };
