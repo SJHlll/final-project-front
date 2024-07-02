@@ -44,13 +44,21 @@ margin-top: 2%;
 }
 
 .Notibody{
-    height: 550px;
+    height: 500px;
     border: 1px solid black;
     border-radius: 15px;
     margin-top: 0px;
     position: relative;
-    bottom: 40px;
+    margin-top: -40px;
     font-size: 24px;
     text-align: start;
     padding: 2%;
+    overflow: auto;
+}
+.notibtn{
+    width: 150px;
+    color: #2c7fdf;
+    background-color: #ebf5ff;
+    border-radius: 15px;
+    margin-right: 5px;
 }

@@ -1,7 +1,6 @@
 .maincontainer {
     background-color: white;
     width: 100%;
-    height: auto;
     display: flex;
     justify-content: center;
     position: fixed;
@@ -17,6 +16,6 @@
       margin-top: 3%;
       border: 1px solid #555555;
       border-radius: 15px;
-      box-shadow: 18px 18px 1px -8px #555555;
+    //   box-shadow: 18px 18px 1px -8px #c2e1ff;
       overflow: hidden;
   }
