@@ -9,7 +9,6 @@ import CarCalendar from './CarCalendar';
 import CarResInfo from './CarResInfo';
 import { setHours, setMinutes } from 'date-fns';
 import '../../../../scss/Button.scss';
-import { StationProvider } from '../../../../contexts/StationContext';
 import styles from './reservation_css/Carres.modul.scss';
 import { CarContext } from '../../../../contexts/CarContext';
 import axios from 'axios';
@@ -187,9 +186,14 @@ const Carres = () => {
         }
       />
       {modal ? modalOpen : button}
+<<<<<<< HEAD
       <StationProvider />
       <CarSwiperReal />
       {/* {selectedCar && <CarInfo rentCar={[selectedCar]} />} */}
+=======
+      <CarSwiper onSelectCar={selectedCar} />
+      {selectedCar && <CarInfo rentCar={[selectedCar]} />}
+>>>>>>> 473a22a492881da9e5e2be70095af58a0f711dd7
     </>
   );
 };

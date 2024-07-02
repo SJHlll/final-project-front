@@ -66,10 +66,11 @@ const UserInfoSave = () => {
     let flag = false;
 
     if (!inputValue) {
-      msg = '회원 이름은 필수입니다.';
+      msg = '이름은 필수입니다.';
     } else if (!nameRegex.test(inputValue)) {
       msg = '2~5 글자 사이의 한글로 작성하세요!';
     } else {
+      msg = '사용 가능한 이름입니다.';
       flag = true;
     }
 
@@ -88,7 +89,7 @@ const UserInfoSave = () => {
     } else if (!phoneRegex.test(inputValue)) {
       msg = '핸드폰 번호 형식이 올바르지 않습니다.';
     } else {
-      msg = 'good!';
+      msg = '사용 가능한 핸드폰 번호입니다.';
       flag = true;
     }
 
@@ -103,17 +104,17 @@ const UserInfoSave = () => {
   const birthDayHandler = (e) => {
     const inputValue = e.target.value;
     const birthRegex =
-      /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
+      /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/;
 
     let msg;
     let flag = false;
 
     if (!inputValue) {
-      msg = '생년월일(8자리)를 입력해 주세요!';
+      msg = '생년월일를 입력해 주세요!';
     } else if (!birthRegex.test(inputValue)) {
-      msg = '생년월일(8자리) 형식이 올바르지 않습니다.';
+      msg = '생년월일을 다시 입력해 주세요!';
     } else {
-      msg = 'good!';
+      msg = '사용 가능한 생년월일입니다.';
       flag = true;
     }
 
@@ -144,7 +145,6 @@ const UserInfoSave = () => {
           },
           body: JSON.stringify(userValue),
         },
-        console.log(userValue),
       );
 
       if (res.ok) {
@@ -191,125 +191,120 @@ const UserInfoSave = () => {
   const toggle = () => setModalOpen(!modalOpen);
 
   const infoModal = () => (
-    <Modal
-      isOpen={modalOpen}
-      toggle={toggle}
-      backdrop='static'
-      style={{ fontFamily: 'font2', top: '25%' }}
-    >
-      <form>
-        <Grid container spacing={2}>
-          <Grid item xs={12} style={{ display: 'flex' }}>
-            <div style={{ width: '30%' }}>이름</div>
-            <TextField
-              id='outl'
-              variant='standard'
-              size='small'
-              defaultValue={userName}
-              onChange={nameHandler}
-            />
-          </Grid>
-          <div className='effectiveness'>
-            <span
-              style={
-                correct.userName
-                  ? { color: 'green' }
-                  : { color: 'red' }
-              }
-            >
-              {message.userName}
-            </span>
-          </div>
+    // <Modal
+    //   isOpen={modalOpen}
+    //   toggle={toggle}
+    //   backdrop='static'
+    //   style={{
+    //     fontFamily: 'font2',
+    //     top: '25%',
+    //     width: '400px',
+    //   }}
+    // >
+    <form>
+      <Grid container spacing={2}>
+        <Grid item xs={12} style={{ display: 'flex' }}>
+          <div style={{ width: '30%' }}>이름</div>
+          <TextField
+            id='outline'
+            variant='standard'
+            fullWidth
+            defaultValue={userName}
+            onChange={nameHandler}
+          />
+        </Grid>
+        <div className='effectiveness'>
+          <span
+            style={
+              correct.userName
+                ? { color: 'green' }
+                : { color: 'red' }
+            }
+          >
+            {message.userName}
+          </span>
+        </div>
 
-          <Grid item xs={12} style={{ display: 'flex' }}>
-            <div style={{ width: '30%' }}>이메일</div>
-            <TextField
-              id='outl'
-              variant='standard'
-              size='small'
-              InputProps={{
-                readOnly: true,
-              }}
-              defaultValue={email}
-            />
-          </Grid>
-
-          <Grid item xs={12} style={{ display: 'flex' }}>
-            <div style={{ width: '30%' }}>연락처</div>
-            <TextField
-              id='outl'
-              variant='standard'
-              size='small'
-              defaultValue={phoneNumber}
-              onChange={phoneNumberHandler}
-            />
-          </Grid>
-          <div className='effectiveness'>
-            <span
-              style={
-                correct.phoneNumber
-                  ? { color: 'green' }
-                  : { color: 'red' }
-              }
-            >
-              {message.phoneNumber}
-            </span>
-          </div>
-
-          <Grid item xs={12} style={{ display: 'flex' }}>
-            <div style={{ width: '30%' }}>생년월일</div>
-            <TextField
-              id='outl'
-              variant='standard'
-              size='small'
-              defaultValue={birthDay}
-              onChange={birthDayHandler}
-            />
-          </Grid>
-          <div className='effectiveness'>
-            <span
-              style={
-                correct.birthDay
-                  ? { color: 'green' }
-                  : { color: 'red' }
-              }
-            >
-              {message.birthDay}
-            </span>
-          </div>
+        <Grid item xs={12} style={{ display: 'flex' }}>
+          <div style={{ width: '30%' }}>이메일</div>
+          <TextField
+            id='outl'
+            variant='standard'
+            fullWidth
+            InputProps={{
+              readOnly: true,
+            }}
+            defaultValue={email}
+          />
         </Grid>
 
-        <div
-          style={{
-            width: '100%',
-            textAlign: 'center',
-            padding: '10px 0px',
-          }}
-        >
-          <button
-            type='submit'
-            className='public-btn updating'
-            onClick={updateButtonClickHandler}
+        <Grid item xs={12} style={{ display: 'flex' }}>
+          <div style={{ width: '30%' }}>연락처</div>
+          <TextField
+            id='outl'
+            variant='standard'
+            fullWidth
+            defaultValue={phoneNumber}
+            onChange={phoneNumberHandler}
+          />
+        </Grid>
+        <div className='effectiveness'>
+          <span
+            style={
+              correct.phoneNumber
+                ? { color: 'green' }
+                : { color: 'red' }
+            }
           >
-            수정하기
-          </button>
+            {message.phoneNumber}
+          </span>
         </div>
-      </form>
-    </Modal>
+
+        <Grid item xs={12} style={{ display: 'flex' }}>
+          <div style={{ width: '30%' }}>생년월일</div>
+          <TextField
+            id='outlined'
+            variant='standard'
+            type='date'
+            autoComplete='birthday'
+            fullWidth
+            defaultValue={birthDay}
+            onChange={birthDayHandler}
+          />
+        </Grid>
+        <div className='effectiveness'>
+          <span
+            style={
+              correct.birthDay
+                ? { color: 'green' }
+                : { color: 'red' }
+            }
+          >
+            {message.birthDay}
+          </span>
+        </div>
+      </Grid>
+
+      <div
+        style={{
+          width: '100%',
+          textAlign: 'center',
+          padding: '10px 0px',
+        }}
+      >
+        <button
+          type='submit'
+          className='public-btn updating'
+          onClick={updateButtonClickHandler}
+        >
+          수정하기
+        </button>
+      </div>
+    </form>
+    // </Modal>
   );
 
-  return (
-    <>
-      <div className='maincontainer'>
-        <div className='contentline'>
-          <button className='public-btn' onClick={toggle}>
-            모달창 오픈!
-          </button>
-          {modalOpen && infoModal()}
-        </div>
-      </div>
-    </>
-  );
+  return <>{infoModal()}</>;
 };
 
 export default UserInfoSave;

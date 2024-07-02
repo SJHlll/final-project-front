@@ -49,11 +49,15 @@ const PlugAndGoStation = ({
   // 예약하기 모달창 활성화
   const modalOpen = () => (
     <ModalBackground>
-      <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle} close={closeBtn} />
+      <Modal
+        isOpen={modal}
+        toggle={toggle}
+        style={{ top: '15%' }}
+      >
         <ModalBody>
           <ReservationModal
-            name={Name}
+            chargeId={StationId}
+            stationName={Name}
             address={Address}
             speed={Speed}
             type={Type}

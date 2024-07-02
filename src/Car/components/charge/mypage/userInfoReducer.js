@@ -1,24 +1,16 @@
 export const initialState = {
   userValue: {
     userName: '',
-    // password: '',
-    // email: '',
     birthDay: '',
     phoneNumber: '',
   },
   message: {
     userName: '',
-    // password: '',
-    // passwordCheck: '',
-    // email: '',
     birthDay: '',
     phoneNumber: '',
   },
   correct: {
     userName: false,
-    // password: false,
-    // passwordCheck: false,
-    // email: false,
     birthDay: false,
     phoneNumber: false,
   },
