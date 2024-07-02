@@ -10,17 +10,25 @@ import DatePicker from 'react-datepicker';
 import '../../../../scss/Button.scss';
 import { ReserveStationContext } from '../../../../contexts/ReserveStationContext';
 import AuthContext from '../../../../util/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const MyPageCharge = () => {
+  const navigate = useNavigate();
   const [cancel, setCancel] = useState(false);
-  // const [isReservation, setIsReservaion] = useState(false); // 예약 존재 여부
+  const [
+    cancelReservationNumber,
+    setCancelReservationNumber,
+  ] = useState(null);
 
   const toggle = () => {
     setCancel(!cancel);
   };
 
+  // 시간 / 분 필터
   const formatTime = (minutes) => {
+    // 시간
     const hours = Math.floor(minutes / 60);
+    // 분 (나머지)
     const remainingMinutes = minutes % 60;
 
     if (hours > 0 && remainingMinutes > 0) {
@@ -32,6 +40,7 @@ const MyPageCharge = () => {
     }
   };
 
+  // 충전 종료 시간
   const calculateEndTime = (startTime, durationMinutes) => {
     const startDate = new Date(startTime);
     startDate.setMinutes(
@@ -40,17 +49,53 @@ const MyPageCharge = () => {
     return startDate;
   };
 
-  const button = () => (
+  const button = (reservations) => (
     <div style={{ width: '100%', textAlign: 'center' }}>
-      <button className='public-btn' onClick={toggle}>
+      <button
+        className='public-btn'
+        onClick={() => toggleCancel(reservations)}
+      >
         예약 취소
       </button>
     </div>
   );
 
-  const cancelReservation = () => {
-    alert('예약이 취소되었습니다.');
+  const toggleCancel = (reservations) => {
+    console.log('가져온 예약번호 : ' + reservations);
+    setCancelReservationNumber(reservations);
     setCancel(!cancel);
+  };
+
+  const cancelReservation = async () => {
+    try {
+      const token = localStorage.getItem('ACCESS_TOKEN');
+      const response = await fetch(
+        `http://localhost:8181/mypage?reservationNo=${cancelReservationNumber}`,
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to cancel reservation');
+      }
+
+      alert('예약이 취소되었습니다.');
+      setCancel(!cancel);
+      setReserveStation((prev) =>
+        prev.filter(
+          (r) =>
+            r.reservationNo !== cancelReservationNumber,
+        ),
+      );
+    } catch (error) {
+      console.error(error);
+      alert('예약 취소에 실패했습니다.');
+    }
   };
 
   const CancelCharge = () => (
@@ -81,10 +126,50 @@ const MyPageCharge = () => {
     </ModalBackground>
   );
 
+  // 예약이 없는 상태 리턴값
   const NoReservation = () => {
-    <div>예약이 없습니다.</div>;
+    return (
+      <>
+        {phoneNumber.length > 1 ? (
+          // 로그인은 했는지
+          <div className='no-reserve'>
+            <div>예약안햇습니다.</div>
+            <div>
+              <span
+                onClick={() =>
+                  navigate('/charge/reservation')
+                }
+                style={{
+                  cursor: 'pointer',
+                  color: '#F18D8A',
+                }}
+              >
+                충전소 예약 페이지로 이동하기
+              </span>
+            </div>
+          </div>
+        ) : (
+          // 로그인도 안했는지
+          <div className='no-reserve'>
+            <div>로그인안햇습니다.</div>
+            <div>
+              <span
+                onClick={() => navigate('/Login')}
+                style={{
+                  cursor: 'pointer',
+                  color: '#F18D8A',
+                }}
+              >
+                로그인 페이지로 이동하기
+              </span>
+            </div>
+          </div>
+        )}
+      </>
+    );
   };
 
+  // 예약한 상태 리턴값
   const YesReservation = ({ reservations }) => {
     return (
       <>
@@ -156,7 +241,7 @@ const MyPageCharge = () => {
                 <div>{r.reservationNo}</div>
               </div>
 
-              {button()}
+              {button(r.reservationNo)}
               {cancel && CancelCharge()}
             </div>
           );
@@ -165,16 +250,26 @@ const MyPageCharge = () => {
     );
   };
 
+  // 예약한 충전소와 사용자의 정보
   const { reserveStation, setReserveStation } = useContext(
     ReserveStationContext,
   );
+  // 로그인한 사용자의 전화번호로 동일한 계정 찾기
   const { phoneNumber } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchStations = async () => {
       try {
+        const token = localStorage.getItem('ACCESS_TOKEN');
         const response = await fetch(
           'http://localhost:8181/mypage',
+          {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          },
         );
         if (!response.ok) {
           throw new Error('Failed to fetch stations');
@@ -186,7 +281,7 @@ const MyPageCharge = () => {
           (station) => station.phoneNumber === phoneNumber,
         );
         setReserveStation(filteredData);
-        console.log(phoneNumber);
+        console.log('내 전화번호 : ' + phoneNumber);
         console.log(filteredData);
       } catch (error) {
         console.error(error);
