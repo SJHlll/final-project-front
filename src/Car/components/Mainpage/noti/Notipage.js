@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Frame from '../Frame';
 import './NotiPage.scss';
+import AuthContext from '../../../../util/AuthContext';
 
 const NotiPage = () => {
   const location = useLocation();
@@ -21,7 +22,7 @@ const NotiPage = () => {
     navigate('/noti');
   };
 
-  const updatehandler = () => {
+  const updateHandler = () => {
     setIsEditing(true);
   };
 
@@ -47,7 +48,8 @@ const NotiPage = () => {
     setCurrentContents(editedContents);
     setIsEditing(false);
   };
-  const deletenotihandler = () => {
+
+  const deleteNotiHandler = () => {
     const storedHits = JSON.parse(
       localStorage.getItem('hits'),
     );
@@ -60,6 +62,8 @@ const NotiPage = () => {
     );
     navigate('/noti');
   };
+  const { role } = useContext(AuthContext);
+
   return (
     <Frame>
       <div style={{ padding: '1%' }}>
@@ -68,10 +72,7 @@ const NotiPage = () => {
           목록
         </p>
         <div
-          style={{
-            position: 'relative',
-            bottom: '80px',
-          }}
+          style={{ position: 'relative', bottom: '80px' }}
         >
           {isEditing ? (
             <>
@@ -82,14 +83,14 @@ const NotiPage = () => {
                   setEditedHeader(e.target.value)
                 }
                 className='Notitheader'
-              ></input>
+              />
               <textarea
                 value={editedContents}
                 onChange={(e) =>
                   setEditedContents(e.target.value)
                 }
                 className='Notitbody'
-              ></textarea>
+              />
             </>
           ) : (
             <>
@@ -112,26 +113,46 @@ const NotiPage = () => {
             <button className='notibtn' onClick={click}>
               이전
             </button>
-            <button
-              className='notibtn'
-              onClick={deletenotihandler}
-            >
-              삭제
-            </button>
-            {isEditing ? (
-              <button
-                className='notibtn'
-                onClick={saveUpdateHandler}
-              >
-                저장
-              </button>
-            ) : (
-              <button
-                className='notibtn'
-                onClick={updatehandler}
-              >
-                수정
-              </button>
+            {role === 'COMMON' &&
+              (isEditing ? (
+                <button
+                  className='notibtn'
+                  onClick={saveUpdateHandler}
+                >
+                  저장
+                </button>
+              ) : (
+                <button
+                  className='notibtn'
+                  onClick={updateHandler}
+                >
+                  수정이가능
+                </button>
+              ))}
+            {role === 'ADMIN' && (
+              <>
+                <button
+                  className='notibtn'
+                  onClick={deleteNotiHandler}
+                >
+                  삭제
+                </button>
+                {isEditing ? (
+                  <button
+                    className='notibtn'
+                    onClick={saveUpdateHandler}
+                  >
+                    저장
+                  </button>
+                ) : (
+                  <button
+                    className='notibtn'
+                    onClick={updateHandler}
+                  >
+                    수정불가
+                  </button>
+                )}
+              </>
             )}
           </div>
         </div>
