@@ -1,11 +1,8 @@
 import React from 'react';
 
-const ReviewSelect = ({ onClick, isSelected }) => {
+const ReviewSelect = ({ onClick }) => {
   return (
-    <div
-      className={`admin-select review ${isSelected ? 'selected' : ''}`}
-      onClick={onClick}
-    >
+    <div className='admin-select review' onClick={onClick}>
       작성된 리뷰
     </div>
   );

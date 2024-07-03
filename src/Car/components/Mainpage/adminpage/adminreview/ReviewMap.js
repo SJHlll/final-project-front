@@ -4,12 +4,41 @@ import React, {
   useState,
 } from 'react';
 import AuthContext from '../../../../../util/AuthContext';
+import { TestRvContext } from './TestRvContext';
 
 const ReviewMap = () => {
+  const { review, setReview } = useContext(TestRvContext);
   const { role } = useContext(AuthContext); // 관리자 확인용
   const [filterPhoneNumber, setFilterPhoneNumber] =
     useState(''); // 전화번호 필터링
   const [filteredCar, setfilteredCar] = useState([]); // 필터링된 리뷰
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const token = localStorage.getItem('ACCESS_TOKEN');
+        const response = await fetch(
+          'http://localhost:8181/admin/review',
+          {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          },
+        );
+        if (!response.ok) {
+          throw new Error('Failed to fetch reviews');
+        }
+        const data = await response.json();
+        setReview(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchReviews();
+  }, [setReview]);
 
   // 날짜 / 시간 작성일
   const formatRentTime = (rentTime) => {
