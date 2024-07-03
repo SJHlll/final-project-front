@@ -97,19 +97,7 @@ const ReservedCarMap = () => {
   return (
     <>
       {role === 'ADMIN' ? ( // && reserveStation.length > 0
-        <>
-          <input
-            className='phone-last-four'
-            type='text'
-            placeholder='전화번호 뒷자리 4개 입력'
-            value={filterPhoneNumber}
-            onChange={(e) =>
-              setFilterPhoneNumber(e.target.value)
-            }
-            maxLength='4'
-          />
-          <AdminContents cars={filteredCar} />
-        </>
+        <AdminContents cars={filteredCar} />
       ) : (
         <div
           style={{
@@ -121,6 +109,16 @@ const ReservedCarMap = () => {
           예약된 렌트카가 없습니다.
         </div>
       )}
+      <input
+        className='phone-last-four'
+        type='text'
+        placeholder='전화번호 뒷자리 4개 입력'
+        value={filterPhoneNumber}
+        onChange={(e) =>
+          setFilterPhoneNumber(e.target.value)
+        }
+        maxLength='4'
+      />
     </>
   );
 };

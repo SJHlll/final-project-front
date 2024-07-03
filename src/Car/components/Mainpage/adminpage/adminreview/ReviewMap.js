@@ -80,19 +80,7 @@ const ReviewMap = () => {
   return (
     <>
       {role === 'ADMIN' ? ( // && reserveStation.length > 0
-        <>
-          <input
-            className='phone-last-four'
-            type='text'
-            placeholder='전화번호 뒷자리 4개 입력'
-            value={filterPhoneNumber}
-            onChange={(e) =>
-              setFilterPhoneNumber(e.target.value)
-            }
-            maxLength='4'
-          />
-          <AdminContents reviews={filteredCar} />
-        </>
+        <AdminContents reviews={filteredCar} />
       ) : (
         <div
           style={{
@@ -104,6 +92,16 @@ const ReviewMap = () => {
           작성된 리뷰가 없습니다.
         </div>
       )}
+      <input
+        className='phone-last-four'
+        type='text'
+        placeholder='전화번호 뒷자리 4개 입력'
+        value={filterPhoneNumber}
+        onChange={(e) =>
+          setFilterPhoneNumber(e.target.value)
+        }
+        maxLength='4'
+      />
     </>
   );
 };
