@@ -17,8 +17,8 @@
         border-bottom: 1px solid #aaa;
 
         &:hover {
-            transform: scale(1.02);
-            border-color: #333;
+            transform: scale(1.04);
+            border-color: black;
         }
     }
 
@@ -36,6 +36,12 @@
 
     .selected {
         border-width: 3px;
+        border-color: black;
+        scale: 1.04;
+
+        &:hover {
+            transform: none;
+        }
     }
 }
 
