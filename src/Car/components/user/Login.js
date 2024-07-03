@@ -143,10 +143,11 @@ const Login = () => {
             </div>
             <Grid item xs={12}>
               <Button
+                className='Loginbtn'
                 type='submit'
                 fullWidth
                 variant='contained'
-                color='#007bfff'
+                onClick={loginHandler}
                 style={{
                   width: '208px',
                   height: '44px',
@@ -158,9 +159,7 @@ const Login = () => {
               </Button>
             </Grid>
           </Grid>
-        </Container>
 
-        <Container className='body-bottom'>
           <Button
             style={{
               width: '208px',
