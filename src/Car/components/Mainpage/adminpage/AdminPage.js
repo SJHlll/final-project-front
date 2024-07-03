@@ -16,19 +16,23 @@ const AdminPage = () => {
       <Frame>
         <div className='admin-page-select'>
           <ReservedStationSelect
+            isSelected={selected === 'station'}
             onClick={() => setSelected('station')}
           />
           <ReservedCarSelect
+            isSelected={selected === 'car'}
             onClick={() => setSelected('car')}
           />
           <ReviewSelect
+            isSelected={selected === 'review'}
             onClick={() => setSelected('review')}
           />
         </div>
         <div className='admin-page-list'>
           {!selected && (
             <div className='no-select'>
-              안고르면 안나옴, 고르면 이 문장 안나옴
+              <div>안고르면 이 문장 나옴.</div>
+              <div>카테고리 고르면 이 문장 안나옴.</div>
             </div>
           )}
           {selected === 'station' && (

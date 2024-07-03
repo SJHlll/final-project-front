@@ -8,6 +8,7 @@
 
     .admin-select {
         width: 30%;
+        height: 50px;
         padding: 5px 0;
         cursor: pointer;
         transition: transform 0.2s ease;
@@ -27,6 +28,10 @@
 
     .review {
         border: 1px solid green;
+    }
+
+    .selected {
+        border-width: 3px;
     }
 }
 

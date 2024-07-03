@@ -1,9 +1,9 @@
 import React from 'react';
 
-const ReservedStationSelect = ({ onClick }) => {
+const ReservedStationSelect = ({ onClick, isSelected }) => {
   return (
     <div
-      className='admin-select reserve-station'
+      className={`admin-select reserve-station ${isSelected ? 'selected' : ''}`}
       onClick={onClick}
     >
       ReservedStation
