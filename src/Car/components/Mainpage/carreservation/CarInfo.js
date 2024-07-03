@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import './reservation_css/CarInfo.scss';
 import { CarContext } from '../../../../contexts/CarContext';
 
-
 // CarSwiperReal.js에서 불러온 rentCar를 집어넣음
 const CarInfo = () => {
   const { selectedCar } = useContext(CarContext);
@@ -35,6 +34,9 @@ const CarInfo = () => {
           <img
             src={selectedCar.carPicture}
             alt='자동차 이미지'
+            style={{
+              width: '100%',
+            }}
           />
           <div>===================</div>
           <div>차종 : {selectedCar.carName}</div>

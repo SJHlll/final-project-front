@@ -52,7 +52,9 @@ const CarSwiperReal = () => {
       spaceBetween={60}
       slidesPerView={3}
       navigation
-      pagination={{ clickable: true }}
+      pagination={{
+        clickable: true,
+      }}
       loop
       autoplay={{ delay: 2000 }}
     >

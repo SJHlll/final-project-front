@@ -1,11 +1,13 @@
 .car-info-container {
-    margin: 20px 0 0 20px;
+   
+    margin-left: 15%;
+    border: 1px solid black;
+    border-radius: 15px;
     width: 450px;
     background-color: #c2e1ff;
+    overflow: hidden;
 }
 
-// .thisCar {
-//     margin: 300px 0 0 200px;
-
-
-// }
+.thisCar {
+    text-align: center;
+}
