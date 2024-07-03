@@ -1,0 +1,38 @@
+.modalmodal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    font-family: font2;
+}
+
+.modalmodal-content {
+    background: white;
+    border: 3px solid black;
+    padding: 20px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.modalmodal-buttons {
+    margin-top: 20px;
+}
+
+.modalmodal-buttons button {
+    margin: 0 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #ebf5ff;
+    color: #2c7fdf;
+    border: 1px solid #2c7fdf;
+}
+
+.modalmodal-buttons button:hover {
+    background-color: #c2e1ff;
+}

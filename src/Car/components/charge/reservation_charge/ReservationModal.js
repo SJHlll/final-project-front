@@ -7,10 +7,11 @@ import React, {
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.module.css';
 import '../scss/ReservationModal.scss';
-import OpenTossPayments from '../../pay/OpenTossPayments';
 import '../../../../scss/Button.scss';
 import AuthContext from '../../../../util/AuthContext';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import ModalModal from './ModalModal';
 
 const ReservationModal = ({
   chargeId,
@@ -20,6 +21,7 @@ const ReservationModal = ({
   type,
   price,
 }) => {
+  const navigate = useNavigate();
   const today = new Date();
   const [startDate, setStartDate] = useState(
     setHours(setMinutes(today, 0), 9), // 오늘 날짜에 9시 0분으로
@@ -37,6 +39,9 @@ const ReservationModal = ({
     return currentDate.getTime() < selectedDate.getTime();
   };
 
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+  const [onConfirm, setOnConfirm] = useState(null);
   // 시간, 분 정하기
   const [selectedOption, setSelectedOption] =
     useState('option1');
@@ -101,7 +106,7 @@ const ReservationModal = ({
       : price * selectedValue;
   };
 
-  // submit 이벤트 핸들러
+  // 모달창 결제버튼 함수
   const reservationHandler = async (e) => {
     e.preventDefault();
 
@@ -127,6 +132,7 @@ const ReservationModal = ({
     const { adjustedPrice, adjustedSelectedValue } =
       adjustValues(speed, price, selectedValue);
 
+    // 백엔드에서 데이터 가져오기
     const requestDTO = {
       chargeId,
       name: userName,
@@ -141,6 +147,7 @@ const ReservationModal = ({
     };
     console.log(requestDTO);
 
+    // 시도
     try {
       const response = await axios.post(
         'http://localhost:8181/charge/reservation',
@@ -148,14 +155,58 @@ const ReservationModal = ({
       );
       console.log(response.data);
       console.log(1);
+
+      // 이상 없으면 새 결제창 염.
+      const width = 700;
+      const height = 800;
+      const left = window.screen.width / 2 - width / 2;
+      const top = window.screen.height / 2 - height / 2;
+
+      window.open(
+        `/pay?totalPrice=${calculateTotalPrice()}`,
+        '_blank',
+        `width=${width},height=${height},top=${top},left=${left}`,
+      );
+      // 에러 발생 시 새 결제창 안염.
     } catch (error) {
-      console.error(error);
-      console.log(2);
+      // 400에러
+      if (error.response && error.response.status === 400) {
+        if (
+          error.response.data ===
+          '이미 예약하신 충전소가 있습니다.'
+        ) {
+          setModalMessage(
+            `'${userName}' 회원님은 이미 예약하신 충전소가 있어 추가 예약이 불가능합니다.
+            \n마이페이지로 이동하시겠습니까?`,
+          );
+          setOnConfirm(() => () => navigate('/mypage'));
+          setModalOpen(true);
+        } else if (
+          error.response.data === '회원 정보가 없습니다.'
+        ) {
+          setModalMessage(
+            `회원 정보를 찾을 수 없습니다. 로그인 후 예약 신청을 해주세요.
+            \n로그인 페이지로 이동하시겠습니까?`,
+          );
+          setOnConfirm(() => () => navigate('/Login'));
+          setModalOpen(true);
+        }
+      } else {
+        setModalMessage(error.message);
+        setOnConfirm(null);
+        setModalOpen(true);
+      }
     }
   };
 
   return (
     <>
+      <ModalModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onConfirm={onConfirm}
+        message={modalMessage}
+      />
       <div
         className='form-wrapper'
         style={{ fontFamily: 'font2' }}
@@ -164,14 +215,47 @@ const ReservationModal = ({
           className='reservation-charge'
           onSubmit={reservationHandler}
         >
-          <div className='flex'>
-            <div className='column'>이름</div>
-            <div className='data'>{userName}</div>
-          </div>
-          <div className='flex'>
-            <div className='column'>핸드폰 번호</div>
-            <div className='data'>{phoneNumber}</div>
-          </div>
+          {userName ? (
+            <>
+              <div className='flex'>
+                <div className='column'>이름</div>
+                <div className='data'>{userName}</div>
+              </div>
+              <div className='flex'>
+                <div className='column'>핸드폰 번호</div>
+                <div className='data'>{phoneNumber}</div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className='flex'>
+                <div className='column'>이름</div>
+                <div
+                  className='data'
+                  style={{
+                    color: '#F18D8A',
+                    cursor: 'pointer',
+                  }}
+                  onClick={() => navigate('/Login')}
+                >
+                  회원 정보 없음!
+                </div>
+              </div>
+              <div className='flex'>
+                <div className='column'>핸드폰 번호</div>
+                <div
+                  className='data'
+                  style={{
+                    color: '#F18D8A',
+                    cursor: 'pointer',
+                  }}
+                  onClick={() => navigate('/Login')}
+                >
+                  로그인을 진행해주세요.
+                </div>
+              </div>
+            </>
+          )}
           <div className='flex'>
             <div className='column'>충전소 이름</div>
             <div className='data'>{stationName}</div>
@@ -262,9 +346,9 @@ const ReservationModal = ({
             }}
           >
             <button className='public-btn'>
-              <OpenTossPayments
-                totalPrice={calculateTotalPrice()}
-              />
+              <div>
+                <span className='pay-button'>결제하기</span>
+              </div>
             </button>
           </div>
         </form>

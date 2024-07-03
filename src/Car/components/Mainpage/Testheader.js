@@ -25,7 +25,7 @@ const Testheader = () => {
     navigate('/Login');
   };
 
-  const { isLoggedIn, name, onLogout } =
+  const { isLoggedIn, name, onLogout, role } =
     useContext(AuthContext);
 
   // 로그아웃 핸들러
@@ -116,6 +116,16 @@ const Testheader = () => {
             >
               로그아웃
             </p>
+          </button>
+        )}
+        {isLoggedIn && role === 'ADMIN' && (
+          <button
+            className={
+              State === 9 ? 'tabliactive' : 'tabli'
+            }
+            onClick={() => onClick(9, '/admin')}
+          >
+            예약 목록 & 관리
           </button>
         )}
       </div>
