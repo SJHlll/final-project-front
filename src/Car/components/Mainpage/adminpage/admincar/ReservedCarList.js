@@ -1,16 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Frame from '../../Frame';
+import ReservedCarMap from './ReservedCarMap';
+import ReservedStationSelect from '../adminstation/ReservedStationSelect';
+import ReviewSelect from '../adminreview/ReviewSelect';
+import ReviewList from '../adminreview/ReviewList';
+import ReservedStationList from '../adminstation/ReservedStationList';
 
 const ReservedCarList = () => {
+  const [selected, setSelected] = useState(null);
+  const navigate = useNavigate();
+
+  const handleSelect = (selection, path) => {
+    setSelected(selection);
+    navigate(path);
+  };
   return (
-    <div className='admin-list reserve-car'>
-      <div className='list-header'>
-        <div className='res-no'>예약번호</div>
-        <div className='res-user-name'>회원명</div>
-        <div className='res-station-name'>충전소</div>
-        <div className='res-station-time'>충전기간</div>
-        <div className='hidden-text'></div>
+    <Frame>
+      <div className='admin-page-select'>
+        <ReservedStationSelect
+          isSelected={selected === 'station'}
+          onClick={() =>
+            handleSelect('station', '/admin/station')
+          }
+        />
+        <div
+          className={'admin-select reserve-car selected'}
+        >
+          예약된 렌트카
+        </div>
+        <ReviewSelect
+          isSelected={selected === 'review'}
+          onClick={() =>
+            handleSelect('review', '/admin/review')
+          }
+        />
       </div>
-    </div>
+      <div className='admin-page-list'>
+        <div className='admin-list reserve-car'>
+          <div className='list-header'>
+            <div className='res-no'>예약번호</div>
+            <div className='res-user-name'>회원명</div>
+            <div className='res-selected-name'>차종</div>
+            <div className='res-selected-time'>
+              렌트기간
+            </div>
+            <div className='hidden-text'></div>
+          </div>
+          <ReservedCarMap />
+        </div>
+        {selected === 'station' && <ReservedStationList />}
+        {selected === 'review' && <ReviewList />}
+      </div>
+    </Frame>
   );
 };
 

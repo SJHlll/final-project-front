@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import './reservation_css/CarInfo.scss';
 import { CarContext } from '../../../../contexts/CarContext';
 
-
 // CarSwiperReal.js에서 불러온 rentCar를 집어넣음
 const CarInfo = () => {
   const { selectedCar } = useContext(CarContext);

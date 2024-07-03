@@ -5,30 +5,51 @@
     justify-content: space-between;
     text-align: center;
     font-size: 1.55em;
+    // 드래그 못하게
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
     .admin-select {
         width: 30%;
+        height: 50px;
         padding: 5px 0;
         cursor: pointer;
+        border-top: 1px solid #aaa;
+        border-bottom: 1px solid #aaa;
         transition: transform 0.2s ease;
 
         &:hover {
-            transform: scale(1.02);
+            transform: scale(1.04);
+            border-color: black;
         }
     }
 
-    .reserve-station {
-        border: 1px solid red;
+    .selected {
+        border-width: 3px;
+        border-color: black;
+        scale: 1.04;
+
+        &:hover {
+            transform: none;
+        }
     }
 
-    .reserve-car {
-        border: 1px solid blue;
-    }
+    // .reserve-station {
+    //     border: 1px solid red;
+    // }
 
-    .review {
-        border: 1px solid green;
-    }
+    // .reserve-car {
+    //     border: 1px solid blue;
+    // }
+
+    // .review {
+    //     border: 1px solid green;
+    // }
 }
+
+
 
 .admin-page-list {
     width: 80%;
@@ -58,31 +79,36 @@
 
     .no-select {
         padding: 10px 10px;
-        border: 1px solid black;
+        font-size: 1.3em;
+        border-top: 2px solid black;
+        border-bottom: 2px solid black;
     }
 
     .admin-list {
         font-size: 1em;
+
 
         .list-header {
             display: flex;
             padding: 10px 10px;
             font-size: 1.3em;
             text-align: center;
+            border-top: 2px solid black;
+            border-bottom: 2px solid black;
 
             .res-no {
-                width: 10%;
+                width: 7%;
             }
 
             .res-user-name {
-                width: 15%;
+                width: 18%;
             }
 
-            .res-station-name {
+            .res-selected-name {
                 width: 35%;
             }
 
-            .res-station-time {
+            .res-selected-time {
                 width: 30%;
             }
 
@@ -93,17 +119,18 @@
 
         .list-body {
             display: flex;
+            height: 70px;
             padding: 10px 10px;
             text-align: center;
             align-items: center;
-            border-top: 1px solid green;
+            border-bottom: 1px solid #aaa;
 
             .res-no {
-                width: 10%;
+                width: 7%;
             }
 
             .res-user-name {
-                width: 15%;
+                width: 18%;
             }
 
             .res-station-name {
@@ -128,17 +155,24 @@
                 }
             }
         }
+
+        .phone-last-four {
+            position: absolute;
+            top: 120px;
+            width: 137px;
+            font-size: 0.8em;
+        }
     }
 
-    .reserve-station {
-        border: 1px solid red;
-    }
+    // .reserve-station {
+    //     border: 1px solid red;
+    // }
 
-    .reserve-car {
-        border: 1px solid blue;
-    }
+    // .reserve-car {
+    //     border: 1px solid blue;
+    // }
 
-    .review {
-        border: 1px solid green;
-    }
+    // .review {
+    //     border: 1px solid green;
+    // }
 }
