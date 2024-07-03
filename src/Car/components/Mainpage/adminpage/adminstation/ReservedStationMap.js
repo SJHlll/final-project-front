@@ -23,7 +23,7 @@ const ReservedStationMap = () => {
       try {
         const token = localStorage.getItem('ACCESS_TOKEN');
         const response = await fetch(
-          'http://localhost:8181/admin',
+          'http://localhost:8181/admin/station',
           {
             method: 'GET',
             headers: {

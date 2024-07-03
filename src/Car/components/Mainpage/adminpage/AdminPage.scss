@@ -5,20 +5,34 @@
     justify-content: space-between;
     text-align: center;
     font-size: 1.55em;
+    // 드래그 못하게
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
     .admin-select {
         width: 30%;
         height: 50px;
         padding: 5px 0;
         cursor: pointer;
-        transition: transform 0.2s ease;
-
         border-top: 1px solid #aaa;
         border-bottom: 1px solid #aaa;
+        transition: transform 0.2s ease;
 
         &:hover {
             transform: scale(1.04);
             border-color: black;
+        }
+    }
+
+    .selected {
+        border-width: 3px;
+        border-color: black;
+        scale: 1.04;
+
+        &:hover {
+            transform: none;
         }
     }
 
@@ -33,16 +47,6 @@
     // .review {
     //     border: 1px solid green;
     // }
-
-    .selected {
-        border-width: 3px;
-        border-color: black;
-        scale: 1.04;
-
-        &:hover {
-            transform: none;
-        }
-    }
 }
 
 
@@ -100,11 +104,11 @@
                 width: 18%;
             }
 
-            .res-station-name {
+            .res-selected-name {
                 width: 35%;
             }
 
-            .res-station-time {
+            .res-selected-time {
                 width: 30%;
             }
 
