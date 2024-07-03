@@ -35,6 +35,8 @@
     }
 }
 
+
+
 .admin-page-list {
     width: 80%;
     height: 600px;
@@ -76,11 +78,11 @@
             text-align: center;
 
             .res-no {
-                width: 10%;
+                width: 7%;
             }
 
             .res-user-name {
-                width: 15%;
+                width: 18%;
             }
 
             .res-station-name {
@@ -98,17 +100,18 @@
 
         .list-body {
             display: flex;
+            height: 70px;
             padding: 10px 10px;
             text-align: center;
             align-items: center;
             border-top: 1px solid green;
 
             .res-no {
-                width: 10%;
+                width: 7%;
             }
 
             .res-user-name {
-                width: 15%;
+                width: 18%;
             }
 
             .res-station-name {
@@ -132,6 +135,13 @@
                     background-color: #c2e1ff;
                 }
             }
+        }
+
+        .phone-last-four {
+            position: absolute;
+            top: 120px;
+            width: 137px;
+            font-size: 0.8em;
         }
     }
 
