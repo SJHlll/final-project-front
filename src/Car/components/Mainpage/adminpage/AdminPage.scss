@@ -13,11 +13,12 @@
         cursor: pointer;
         transition: transform 0.2s ease;
 
-        border-top: 1px solid black;
-        border-bottom: 1px solid black;
+        border-top: 1px solid #aaa;
+        border-bottom: 1px solid #aaa;
 
         &:hover {
             transform: scale(1.02);
+            border-color: #333;
         }
     }
 
