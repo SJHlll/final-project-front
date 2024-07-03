@@ -1,12 +1,12 @@
 import React from 'react';
 
-const ReservedStationSelect = ({ onClick }) => {
+const ReservedStationSelect = ({ onClick, isSelected }) => {
   return (
     <div
       className='admin-select reserve-station'
       onClick={onClick}
     >
-      ReservedStation
+      예약된 충전소
     </div>
   );
 };

@@ -32,6 +32,9 @@ import Loginpage from './Car/components/Mainpage/Loginpage';
 import KakaoLoginHandler from './Car/components/user/KakaoLoginHandler';
 import NaverLoginHandler from './Car/components/user/NaverLoginHandler';
 import AdminPage from './Car/components/Mainpage/adminpage/AdminPage';
+import ReservedStationList from './Car/components/Mainpage/adminpage/adminstation/ReservedStationList';
+import ReservedCarList from './Car/components/Mainpage/adminpage/admincar/ReservedCarList';
+import ReviewList from './Car/components/Mainpage/adminpage/adminreview/ReviewList';
 
 const App = () => {
   const location = useLocation();
@@ -131,6 +134,18 @@ const App = () => {
 
             {/* 어드민페이지 */}
             <Route path='/admin' element={<AdminPage />} />
+            <Route
+              path='/admin/station'
+              element={<ReservedStationList />}
+            />
+            <Route
+              path='/admin/car'
+              element={<ReservedCarList />}
+            />
+            <Route
+              path='/admin/review'
+              element={<ReviewList />}
+            />
           </Routes>
         </div>
       </AuthContextProvider>
