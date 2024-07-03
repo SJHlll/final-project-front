@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Noti.scss';
 import Notilist from './Notilist';
 import Frame from '../Frame';
 import { Modal, ModalBody } from 'reactstrap';
 import styled from 'styled-components';
+
+import AuthContext from '../../../../util/AuthContext';
+
 const ModalBackground = styled.div`
   position: fixed;
   top: 0;
@@ -20,7 +23,7 @@ const Noti = () => {
   const [Create, setCreate] = useState(false);
   const [NotiTitle, setNotiTitle] = useState('');
   const [NotiContent, setNotiContent] = useState('');
-
+  const { role } = useContext(AuthContext);
   const handleSubmit = (e) => {
     e.preventDefault();
     alert('게시물이 등록 되었습니다');
@@ -44,12 +47,14 @@ const Noti = () => {
         <div className='notiline'>
           <Notilist />
           <div style={{ display: 'flex' }}>
-            <button
-              className='createnotilist'
-              onClick={toggle}
-            >
-              등록
-            </button>
+            {role === 'ADMIN' && (
+              <button
+                className='createnotilist'
+                onClick={toggle}
+              >
+                등록
+              </button>
+            )}
           </div>
         </div>
       </Frame>
