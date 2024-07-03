@@ -11,7 +11,7 @@ const ReviewMap = () => {
   const { role } = useContext(AuthContext); // 관리자 확인용
   const [filterPhoneNumber, setFilterPhoneNumber] =
     useState(''); // 전화번호 필터링
-  const [filteredCar, setfilteredCar] = useState([]); // 필터링된 리뷰
+  const [filteredReview, setfilteredReview] = useState([]); // 필터링된 리뷰
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -62,34 +62,33 @@ const ReviewMap = () => {
   };
 
   // 전화번호 뒷자리 4개로 필터링
-  // useEffect(() => {
-  //   if (filterPhoneNumber.length === 4) {
-  //     const filtered = reserveStation.filter((e) =>
-  //       e.phoneNumber.endsWith(filterPhoneNumber),
-  //     );
-  //     setfilteredCar(filtered);
-  //   } else {
-  //     setfilteredCar(reserveStation);
-  //   }
-  // }, [filterPhoneNumber, reserveStation]);
+  useEffect(() => {
+    if (filterPhoneNumber.length === 4) {
+      const filtered = review.filter((e) =>
+        e.phoneNumber.endsWith(filterPhoneNumber),
+      );
+      setfilteredReview(filtered);
+    } else {
+      setfilteredReview(review);
+    }
+  }, [filterPhoneNumber, review]);
 
   // 회원이 작성한 리뷰 목록
   const AdminContents = ({ reviews }) => {
     return (
       <>
         {reviews.map((e) => (
-          <div className='list-body' key={e.reservationNo}>
-            <div className='res-no'>{e.reservationNo}</div>
+          <div className='list-body' key={e.reviewNo}>
+            <div className='res-no'>{e.reviewNo}</div>
             <div className='res-user-name'>
               <div>{e.name}</div>
-              <div>{e.phoneNumber}</div>
             </div>
             <div className='res-user-no'></div>
             <div className='res-station-name'>
-              {truncateText(e.stationName, 20)}
+              {truncateText(e.content, 50)}
             </div>
             <div className='res-station-time'>
-              <div>{formatRentTime(e.rentTime)}</div>
+              <div>{formatRentTime(e.updateDate)}</div>
             </div>
             <button
               className='res-cancel-btn'
@@ -108,8 +107,8 @@ const ReviewMap = () => {
   // 본체
   return (
     <>
-      {role === 'ADMIN' ? ( // && reserveStation.length > 0
-        <AdminContents reviews={filteredCar} />
+      {role === 'ADMIN' && review.length > 0 ? (
+        <AdminContents reviews={filteredReview} />
       ) : (
         <div
           style={{
