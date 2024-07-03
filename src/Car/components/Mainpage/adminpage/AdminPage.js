@@ -31,8 +31,10 @@ const AdminPage = () => {
         <div className='admin-page-list'>
           {!selected && (
             <div className='no-select'>
-              <div>안고르면 이 문장 나옴.</div>
-              <div>카테고리 고르면 이 문장 안나옴.</div>
+              <div>
+                안고르면 이 문장 나옴. 카테고리 고르면 이
+                문장 안나옴.
+              </div>
             </div>
           )}
           {selected === 'station' && (

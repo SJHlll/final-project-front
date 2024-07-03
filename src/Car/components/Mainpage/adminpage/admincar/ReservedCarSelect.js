@@ -6,7 +6,7 @@ const ReservedCarSelect = ({ onClick, isSelected }) => {
       className={`admin-select reserve-car ${isSelected ? 'selected' : ''}`}
       onClick={onClick}
     >
-      ReservedCar
+      예약된 렌트카
     </div>
   );
 };

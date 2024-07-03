@@ -6,7 +6,7 @@ const ReservedStationSelect = ({ onClick, isSelected }) => {
       className={`admin-select reserve-station ${isSelected ? 'selected' : ''}`}
       onClick={onClick}
     >
-      ReservedStation
+      예약된 충전소
     </div>
   );
 };

@@ -9,14 +9,15 @@ import AuthContext from '../../../../../util/AuthContext';
 const ReservedStationMap = () => {
   const { reserveStation, setReserveStation } = useContext(
     ReserveStationContext,
-  );
-  const { role } = useContext(AuthContext);
+  ); // 예약한 충전소 가져오기
+  const { role } = useContext(AuthContext); // 관리자 확인용
   const [filterPhoneNumber, setFilterPhoneNumber] =
-    useState('');
+    useState(''); // 전화번호 필터링
   const [filteredStations, setFilteredStations] = useState(
     [],
-  );
+  ); // 필터링된 충전소
 
+  // DB에서 예약한 충전소 가져오기
   useEffect(() => {
     const fetchStations = async () => {
       try {
@@ -44,6 +45,7 @@ const ReservedStationMap = () => {
     fetchStations();
   }, [setReserveStation]);
 
+  // 예약한 충전소 DB에 지우기 (예약번호를 기준으로)
   const handleCancelReservation = async (reservationNo) => {
     try {
       const token = localStorage.getItem('ACCESS_TOKEN');
@@ -74,6 +76,7 @@ const ReservedStationMap = () => {
     }
   };
 
+  // 날짜 / 시간 시작일
   const formatRentTime = (rentTime) => {
     const date = new Date(rentTime);
     return date.toLocaleString('ko-KR', {
@@ -86,6 +89,7 @@ const ReservedStationMap = () => {
     });
   };
 
+  // 날짜 / 시간 종료일
   const formatRentEndTime = (rentTime, time) => {
     const date = new Date(rentTime);
     date.setMinutes(date.getMinutes() + time);
@@ -99,6 +103,7 @@ const ReservedStationMap = () => {
     });
   };
 
+  // ?글자 이상 시 ... 처리
   const truncateText = (text, length) => {
     if (text.length > length) {
       return text.substring(0, length) + '...';
@@ -106,6 +111,7 @@ const ReservedStationMap = () => {
     return text;
   };
 
+  // 전화번호 뒷자리 4개로 필터링
   useEffect(() => {
     if (filterPhoneNumber.length === 4) {
       const filtered = reserveStation.filter((e) =>
@@ -117,6 +123,7 @@ const ReservedStationMap = () => {
     }
   }, [filterPhoneNumber, reserveStation]);
 
+  // 회원이 예약한 충전소 목록
   const AdminContents = ({ stations }) => {
     return (
       <>
@@ -151,10 +158,12 @@ const ReservedStationMap = () => {
     );
   };
 
+  // 본체
   return (
     <>
       {role === 'ADMIN' && reserveStation.length > 0 ? (
         <>
+          <AdminContents stations={filteredStations} />
           <input
             className='phone-last-four'
             type='text'
@@ -165,13 +174,13 @@ const ReservedStationMap = () => {
             }
             maxLength='4'
           />
-          <AdminContents stations={filteredStations} />
         </>
       ) : (
         <div
           style={{
             textAlign: 'center',
-            alignItems: 'center',
+            marginTop: '100px',
+            fontSize: '1.5rem',
           }}
         >
           예약된 충전소가 없습니다.

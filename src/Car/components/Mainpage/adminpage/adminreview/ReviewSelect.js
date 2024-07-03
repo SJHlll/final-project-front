@@ -6,7 +6,7 @@ const ReviewSelect = ({ onClick, isSelected }) => {
       className={`admin-select review ${isSelected ? 'selected' : ''}`}
       onClick={onClick}
     >
-      Review
+      작성된 리뷰
     </div>
   );
 };

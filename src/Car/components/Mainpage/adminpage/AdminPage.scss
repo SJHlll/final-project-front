@@ -13,22 +13,25 @@
         cursor: pointer;
         transition: transform 0.2s ease;
 
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+
         &:hover {
             transform: scale(1.02);
         }
     }
 
-    .reserve-station {
-        border: 1px solid red;
-    }
+    // .reserve-station {
+    //     border: 1px solid red;
+    // }
 
-    .reserve-car {
-        border: 1px solid blue;
-    }
+    // .reserve-car {
+    //     border: 1px solid blue;
+    // }
 
-    .review {
-        border: 1px solid green;
-    }
+    // .review {
+    //     border: 1px solid green;
+    // }
 
     .selected {
         border-width: 3px;
@@ -65,17 +68,22 @@
 
     .no-select {
         padding: 10px 10px;
-        border: 1px solid black;
+        font-size: 1.3em;
+        border-top: 2px solid black;
+        border-bottom: 2px solid black;
     }
 
     .admin-list {
         font-size: 1em;
+
 
         .list-header {
             display: flex;
             padding: 10px 10px;
             font-size: 1.3em;
             text-align: center;
+            border-top: 2px solid black;
+            border-bottom: 2px solid black;
 
             .res-no {
                 width: 7%;
@@ -104,7 +112,7 @@
             padding: 10px 10px;
             text-align: center;
             align-items: center;
-            border-top: 1px solid green;
+            border-bottom: 1px solid #aaa;
 
             .res-no {
                 width: 7%;
@@ -145,15 +153,15 @@
         }
     }
 
-    .reserve-station {
-        border: 1px solid red;
-    }
+    // .reserve-station {
+    //     border: 1px solid red;
+    // }
 
-    .reserve-car {
-        border: 1px solid blue;
-    }
+    // .reserve-car {
+    //     border: 1px solid blue;
+    // }
 
-    .review {
-        border: 1px solid green;
-    }
+    // .review {
+    //     border: 1px solid green;
+    // }
 }
