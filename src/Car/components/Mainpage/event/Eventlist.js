@@ -9,19 +9,19 @@ const Eventlist = () => {
   const Notilist = [
     {
       id: 1,
-      img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/eventbanner1.png',
+      img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/event1.jpg',
       title: '렌트카 하면 커피',
       status: '진행중',
     },
     {
       id: 2,
-      img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/eventbanner2.png',
-      title: '우리차+우리충전소 할인',
+      img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/event3.jpg',
+      title: '회원가입 시 할인',
       status: '진행중',
     },
     {
       id: 3,
-      img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/eventbanner1.png',
+      img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/event2.jpg',
       title: '열번충전 -> 기프티콘',
       status: '진행중',
     },

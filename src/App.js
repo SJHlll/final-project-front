@@ -31,6 +31,7 @@ import NotiPage from './Car/components/Mainpage/noti/Notipage';
 import Loginpage from './Car/components/Mainpage/Loginpage';
 import KakaoLoginHandler from './Car/components/user/KakaoLoginHandler';
 import NaverLoginHandler from './Car/components/user/NaverLoginHandler';
+import AdminPage from './Car/components/Mainpage/adminpage/AdminPage';
 
 const App = () => {
   const location = useLocation();
@@ -130,6 +131,9 @@ const App = () => {
               path='/info'
               element={<UserInfoSave />}
             />
+
+            {/* 어드민페이지 */}
+            <Route path='/admin' element={<AdminPage />} />
           </Routes>
         </div>
       </AuthContextProvider>

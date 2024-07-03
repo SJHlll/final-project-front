@@ -1,0 +1,144 @@
+.admin-page-select {
+    width: 80%;
+    margin: 50px auto;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    font-size: 1.55em;
+
+    .admin-select {
+        width: 30%;
+        padding: 5px 0;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+
+        &:hover {
+            transform: scale(1.02);
+        }
+    }
+
+    .reserve-station {
+        border: 1px solid red;
+    }
+
+    .reserve-car {
+        border: 1px solid blue;
+    }
+
+    .review {
+        border: 1px solid green;
+    }
+}
+
+.admin-page-list {
+    width: 80%;
+    height: 600px;
+    margin: 0 auto;
+    overflow-y: auto;
+
+    // 스크롤바 몸통
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    // 스크롤바 배경
+    &::-webkit-scrollbar-track {
+        background: #c2e1ff;
+    }
+
+    // 스크롤바 위치
+    &::-webkit-scrollbar-thumb {
+        background: #2c7fdf;
+    }
+
+    // 스크롤바 호버
+    &::-webkit-scrollbar-thumb:hover {
+        background: #0056b3;
+    }
+
+    .no-select {
+        padding: 10px 10px;
+        border: 1px solid black;
+    }
+
+    .admin-list {
+        font-size: 1em;
+
+        .list-header {
+            display: flex;
+            padding: 10px 10px;
+            font-size: 1.3em;
+            text-align: center;
+
+            .res-no {
+                width: 10%;
+            }
+
+            .res-user-name {
+                width: 15%;
+            }
+
+            .res-station-name {
+                width: 35%;
+            }
+
+            .res-station-time {
+                width: 30%;
+            }
+
+            .hidden-text {
+                width: 10%;
+            }
+        }
+
+        .list-body {
+            display: flex;
+            padding: 10px 10px;
+            text-align: center;
+            align-items: center;
+            border-top: 1px solid green;
+
+            .res-no {
+                width: 10%;
+            }
+
+            .res-user-name {
+                width: 15%;
+            }
+
+            .res-station-name {
+                width: 35%;
+            }
+
+            .res-station-time {
+                width: 30%;
+            }
+
+            .res-cancel-btn {
+                width: 60px;
+                padding: 5px 0;
+                border-radius: 10px;
+                margin-left: auto;
+                background-color: #ebf5ff;
+                color: #2c7fdf;
+                border: 1px solid #2c7fdf;
+
+                &:hover {
+                    background-color: #c2e1ff;
+                }
+            }
+        }
+    }
+
+    .reserve-station {
+        border: 1px solid red;
+    }
+
+    .reserve-car {
+        border: 1px solid blue;
+    }
+
+    .review {
+        border: 1px solid green;
+    }
+}
