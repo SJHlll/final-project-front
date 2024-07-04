@@ -173,6 +173,17 @@
             font-size: 0.8em;
         }
 
+        .filtered-count {
+            position: absolute;
+            top: 120px;
+            left: 280px;
+            font-size: 0.8em;
+
+            .filtered-num {
+                font-size: 1.1rem;
+            }
+        }
+
         .admin-filter2 {
             position: absolute;
             top: 125px;
