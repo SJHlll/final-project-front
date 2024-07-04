@@ -5,7 +5,6 @@ import React, {
 } from 'react';
 import { TestRvContext } from './TestRvContext';
 import AuthContext from '../../../../../util/AuthContext';
-import { badwords } from './badwords';
 
 const ReviewMap = () => {
   const { review, setReview } = useContext(TestRvContext);
