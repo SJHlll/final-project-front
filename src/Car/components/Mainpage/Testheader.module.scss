@@ -45,17 +45,17 @@
   align-self: center;
 }
 .tabline {
-  width: 90%;
-margin: 0 auto;
+  width: 60%;
   // box-shadow: 3px 4px 3px 3px #555555;
   // margin-right: 15%;
   display: flex;
   // margin-top: 5%;
   // padding-top: 1%;
   // padding-bottom: 1%;
+  margin-left: 15%;
 }
 .tabli {
-  width: 7%;
+  width: 10%;
   height:50px;
   // margin-bottom: 5px;
   background-color: rgb(216, 230, 241);
@@ -69,7 +69,7 @@ align-self: center;
   }
 }
 .tabliactive {
-  width: 7%;
+  width: 10%;
   height: 50px;
   margin-top: 0.7%;
   border: 0.1px solid #ebf5ff;
