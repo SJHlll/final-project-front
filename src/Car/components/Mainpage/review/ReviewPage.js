@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReviewItem from './ReviewItem';
 import Modal from './Modal';
 import Modal2 from './Modal2'; // Modal2 가져오기
-import './ReviewPage.scss';
+import styles from './ReviewPage.module.scss';
 
 const ReviewPage = () => {
   const generateDummyReviews = (type, count) => {
@@ -97,12 +97,12 @@ const ReviewPage = () => {
   );
 
   return (
-    <div className='review-page'>
-      <div className='type-switch'>
+    <div className={styles.reviewPage}>
+      <div className={styles.typeSwitch}>
         <button
           onClick={() => handleTypeChange('rental')}
           className={
-            selectedType === 'rental' ? 'active' : ''
+            selectedType === 'rental' ? styles.active : ''
           }
         >
           렌트카 리뷰
@@ -110,7 +110,7 @@ const ReviewPage = () => {
         <button
           onClick={() => handleTypeChange('charging')}
           className={
-            selectedType === 'charging' ? 'active' : ''
+            selectedType === 'charging' ? styles.active : ''
           }
         >
           충전소 리뷰
@@ -118,11 +118,11 @@ const ReviewPage = () => {
       </div>
       <button
         onClick={() => setIsModalOpen(true)}
-        className='write-review-button'
+        className={styles.writeReviewButton}
       >
         후기 작성
       </button>
-      <div className='review-list'>
+      <div className={styles.reviewList}>
         {currentReviews.map((review) => (
           <ReviewItem
             key={review.id}
@@ -131,7 +131,7 @@ const ReviewPage = () => {
           />
         ))}
       </div>
-      <div className='pagination'>
+      <div className={styles.pagination}>
         {Array.from(
           {
             length: Math.ceil(
@@ -143,7 +143,9 @@ const ReviewPage = () => {
               key={index}
               onClick={() => setCurrentPage(index + 1)}
               className={
-                currentPage === index + 1 ? 'active' : ''
+                currentPage === index + 1
+                  ? styles.active
+                  : ''
               }
             >
               {index + 1}

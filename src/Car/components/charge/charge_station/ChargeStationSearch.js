@@ -1,11 +1,11 @@
 import React from 'react';
 import Area from './area/Area';
-import '../scss/ChargeStationSearch.scss';
+import styles from '../scss/ChargeStationSearch.module.scss';
 
 const ChargeStationSearch = () => {
   return (
-    <div className='SearchContainer'>
-      <div className='One'>
+    <div className={styles.SearchContainer}>
+      <div className={styles.One}>
         <span>충전소 위치 찾기</span>
       </div>
       <Area />

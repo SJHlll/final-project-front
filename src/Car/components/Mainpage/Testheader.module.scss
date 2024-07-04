@@ -1,0 +1,79 @@
+.Testheader {
+  width: 100%;
+  height: 100px;
+  background-color: rgb(216, 230, 241);
+  z-index: 9999;
+  // box-shadow: 3px 4px 3px 3px #555555;
+  display: flex;
+  margin: 0 auto;
+}
+.logo {
+  background-image: url(../../assets/nlogo.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 10%;
+  height: 100%;
+  text-align: center;
+  align-content: center;
+  // position: relative;
+  // bottom: 20%;
+  cursor: pointer;
+  margin-left: 5%;
+  transform: scale(2);
+}
+.loginbtn {
+  // position: relative;
+  // bottom: 30%;
+  width: 7%;
+  height: 50px;
+  align-self: center;
+  background-color: rgb(216, 230, 241);
+  border: 1px solid rgb(216, 230, 241);;
+  margin-left: 3%;
+}
+.logoutbtn {
+  display: flex;
+  width: 5%;
+  height: 20px;
+  justify-content: center;
+  position: fixed;
+  bottom: 25%;
+  right: 2%;
+}
+.logouticon {
+  align-self: center;
+}
+.tabline {
+  width: 90%;
+margin: 0 auto;
+  // box-shadow: 3px 4px 3px 3px #555555;
+  // margin-right: 15%;
+  display: flex;
+  // margin-top: 5%;
+  // padding-top: 1%;
+  // padding-bottom: 1%;
+}
+.tabli {
+  width: 7%;
+  height:50px;
+  // margin-bottom: 5px;
+  background-color: rgb(216, 230, 241);
+  border: 1px solid rgb(216, 230, 241);
+  // border-bottom: 1px solid black;
+align-self: center;
+  &:hover {
+    cursor: pointer;
+    color: #2c7fdf;
+    background-color: #c2e1ff;
+  }
+}
+.tabliactive {
+  width: 7%;
+  height: 50px;
+  margin-top: 0.7%;
+  border: 0.1px solid #ebf5ff;
+  // box-shadow: 2px 2px 1px 1px #555555;
+  color: #2c7fdf;
+  background-color: #ebf5ff;
+}

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Frame from '../Frame';
-import './NotiPage.scss';
+import styles from './NotiPage.module.scss';
 import AuthContext from '../../../../util/AuthContext';
 
 const NotiPage = () => {
@@ -67,8 +67,10 @@ const NotiPage = () => {
   return (
     <Frame>
       <div style={{ padding: '1%' }}>
-        <div className='categoriheader'>이용방법</div>
-        <p className='backnoti' onClick={click}>
+        <div className={styles.categoriheader}>
+          이용방법
+        </div>
+        <p className={styles.backnoti} onClick={click}>
           목록
         </p>
         <div
@@ -82,23 +84,27 @@ const NotiPage = () => {
                 onChange={(e) =>
                   setEditedHeader(e.target.value)
                 }
-                className='Notitheader'
+                className={styles.Notitheader}
               />
               <textarea
                 value={editedContents}
                 onChange={(e) =>
                   setEditedContents(e.target.value)
                 }
-                className='Notitbody'
+                className={styles.Notitbody}
               />
             </>
           ) : (
             <>
-              <h1 className='Notiheader'>
+              <h1 className={styles.Notiheader}>
                 제목 : {currentHeader}
               </h1>
-              <p className='Notihits'>조회수: {hits}</p>
-              <p className='Notibody'>{currentContents}</p>
+              <p className={styles.Notihits}>
+                조회수: {hits}
+              </p>
+              <p className={styles.Notibody}>
+                {currentContents}
+              </p>
             </>
           )}
           <div
@@ -110,20 +116,23 @@ const NotiPage = () => {
               flexDirection: 'row-reverse',
             }}
           >
-            <button className='notibtn' onClick={click}>
+            <button
+              className={styles.notibtn}
+              onClick={click}
+            >
               이전
             </button>
             {role === 'COMMON' &&
               (isEditing ? (
                 <button
-                  className='notibtn'
+                  className={styles.notibtn}
                   onClick={saveUpdateHandler}
                 >
                   저장
                 </button>
               ) : (
                 <button
-                  className='notibtn'
+                  className={styles.notibtn}
                   onClick={updateHandler}
                 >
                   수정이가능
@@ -132,21 +141,21 @@ const NotiPage = () => {
             {role === 'ADMIN' && (
               <>
                 <button
-                  className='notibtn'
+                  className={styles.notibtn}
                   onClick={deleteNotiHandler}
                 >
                   삭제
                 </button>
                 {isEditing ? (
                   <button
-                    className='notibtn'
+                    className={styles.notibtn}
                     onClick={saveUpdateHandler}
                   >
                     저장
                   </button>
                 ) : (
                   <button
-                    className='notibtn'
+                    className={styles.notibtn}
                     onClick={updateHandler}
                   >
                     수정불가

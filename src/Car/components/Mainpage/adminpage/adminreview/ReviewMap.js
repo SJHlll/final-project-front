@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 import AuthContext from '../../../../../util/AuthContext';
 import { TestRvContext } from './TestRvContext';
-
+import styles from '../AdminPage.module.scss';
 const ReviewMap = () => {
   const { review, setReview } = useContext(TestRvContext);
   const { role } = useContext(AuthContext); // 관리자 확인용
@@ -78,20 +78,20 @@ const ReviewMap = () => {
     return (
       <>
         {reviews.map((e) => (
-          <div className='list-body' key={e.reviewNo}>
-            <div className='res-no'>{e.reviewNo}</div>
-            <div className='res-user-name'>
+          <div className={styles.listBody} key={e.reviewNo}>
+            <div className={styles.resNo}>{e.reviewNo}</div>
+            <div className={styles.resUserName}>
               <div>{e.name}</div>
             </div>
-            <div className='res-user-no'></div>
-            <div className='res-station-name'>
+            <div className={styles.resUserNo}></div>
+            <div className={styles.resStationName}>
               {truncateText(e.content, 50)}
             </div>
-            <div className='res-station-time'>
+            <div className={styles.resStationTime}>
               <div>{formatRentTime(e.updateDate)}</div>
             </div>
             <button
-              className='res-cancel-btn'
+              className={styles.resCancelBtn}
               // onDoubleClick={() =>
               //   handleCancelReservation(e.reservationNo)
               // }
@@ -121,7 +121,7 @@ const ReviewMap = () => {
         </div>
       )}
       <input
-        className='phone-last-four'
+        className={styles.phoneLastFour}
         type='text'
         placeholder='전화번호 뒷자리 4개 입력'
         value={filterPhoneNumber}

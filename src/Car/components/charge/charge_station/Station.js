@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import '../scss/ChargeStationList.scss';
+import styles from '../scss/ChargeStationList.module.scss';
 import { MapContext } from '../../../../contexts/MapContext';
 
 const Station = ({
@@ -25,15 +25,21 @@ const Station = ({
   };
 
   return (
-    <div className='Station' style={{ marginTop: '5px' }}>
+    <div
+      className={styles.Station}
+      style={{ marginTop: '5px' }}
+    >
       {/* 왼쪽박스 */}
-      <div className='Status'>
-        <div className='Name' onClick={handleLocateClick}>
+      <div className={styles.Status}>
+        <div
+          className={styles.Name}
+          onClick={handleLocateClick}
+        >
           <span>
             ({Speed}) {Name}
           </span>
         </div>
-        <div className='Address'>
+        <div className={styles.Address}>
           <a
             href={`https://map.kakao.com/link/to/${Address},${lat},${lng}`}
             target='_blank'
@@ -44,11 +50,13 @@ const Station = ({
         </div>
       </div>
       {/* 오른쪽박스 */}
-      <div className='Charger'>
-        <div className='ChargerType'>{Type}</div>
+      <div className={styles.Charger}>
+        <div className={styles.ChargerType}>{Type}</div>
         <div
           className={
-            Available === '이용가능' ? 'able' : 'disable'
+            Available === '이용가능'
+              ? styles.able
+              : styles.disable
           }
         >
           {Available}

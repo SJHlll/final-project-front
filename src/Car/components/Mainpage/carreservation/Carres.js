@@ -4,9 +4,9 @@ import { ModalBody, ModalFooter } from 'reactstrap';
 import CarCalendar from './CarCalendar';
 import CarResInfo from './CarResInfo';
 import { setHours, setMinutes } from 'date-fns';
-import '../../../../scss/Button.scss';
+import style from '../../../../scss/Button.module.scss';
 import { StationProvider } from '../../../../contexts/StationContext';
-import styles from './reservation_css/Carres.modul.scss';
+import styles from './reservation_css/Carres.module.scss';
 import CarSwiperReal from './CarSwiperReal';
 import CarInfo from './CarInfo';
 
@@ -108,14 +108,17 @@ const Carres = () => {
   };
 
   const button = (
-    <button className='resBtn public-btn' onClick={toggle}>
+    <button
+      className={`${style.resBtn} ${style.publicBtn}`}
+      onClick={toggle}
+    >
       예약 하기
     </button>
   );
 
   const closeBtn = (
     <button
-      className='public-btn closeBtn'
+      className={`${styles.publicBtn} ${styles.closeBtn}`}
       onClick={toggle}
     >
       &times;
@@ -125,18 +128,24 @@ const Carres = () => {
   const modalOpen = (
     <ModalBackground>
       <ModalContent>
-        <div className='reservation-container'>
-          <div className={styles.myComponent} id='big'>
-            <h1 className='resTitle'>예약 확인</h1>
-            <span className='close-Btn' onClick={toggle}>
+        <div className={styles.reservationContainer}>
+          <div
+            className={styles.myComponent}
+            id={styles.big}
+          >
+            <h1 className={styles.resTitle}>예약 확인</h1>
+            <span
+              className={style.closeBtn}
+              onClick={toggle}
+            >
               X
             </span>
           </div>
 
           <ModalBody>
-            <div className='resinfo-container'>
+            <div className={styles.resinfoContainer}>
               <hr />
-              <div className='resinfo-body'>
+              <div className={styles.resinfoBody}>
                 <CarResInfo
                   pickup={pickup}
                   returning={returning}
@@ -147,7 +156,7 @@ const Carres = () => {
           <hr />
           <ModalFooter>
             <button
-              className='public-btn payBtn'
+              className={`${style.publicBtn} ${style.payBtn}`}
               onClick={reservationHandler}
             >
               결제 하기
@@ -167,10 +176,10 @@ const Carres = () => {
           paddingTop: '1%',
         }}
       >
-        <div className='selectCar'>
+        <div className={styles.selectCar}>
           <CarInfo selectedCar={selectedCar} />
         </div>
-        <div className='calendarbtn'>
+        <div className={styles.calendarbtn}>
           <CarCalendar
             startDate={pickup.date}
             endDate={returning.date}
@@ -189,7 +198,7 @@ const Carres = () => {
               setReturning((prev) => ({ ...prev, time }))
             }
           />
-          <div className='reservationBtn'>
+          <div className={styles.reservationBtn}>
             {modal ? modalOpen : button}
           </div>
           <div
@@ -200,10 +209,12 @@ const Carres = () => {
               margin: '0 auto',
             }}
           >
-            <div className='caltotalbox1'>렌트기간</div>
-            <div className='caltotalbox2'>일</div>
-            <div className='caltotalbox3'>금액</div>
-            <div className='caltotalbox4'>???원</div>
+            <div className={styles.caltotalbox1}>
+              렌트기간
+            </div>
+            <div className={styles.caltotalbox2}>일</div>
+            <div className={styles.caltotalbox3}>금액</div>
+            <div className={styles.caltotalbox4}>???원</div>
           </div>
         </div>
       </div>

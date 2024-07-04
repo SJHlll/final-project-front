@@ -7,7 +7,7 @@ import ReviewSelect from '../adminreview/ReviewSelect';
 import ReservedCarList from '../admincar/ReservedCarList';
 import ReviewList from '../adminreview/ReviewList';
 import { ReserveStationProvider } from '../../../../../contexts/ReserveStationContext';
-
+import styles from '../AdminPage.module.scss';
 const ReservedStationList = () => {
   const [selected, setSelected] = useState(null);
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const ReservedStationList = () => {
   return (
     <ReserveStationProvider>
       <Frame>
-        <div className='admin-page-select'>
+        <div className={styles.adminPageSelect}>
           <div
             className={
               'admin-select reserve-station selected'
@@ -40,18 +40,22 @@ const ReservedStationList = () => {
             }
           />
         </div>
-        <div className='admin-page-list'>
-          <div className='admin-list reserve-station'>
-            <div className='list-header'>
-              <div className='res-no'>예약번호</div>
-              <div className='res-user-name'>회원명</div>
-              <div className='res-selected-name'>
+        <div className={styles.adminPageList}>
+          <div
+            className={`${styles.adminList} ${styles.reserveStation}`}
+          >
+            <div className={styles.listHeader}>
+              <div className={styles.resNo}>예약번호</div>
+              <div className={styles.resUserName}>
+                회원명
+              </div>
+              <div className={styles.resSelectedName}>
                 충전소
               </div>
-              <div className='res-selected-time'>
+              <div className={styles.resSelectedTime}>
                 충전기간
               </div>
-              <div className='hidden-text'></div>
+              <div className={styles.hiddenText}></div>
             </div>
             <ReservedStationMap />
           </div>

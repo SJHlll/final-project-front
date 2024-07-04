@@ -1,6 +1,6 @@
 // Modal.js
 import React from 'react';
-import '../scss/ModalModal.scss';
+import styles from '../scss/ModalModal.module.scss';
 
 const ModalModal = ({
   isOpen,
@@ -11,10 +11,10 @@ const ModalModal = ({
   if (!isOpen) return null;
 
   return (
-    <div className='modalmodal-overlay'>
-      <div className='modalmodal-content'>
+    <div className={styles.modalmodalOverlay}>
+      <div className={styles.modalmodalContent}>
         <p style={{ whiteSpace: 'pre-line' }}>{message}</p>
-        <div className='modalmodal-buttons'>
+        <div className={styles.modalmodalButtons}>
           {onConfirm && (
             <button onClick={onConfirm}>확인</button>
           )}

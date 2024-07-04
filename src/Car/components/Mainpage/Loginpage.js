@@ -1,7 +1,7 @@
 import React from 'react';
 import Login from './../user/Login';
 import Frame from './Frame';
-import './Loginpage.scss';
+import styles from './Loginpage.module.scss';
 
 const Loginpage = () => {
   return (

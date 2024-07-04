@@ -1,5 +1,5 @@
 import React from 'react';
-
+import styles from './ReviewPage.module.scss';
 // Modal 컴포넌트: 리뷰의 세부 사항을 표시하는 모달 창
 const Modal = ({ review, onClose }) => {
   // 모달 외부를 클릭하면 모달을 닫는 함수
@@ -24,25 +24,28 @@ const Modal = ({ review, onClose }) => {
 
   // 모달 컴포넌트의 렌더링 부분
   return (
-    <div className='modal' onClick={handleOutsideClick}>
+    <div
+      className={styles.modal}
+      onClick={handleOutsideClick}
+    >
       {' '}
       {/* 모달 외부 클릭 이벤트 처리 */}
-      <div className='modal-content'>
-        <span className='close' onClick={onClose}>
+      <div className={styles.modalContent}>
+        <span className={styles.close} onClick={onClose}>
           {' '}
           {/* 모달 닫기 버튼 */}
           &times; {/* '×' 문자 */}
         </span>
-        <div className='modal-image-container'>
+        <div className={styles.modalImageContainer}>
           <img src={review.imageUrl} alt='이미지' />{' '}
           {/* 리뷰 이미지 */}
-          <span className='review-date'>
+          <span className={styles.reviewDate}>
             {review.date}
           </span>{' '}
           {/* 리뷰 날짜 */}
         </div>
         <h3>{review.name}</h3> {/* 리뷰 이름 */}
-        <div className='rating'>
+        <div className={styles.rating}>
           {fullStars} {/* 꽉 찬 별 배열 */}
           {emptyStars} {/* 빈 별 배열 */}
         </div>

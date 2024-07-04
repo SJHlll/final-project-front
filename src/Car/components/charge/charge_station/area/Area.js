@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 import { areas } from './cities';
 import { SearchContext } from '../../../../../contexts/SearchContext';
-import './Area.scss';
+import styles from './Area.module.scss';
 
 const Area = () => {
   const [selectedArea, setSelectedArea] = useState('');
@@ -87,10 +87,10 @@ const Area = () => {
   };
 
   return (
-    <div className='area-selector'>
-      <div className='search-box'>
+    <div className={styles.areaSelector}>
+      <div className={styles.searchBox}>
         <select
-          className='select-box'
+          className={styles.selectBox}
           value={selectedArea}
           onChange={handleAreaChange}
         >
@@ -102,7 +102,7 @@ const Area = () => {
           ))}
         </select>
         <select
-          className='select-box'
+          className={styles.selectBox}
           value={selectedSubArea}
           onChange={handleSubAreaChange}
         >
@@ -114,22 +114,22 @@ const Area = () => {
           ))}
         </select>
         <label>
-          <div className='checkbox-box'>
+          <div className={styles.checkboxBox}>
             <input
               type='checkbox'
-              className='able-checkbox'
+              className={styles.ableCheckbox}
               checked={isAvailableOnly}
               onChange={handleAvailabilityChange}
             />
-            <span className='checkbox-content'>
+            <span className={styles.checkboxContent}>
               이용가능
             </span>
           </div>
         </label>
       </div>
-      <div className='search-box'>
+      <div className={styles.searchBox}>
         <input
-          className='search-input'
+          className={styles.searchInput}
           type='text'
           placeholder='충전소 이름 검색'
           value={facilitySearch}
@@ -137,12 +137,15 @@ const Area = () => {
           onKeyDown={KeyboardSearch}
         />
         <button
-          className='search-btn'
+          className={styles.searchBtn}
           onClick={handleSearch}
         >
           검색
         </button>
-        <button className='reset-btn' onClick={resetArea}>
+        <button
+          className={styles.resetBtn}
+          onClick={resetArea}
+        >
           초기화
         </button>
       </div>

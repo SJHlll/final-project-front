@@ -1,0 +1,79 @@
+#big {
+    display: flex;
+    align-items: center; /* 자식 요소들을 수평 중앙에 정렬 */
+    width: 100%;
+}
+
+.reservationBtn{ // 예약하기 버튼 부모 클래스
+    // display: flex;
+    // justify-content: flex-end;
+    width: 60%;
+ height: auto;
+ margin: 0 auto;
+    .resBtn { // 예약하기 버튼
+       
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        height: 30px;
+        align-self: center; /* 부모의 정렬 속성을 무시하고 중앙에 정렬 */
+    }
+}
+
+.resTitle { // 예약확인 글자
+    font-size: 20px;
+    margin-top: 20px;
+    margin-left: 10px;
+    color: black;
+    text-align: left; /* 왼쪽 정렬 */
+    flex: 1; /* 여유 공간을 차지하여 왼쪽으로 정렬 */
+}
+
+.closeBtn { // 모달 닫기 버튼 
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    margin-top: 0px;
+    color: #2c7fdf;
+    display: block;
+    cursor: pointer;
+    text-align: right;
+}
+
+.closeBtn:hover { 
+    color: #c2e1ff;
+    flex-direction: column;
+}
+
+.reservationContainer {
+    margin-left: 10px;
+}
+
+.selectCar { // 선택한 차 정보
+    width: 50%;
+    height: auto;
+    border: 1px solid black;
+    align-content: center;
+    
+}
+
+.calendarbtn{
+    display: flex;
+    width:50%;
+    flex-direction: column;
+    
+}
+.caltotalbox1{
+    width: 20%;
+    text-align: center;
+    border-right: 1px solid black;
+}
+.caltotalbox2{width: 30%;
+    text-align: right;
+    padding-right: 5%;
+    border-right: 1px solid black;}
+.caltotalbox3{width: 20%;
+    text-align: center;
+    border-right: 1px solid black;}
+.caltotalbox4{width: 30%;
+text-align: center;}

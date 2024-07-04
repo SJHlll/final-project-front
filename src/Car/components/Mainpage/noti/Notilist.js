@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './Notilist.scss';
+import styles from './Notilist.module.scss';
 import { useNavigate } from 'react-router-dom';
-import '../../../../scss/Button.scss';
 
 const Notilist = () => {
   const currentDate = new Date();
@@ -127,8 +126,8 @@ const Notilist = () => {
       >
         이용방법
       </header>
-      <div className='noticontent'>
-        <div className='notibody'>
+      <div className={styles.noticontent}>
+        <div className={styles.notibody}>
           <div style={{ width: '10%' }}>글번호</div>
           <div style={{ width: '45%' }}>제목</div>
           <div style={{ width: '10%' }}>작성자</div>
@@ -136,7 +135,7 @@ const Notilist = () => {
           <div style={{ width: '15%' }}>조회수</div>
         </div>
         {Hit.map((noti) => (
-          <div className='notilist' key={noti.num}>
+          <div className={styles.notilist} key={noti.num}>
             <div style={{ width: '10%' }}>{noti.num}</div>
             <div
               onClick={() => handleHitClick(noti)}

@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
-import '../scss/PlugAndGoStation.scss';
+import styles from '../scss/PlugAndGoStation.module.scss';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import styled from 'styled-components';
 import ReservationModal from './ReservationModal';
-import '../../../../scss/Button.scss';
+import style from '../../../../scss/Button.module.scss';
 import { SecondMapContext } from '../../../../contexts/SecondMapContext';
 
 const PlugAndGoStation = ({
@@ -32,7 +32,7 @@ const PlugAndGoStation = ({
   const button = () => (
     <div>
       <button
-        className='public-btn reserve-button'
+        className={`${style.publicBtn} ${style.reserveButton}`}
         onClick={toggle}
       >
         예약하기
@@ -41,7 +41,7 @@ const PlugAndGoStation = ({
   );
 
   const closeBtn = (
-    <button className='public-btn' onClick={toggle}>
+    <button className={style.publicBtn} onClick={toggle}>
       &times;
     </button>
   );
@@ -69,20 +69,20 @@ const PlugAndGoStation = ({
   );
 
   return (
-    <div className='OurStation'>
-      <div className='station-content'>
-        <div className='Name'>
+    <div className={styles.OurStation}>
+      <div className={styles.stationContent}>
+        <div className={styles.Name}>
           <span
-            className='name-detail'
+            className={styles.nameDetail}
             onClick={handleLocateClick}
           >
             ({Speed}) {Name}
           </span>
         </div>
       </div>
-      <div className='station-content'>
-        <div className='Address'>
-          <span className='address-detail'>
+      <div className={styles.stationContent}>
+        <div className={styles.Address}>
+          <span className={styles.addressDetail}>
             <HoverATag
               href={`https://map.kakao.com/link/to/${Address},${lat},${lng}`}
               target='_blank'
@@ -93,9 +93,11 @@ const PlugAndGoStation = ({
           </span>
         </div>
       </div>
-      <div className='foot station-content'>
-        <div className='ChargerType'>{Type}</div>
-        <div className='Price'>{price}원</div>
+      <div
+        className={`${styles.foot} ${styles.stationContent}`}
+      >
+        <div className={styles.ChargerType}>{Type}</div>
+        <div className={styles.Price}>{price}원</div>
         {button()}
       </div>
       {modal && modalOpen()}
@@ -105,6 +107,15 @@ const PlugAndGoStation = ({
 
 export default PlugAndGoStation;
 
+const HoverATag = styled.a`
+  color: black;
+  text-decoration: none;
+
+  &:hover {
+    color: blue;
+    text-decoration: underline;
+  }
+`;
 const ModalBackground = styled.div`
   position: fixed;
   top: 0;
@@ -116,14 +127,4 @@ const ModalBackground = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 10;
-`;
-
-const HoverATag = styled.a`
-  color: black;
-  text-decoration: none;
-
-  &:hover {
-    color: blue;
-    text-decoration: underline;
-  }
 `;

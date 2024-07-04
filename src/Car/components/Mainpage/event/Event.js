@@ -1,25 +1,20 @@
 import React from 'react';
-import './Event.scss';
+import styles from './Event.module.scss';
 import Eventlist from './Eventlist';
-
+import Frame from '../Frame';
+import style from '../../../../scss/Button.module.scss';
 const Event = () => {
   return (
-    <div className='maincontainer'>
-      <div className='contentline'>
-        <div className='eventbody'>
-          <Eventlist />
-        </div>
-        <button className='public-btn event-button'>
-          추가
-        </button>
-        <button className='public-btn event-button'>
-          수정
-        </button>
-        <button className='public-btn event-button'>
-          삭제
-        </button>
+    <Frame>
+      <div className={styles.eventbody}>
+        <Eventlist />
       </div>
-    </div>
+      <button
+        className={`${style.publicBtn} ${style.eventButton}`}
+      >
+        추가
+      </button>
+    </Frame>
   );
 };
 

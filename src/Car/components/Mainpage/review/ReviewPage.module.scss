@@ -1,0 +1,283 @@
+.reviewPage {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .typeSwitch {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+
+            &.active {
+                background-color: #4597ee;
+                color: white;
+            }
+
+            &:hover {
+                background-color: #dcdcdc;
+            }
+        }
+    }
+
+    .writeReviewButton {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        // border: none;
+        background-color: #b8d1ec;
+        color: black;
+        border-radius: 5px;
+
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #3792e2;
+        }
+    }
+
+    .reviewList {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        margin: 0 100px;
+        animation: fade-in 0.5s ease;
+
+        .reviewItem {
+            border: 1px solid rgb(111, 0, 255);
+            width: 300px;
+            max-height: 350px;
+            min-height: 350px;
+            margin: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+
+            &:hover {
+                transform: translateY(-5px);
+            }
+
+            .imageContainer {
+                width: 100%;
+                height: 200px;
+                margin-bottom: 10px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 5px;
+                }
+            }
+
+            .contentContainer {
+                .nameRating {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    h3 {
+                        font-size: 16px;
+                        margin-bottom: 5px;
+                    }
+
+                    .rating {
+                        font-size: 16px;
+                        display: flex;
+                        align-items: center;
+
+                        span {
+                            margin-top: 8px;
+                            font-size: 18px;
+                            color: #ffc107;
+                        }
+                    }
+                }
+
+                .reviewDate {
+                    font-size: 12px;
+                    color: #999;
+                    margin-bottom: 5px;
+                    position: relative;
+                }
+
+                p {
+                    margin-top: 15px;
+                    width: 100%;
+                    font-size: 14px;
+                    line-height: 1.5;
+                    color: #666;
+                }
+            }
+        }
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin: 20px;
+
+        button {
+            padding: 10px 15px;
+            margin: 0 5px;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+
+            &.active {
+                background-color: #007bff;
+                color: white;
+            }
+
+            &:hover {
+                background-color: #dcdcdc;
+            }
+        }
+    }
+
+    .modal {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        animation: fade-in 0.3s ease;
+
+        .modalContent {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+            max-height: 70vh;
+            min-height: 70vh;
+            overflow-y: auto;
+
+            .close {
+                position: absolute;
+                top: 28px;
+                right: 23px;
+                font-size: 23px;
+                font-weight: bold;
+                color: #f1e8e8;
+                cursor: pointer;
+                z-index: 10;
+                background-color: black;
+                padding: 0px 9px 4px 9px;
+                opacity: 0.7;
+                border-radius: 25%;
+            }
+
+            .modalImageContainer {
+                position: relative;
+
+                img {
+                    width: 100%;
+                    height: 320px;
+                    object-fit: cover;
+                    border-radius: 5px;
+                    margin-bottom: 10px;
+                }
+
+                .reviewDate {
+                    position: relative;
+                    top: 10px;
+                    left: 10px;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    color: white;
+                    padding: 5px;
+                    border-radius: 3px;
+                    font-size: 12px;
+                }
+            }
+
+            h3 {
+                font-size: 24px;
+            }
+
+            .rating {
+                position: absolute;
+                font-size: 20px;
+                bottom: 230px;
+
+                span {
+                    color: #ffc107;
+                }
+            }
+
+            p {
+                font-size: 16px;
+                line-height: 1.5;
+                width: 100%;
+                height: 170px;
+                overflow: auto;
+            }
+
+            p::-webkit-scrollbar {
+                width: 0px;
+            }
+        }
+    }
+
+    form {
+        margin: 20px 0;
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: none;
+        }
+
+        .error {
+            color: red;
+            margin-top: 5px;
+        }
+
+        button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #4597ee;
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: #357ab8;
+            }
+        }
+    }
+}
