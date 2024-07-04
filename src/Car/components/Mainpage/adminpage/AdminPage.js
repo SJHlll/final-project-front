@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Frame from '../Frame';
 import ReservedStationSelect from './adminstation/ReservedStationSelect';
@@ -8,8 +8,10 @@ import ReservedStationList from './adminstation/ReservedStationList';
 import ReservedCarList from './admincar/ReservedCarList';
 import ReviewList from './adminreview/ReviewList';
 import './AdminPage.scss';
+import AuthContext from '../../../../util/AuthContext';
 
 const AdminPage = () => {
+  const { role } = useContext(AuthContext);
   const [selected, setSelected] = useState(null);
   const navigate = useNavigate();
 
@@ -17,6 +19,11 @@ const AdminPage = () => {
     setSelected(selection);
     navigate(path);
   };
+
+  if (role !== 'ADMIN') {
+    navigate('/');
+  }
+
   return (
     <Frame>
       <div className='admin-page-select'>
