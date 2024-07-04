@@ -1,6 +1,6 @@
 .review-page {
     width: 100%;
-    max-width: 1200px;
+    height: 1800px;
     margin: 0 auto;
 
     .type-switch {
@@ -50,18 +50,21 @@
         }
     }
 
+
+
     .review-list {
+        // background-color: #007bff;
         display: flex;
         justify-content: flex-start;
         flex-wrap: wrap;
-        margin: 0 100px;
+        margin: 0 170px;
         animation: fade-in 0.5s ease;
 
         .review-item {
+
             border: 1px solid rgb(111, 0, 255);
             width: 300px;
-            max-height: 350px;
-            min-height: 350px;
+            height: 330px;
             margin: 10px;
             padding: 10px;
             background-color: #fff;
@@ -71,12 +74,16 @@
             transition: transform 0.3s ease;
             display: flex;
             flex-direction: column;
+            // border: 1px solid lightgray;
 
             &:hover {
                 transform: translateY(-5px);
             }
 
             .image-container {
+
+                border: 1px solid lightgray;
+                border-radius: 8px;
                 width: 100%;
                 height: 200px;
                 margin-bottom: 10px;
@@ -90,27 +97,46 @@
             }
 
             .content-container {
+                display: flex;
+                flex-wrap: wrap;
+                border-top: 1px solid lightgray;
+
                 .name-rating {
+                    margin-top: 5px;
                     display: flex;
+                    // flex: wrap;
                     align-items: center;
                     justify-content: space-between;
+                    width: 100%;
 
                     h3 {
+                        margin-left: 10px;
+                        width: 70%;
                         font-size: 16px;
                         margin-bottom: 5px;
                     }
 
                     .rating {
+                        // border: 1px solid red;
+                        width: 100%;
                         font-size: 16px;
                         display: flex;
                         align-items: center;
 
                         span {
-                            margin-top: 8px;
+                            // border: 1px solid red;
                             font-size: 18px;
                             color: #ffc107;
                         }
                     }
+
+                }
+
+                h2 {
+                    // border: 1px solid blue;
+                    font-size: 15px;
+                    width: 90%;
+                    margin-left: 10px;
                 }
 
                 .review-date {
@@ -121,7 +147,7 @@
                 }
 
                 p {
-                    margin-top: 15px;
+                    margin-left: 10px;
                     width: 100%;
                     font-size: 14px;
                     line-height: 1.5;
@@ -166,6 +192,8 @@
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
         animation: fade-in 0.3s ease;
+        border: 1px solid black;
+
 
         .modal-content {
             background-color: #fff;
@@ -179,9 +207,10 @@
             min-height: 70vh;
             overflow-y: auto;
 
+
             .close {
                 position: absolute;
-                top: 28px;
+                top: 20px;
                 right: 23px;
                 font-size: 23px;
                 font-weight: bold;
@@ -196,6 +225,9 @@
 
             .modal-image-container {
                 position: relative;
+                border: 1px solid black;
+                border-radius: 6px;
+                height: 320px;
 
                 img {
                     width: 100%;
@@ -203,31 +235,47 @@
                     object-fit: cover;
                     border-radius: 5px;
                     margin-bottom: 10px;
+                    // border: 1px solid black;
                 }
 
                 .review-date {
                     position: relative;
-                    top: 10px;
-                    left: 10px;
+                    // top: 10px;
+                    // left: 10px;
                     background-color: rgba(0, 0, 0, 0.5);
                     color: white;
                     padding: 5px;
                     border-radius: 3px;
                     font-size: 12px;
+
+                    border: 1px solid black;
+
+
                 }
             }
 
             h3 {
                 font-size: 24px;
+                width: 70%;
+                // border: 1px solid black;
+
+            }
+
+            h2 {
+                font-size: 19px;
+                // border: 1px solid black;
+
             }
 
             .rating {
-                position: absolute;
-                font-size: 20px;
-                bottom: 230px;
+                width: 30%;
+
 
                 span {
+                    font-size: 20px;
                     color: #ffc107;
+                    // border: 1px dashed blue;
+                    margin-right: 4px;
                 }
             }
 
@@ -237,6 +285,7 @@
                 width: 100%;
                 height: 170px;
                 overflow: auto;
+                // border: 1px solid black;
             }
 
             p::-webkit-scrollbar {
