@@ -47,7 +47,7 @@ const CarInfo = () => {
             탑승인원 : 최대 {selectedCar.maximumPassenger}명
           </div>
           <div>
-            가격 : {selectedCar.carPrice}원 (렌트가격)
+            가격 : {selectedCar.carPrice}원 (1일 렌트 비용)
           </div>
         </div>
       </div>

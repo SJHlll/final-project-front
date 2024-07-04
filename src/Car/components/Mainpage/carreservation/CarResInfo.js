@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './reservation_css/CarResInfo.scss';
+import { CarContext } from '../../../../contexts/CarContext';
 
 const CarResInfo = ({ pickup, returning }) => {
+  const { selectedCar } = useContext(CarContext); // db에서 자동차 정보 가져온 것.
+
   const formatDate = (date) => {
     if (!date) return '선택되지 않음';
     const formattedDate = new Intl.DateTimeFormat('ko-KR', {
@@ -26,12 +29,9 @@ const CarResInfo = ({ pickup, returning }) => {
   return (
     <>
       <div className='resInfo'>
-        <div className='resName'>이름: ooo</div>
-        <div className='phonNumber'>
-          전화번호: 010-0000-0000
-        </div>
-        <div>자동차 정보</div>
-        <div>볼보 뭐시깽이</div>
+        <div className='resName'>이름: {}</div>
+        <div className='phonNumber'>전화번호: {}</div>
+        <div>예약하실 자동차: {selectedCar.carName}</div>
         <div className='date'>
           픽업 날짜: {formatDate(pickup.date)}
         </div>
@@ -44,6 +44,7 @@ const CarResInfo = ({ pickup, returning }) => {
         <div className='time'>
           반납 시간: {formatTime(returning.time)}
         </div>
+        <div>결제 금액: {}</div>
         비고:
         <input type='text' />
       </div>
