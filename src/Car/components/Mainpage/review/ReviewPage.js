@@ -10,79 +10,42 @@ const ReviewPage = ({ ReviewList }) => {
   const [selectedReview, setSelectedReview] =
     useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [reviews, setReviews] = useState({
-    rental: ReviewList
-      ? ReviewList.filter(
-          (review) => review.type === 'rental',
-        )
-      : [],
-    charging: ReviewList
-      ? ReviewList.filter(
-          (review) => review.type === 'charging',
-        )
-      : [],
-  });
-  const reviewsPerPage = 12;
+  const reviewsPerPage = 20;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [reviewList, setReviewList] = useState([]);
+  const [chargingReviews, setChargingReviews] = useState(
+    [],
+  );
+  const [rentalReviews, setRentalReviews] = useState([]);
 
   useEffect(() => {
-    const fetchChargeReviews = async () => {
+    const fetchReviews = async () => {
       try {
-        // const token = localStorage.getItem('ACCESS_TOKEN');
         const response = await fetch(
           'http://localhost:8181/review/list',
-          {
-            method: 'GET',
-            headers: {
-              // Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            },
-          },
         );
         if (!response.ok) {
           throw new Error('Failed to fetch reviews');
         }
         const data = await response.json();
-        setReviewList(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+        setReviewList(data.reverse());
 
-    if (selectedType !== 'rental') {
-      fetchChargeReviews();
-    }
-  }, [selectedType]);
-
-  useEffect(() => {
-    const fetchChargeReviews = async () => {
-      try {
-        // const token = localStorage.getItem('ACCESS_TOKEN');
-        const response = await fetch(
-          'http://localhost:8181/review/list',
-          {
-            method: 'GET',
-            headers: {
-              // Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            },
-          },
+        // 데이터 필터링
+        const rental = data.filter(
+          (review) => review.carName !== null,
         );
-        if (!response.ok) {
-          throw new Error('Failed to fetch reviews');
-        }
-        const data = await response.json();
-        setReviewList(data);
-      } catch (error) {
-        console.error(error);
+        const charging = data.filter(
+          (review) => review.stationName !== null,
+        );
+        setRentalReviews(rental);
+        setChargingReviews(charging);
+      } catch (err) {
+        console.log('Error fetching reviews : ', err);
       }
     };
 
-    if (selectedType === 'rental') {
-      fetchChargeReviews();
-    }
-  }, [selectedType]);
+    fetchReviews();
+  }, []);
 
   const handleTypeChange = (type) => {
     setSelectedType(type);
@@ -114,32 +77,33 @@ const ReviewPage = ({ ReviewList }) => {
       : baseImageUrl;
 
     const newReview = {
-      id: reviews[selectedType].length + 1,
+      id: reviewList.length + 1,
       imageUrl,
-      name: `${selectedType === 'rental' ? '렌트카' : '충전소'} ${
-        reviews[selectedType].length + 1
-      }`,
       rating,
       content,
       date: new Date().toLocaleDateString(),
       item: selectedItem,
     };
 
-    setReviews((prevReviews) => ({
-      ...prevReviews,
-      [selectedType]: [
-        newReview,
-        ...prevReviews[selectedType],
-      ],
-    }));
-
+    setReviewList([newReview, ...reviewList]);
+    if (selectedType === 'rental') {
+      setRentalReviews([newReview, ...rentalReviews]);
+    } else {
+      setChargingReviews([newReview, ...chargingReviews]);
+    }
     setIsModalOpen(false);
   };
 
-  // const currentReviews = reviews[selectedType].slice(
-  //   (currentPage - 1) * reviewsPerPage,
-  //   currentPage * reviewsPerPage,
-  // );
+  const currentReviews =
+    selectedType === 'rental'
+      ? rentalReviews.slice(
+          (currentPage - 1) * reviewsPerPage,
+          currentPage * reviewsPerPage,
+        )
+      : chargingReviews.slice(
+          (currentPage - 1) * reviewsPerPage,
+          currentPage * reviewsPerPage,
+        );
 
   return (
     <div className='review-page'>
@@ -168,10 +132,11 @@ const ReviewPage = ({ ReviewList }) => {
         후기 작성
       </button>
       <div className='review-list'>
-        {reviewList.map((review) => (
+        {currentReviews.map((review) => (
           <ReviewItem
             key={review.id}
             review={review}
+            selectedType={selectedType}
             onMoreClick={handleMoreClick}
           />
         ))}
@@ -180,7 +145,9 @@ const ReviewPage = ({ ReviewList }) => {
         {Array.from(
           {
             length: Math.ceil(
-              reviews[selectedType].length / reviewsPerPage,
+              (selectedType === 'rental'
+                ? rentalReviews.length
+                : chargingReviews.length) / reviewsPerPage,
             ),
           },
           (_, index) => (
