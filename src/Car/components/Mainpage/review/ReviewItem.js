@@ -25,7 +25,7 @@ const ReviewItem = ({ review, onMoreClick }) => {
       <div className='content-container'>
         {/* 이름 및 평점 */}
         <div className='name-rating'>
-          <h3>{review.name}</h3>
+          <h3>{review.stationName}</h3>
           {/* 평점 표시 */}
           <div className='rating'>
             {/* 가득 찬 별 */}

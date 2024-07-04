@@ -7,6 +7,9 @@ import { Modal, ModalBody } from 'reactstrap';
 const MyPageInfo = () => {
   const [updateInfo, setUpdateInfo] = useState(false);
 
+  const { userName, email, phoneNumber } =
+    useContext(AuthContext);
+
   const toggle = () => setUpdateInfo(!updateInfo);
 
   // 회원정보 수정하기 모달창 활성화
@@ -21,9 +24,6 @@ const MyPageInfo = () => {
       </ModalBody>
     </Modal>
   );
-
-  const { userName, email, phoneNumber } =
-    useContext(AuthContext);
 
   return (
     <div className='reservation-list'>

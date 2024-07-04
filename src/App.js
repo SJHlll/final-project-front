@@ -135,6 +135,18 @@ const App = () => {
 
             {/* 어드민페이지 */}
             <Route path='/admin' element={<AdminPage />} />
+            <Route
+              path='/admin/station'
+              element={<ReservedStationList />}
+            />
+            <Route
+              path='/admin/car'
+              element={<ReservedCarList />}
+            />
+            <Route
+              path='/admin/review'
+              element={<ReviewList />}
+            />
           </Routes>
         </div>
       </AuthContextProvider>
