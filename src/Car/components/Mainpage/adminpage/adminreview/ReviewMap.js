@@ -18,6 +18,7 @@ const ReviewMap = () => {
   const [isCar, setIsCar] = useState(false); // 렌트카리뷰?
   const [filteredReview, setFilteredReview] = useState([]); // 필터링된 리뷰
 
+  // DB에서 작성된 리뷰 가져오기
   useEffect(() => {
     const fetchReviews = async () => {
       try {
@@ -45,6 +46,7 @@ const ReviewMap = () => {
     fetchReviews();
   }, [setReview]);
 
+  // 작성된 리뷰 DB에 지우기 (리뷰번호를 기준으로)
   const handleDeleteReview = async (reviewNo) => {
     try {
       const token = localStorage.getItem('ACCESS_TOKEN');
@@ -74,16 +76,16 @@ const ReviewMap = () => {
     }
   };
 
-  // 날짜 / 시간 작성일
-  const formatRentTime = (rentTime) => {
-    const date = new Date(rentTime);
+  // 날짜 / 시간
+  const formatTime = (time) => {
+    const date = new Date(time);
     return date.toLocaleString('ko-KR', {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
       hour: '2-digit',
       minute: 'numeric',
-      hour12: true,
+      hour12: false,
     });
   };
 
@@ -132,6 +134,12 @@ const ReviewMap = () => {
       );
     }
 
+    // 작성일자 기준 내림차순 정렬
+    filtered.sort(
+      (a, b) =>
+        new Date(b.updateDate) - new Date(a.updateDate),
+    );
+
     setFilteredReview(filtered);
   }, [
     review,
@@ -163,7 +171,7 @@ const ReviewMap = () => {
               {truncateText(e.content, 50)}
             </div>
             <div className='res-selected-time'>
-              <div>{formatRentTime(e.updateDate)}</div>
+              <div>{formatTime(e.updateDate)}</div>
             </div>
             <div className='space-blank'>
               <button

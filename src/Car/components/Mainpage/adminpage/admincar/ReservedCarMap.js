@@ -42,7 +42,36 @@ const ReservedCarMap = () => {
     fetchStations();
   }, [setReserveCar]);
 
-  // 날짜 / 시간 시작일
+  // 예약한 충전소 DB에 지우기 (예약번호를 기준으로)
+  const handleCancelReservation = async (reservationNo) => {
+    try {
+      const token = localStorage.getItem('ACCESS_TOKEN');
+      const response = await fetch(
+        `http://localhost:8181/admin/car?reservationNo=${reservationNo}`,
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+      if (!response.ok) {
+        throw new Error('Failed to cancel reservation');
+      }
+
+      // 예약 취소가 성공하면 UI에서 해당 예약을 제거
+      setReserveCar((prevCar) =>
+        prevCar.filter(
+          (car) => car.reservationNo !== reservationNo,
+        ),
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // 날짜 / 시간
   const formatRentTime = (rentTime) => {
     const date = new Date(rentTime);
     return date.toLocaleString('ko-KR', {
@@ -51,21 +80,7 @@ const ReservedCarMap = () => {
       day: '2-digit',
       hour: '2-digit',
       minute: 'numeric',
-      hour12: true,
-    });
-  };
-
-  // 날짜 / 시간 종료일
-  const formatRentEndTime = (rentTime, time) => {
-    const date = new Date(rentTime);
-    date.setMinutes(date.getMinutes() + time);
-    return date.toLocaleString('ko-KR', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: 'numeric',
-      hour12: true,
+      hour12: false,
     });
   };
 
@@ -97,8 +112,8 @@ const ReservedCarMap = () => {
     return (
       <>
         {cars.map((e) => (
-          <div className='list-body' key={e.carNo}>
-            <div className='res-no'>{e.carNo}</div>
+          <div className='list-body' key={e.reservationNo}>
+            <div className='res-no'>{e.reservationNo}</div>
             <div className='res-user-name'>
               <div>{e.userName}</div>
               <div>{e.phoneNumber}</div>
@@ -110,17 +125,15 @@ const ReservedCarMap = () => {
               {e.rentCarPrice}원
             </div>
             <div className='res-selected-time'>
-              <div>{formatRentTime(e.rentTime)}</div>
-              <div>
-                ~ {formatRentEndTime(e.rentTime, e.time)}
-              </div>
+              <div>{formatRentTime(e.rentDate)}</div>
+              <div>~ {formatRentTime(e.turninDate)}</div>
             </div>
             <div className='space-blank'>
               <button
                 className='res-cancel-btn'
-                // onDoubleClick={() =>
-                //   handleCancelReservation(e.reservationNo)
-                // }
+                onDoubleClick={() =>
+                  handleCancelReservation(e.reservationNo)
+                }
               >
                 취소
               </button>

@@ -50,7 +50,6 @@ const ReservedStationMap = () => {
     try {
       const token = localStorage.getItem('ACCESS_TOKEN');
       const response = await fetch(
-        // 마이페이지에 예약번호 기준으로 예약 취소되는거 훔쳐옴.
         `http://localhost:8181/mypage?reservationNo=${reservationNo}`,
         {
           method: 'DELETE',
@@ -85,7 +84,7 @@ const ReservedStationMap = () => {
       day: '2-digit',
       hour: '2-digit',
       minute: 'numeric',
-      hour12: true,
+      hour12: false,
     });
   };
 
@@ -99,7 +98,7 @@ const ReservedStationMap = () => {
       day: '2-digit',
       hour: '2-digit',
       minute: 'numeric',
-      hour12: true,
+      hour12: false,
     });
   };
 
@@ -131,8 +130,8 @@ const ReservedStationMap = () => {
     return (
       <>
         {stations.map((e) => (
-          <div className='list-body' key={e.chargeNo}>
-            <div className='res-no'>{e.chargeNo}</div>
+          <div className='list-body' key={e.reservationNo}>
+            <div className='res-no'>{e.reservationNo}</div>
             <div className='res-user-name'>
               <div>{e.name}</div>
               <div>{e.phoneNumber}</div>
