@@ -1,10 +1,12 @@
 import React, { useContext, useState } from 'react';
 import '../scss/PlugAndGoStation.scss';
-import { Modal, ModalBody, ModalHeader } from 'reactstrap';
+import { Modal, ModalBody } from 'reactstrap';
 import styled from 'styled-components';
 import ReservationModal from './ReservationModal';
 import '../../../../scss/Button.scss';
 import { SecondMapContext } from '../../../../contexts/SecondMapContext';
+import AuthContext from '../../../../util/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const PlugAndGoStation = ({
   lat,
@@ -21,6 +23,8 @@ const PlugAndGoStation = ({
   const { setSelectedStation, setMapLevel } = useContext(
     SecondMapContext,
   );
+  const { userName } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   // 위치 찾기 버튼 클릭 시 발동하는 함수
   const handleLocateClick = () => {
@@ -31,19 +35,23 @@ const PlugAndGoStation = ({
   // Modal Open 버튼 활성화
   const button = () => (
     <div>
-      <button
-        className='public-btn reserve-button'
-        onClick={toggle}
-      >
-        예약하기
-      </button>
+      {!userName ? (
+        <button
+          className='public-btn reserve-button'
+          onClick={() => navigate('/Login')}
+          style={{ fontSize: '0.8em' }}
+        >
+          로그인하기
+        </button>
+      ) : (
+        <button
+          className='public-btn reserve-button'
+          onClick={toggle}
+        >
+          예약하기
+        </button>
+      )}
     </div>
-  );
-
-  const closeBtn = (
-    <button className='public-btn' onClick={toggle}>
-      &times;
-    </button>
   );
 
   // 예약하기 모달창 활성화

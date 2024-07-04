@@ -105,6 +105,9 @@ const ReservedStationMap = () => {
 
   // ?글자 이상 시 ... 처리
   const truncateText = (text, length) => {
+    if (!text) {
+      return '';
+    }
     if (text.length > length) {
       return text.substring(0, length) + '...';
     }
@@ -129,29 +132,36 @@ const ReservedStationMap = () => {
       <>
         {stations.map((e) => (
           <div className='list-body' key={e.reservationNo}>
-            <div className='res-no'>{e.reservationNo}</div>
+            <div className='res-no'>{e.chargeNo}</div>
             <div className='res-user-name'>
               <div>{e.name}</div>
               <div>{e.phoneNumber}</div>
             </div>
-            <div className='res-user-no'></div>
-            <div className='res-station-name'>
-              {truncateText(e.stationName, 20)}
+            <div className='res-selected-name'>
+              <div>{truncateText(e.stationName, 20)}</div>
+              <div style={{ fontSize: '0.8em' }}>
+                {truncateText(e.address, 35)}
+              </div>
             </div>
-            <div className='res-station-time'>
+            <div className='res-selected-ad'>
+              {e.rentChargePrice}원
+            </div>
+            <div className='res-selected-time'>
               <div>{formatRentTime(e.rentTime)}</div>
               <div>
                 ~ {formatRentEndTime(e.rentTime, e.time)}
               </div>
             </div>
-            <button
-              className='res-cancel-btn'
-              onDoubleClick={() =>
-                handleCancelReservation(e.reservationNo)
-              }
-            >
-              취소
-            </button>
+            <div className='space-blank'>
+              <button
+                className='res-cancel-btn'
+                onDoubleClick={() =>
+                  handleCancelReservation(e.reservationNo)
+                }
+              >
+                취소
+              </button>
+            </div>
           </div>
         ))}
       </>
@@ -175,7 +185,7 @@ const ReservedStationMap = () => {
         </div>
       )}
       <input
-        className='phone-last-four'
+        className='admin-filter'
         type='text'
         placeholder='전화번호 뒷자리 4개 입력'
         value={filterPhoneNumber}

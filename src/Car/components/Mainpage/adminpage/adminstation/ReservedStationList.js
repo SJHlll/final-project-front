@@ -40,19 +40,16 @@ const ReservedStationList = () => {
             }
           />
         </div>
+        <div className='list-header'>
+          <div className='res-no'>번호</div>
+          <div className='res-user-name'>회원명</div>
+          <div className='res-selected-name'>충전소</div>
+          <div className='res-selected-ad'>충전비용</div>
+          <div className='res-selected-time'>충전기간</div>
+          <div className='hidden-text'></div>
+        </div>
         <div className='admin-page-list'>
           <div className='admin-list reserve-station'>
-            <div className='list-header'>
-              <div className='res-no'>예약번호</div>
-              <div className='res-user-name'>회원명</div>
-              <div className='res-selected-name'>
-                충전소
-              </div>
-              <div className='res-selected-time'>
-                충전기간
-              </div>
-              <div className='hidden-text'></div>
-            </div>
             <ReservedStationMap />
           </div>
           {selected === 'car' && <ReservedCarList />}
