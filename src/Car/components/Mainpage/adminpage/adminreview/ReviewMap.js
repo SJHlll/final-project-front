@@ -12,9 +12,11 @@ const ReviewMap = () => {
   const { role } = useContext(AuthContext); // 관리자 확인용
   const [filterEmailDomain, setFilterEmailDomain] =
     useState(''); // 이메일 필터링
-  const [filteredReview, setFilteredReview] = useState([]); // 필터링된 리뷰
   const [isBadWordFilter, setIsBadWordFilter] =
-    useState(false); // 특정 단어 필터링 체크박스 상태
+    useState(false); // 비속어 필터링 체크박스
+  const [isStation, setIsStation] = useState(false); // 충전소리뷰?
+  const [isCar, setIsCar] = useState(false); // 렌트카리뷰?
+  const [filteredReview, setFilteredReview] = useState([]); // 필터링된 리뷰
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -67,16 +69,18 @@ const ReviewMap = () => {
     return text;
   };
 
-  // 이메일 도메인과 특정 단어로 필터링
+  // 필터링 함수
   useEffect(() => {
     let filtered = review;
 
+    // 이메일 검색
     if (filterEmailDomain) {
       filtered = filtered.filter((e) =>
         e.email.includes(filterEmailDomain),
       );
     }
 
+    // 비속어 체크박스
     if (isBadWordFilter) {
       filtered = filtered.filter((e) =>
         badwords[0].word.some((bad) =>
@@ -85,8 +89,28 @@ const ReviewMap = () => {
       );
     }
 
+    // 충전소 리뷰인지 체크
+    if (isStation) {
+      filtered = filtered.filter(
+        (e) => e.stationName && e.stationName.length >= 1,
+      );
+    }
+
+    // 렌트카 리뷰인지 체크
+    if (isCar) {
+      filtered = filtered.filter(
+        (e) => e.carName && e.carName.length >= 1,
+      );
+    }
+
     setFilteredReview(filtered);
-  }, [filterEmailDomain, isBadWordFilter, review]);
+  }, [
+    review,
+    filterEmailDomain,
+    isBadWordFilter,
+    isStation,
+    isCar,
+  ]);
 
   // 회원이 작성한 리뷰 목록
   const AdminContents = ({ reviews }) => {
@@ -162,8 +186,38 @@ const ReviewMap = () => {
           }
           style={{ marginRight: '5px' }}
         />
-        비속어가 포함된 리뷰 보기 (&apos;?&apos;도 필터링에
-        추가)
+        <span>
+          비속어가 포함된 리뷰 보기 (&apos;?&apos;도
+          필터링에 추가)
+        </span>
+      </label>
+      <label className='admin-filter3'>
+        <input
+          type='checkbox'
+          checked={isStation}
+          onChange={(e) => {
+            setIsStation(e.target.checked);
+            if (e.target.checked) {
+              setIsCar(false);
+            }
+          }}
+          style={{ marginRight: '5px' }}
+        />
+        <span>충전소만 보기</span>
+      </label>
+      <label className='admin-filter4'>
+        <input
+          type='checkbox'
+          checked={isCar}
+          onChange={(e) => {
+            setIsCar(e.target.checked);
+            if (e.target.checked) {
+              setIsStation(false);
+            }
+          }}
+          style={{ marginRight: '5px' }}
+        />
+        <span>렌트카만 보기</span>
       </label>
     </>
   );
