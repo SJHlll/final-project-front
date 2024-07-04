@@ -32,6 +32,7 @@ import Loginpage from './Car/components/Mainpage/Loginpage';
 import KakaoLoginHandler from './Car/components/user/KakaoLoginHandler';
 import NaverLoginHandler from './Car/components/user/NaverLoginHandler';
 import AdminPage from './Car/components/Mainpage/adminpage/AdminPage';
+import ReviewPage from './Car/components/Mainpage/review/ReviewPage';
 
 const App = () => {
   const location = useLocation();
@@ -81,6 +82,7 @@ const App = () => {
             />
             {/* 이용후기 페이지 */}
             <Route path='/review' element={<Review />} />
+
             {/* 충전소 페이지 */}
             <Route
               path='charge/list'

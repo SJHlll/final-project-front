@@ -1,6 +1,13 @@
-import React, { useState } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import './Modal2.scss';
 import axios from 'axios';
+import axiosInstance from '../../../../config/axios-config';
+import { CarContext } from '../../../../contexts/CarContext';
+import AuthContext from '../../../../util/AuthContext';
 
 const Modal2 = ({ onClose, onSave, selectedType }) => {
   const [content, setContent] = useState('');
@@ -9,11 +16,68 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
   const [rating, setRating] = useState(1);
   const [photo, setPhoto] = useState(null);
   const [photoPreview, setPhotoPreview] = useState(null);
+  const [reviewList, setReviewList] = useState([]);
+  const [carList, setCarList] = useState([]);
+  const [chargeList, setChargeList] = useState([]);
 
-  const reviewSelect =
-    selectedType === 'rental'
-      ? ['차량 1', '차량 2', '차량 3']
-      : ['충전소 1', '충전소 2', '충전소 3'];
+  const { token } = useContext(AuthContext);
+
+  useEffect(() => {
+    const fetchCarList = async () => {
+      try {
+        const response = await axios.get(
+          'http://localhost:8181/car/res',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+        console.log(
+          '렌트카 목록 응답 데이터 : ',
+          response.data,
+        );
+        setCarList(response.data);
+      } catch (error) {
+        console.log(
+          '렌트카 목록을 가져오는데 실패했습니다. : ',
+          error,
+        );
+      }
+    };
+
+    if (selectedType === 'rental') {
+      fetchCarList();
+    }
+  }, [token, selectedType]);
+
+  useEffect(() => {
+    const fetchChargeList = async () => {
+      try {
+        const response = await axios.get(
+          'http://localhost:8181/charge/reservation',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+        console.log(
+          '충전소 목록 응답 데이터 : ',
+          response.data,
+        );
+        setChargeList(response.data.chargers);
+      } catch (error) {
+        console.log(
+          '충전소 목록을 가져오는데 실패했습니다. : ',
+          error,
+        );
+      }
+    };
+    if (selectedType !== 'rental') {
+      fetchChargeList();
+    }
+  }, [token, selectedType]);
 
   const handleChange = (e) => {
     const inputValue = e.target.value;
@@ -68,33 +132,35 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
       return;
     }
 
-    const requestDTO = {
+    const reviewData = {
       content,
-      selectedItem,
       rating,
-      photo: photo ? photo.name : null, // 사진 이름만 전송, 서버에서 실제 파일 처리 필요
+      carId: selectedItem,
     };
 
     try {
-      const response = await axios.post(
-        'http://localhost:3000/review',
-        requestDTO,
+      const response = await axiosInstance.post(
+        'http://localhost:8181/review/charge',
+        reviewData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        },
       );
-      console.log(response.data);
-      console.log('전송완료');
-      onSave(content, selectedItem, rating, photo);
-      setContent('');
-      setSelectedItem('');
-      setRating(1);
-      setPhoto(null);
-      setPhotoPreview(null);
-      onClose();
-    } catch (error) {
-      console.error('Error saving review:', error);
-      window.alert(
-        '리뷰를 저장하는 동안 오류가 발생했습니다. 다시 시도해주세요.',
-      );
+      setReviewList([...reviewList, response.data]);
+      alert('리뷰 작성이 완성되었습니다.');
+      onSave(content, selectedItem, rating);
+    } catch (err) {
+      setError(err.message);
+      alert('리뷰 등록에 실패하였습니다.');
     }
+
+    onSave(content, selectedItem, rating); // 부모 컴포넌트에 후기 저장 요청
+    setContent(''); // 폼 초기화
+    setSelectedItem(''); // 폼 초기화
+    setRating(1); // 폼 초기화
   };
 
   return (
@@ -113,11 +179,17 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
                 onChange={handleItemChange}
               >
                 <option value=''>선택하세요</option>
-                {reviewSelect.map((item, index) => (
-                  <option key={index} value={item}>
-                    {item}
-                  </option>
-                ))}
+                {selectedType === 'rental'
+                  ? carList.map((car) => (
+                      <option key={car.id} value={car.id}>
+                        {car.name}
+                      </option>
+                    ))
+                  : chargeList.map((charge) => (
+                      <option key={charge.stationId}>
+                        {charge.stationName}
+                      </option>
+                    ))}
               </select>
             </div>
             <div>
