@@ -44,7 +44,7 @@ const ReservedStationList = () => {
           <div className='res-no'>번호</div>
           <div className='res-user-name'>회원명</div>
           <div className='res-selected-name'>충전소</div>
-          <div className='res-selected-ad'>무언가</div>
+          <div className='res-selected-ad'>충전비용</div>
           <div className='res-selected-time'>충전기간</div>
           <div className='hidden-text'></div>
         </div>

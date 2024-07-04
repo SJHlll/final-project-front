@@ -138,9 +138,14 @@ const ReservedStationMap = () => {
               <div>{e.phoneNumber}</div>
             </div>
             <div className='res-selected-name'>
-              {truncateText(e.stationName, 20)}
+              <div>{truncateText(e.stationName, 20)}</div>
+              <div style={{ fontSize: '0.8em' }}>
+                {truncateText(e.address, 35)}
+              </div>
             </div>
-            <div className='res-selected-ad'>1</div>
+            <div className='res-selected-ad'>
+              {e.rentChargePrice}원
+            </div>
             <div className='res-selected-time'>
               <div>{formatRentTime(e.rentTime)}</div>
               <div>

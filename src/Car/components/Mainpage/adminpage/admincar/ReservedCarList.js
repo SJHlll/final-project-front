@@ -40,7 +40,7 @@ const ReservedCarList = () => {
         <div className='res-no'>번호</div>
         <div className='res-user-name'>회원명</div>
         <div className='res-selected-name'>차종</div>
-        <div className='res-selected-ad'>무언가</div>
+        <div className='res-selected-ad'>렌트비용</div>
         <div className='res-selected-time'>렌트기간</div>
         <div className='hidden-text'></div>
       </div>

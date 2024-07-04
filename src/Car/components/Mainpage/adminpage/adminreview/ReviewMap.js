@@ -5,6 +5,7 @@ import React, {
 } from 'react';
 import AuthContext from '../../../../../util/AuthContext';
 import { TestRvContext } from './TestRvContext';
+import { badWords } from './badWords';
 
 const ReviewMap = () => {
   const { review, setReview } = useContext(TestRvContext);
@@ -12,6 +13,8 @@ const ReviewMap = () => {
   const [filterEmailDomain, setFilterEmailDomain] =
     useState(''); // 이메일 필터링
   const [filteredReview, setFilteredReview] = useState([]); // 필터링된 리뷰
+  const [isConfirmFilter, setIsConfirmFilter] =
+    useState(false); // 특정 단어 필터링 체크박스 상태
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -64,17 +67,26 @@ const ReviewMap = () => {
     return text;
   };
 
-  // 이메일 도메인으로 필터링
+  // 이메일 도메인과 특정 단어로 필터링
   useEffect(() => {
+    let filtered = review;
+
     if (filterEmailDomain) {
-      const filtered = review.filter((e) =>
+      filtered = filtered.filter((e) =>
         e.email.includes(filterEmailDomain),
       );
-      setFilteredReview(filtered);
-    } else {
-      setFilteredReview(review);
     }
-  }, [filterEmailDomain, review]);
+
+    if (isConfirmFilter) {
+      filtered = filtered.filter((e) =>
+        badWords[0].word.some((badWord) =>
+          e.content.includes(badWord),
+        ),
+      );
+    }
+
+    setFilteredReview(filtered);
+  }, [filterEmailDomain, isConfirmFilter, review]);
 
   // 회원이 작성한 리뷰 목록
   const AdminContents = ({ reviews }) => {
@@ -95,7 +107,7 @@ const ReviewMap = () => {
                   : null}
             </div>
             <div className='res-selected-name'>
-              {truncateText(e.content, 35)}
+              {truncateText(e.content, 50)}
             </div>
             <div className='res-selected-time'>
               <div>{formatRentTime(e.updateDate)}</div>
@@ -141,6 +153,18 @@ const ReviewMap = () => {
           setFilterEmailDomain(e.target.value)
         }
       />
+      <label className='admin-filter2'>
+        <input
+          type='checkbox'
+          checked={isConfirmFilter}
+          onChange={(e) =>
+            setIsConfirmFilter(e.target.checked)
+          }
+          style={{ marginRight: '5px' }}
+        />
+        비속어가 포함된 리뷰 보기 (&apos;?&apos;도 필터링에
+        추가)
+      </label>
     </>
   );
 };
