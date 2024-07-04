@@ -125,7 +125,7 @@ const Testheader = () => {
             }
             onClick={() => onClick(9, '/admin')}
           >
-            예약 목록 & 관리
+            예약 및 리뷰 목록 & 관리
           </button>
         )}
       </div>

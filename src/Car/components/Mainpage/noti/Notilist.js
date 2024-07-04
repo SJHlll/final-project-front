@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './Notilist.scss';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import '../../../../scss/Button.scss';
-import { Modal, ModalBody } from 'reactstrap';
 
 const Notilist = () => {
   const currentDate = new Date();
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth() + 1;
   const day = currentDate.getDate();
-  const hours = currentDate.getHours();
-  const minutes = currentDate.getMinutes();
-  const seconds = currentDate.getSeconds();
 
-  const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')} ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-
+  const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')} `;
   function createData(
     num,
     header,
@@ -33,6 +27,7 @@ const Notilist = () => {
       hits,
     };
   }
+
   const initialRows = [
     createData(
       1,
@@ -76,7 +71,6 @@ const Notilist = () => {
     ),
   ];
 
-  // Load hits from localStorage or set initial hits
   const loadHits = () => {
     const storedHits = JSON.parse(
       localStorage.getItem('hits'),
@@ -117,7 +111,6 @@ const Notilist = () => {
       },
     });
   };
-
   return (
     <>
       <header

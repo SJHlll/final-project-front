@@ -1,19 +1,29 @@
-import React, { useContext, useEffect } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { ReserveStationContext } from '../../../../../contexts/ReserveStationContext';
 import AuthContext from '../../../../../util/AuthContext';
 
 const ReservedStationMap = () => {
   const { reserveStation, setReserveStation } = useContext(
     ReserveStationContext,
-  );
-  const { role } = useContext(AuthContext);
+  ); // 예약한 충전소 가져오기
+  const { role } = useContext(AuthContext); // 관리자 확인용
+  const [filterPhoneNumber, setFilterPhoneNumber] =
+    useState(''); // 전화번호 필터링
+  const [filteredStations, setFilteredStations] = useState(
+    [],
+  ); // 필터링된 충전소
 
+  // DB에서 예약한 충전소 가져오기
   useEffect(() => {
     const fetchStations = async () => {
       try {
         const token = localStorage.getItem('ACCESS_TOKEN');
         const response = await fetch(
-          'http://localhost:8181/admin',
+          'http://localhost:8181/admin/station',
           {
             method: 'GET',
             headers: {
@@ -35,6 +45,7 @@ const ReservedStationMap = () => {
     fetchStations();
   }, [setReserveStation]);
 
+  // 예약한 충전소 DB에 지우기 (예약번호를 기준으로)
   const handleCancelReservation = async (reservationNo) => {
     try {
       const token = localStorage.getItem('ACCESS_TOKEN');
@@ -62,10 +73,10 @@ const ReservedStationMap = () => {
       );
     } catch (error) {
       console.error(error);
-      alert('예약 취소에 실패했습니다.');
     }
   };
 
+  // 날짜 / 시간 시작일
   const formatRentTime = (rentTime) => {
     const date = new Date(rentTime);
     return date.toLocaleString('ko-KR', {
@@ -78,6 +89,7 @@ const ReservedStationMap = () => {
     });
   };
 
+  // 날짜 / 시간 종료일
   const formatRentEndTime = (rentTime, time) => {
     const date = new Date(rentTime);
     date.setMinutes(date.getMinutes() + time);
@@ -91,10 +103,31 @@ const ReservedStationMap = () => {
     });
   };
 
-  const AdminContents = () => {
+  // ?글자 이상 시 ... 처리
+  const truncateText = (text, length) => {
+    if (text.length > length) {
+      return text.substring(0, length) + '...';
+    }
+    return text;
+  };
+
+  // 전화번호 뒷자리 4개로 필터링
+  useEffect(() => {
+    if (filterPhoneNumber.length === 4) {
+      const filtered = reserveStation.filter((e) =>
+        e.phoneNumber.endsWith(filterPhoneNumber),
+      );
+      setFilteredStations(filtered);
+    } else {
+      setFilteredStations(reserveStation);
+    }
+  }, [filterPhoneNumber, reserveStation]);
+
+  // 회원이 예약한 충전소 목록
+  const AdminContents = ({ stations }) => {
     return (
       <>
-        {reserveStation.map((e) => (
+        {stations.map((e) => (
           <div className='list-body' key={e.reservationNo}>
             <div className='res-no'>{e.reservationNo}</div>
             <div className='res-user-name'>
@@ -103,7 +136,7 @@ const ReservedStationMap = () => {
             </div>
             <div className='res-user-no'></div>
             <div className='res-station-name'>
-              {e.stationName}
+              {truncateText(e.stationName, 20)}
             </div>
             <div className='res-station-time'>
               <div>{formatRentTime(e.rentTime)}</div>
@@ -125,17 +158,32 @@ const ReservedStationMap = () => {
     );
   };
 
+  // 본체
   return (
     <>
       {role === 'ADMIN' && reserveStation.length > 0 ? (
-        <>
-          <AdminContents />
-        </>
+        <AdminContents stations={filteredStations} />
       ) : (
-        <div style={{ textAlign: 'center' }}>
+        <div
+          style={{
+            textAlign: 'center',
+            marginTop: '100px',
+            fontSize: '1.5rem',
+          }}
+        >
           예약된 충전소가 없습니다.
         </div>
       )}
+      <input
+        className='phone-last-four'
+        type='text'
+        placeholder='전화번호 뒷자리 4개 입력'
+        value={filterPhoneNumber}
+        onChange={(e) =>
+          setFilterPhoneNumber(e.target.value)
+        }
+        maxLength='4'
+      />
     </>
   );
 };
