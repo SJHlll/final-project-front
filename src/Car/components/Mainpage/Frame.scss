@@ -1,20 +1,22 @@
 .maincontainer {
-    background-color: white;
+    background-color: aliceblue;
     width: 100%;
     display: flex;
     justify-content: center;
     position: fixed;
-    
+    height: 100%;
   }
   
   .contentline{
       position: fixed;
       width: 70%;
-      height: 760px;
+      height: 100%;
       background-size: contain;
-      margin-right: 4%;
-      margin-top: 3%;
-      border: 1px solid #555555;
+      // margin-right: 4%;
+      // margin-top: 3%;
+      background-color: white;
+      // border-left: 1px solid black;
+      // border-right: 1px solid black;
       border-radius: 15px;
     //   box-shadow: 18px 18px 1px -8px #c2e1ff;
       overflow: hidden;

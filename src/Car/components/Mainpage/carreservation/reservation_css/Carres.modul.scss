@@ -5,15 +5,14 @@
 }
 
 .reservationBtn{ // 예약하기 버튼 부모 클래스
-    display: flex;
-    justify-content: flex-end;
-    width: 500px;
-    margin-left: auto;
-    margin-right: 85px;
-
+    // display: flex;
+    // justify-content: flex-end;
+    width: 60%;
+ height: auto;
+ margin: 0 auto;
     .resBtn { // 예약하기 버튼
-        margin-right: auto;
-        width: 480px;
+       
+        width: 100%;
         margin-top: 20px;
         margin-bottom: 20px;
         height: 30px;
@@ -51,7 +50,30 @@
 }
 
 .selectCar { // 선택한 차 정보
-    width: 500px;
+    width: 50%;
     height: auto;
+    border: 1px solid black;
+    align-content: center;
+    
 }
 
+.calendarbtn{
+    display: flex;
+    width:50%;
+    flex-direction: column;
+    
+}
+.caltotalbox1{
+    width: 20%;
+    text-align: center;
+    border-right: 1px solid black;
+}
+.caltotalbox2{width: 30%;
+    text-align: right;
+    padding-right: 5%;
+    border-right: 1px solid black;}
+.caltotalbox3{width: 20%;
+    text-align: center;
+    border-right: 1px solid black;}
+.caltotalbox4{width: 30%;
+text-align: center;}

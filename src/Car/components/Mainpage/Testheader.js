@@ -1,8 +1,6 @@
 import React, { useContext, useState } from 'react';
 import './Testheader.scss';
 import { useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import AuthContext from '../../../util/AuthContext';
 import {
   API_BASE_URL,
@@ -12,10 +10,11 @@ import ChargeFooter from '../charge/footer/ChargeFooter';
 
 const Testheader = () => {
   const navigate = useNavigate();
-  const [State, Setstate] = useState('');
+  const [state, setState] = useState(1);
+
   const onClick = (index, text) => {
-    navigate(text);
-    Setstate(index);
+    navigate(text === '' ? '/' : text);
+    setState(index);
   };
 
   const onclick = () => {
@@ -45,57 +44,59 @@ const Testheader = () => {
     // AuthContext의 onLogout 함수를 호출하여 로그인 상태를 업데이트 합니다.
     onLogout();
   };
-
+  const cllick = () => {
+    navigate('/');
+    setState(1);
+  };
   return (
     <div className='Testheader'>
-      <div className='logo' onClick={onclick} />
-      {/* 탭형식의 메뉴 구성으로 로고에 홈 url이 안먹음 */}
+      <div className='logo' onClick={cllick} />
 
       <div className='tabline'>
         <button
-          className={State === 1 ? 'tabliactive' : 'tabli'}
+          className={state === 1 ? 'tabliactive' : 'tabli'}
           onClick={() => onClick(1, '/')}
         >
           Home
         </button>
         <button
-          className={State === 2 ? 'tabliactive' : 'tabli'}
+          className={state === 2 ? 'tabliactive' : 'tabli'}
           onClick={() => onClick(2, '/car/res')}
         >
           전기차 렌트
         </button>
         <button
-          className={State === 3 ? 'tabliactive' : 'tabli'}
+          className={state === 3 ? 'tabliactive' : 'tabli'}
           onClick={() => onClick(3, '/charge/list')}
         >
           충전소 보기
         </button>
         <button
-          className={State === 4 ? 'tabliactive' : 'tabli'}
+          className={state === 4 ? 'tabliactive' : 'tabli'}
           onClick={() => onClick(4, '/charge/reservation')}
         >
           충전소 예약
         </button>
         <button
-          className={State === 5 ? 'tabliactive' : 'tabli'}
+          className={state === 5 ? 'tabliactive' : 'tabli'}
           onClick={() => onClick(5, '/noti')}
         >
           이용방법
         </button>
         <button
-          className={State === 6 ? 'tabliactive' : 'tabli'}
+          className={state === 6 ? 'tabliactive' : 'tabli'}
           onClick={() => onClick(6, '/event')}
         >
           이벤트
         </button>
         <button
-          className={State === 7 ? 'tabliactive' : 'tabli'}
+          className={state === 7 ? 'tabliactive' : 'tabli'}
           onClick={() => onClick(7, '/review')}
         >
           이용후기
         </button>
         <button
-          className={State === 8 ? 'tabliactive' : 'tabli'}
+          className={state === 8 ? 'tabliactive' : 'tabli'}
           onClick={() => onClick(8, '/mypage')}
         >
           마이페이지 {name}
@@ -109,19 +110,13 @@ const Testheader = () => {
             className='loginbtn'
             onClick={logoutHandler}
           >
-            <p
-              style={{
-                marginTop: '10px',
-              }}
-            >
-              로그아웃
-            </p>
+            <p style={{ marginTop: '10px' }}>로그아웃</p>
           </button>
         )}
         {isLoggedIn && role === 'ADMIN' && (
           <button
             className={
-              State === 9 ? 'tabliactive' : 'tabli'
+              state === 9 ? 'tabliactive' : 'tabli'
             }
             onClick={() => onClick(9, '/admin')}
           >

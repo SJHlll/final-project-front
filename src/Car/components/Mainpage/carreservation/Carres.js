@@ -160,32 +160,56 @@ const Carres = () => {
 
   return (
     <>
-      <div className='selectCar'>
-        <CarInfo selectedCar={selectedCar} />
+      <div
+        style={{
+          display: 'flex',
+          width: '100%',
+          paddingTop: '1%',
+        }}
+      >
+        <div className='selectCar'>
+          <CarInfo selectedCar={selectedCar} />
+        </div>
+        <div className='calendarbtn'>
+          <CarCalendar
+            startDate={pickup.date}
+            endDate={returning.date}
+            onChangeStartDate={(date) =>
+              setPickup((prev) => ({ ...prev, date }))
+            }
+            onChangeEndDate={(date) =>
+              setReturning((prev) => ({ ...prev, date }))
+            }
+            startTime={pickup.time}
+            endTime={returning.time}
+            onChangeStartTime={(time) =>
+              setPickup((prev) => ({ ...prev, time }))
+            }
+            onChangeEndTime={(time) =>
+              setReturning((prev) => ({ ...prev, time }))
+            }
+          />
+          <div className='reservationBtn'>
+            {modal ? modalOpen : button}
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              border: '1px solid black',
+              width: '70%',
+              margin: '0 auto',
+            }}
+          >
+            <div className='caltotalbox1'>렌트기간</div>
+            <div className='caltotalbox2'>일</div>
+            <div className='caltotalbox3'>금액</div>
+            <div className='caltotalbox4'>???원</div>
+          </div>
+        </div>
       </div>
-      <CarCalendar
-        startDate={pickup.date}
-        endDate={returning.date}
-        onChangeStartDate={(date) =>
-          setPickup((prev) => ({ ...prev, date }))
-        }
-        onChangeEndDate={(date) =>
-          setReturning((prev) => ({ ...prev, date }))
-        }
-        startTime={pickup.time}
-        endTime={returning.time}
-        onChangeStartTime={(time) =>
-          setPickup((prev) => ({ ...prev, time }))
-        }
-        onChangeEndTime={(time) =>
-          setReturning((prev) => ({ ...prev, time }))
-        }
-      />
       {selectedCar && <CarInfo rentCar={[selectedCar]} />}
       {/* 선택된 차가 있을 때만 CarInfo 컴포넌트 렌더링 */}
-      <div className='reservationBtn'>
-        {modal ? modalOpen : button}
-      </div>
+
       <StationProvider />
       <CarSwiperReal setSelectedCar={setSelectedCar} />
       {/* CarSwiperReal 컴포넌트에 setSelectedCar 함수 전달 */}

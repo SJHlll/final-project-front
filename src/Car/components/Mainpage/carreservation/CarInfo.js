@@ -34,6 +34,9 @@ const CarInfo = () => {
           <img
             src={selectedCar.carPicture}
             alt='자동차 이미지'
+            style={{
+              width: '100%',
+            }}
           />
           <div>===================</div>
           <div>차종 : {selectedCar.carName}</div>
