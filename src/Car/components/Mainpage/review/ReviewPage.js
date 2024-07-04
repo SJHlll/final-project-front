@@ -15,7 +15,7 @@ const ReviewPage = ({ ReviewList }) => {
   // 현재 페이지 번호
   const [currentPage, setCurrentPage] = useState(1);
   // 페이지당 리뷰 수
-  const reviewsPerPage = 20;
+  const reviewsPerPage = 12;
   // 모달 열림 여부
   const [isModalOpen, setIsModalOpen] = useState(false);
   // 전체 리뷰 목록
