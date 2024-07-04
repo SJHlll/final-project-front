@@ -178,7 +178,7 @@ const ReservedStationMap = () => {
         </div>
       )}
       <input
-        className='phone-last-four'
+        className='admin-filter'
         type='text'
         placeholder='전화번호 뒷자리 4개 입력'
         value={filterPhoneNumber}

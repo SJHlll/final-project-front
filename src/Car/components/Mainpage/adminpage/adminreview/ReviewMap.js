@@ -9,9 +9,9 @@ import { TestRvContext } from './TestRvContext';
 const ReviewMap = () => {
   const { review, setReview } = useContext(TestRvContext);
   const { role } = useContext(AuthContext); // 관리자 확인용
-  const [filterPhoneNumber, setFilterPhoneNumber] =
-    useState(''); // 전화번호 필터링
-  const [filteredReview, setfilteredReview] = useState([]); // 필터링된 리뷰
+  const [filterEmailDomain, setFilterEmailDomain] =
+    useState(''); // 이메일 필터링
+  const [filteredReview, setFilteredReview] = useState([]); // 필터링된 리뷰
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -64,17 +64,17 @@ const ReviewMap = () => {
     return text;
   };
 
-  // 전화번호 뒷자리 4개로 필터링
+  // 이메일 도메인으로 필터링
   useEffect(() => {
-    if (filterPhoneNumber.length === 4) {
+    if (filterEmailDomain) {
       const filtered = review.filter((e) =>
-        e.phoneNumber.endsWith(filterPhoneNumber),
+        e.email.includes(filterEmailDomain),
       );
-      setfilteredReview(filtered);
+      setFilteredReview(filtered);
     } else {
-      setfilteredReview(review);
+      setFilteredReview(review);
     }
-  }, [filterPhoneNumber, review]);
+  }, [filterEmailDomain, review]);
 
   // 회원이 작성한 리뷰 목록
   const AdminContents = ({ reviews }) => {
@@ -85,7 +85,7 @@ const ReviewMap = () => {
             <div className='res-no'>{e.reviewNo}</div>
             <div className='res-user-name'>
               <div>{e.name}</div>
-              <div>{e.email}</div>
+              <div>{truncateText(e.email, 20)}</div>
             </div>
             <div className='res-selected-ad'>
               {e.carName && e.carName.length > 1
@@ -131,14 +131,13 @@ const ReviewMap = () => {
         </div>
       )}
       <input
-        className='phone-last-four'
+        className='admin-filter'
         type='text'
-        placeholder='전화번호 뒷자리 4개 입력'
-        value={filterPhoneNumber}
+        placeholder='이메일 도메인 입력'
+        value={filterEmailDomain}
         onChange={(e) =>
-          setFilterPhoneNumber(e.target.value)
+          setFilterEmailDomain(e.target.value)
         }
-        maxLength='4'
       />
     </>
   );
