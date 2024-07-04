@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 import { ReserveStationContext } from '../../../../../contexts/ReserveStationContext';
 import AuthContext from '../../../../../util/AuthContext';
-
+import styles from '../AdminPage.module.scss';
 const ReservedStationMap = () => {
   const { reserveStation, setReserveStation } = useContext(
     ReserveStationContext,
@@ -130,30 +130,30 @@ const ReservedStationMap = () => {
     return (
       <>
         {stations.map((e) => (
-          <div className='list-body' key={e.reservationNo}>
-            <div className='res-no'>{e.reservationNo}</div>
-            <div className='res-user-name'>
+          <div className={styles.listBody} key={e.reservationNo}>
+            <div className={styles.resNo}>{e.chargeNo}</div>
+            <div className={styles.resUserName}>
               <div>{e.name}</div>
               <div>{e.phoneNumber}</div>
             </div>
-            <div className='res-selected-name'>
+            <div className={styles.resSelectedName}>
               <div>{truncateText(e.stationName, 20)}</div>
               <div style={{ fontSize: '0.8em' }}>
                 {truncateText(e.address, 35)}
               </div>
             </div>
-            <div className='res-selected-ad'>
+            <div className={styles.resSelectedAd}>
               {e.rentChargePrice}원
             </div>
-            <div className='res-selected-time'>
+            <div className={styles.resSelectedTime}>
               <div>{formatRentTime(e.rentTime)}</div>
               <div>
                 ~ {formatRentEndTime(e.rentTime, e.time)}
               </div>
             </div>
-            <div className='space-blank'>
+            <div className={styles.spaceBlank}>
               <button
-                className='res-cancel-btn'
+                className={styles.resCancelBtn}
                 onDoubleClick={() =>
                   handleCancelReservation(e.reservationNo)
                 }
@@ -203,6 +203,16 @@ const ReservedStationMap = () => {
           예약된 충전소가 없습니다.
         </div>
       )}
+      <input
+        className={styles.adminFilter}
+        type='text'
+        placeholder='전화번호 뒷자리 4개 입력'
+        value={filterPhoneNumber}
+        onChange={(e) =>
+          setFilterPhoneNumber(e.target.value)
+        }
+        maxLength='4'
+      />
     </>
   );
 };

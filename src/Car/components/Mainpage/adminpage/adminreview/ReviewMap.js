@@ -5,7 +5,9 @@ import React, {
 } from 'react';
 import { TestRvContext } from './TestRvContext';
 import AuthContext from '../../../../../util/AuthContext';
-import { badwords } from './badwords';
+import { TestRvContext } from './TestRvContext';
+import styles from '../AdminPage.module.scss';
+import { badWords } from './badWords';
 
 const ReviewMap = () => {
   const { review, setReview } = useContext(TestRvContext);
@@ -154,9 +156,9 @@ const ReviewMap = () => {
     return (
       <>
         {reviews.map((e) => (
-          <div className='list-body' key={e.reviewNo}>
-            <div className='res-no'>{e.reviewNo}</div>
-            <div className='res-user-name'>
+          <div className={styles.listBody} key={e.reviewNo}>
+            <div className={styles.resNo}>{e.reviewNo}</div>
+            <div className={styles.resUserName}>
               <div>{e.name}</div>
               <div>{truncateText(e.email, 20)}</div>
             </div>
@@ -167,15 +169,15 @@ const ReviewMap = () => {
                   ? truncateText(e.stationName, 14)
                   : null}
             </div>
-            <div className='res-selected-name'>
+            <div className={styles.resSelectedName}>
               {truncateText(e.content, 50)}
             </div>
-            <div className='res-selected-time'>
-              <div>{formatTime(e.updateDate)}</div>
+            <div className={styles.resSelectedTime}>
+              <div>{formatRentTime(e.updateDate)}</div>
             </div>
-            <div className='space-blank'>
+            <div className={styles.spaceBlank}>
               <button
-                className='res-cancel-btn'
+                className={styles.resCancelBtn}
                 onDoubleClick={() =>
                   handleDeleteReview(e.reviewNo)
                 }
@@ -196,7 +198,7 @@ const ReviewMap = () => {
         <>
           <AdminContents reviews={filteredReview} />
           <input
-            className='admin-filter'
+            className={styles.adminFilter}
             type='text'
             placeholder='이메일 도메인 입력'
             value={filterEmailDomain}
@@ -204,7 +206,7 @@ const ReviewMap = () => {
               setFilterEmailDomain(e.target.value)
             }
           />
-          <label className='admin-filter2'>
+          <label className={styles.adminiFlter2}>
             <input
               type='checkbox'
               checked={isBadWordFilter}

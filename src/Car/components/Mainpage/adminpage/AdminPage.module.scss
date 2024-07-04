@@ -1,0 +1,204 @@
+.adminPageSelect {
+    width: 80%;
+    margin: 50px auto;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    font-size: 1.55em;
+    // 드래그 못하게
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    .adminSelect {
+        width: 30%;
+        height: 50px;
+        padding: 5px 0;
+        cursor: pointer;
+        border-top: 1px solid #aaa;
+        border-bottom: 1px solid #aaa;
+        transition: transform 0.2s ease;
+
+        &:hover {
+            transform: scale(1.04);
+            border-color: black;
+        }
+    }
+
+    .selected {
+        border-width: 3px;
+        border-color: black;
+        scale: 1.04;
+
+        &:hover {
+            transform: none;
+        }
+    }
+
+}
+
+.listHeader {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    padding: 10px 10px;
+    font-size: 1.3em;
+    text-align: center;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+
+    .resNo {
+        width: 5%;
+    }
+
+    .resUserName {
+        width: 20%;
+    }
+
+    .resSelectedName {
+        width: 35%;
+    }
+
+    .resSelectedAd {
+        width: 10%;
+    }
+
+    .resSelectedTime {
+        width: 20%;
+    }
+
+    .hiddenText {
+        width: 10%;
+    }
+}
+
+
+.adminPageList {
+    width: 80%;
+    height: 600px;
+    margin: 0 auto;
+    overflow-y: auto;
+
+    // 스크롤바 몸통
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    // 스크롤바 배경
+    &::-webkit-scrollbar-track {
+        background: #c2e1ff;
+    }
+
+    // 스크롤바 위치
+    &::-webkit-scrollbar-thumb {
+        background: #2c7fdf;
+    }
+
+    // 스크롤바 호버
+    &::-webkit-scrollbar-thumb:hover {
+        background: #0056b3;
+    }
+
+    .noSelect {
+        padding: 10px 10px;
+        font-size: 1.3em;
+        border-top: 2px solid black;
+        border-bottom: 2px solid black;
+    }
+
+}
+    .adminList {
+        font-size: 1em;
+
+
+        .listHeader {
+            display: flex;
+            padding: 10px 10px;
+            font-size: 1.3em;
+            text-align: center;
+            border-top: 2px solid black;
+            border-bottom: 2px solid black;
+
+            .resNo {
+                width: 7%;
+            }
+
+            .resUserName {
+                width: 18%;
+            }
+
+            .resSelectedName {
+                width: 35%;
+            }
+
+            .resSelectedTime {
+                width: 30%;
+            }
+
+            .hiddenText {
+                width: 10%;
+            }
+        }
+    }
+        .listBody {
+            display: flex;
+            height: 70px;
+            padding: 10px 10px;
+            text-align: center;
+            align-items: center;
+            border-bottom: 1px solid #aaa;
+
+            .resNo {
+                width: 7%;
+            }
+
+            .resUserName {
+                width: 18%;
+            }
+
+            .resStationName {
+                width: 35%;
+            }
+
+            .resStationTime {
+                width: 30%;
+            }
+
+            .resSelectedTime {
+                width: 20%;
+            }
+
+            .spaceBlank {
+                margin-left: auto;
+            }
+            .resCancelBtn {
+                width: 60px;
+                padding: 5px 0;
+                border-radius: 10px;
+                margin-left: auto;
+                background-color: #ebf5ff;
+                color: #2c7fdf;
+                border: 1px solid #2c7fdf;
+
+                &:hover {
+                    background-color: #c2e1ff;
+                }
+            }
+        }
+
+        .phoneLastFour {
+        .adminFilter {
+            position: absolute;
+            top: 120px;
+            width: 137px;
+            font-size: 0.8em;
+        }
+
+        .adminFilter2 {
+            position: absolute;
+            top: 125px;
+            left: 280px;
+            font-size: 0.8em;
+        }
+}

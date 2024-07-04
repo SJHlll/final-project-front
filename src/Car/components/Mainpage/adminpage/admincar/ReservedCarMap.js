@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 import { TestRcContext } from './TestRcContext';
 import AuthContext from '../../../../../util/AuthContext';
-
+import styles from '../AdminPage.module.scss';
 const ReservedCarMap = () => {
   const { reserveCar, setReserveCar } =
     useContext(TestRcContext);
@@ -112,9 +112,14 @@ const ReservedCarMap = () => {
     return (
       <>
         {cars.map((e) => (
-          <div className='list-body' key={e.reservationNo}>
-            <div className='res-no'>{e.reservationNo}</div>
-            <div className='res-user-name'>
+          <div
+            className={styles.listBody}
+            key={e.reservationNo}
+          >
+            <div className={styles.resNo}>
+              {e.reservationNo}
+            </div>
+            <div className={styles.resUserName}>
               <div>{e.userName}</div>
               <div>{e.phoneNumber}</div>
             </div>
@@ -128,9 +133,9 @@ const ReservedCarMap = () => {
               <div>{formatRentTime(e.rentDate)}</div>
               <div>~ {formatRentTime(e.turninDate)}</div>
             </div>
-            <div className='space-blank'>
+            <div className={styles.spaceBlank}>
               <button
-                className='res-cancel-btn'
+                className={styles.resCancelBtn}
                 onDoubleClick={() =>
                   handleCancelReservation(e.reservationNo)
                 }
@@ -180,6 +185,16 @@ const ReservedCarMap = () => {
           예약된 렌트카가 없습니다.
         </div>
       )}
+      <input
+        className='admin-filter'
+        type='text'
+        placeholder='전화번호 뒷자리 4개 입력'
+        value={filterPhoneNumber}
+        onChange={(e) =>
+          setFilterPhoneNumber(e.target.value)
+        }
+        maxLength='4'
+      />
     </>
   );
 };

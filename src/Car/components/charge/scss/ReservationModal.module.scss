@@ -1,0 +1,34 @@
+@font-face {
+  font-family: 'font2';
+  src: url(https://plugngo.s3.ap-northeast-2.amazonaws.com/WantedSans-SemiBold.woff2);
+}
+
+.formWrapper {
+  width: 600px;
+  border: 1px solid black;
+  font-family: font;
+
+  .flex {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .column {
+    width: 200px;
+  }
+
+  .datePicker {
+    width: 220px;
+  }
+}
+
+.reservation {
+  width: 30%;
+  justify-self: center;
+}
+
+.modalContent {
+  background-color: #fff;
+  width: 462px;
+}

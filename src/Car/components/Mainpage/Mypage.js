@@ -1,5 +1,5 @@
 import React from 'react';
-import './Mypage.scss';
+import styles from './Mypage.module.scss';
 
 import Frame from './Frame';
 import MyPageCharge from '../charge/mypage/MyPageCharge';

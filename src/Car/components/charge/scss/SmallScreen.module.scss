@@ -1,0 +1,45 @@
+.smallScreen {
+    z-index: 10;
+    position: absolute;
+    right: 10px;
+    bottom: 65px;
+    background-color: white;
+    border: 1px solid #aaa;
+    border-radius: 10px;
+    width: 400px;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    opacity: 0.95;
+
+    // 드래그 못하게
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+
+    .markerList {
+        line-height: 45px;
+
+        &.active {
+            opacity: 1;
+        }
+
+        &.inactive {
+            opacity: 0.5;
+        }
+
+        img {
+            width: 28px;
+            height: 40px;
+            margin-right: 5px;
+        }
+
+        .markerCheckbox {
+            margin-left: 5px;
+        }
+    }
+
+    
+    
+}

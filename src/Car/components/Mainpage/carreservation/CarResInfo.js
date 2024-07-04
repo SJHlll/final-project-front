@@ -1,3 +1,4 @@
+import styles from './reservation_css/CarResInfo.module.scss';
 import React, { useContext } from 'react';
 import './reservation_css/CarResInfo.scss';
 import { CarContext } from '../../../../contexts/CarContext';
@@ -28,6 +29,14 @@ const CarResInfo = ({ pickup, returning }) => {
 
   return (
     <>
+      <div className={styles.resInfo}>
+        <div className={styles.resName}>이름: ooo</div>
+        <div className={styles.phonNumber}>
+          전화번호: 010-0000-0000
+        </div>
+        <div>자동차 정보</div>
+        <div>볼보 뭐시깽이</div>
+        <div className={styles.date}>
       <div className='resInfo'>
         <div className='resName'>이름: {}</div>
         <div className='phonNumber'>전화번호: {}</div>
@@ -35,13 +44,13 @@ const CarResInfo = ({ pickup, returning }) => {
         <div className='date'>
           픽업 날짜: {formatDate(pickup.date)}
         </div>
-        <div className='date'>
+        <div className={styles.date}>
           반납 날짜: {formatDate(returning.date)}
         </div>
-        <div className='time'>
+        <div className={styles.time}>
           픽업 시간: {formatTime(pickup.time)}
         </div>
-        <div className='time'>
+        <div className={styles.time}>
           반납 시간: {formatTime(returning.time)}
         </div>
         <div>결제 금액: {}</div>

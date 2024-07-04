@@ -3,7 +3,7 @@ import {
   useNavigate,
   useSearchParams,
 } from 'react-router-dom';
-
+import styles from './Pay.module.scss';
 export function Success() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -58,16 +58,22 @@ export function Success() {
   }, [searchParams, navigate]);
 
   return (
-    <div className='result-wrapper'>
-      <div className='box_section'>
-        <h2 className='pay-head'>결제 성공</h2>
-        <p className='pay-body'>{`주문번호: ${searchParams.get('orderId')}`}</p>
-        <p className='pay-body'>{`paymentKey: ${searchParams.get('paymentKey')}`}</p>
-        <p className='pay-body pay-amount'>{`결제 금액: ${Number(
+    <div className={styles.resultWrapper}>
+      <div className={styles.boxSection}>
+        <h2 className={styles.payHead}>결제 성공</h2>
+        <p
+          className={styles.payBody}
+        >{`주문번호: ${searchParams.get('orderId')}`}</p>
+        <p
+          className={styles.payBody}
+        >{`paymentKey: ${searchParams.get('paymentKey')}`}</p>
+        <p
+          className={`${styles.payBody} ${styles.payAmount}`}
+        >{`결제 금액: ${Number(
           searchParams.get('amount'),
         ).toLocaleString()}원`}</p>
         <p
-          className='public-btn pay-button'
+          className={`${styles.publicBtn} ${styles.payButton}`}
           onClick={handleCloseWindow}
         >
           창 닫기

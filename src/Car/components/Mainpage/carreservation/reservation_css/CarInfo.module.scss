@@ -1,0 +1,34 @@
+.carInfiContainer {
+   
+    margin-left: 15%;
+    border: 1px solid black;
+    border-radius: 15px;
+    width: 450px;
+    background-color: #c2e1ff;
+    overflow: hidden;
+}
+
+.thisCar {
+    text-align: center;
+}
+.selectedCar{
+    width: 70%;
+    margin-left: 20%;
+// border: 1px solid black;
+}
+.selectinfo{
+    width: 100%;
+    // border: 1px solid black;
+}
+.selectcarbox{
+    width: 100%;
+    display: flex;
+}
+.selinformation{
+    width: 20%;
+    text-align-last: end;
+    margin-right: 3%;
+}
+.selinformation2{
+    margin-left: 3%;
+}

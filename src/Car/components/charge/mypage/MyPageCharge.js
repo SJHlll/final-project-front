@@ -3,11 +3,11 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import '../scss/MyPageCharge.scss';
+import styles from '../scss/MyPageCharge.module.scss';
 import styled from 'styled-components';
 import { Modal, ModalBody } from 'reactstrap';
 import DatePicker from 'react-datepicker';
-import '../../../../scss/Button.scss';
+import style from '../../../../scss/Button.module.scss';
 import { ReserveStationContext } from '../../../../contexts/ReserveStationContext';
 import AuthContext from '../../../../util/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -104,18 +104,20 @@ const MyPageCharge = () => {
       <Modal isOpen={cancel} toggle={toggle}>
         <ModalBody>
           <div style={{ fontFamily: 'font2' }}>
-            <div className='my-charge-content'>
+            <div className={styles.myChargeContent}>
               <div>예약을 취소하시겠습니까?</div>
             </div>
-            <div className='flex my-charge-modal-button'>
+            <div
+              className={`${styles.flex} ${style.myChargeModalButton}`}
+            >
               <button
-                className='public-btn cancel-charge-btn'
+                className={`${style.publicBtn} ${style.cancelChargeBtn}`}
                 onClick={cancelReservation}
               >
                 예약 취소
               </button>
               <button
-                className='public-btn cancel-charge-btn'
+                className={`${style.publicBtn} ${style.cancelChargeBtn}`}
                 onClick={toggle}
               >
                 뒤로 가기
@@ -133,7 +135,7 @@ const MyPageCharge = () => {
       <>
         {phoneNumber.length > 1 ? (
           // 로그인은 했는지
-          <div className='no-reserve'>
+          <div className={styles.noReserve}>
             <div>예약하신 충전소가 없습니다.</div>
             <div>
               <span
@@ -151,7 +153,7 @@ const MyPageCharge = () => {
           </div>
         ) : (
           // 로그인도 안했는지
-          <div className='no-reserve'>
+          <div className={styles.noReserve}>
             <div>로그인을 안한 상태입니다.</div>
             <div>
               <span
@@ -182,28 +184,32 @@ const MyPageCharge = () => {
 
           return (
             <div key={r.id}>
-              <div className='flex'>
-                <div className='value'>충전소명</div>
+              <div className={styles.flex}>
+                <div className={styles.value}>충전소명</div>
                 <div>{r.stationName}</div>
               </div>
 
-              <div className='flex'>
-                <div className='value'>충전소 주소</div>
+              <div className={styles.flex}>
+                <div className={styles.value}>
+                  충전소 주소
+                </div>
                 <div>{r.address}</div>
               </div>
 
-              <div className='flex'>
-                <div className='value'>가격</div>
+              <div className={styles.flex}>
+                <div className={styles.value}>가격</div>
                 <div>
                   {r.rentChargePrice}원 (
                   {formatTime(r.time)})
                 </div>
               </div>
 
-              <div className='flex'>
-                <div className='value'>충전 시작 시간</div>
+              <div className={styles.flex}>
+                <div className={styles.value}>
+                  충전 시작 시간
+                </div>
                 <DatePicker
-                  className='read-only-date'
+                  className={styles.readOnlyDate}
                   selected={new Date(r.rentTime)}
                   showTimeSelect
                   dateFormat={'yyyy년 MM월 dd일 aa hh:mm'}
@@ -211,10 +217,12 @@ const MyPageCharge = () => {
                 />
               </div>
 
-              <div className='flex'>
-                <div className='value'>충전 종료 시간</div>
+              <div className={styles.flex}>
+                <div className={styles.value}>
+                  충전 종료 시간
+                </div>
                 <DatePicker
-                  className='read-only-date'
+                  className={styles.readOnlyDate}
                   selected={endTime}
                   showTimeSelect
                   dateFormat={'yyyy년 MM월 dd일 aa hh:mm'}
@@ -222,8 +230,8 @@ const MyPageCharge = () => {
                 />
               </div>
 
-              <div className='flex'>
-                <div className='value'>예약번호</div>
+              <div className={styles.flex}>
+                <div className={styles.value}>예약번호</div>
                 <div>{r.reservationNo}</div>
               </div>
 
@@ -278,7 +286,7 @@ const MyPageCharge = () => {
   }, [phoneNumber, setReserveStation]);
 
   return (
-    <div className='reservation-list'>
+    <div className={styles.reservationList}>
       <h3 style={{ textAlign: 'center' }}>
         전기차 충전소 예약 내역
       </h3>
