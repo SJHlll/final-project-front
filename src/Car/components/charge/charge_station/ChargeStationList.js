@@ -4,7 +4,7 @@ import React, {
   useState,
 } from 'react';
 import Station from './Station';
-import '../scss/ChargeStationList.scss';
+import styles from '../scss/ChargeStationList.module.scss';
 import { SearchContext } from '../../../../contexts/SearchContext';
 import { StationContext } from '../../../../contexts/StationContext';
 import { removeDuplicates } from '../utils/utils';
@@ -104,12 +104,12 @@ const ChargeStationList = () => {
   if (isLoading) {
     return (
       <div>
-        <p className='list-content'>
+        <p className={styles.listContent}>
           충전소 정보를 불러오는 중...
         </p>
-        <p className='list-content'>
+        <p className={styles.listContent}>
           <img
-            className='loading'
+            className={styles.loading}
             src={loadingImg}
             alt='Loading'
           />
@@ -141,7 +141,7 @@ const ChargeStationList = () => {
     .sort((a, b) => a.distance - b.distance);
 
   return (
-    <div className='ListContainer'>
+    <div className={styles.ListContainer}>
       {sortedStations.length > 0 ? (
         <>
           {sortedStations
@@ -165,7 +165,7 @@ const ChargeStationList = () => {
           {visibleCount < filteredStations.length && (
             <div
               onClick={handleShowMore}
-              className='show-more-button'
+              className={styles.showMoreButton}
             >
               {' '}
               &darr; 더 보기 &darr;
@@ -173,7 +173,7 @@ const ChargeStationList = () => {
           )}
         </>
       ) : (
-        <p className='list-content'>
+        <p className={styles.listContent}>
           조건에 맞는 충전소가 없습니다. 검색을 다시
           진행해주세요.
         </p>

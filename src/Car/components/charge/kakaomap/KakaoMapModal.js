@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import '../scss/KakaoMapModal.scss';
+import styles from '../scss/KakaoMapModal.module.scss';
 import { ModalFooter } from 'reactstrap';
 
 const KakaoMapModal = ({ isOpen, onClose, marker }) => {
@@ -29,42 +29,45 @@ const KakaoMapModal = ({ isOpen, onClose, marker }) => {
   return (
     <ModalBackground>
       <ModalContent onClick={(e) => e.stopPropagation()}>
-        <div className='header'>
-          <span className='close-btn' onClick={onClose}>
+        <div className={styles.header}>
+          <span
+            className={styles.closeBtn}
+            onClick={onClose}
+          >
             X
           </span>
         </div>
         {marker && (
           <>
-            <div className='station-container'>
-              <p className='station-name'>
+            <div className={styles.stationContainer}>
+              <p className={styles.stationName}>
                 {marker.StationName}
               </p>
               <hr />
-              <div className='man-ava'>
-                <p className='station-management'>
+              <div className={styles.manAva}>
+                <p className={styles.stationManagement}>
                   운영기관 : {marker.Management}
                 </p>
                 <p
                   className={
                     marker.Available === '이용가능'
-                      ? 'able'
-                      : 'disable'
+                      ? styles.able
+                      : styles.disable
                   }
                 >
                   {marker.Available}
                 </p>
               </div>
-              <div className='id-spe-typ'>
-                <div className='station-id'>
+              <div className={styles.idSpeTyp}>
+                <div className={styles.stationId}>
                   <div>충전기 ID</div>
                   <div>{marker.StationId}</div>
                 </div>
-                <div className='station-speed'>
+                <div className={styles.stationSpeed}>
                   <div>구분</div>
                   <div>{marker.Speed}</div>
                 </div>
-                <div className='station-type'>
+                <div className={styles.stationType}>
                   <div>충전기 타입</div>
                   <div>{marker.Type}</div>
                 </div>
@@ -73,8 +76,8 @@ const KakaoMapModal = ({ isOpen, onClose, marker }) => {
           </>
         )}
         <ModalFooter>
-          <div className='footer'>
-            <span className='station-address'>
+          <div className={styles.footer}>
+            <span className={styles.stationAddress}>
               {marker.Address}
             </span>
             <br />

@@ -4,7 +4,8 @@ import React, {
   useReducer,
   useState,
 } from 'react';
-import '../scss/UserInfoSave.scss';
+import { Modal } from 'reactstrap';
+import styles from '../scss/UserInfoSave.module.scss';
 import {
   initialState,
   userInfoReducer,
@@ -205,7 +206,7 @@ const UserInfoSave = () => {
             onChange={nameHandler}
           />
         </Grid>
-        <div className='effectiveness'>
+        <div className={styles.effectiveness}>
           <span
             style={
               correct.userName
@@ -240,7 +241,7 @@ const UserInfoSave = () => {
             onChange={phoneNumberHandler}
           />
         </Grid>
-        <div className='effectiveness'>
+        <div className={styles.effectiveness}>
           <span
             style={
               correct.phoneNumber
@@ -264,7 +265,7 @@ const UserInfoSave = () => {
             onChange={birthDayHandler}
           />
         </Grid>
-        <div className='effectiveness'>
+        <div className={styles.effectiveness}>
           <span
             style={
               correct.birthDay
@@ -286,13 +287,14 @@ const UserInfoSave = () => {
       >
         <button
           type='submit'
-          className='public-btn updating'
+          className={`${styles.publicBtn} ${styles.updating}`}
           onClick={updateButtonClickHandler}
         >
           수정하기
         </button>
       </div>
     </form>
+    // </Modal>
   );
 
   return <>{infoModal()}</>;

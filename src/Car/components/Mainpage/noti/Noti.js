@@ -3,12 +3,11 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import './Noti.scss';
+import styles from './Noti.module.scss';
 import Notilist from './Notilist';
 import Frame from '../Frame';
 import { Modal, ModalBody } from 'reactstrap';
 import styled from 'styled-components';
-
 import AuthContext from '../../../../util/AuthContext';
 import axios from 'axios';
 
@@ -94,7 +93,7 @@ const Noti = () => {
   return (
     <>
       <Frame>
-        <div className='notiline'>
+        <div className={styles.notiline}>
           <Notilist
             notiList={notiList}
             fetchNotiList={fetchNotiList}
@@ -102,7 +101,7 @@ const Noti = () => {
           <div style={{ display: 'flex' }}>
             {role === 'ADMIN' && (
               <button
-                className='createnotilist'
+                className={styles.createnotilist}
                 onClick={toggle}
               >
                 등록
@@ -119,7 +118,7 @@ const Noti = () => {
               <div style={{ fontFamily: 'font2' }}>
                 <div
                   style={{ marginBottom: '3%' }}
-                  className='content'
+                  className={styles.content}
                 >
                   <div style={{ fontSize: '30px' }}>
                     이용방법 등록
@@ -127,7 +126,7 @@ const Noti = () => {
                 </div>
                 <form
                   onSubmit={handleSubmit}
-                  className='notilistform'
+                  className={styles.notilistform}
                 >
                   <input
                     type='text'
@@ -136,7 +135,7 @@ const Noti = () => {
                     onChange={(e) =>
                       setNotiTitle(e.target.value)
                     }
-                    className='notilistinput'
+                    className={styles.notilistinput}
                   />
                   <textarea
                     placeholder='내용'
@@ -144,7 +143,7 @@ const Noti = () => {
                     onChange={(e) =>
                       setNotiContent(e.target.value)
                     }
-                    className='notilisttext'
+                    className={styles.notilisttext}
                   ></textarea>
                   <div style={{ display: 'flex' }}>
                     <div
@@ -157,7 +156,7 @@ const Noti = () => {
                     >
                       <button
                         type='submit'
-                        className='public-btn'
+                        className={styles.publicBtn}
                       >
                         등록
                       </button>
@@ -171,7 +170,7 @@ const Noti = () => {
                       }}
                     >
                       <button
-                        className='public-btn'
+                        className={styles.publicBtn}
                         onClick={cancelcreatenoti}
                       >
                         취소

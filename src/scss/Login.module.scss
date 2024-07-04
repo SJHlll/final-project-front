@@ -1,0 +1,25 @@
+.loginform{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    justify-content: center;
+}
+.bodyTop{
+    width: 100%;
+    height: 30%;
+    align-content: center;
+    margin-top: 10%;
+}
+.bodyBottom{
+    width: 100%;
+    height: 40%;
+    position: relative;
+    bottom: 10%;
+    align-content: center;
+}
+.Loginbtn{
+    :hover{
+        cursor: pointer;
+        background-color: blue;
+    }
+}

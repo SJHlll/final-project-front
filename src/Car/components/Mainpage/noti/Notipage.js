@@ -9,7 +9,7 @@ import {
   useParams,
 } from 'react-router-dom';
 import Frame from '../Frame';
-import './NotiPage.scss';
+import styles from './NotiPage.module.scss';
 import AuthContext from '../../../../util/AuthContext';
 import axios from 'axios';
 
@@ -138,19 +138,19 @@ const NotiPage = () => {
                 onChange={(e) =>
                   setEditedContents(e.target.value)
                 }
-                className='Notitbody'
+                className={styles.Notitbody}
               />
             </>
           ) : (
             <>
-              <h1 className='Notiheader'>
+              <h1 className={styles.Notiheader}>
                 제목 : {currentHeader}
               </h1>
-              <p className='Notihits'>
+              <p className={styles.Notihits}>
                 조회수: {currentViews}
               </p>
               <p
-                className='Notibody'
+                className={styles.Notibody}
                 style={{ whiteSpace: 'pre-wrap' }}
               >
                 {currentContents}
@@ -166,20 +166,23 @@ const NotiPage = () => {
               flexDirection: 'row-reverse',
             }}
           >
-            <button className='notibtn' onClick={click}>
+            <button
+              className={styles.notibtn}
+              onClick={click}
+            >
               이전
             </button>
             {/* {role === 'COMMON' &&
               (isEditing ? (
                 <button
-                  className='notibtn'
+                  className={styles.notibtn}
                   onClick={saveUpdateHandler}
                 >
                   저장
                 </button>
               ) : (
                 <button
-                  className='notibtn'
+                  className={styles.notibtn}
                   onClick={updateHandler}
                 >
                   수정불가능
@@ -188,21 +191,21 @@ const NotiPage = () => {
             {role === 'ADMIN' && (
               <>
                 <button
-                  className='notibtn'
+                  className={styles.notibtn}
                   onClick={deleteNotiHandler}
                 >
                   삭제
                 </button>
                 {isEditing ? (
                   <button
-                    className='notibtn'
+                    className={styles.notibtn}
                     onClick={saveUpdateHandler}
                   >
                     저장
                   </button>
                 ) : (
                   <button
-                    className='notibtn'
+                    className={styles.notibtn}
                     onClick={updateHandler}
                   >
                     수정

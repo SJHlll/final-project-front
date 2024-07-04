@@ -7,8 +7,8 @@ import ReviewSelect from './adminreview/ReviewSelect';
 import ReservedStationList from './adminstation/ReservedStationList';
 import ReservedCarList from './admincar/ReservedCarList';
 import ReviewList from './adminreview/ReviewList';
-import './AdminPage.scss';
 import AuthContext from '../../../../util/AuthContext';
+import styles from './AdminPage.module.scss';
 
 const AdminPage = () => {
   const { role } = useContext(AuthContext);
@@ -26,7 +26,7 @@ const AdminPage = () => {
 
   return (
     <Frame>
-      <div className='admin-page-select'>
+      <div className={styles.adminPageSelect}>
         <ReservedStationSelect
           isSelected={selected === 'station'}
           onClick={() =>
@@ -44,9 +44,9 @@ const AdminPage = () => {
           }
         />
       </div>
-      <div className='admin-page-list'>
+      <div className={styles.adminPageList}>
         {!selected && (
-          <div className='no-select'>
+          <div className={styles.noSelect}>
             <div>카테고리 누르면 관리자만 목록 보임</div>
           </div>
         )}

@@ -3,7 +3,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import './Modal2.scss';
+import styles from './Modal2.module.scss';
 import axios from 'axios';
 import axiosInstance from '../../../../config/axios-config';
 import AuthContext from '../../../../util/AuthContext';
@@ -188,13 +188,13 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
   };
 
   return (
-    <div className='modal2'>
-      <div className='modal2-content'>
-        <span className='close' onClick={onClose}>
+    <div className={styles.modal2}>
+      <div className={styles.modal2Content}>
+        <span className={styles.close} onClick={onClose}>
           &times;
         </span>
         <form onSubmit={handleSubmit}>
-          <div className='selection-row'>
+          <div className={styles.selectionRow}>
             <div>
               <label htmlFor='item'>{`${selectedType === 'rental' ? '차량' : '충전소'} 선택:`}</label>
               <select
@@ -231,7 +231,7 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
               </select>
             </div>
           </div>
-          <div className='image-upload'>
+          <div className={styles.imageUpload}>
             <label htmlFor='photo'>upload</label>
             <input
               type='file'
@@ -239,25 +239,25 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
               accept='image/*'
               onChange={handlePhotoChange}
             />
-            <div className='photo-preview'>
+            <div className={styles.photoPreview}>
               {photoPreview && (
                 <img
                   src={photoPreview}
                   alt='이미지 미리보기'
-                  className='preview-image'
+                  className={styles.previewImage}
                 />
               )}
             </div>
           </div>
-          <div className='review-textarea'>
+          <div className={styles.reviewTextarea}>
             <textarea
               value={content}
               onChange={handleChange}
               placeholder='후기를 작성해주세요.'
             />
           </div>
-          {error && <p className='error'>{error}</p>}
-          <div className='submit-button'>
+          {error && <p className={styles.error}>{error}</p>}
+          <div className={styles.submitButton}>
             <button type='submit'>저장</button>
           </div>
         </form>

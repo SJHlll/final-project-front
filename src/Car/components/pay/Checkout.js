@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
 import { nanoid } from 'nanoid';
-import './Pay.scss';
+import styles from './Pay.module.scss';
 
 // 구매자의 고유 아이디를 불러와서 customerKey로 설정하세요.
 // 이메일・전화번호와 같이 유추가 가능한 값은 안전하지 않습니다.
@@ -80,11 +80,11 @@ export function Checkout() {
   return (
     <div>
       {/* 결제 UI, 이용약관 UI 영역 */}
-      <div id='payment-widget' />
-      <div id='agreement' />
+      <div id={styles.paymentWidget} />
+      <div id={styles.agreement} />
       {/* 결제하기 버튼 */}
       <button
-        id='payment-button'
+        id={styles.paymentButton}
         onClick={handlePaymentRequest}
       >
         결제하기

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import './Testheader.scss';
+import styles from './Testheader.module.scss';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../../util/AuthContext';
 import {
@@ -49,54 +49,70 @@ const Testheader = () => {
     setState(1);
   };
   return (
-    <div className='Testheader'>
-      <div className='logo' onClick={cllick} />
+    <div className={styles.Testheader}>
+      <div className={styles.logo} onClick={cllick} />
 
-      <div className='tabline'>
+      <div className={styles.tabline}>
         <button
-          className={state === 1 ? 'tabliactive' : 'tabli'}
+          className={
+            state === 1 ? styles.tabliactive : styles.tabli
+          }
           onClick={() => onClick(1, '/')}
         >
           Home
         </button>
         <button
-          className={state === 2 ? 'tabliactive' : 'tabli'}
+          className={
+            state === 2 ? styles.tabliactive : styles.tabli
+          }
           onClick={() => onClick(2, '/car/res')}
         >
           전기차 렌트
         </button>
         <button
-          className={state === 3 ? 'tabliactive' : 'tabli'}
+          className={
+            state === 3 ? styles.tabliactive : styles.tabli
+          }
           onClick={() => onClick(3, '/charge/list')}
         >
           충전소 보기
         </button>
         <button
-          className={state === 4 ? 'tabliactive' : 'tabli'}
+          className={
+            state === 4 ? styles.tabliactive : styles.tabli
+          }
           onClick={() => onClick(4, '/charge/reservation')}
         >
           충전소 예약
         </button>
         <button
-          className={state === 5 ? 'tabliactive' : 'tabli'}
+          className={
+            state === 5 ? styles.tabliactive : styles.tabli
+          }
           onClick={() => onClick(5, '/noti')}
         >
           이용방법
         </button>
         <button
-          className={state === 6 ? 'tabliactive' : 'tabli'}
+          className={
+            state === 6 ? styles.tabliactive : styles.tabli
+          }
           onClick={() => onClick(6, '/event')}
         >
           이벤트
         </button>
         <button
-          className={state === 7 ? 'tabliactive' : 'tabli'}
+          className={
+            state === 7 ? styles.tabliactive : styles.tabli
+          }
           onClick={() => onClick(7, '/review')}
         >
           이용후기
         </button>
         <button
-          className={state === 8 ? 'tabliactive' : 'tabli'}
+          className={
+            state === 8 ? styles.tabliactive : styles.tabli
+          }
           onClick={() => onClick(8, '/mypage')}
         >
           마이페이지 {name}
@@ -107,7 +123,7 @@ const Testheader = () => {
           </button>
         ) : (
           <button
-            className='loginbtn'
+            className={styles.loginbtn}
             onClick={logoutHandler}
           >
             <p style={{ marginTop: '10px' }}>로그아웃</p>
@@ -116,7 +132,9 @@ const Testheader = () => {
         {isLoggedIn && role === 'ADMIN' && (
           <button
             className={
-              state === 9 ? 'tabliactive' : 'tabli'
+              state === 9
+                ? styles.tabliactive
+                : styles.tabli
             }
             onClick={() => onClick(9, '/admin')}
           >

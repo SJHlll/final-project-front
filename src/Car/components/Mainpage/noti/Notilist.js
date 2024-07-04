@@ -1,134 +1,10 @@
-import React, {
-  useState,
-  useEffect,
-  useContext,
-} from 'react';
-import './Notilist.scss';
+import React from 'react';
+import styles from './Notilist.module.scss';
 import { useNavigate } from 'react-router-dom';
-import '../../../../scss/Button.scss';
-import AuthContext from '../../../../util/AuthContext';
+
 import axios from 'axios';
 
 const Notilist = ({ notiList, fetchNotiList }) => {
-  // const currentDate = new Date();
-  // const year = currentDate.getFullYear();
-  // const month = currentDate.getMonth() + 1;
-  // const day = currentDate.getDate();
-
-  // const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')} `;
-  // function createData(
-  //   num,
-  //   header,
-  //   contents,
-  //   writer,
-  //   datetime,
-  //   hits,
-  // ) {
-  //   return {
-  //     num,
-  //     header,
-  //     contents,
-  //     writer,
-  //     datetime,
-  //     hits,
-  //   };
-  // }
-
-  // const initialRows = [
-  //   createData(
-  //     1,
-  //     '제목',
-  //     '내용1',
-  //     '관리자',
-  //     formattedDate,
-  //     0,
-  //   ),
-  //   createData(
-  //     2,
-  //     '제목2',
-  //     '내용2',
-  //     '관리자',
-  //     formattedDate,
-  //     0,
-  //   ),
-  //   createData(
-  //     3,
-  //     '제목3',
-  //     '내용3',
-  //     '관리자',
-  //     formattedDate,
-  //     0,
-  //   ),
-  //   createData(
-  //     4,
-  //     '제목4',
-  //     '내용4',
-  //     '관리자',
-  //     formattedDate,
-  //     0,
-  //   ),
-  //   createData(
-  //     5,
-  //     '제목5',
-  //     '내용5',
-  //     '관리자',
-  //     formattedDate,
-  //     0,
-  //   ),
-  // ];
-
-  // const loadHits = () => {
-  //   const storedHits = JSON.parse(
-  //     localStorage.getItem('hits'),
-  //   );
-  //   if (storedHits) {
-  //     return initialRows.map((row) => {
-  //       const storedHit = storedHits.find(
-  //         (hit) => hit.num === row.num,
-  //       );
-  //       return storedHit
-  //         ? { ...row, hits: storedHit.hits }
-  //         : row;
-  //     });
-  //   }
-  //   return initialRows;
-  // };
-
-  // const [Hit, setHits] = useState(loadHits());
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   localStorage.setItem('hits', JSON.stringify(Hit));
-  // }, [Hit]);
-
-  // const handleHitClick = (noti) => {
-  //   const updatedRows = Hit.map((row) =>
-  //     row.num === noti.num
-  //       ? { ...row, hits: row.hits + 1 }
-  //       : row,
-  //   );
-  //   setHits(updatedRows);
-  //   const updatedNoti = { ...noti, hits: noti.hits + 1 };
-  //   navigate(`/noti/${updatedNoti.num}`, {
-  //     state: {
-  //       header: updatedNoti.header,
-  //       contents: updatedNoti.contents,
-  //       hits: updatedNoti.hits,
-  //     },
-  //   });
-  // };
-
-  // const handleHitClick = (list) => {
-  //   const updatedNoti = { ...list, views: list.views + 1 };
-  //   navigate(`${updatedNoti.notiId}`, {
-  //     state: {
-  //       header: updatedNoti.notiTitle,
-  //       contents: updatedNoti.notiContent,
-  //       hits: updatedNoti.views,
-  //     },
-  //   });
-  // };
-
   const navigate = useNavigate();
 
   const handleHitClick = async (list) => {
@@ -178,8 +54,8 @@ const Notilist = ({ notiList, fetchNotiList }) => {
       >
         이용방법
       </header>
-      <div className='noticontent'>
-        <div className='notibody'>
+      <div className={styles.noticontent}>
+        <div className={styles.notibody}>
           <div style={{ width: '10%' }}>글번호</div>
           <div style={{ width: '45%' }}>제목</div>
           <div style={{ width: '10%' }}>작성자</div>
@@ -188,7 +64,10 @@ const Notilist = ({ notiList, fetchNotiList }) => {
         </div>
         {Array.isArray(notiList) &&
           notiList.map((list) => (
-            <div className='notilist' key={list.notiId}>
+            <div
+              className={styles.notilist}
+              key={list.notiId}
+            >
               <div style={{ width: '10%' }}>
                 {list.notiId}
               </div>

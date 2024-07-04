@@ -1,29 +1,28 @@
 import React from 'react';
-import '../scss/ReservationCharge.scss';
+import styles from '../scss/ReservationCharge.module.scss';
 import ReservationList from './ReservationList';
 import { StationProvider } from '../../../../contexts/StationContext';
 import { SecondMapProvider } from '../../../../contexts/SecondMapContext';
 import styled from 'styled-components';
+import Frame from '../../Mainpage/Frame';
 
 const ReservationCharge = () => {
   return (
     <>
       <StationProvider>
         <SecondMapProvider>
-          <div className='maincontainer'>
-            <div className='contentline'>
-              <div
-                style={{
-                  width: '840px',
-                  padding: '20px 15px 0px 15px',
-                  textAlign: 'right',
-                }}
-              >
-                가격 단위 : 1kWh
-              </div>
-              <ReservationList />
+          <Frame>
+            <div
+              style={{
+                width: '840px',
+                padding: '20px 15px 0px 15px',
+                textAlign: 'right',
+              }}
+            >
+              가격 단위 : 1kWh
             </div>
-          </div>
+            <ReservationList />
+          </Frame>
         </SecondMapProvider>
       </StationProvider>
     </>

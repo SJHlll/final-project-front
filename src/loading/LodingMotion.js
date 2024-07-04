@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import './LodingMotion.scss';
+import styles from './LodingMotion.module.scss';
 
 const LodingMotion = () => {
   const [visible, setVisible] = useState(true);
@@ -17,14 +17,14 @@ const LodingMotion = () => {
     <AnimatePresence>
       {visible && (
         <motion.div
-          className='overlay'
+          className={styles.overlay}
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 2, ease: 'easeInOut' }}
         >
           <motion.div
-            className='box'
+            className={styles.box}
             animate={{
               scale: [1, 2, 2, 1],
               rotate: [0, 90, 180, 360],
