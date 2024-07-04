@@ -102,6 +102,9 @@ export const AuthContextProvider = (props) => {
         loginMethod,
         onLogout: logoutHandler,
         onLogin: loginHandler,
+        setUserName,
+        setEmail,
+        setPhoneNumber,
       }}
     >
       {props.children}
