@@ -150,7 +150,7 @@ const Carres = () => {
               className='public-btn payBtn'
               onClick={reservationHandler}
             >
-              결제 하기
+              예약 확정 하기
             </button>
           </ModalFooter>
         </div>
@@ -202,7 +202,7 @@ const Carres = () => {
           >
             <div className='caltotalbox1'>렌트기간</div>
             <div className='caltotalbox2'>일</div>
-            <div className='caltotalbox3'>금액</div>
+            <div className='caltotalbox3'>총 금액</div>
             <div className='caltotalbox4'>???원</div>
           </div>
         </div>
