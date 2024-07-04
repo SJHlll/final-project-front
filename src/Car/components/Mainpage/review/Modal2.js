@@ -36,7 +36,7 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
           '렌트카 목록 응답 데이터 : ',
           response.data,
         );
-        setCarList(response.data);
+        setCarList(response.data.carList);
       } catch (error) {
         console.log(
           '렌트카 목록을 가져오는데 실패했습니다. : ',
@@ -205,12 +205,18 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
                 <option value=''>선택하세요</option>
                 {selectedType === 'rental'
                   ? carList.map((car) => (
-                      <option key={car.id} value={car.id}>
-                        {car.name}
+                      <option
+                        key={car.carId}
+                        value={car.carId}
+                      >
+                        {car.carName}
                       </option>
                     ))
                   : chargeList.map((charge) => (
-                      <option key={charge.stationId}>
+                      <option
+                        key={charge.stationId}
+                        value={charge.stationId}
+                      >
                         {charge.stationName}
                       </option>
                     ))}
