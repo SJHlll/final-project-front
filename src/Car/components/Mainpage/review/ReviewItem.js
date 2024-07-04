@@ -25,9 +25,10 @@ const ReviewItem = ({ review, onMoreClick }) => {
       <div className='content-container'>
         {/* 이름 및 평점 */}
         <div className='name-rating'>
-          <h3>{review.stationName}</h3>
           {/* 평점 표시 */}
           <div className='rating'>
+            {/* 이름 */}
+            <h3>{review.name}</h3>
             {/* 가득 찬 별 */}
             {Array.from(
               Array(Math.floor(review.rating)),
@@ -44,6 +45,7 @@ const ReviewItem = ({ review, onMoreClick }) => {
             )}
           </div>
         </div>
+        <h2>충전소: {review.stationName}</h2>
         {/* 리뷰 날짜 */}
         <span className='review-date'>{review.date}</span>
         {/* 리뷰 내용 (길이 제한 적용) */}
