@@ -7,7 +7,7 @@ import ReviewSelect from '../adminreview/ReviewSelect';
 import ReviewList from '../adminreview/ReviewList';
 import ReservedStationList from '../adminstation/ReservedStationList';
 import { TestRcProvider } from './TestRcContext';
-
+import styles from '../AdminPage.module.scss';
 const ReservedCarList = () => {
   const [selected, setSelected] = useState(null);
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const ReservedCarList = () => {
   return (
     <TestRcProvider>
       <Frame>
-        <div className='admin-page-select'>
+        <div className={styles.adminPageSelect}>
           <ReservedStationSelect
             isSelected={selected === 'station'}
             onClick={() =>
@@ -27,7 +27,7 @@ const ReservedCarList = () => {
             }
           />
           <div
-            className={'admin-select reserve-car selected'}
+            className={`${styles.adminSelect} ${styles.reserveCar} ${styles.selected}`}
           >
             예약된 렌트카
           </div>
@@ -38,16 +38,22 @@ const ReservedCarList = () => {
             }
           />
         </div>
-        <div className='list-header'>
-          <div className='res-no'>번호</div>
-          <div className='res-user-name'>회원명</div>
-          <div className='res-selected-name'>차종</div>
-          <div className='res-selected-ad'>렌트비용</div>
-          <div className='res-selected-time'>렌트기간</div>
-          <div className='hidden-text'></div>
+        <div className={styles.listHeader}>
+          <div className={styles.resNo}>번호</div>
+          <div className={styles.resUserName}>회원명</div>
+          <div className={styles.resSelectedName}>차종</div>
+          <div className={styles.resSelectedAd}>
+            렌트비용
+          </div>
+          <div className={styles.resSelectedTime}>
+            렌트기간
+          </div>
+          <div className={styles.hiddenText}></div>
         </div>
-        <div className='admin-page-list'>
-          <div className='admin-list reserve-car'>
+        <div className={styles.adminPageList}>
+          <div
+            className={`${styles.adminList} ${styles.reserveCar}`}
+          >
             <ReservedCarMap />
           </div>
           {selected === 'station' && (

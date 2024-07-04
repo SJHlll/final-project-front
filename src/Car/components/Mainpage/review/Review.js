@@ -1,11 +1,11 @@
 import React from 'react';
-import './Review.scss';
+import styles from './Review.module.scss';
 import ReviewPage from './ReviewPage';
 import Frame from '../Frame';
 const Review = () => {
   return (
     <Frame>
-      <div className='reviewbody'>
+      <div className={styles.reviewbody}>
         <ReviewPage />
       </div>
     </Frame>

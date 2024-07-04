@@ -14,7 +14,7 @@ import {
   Autoplay,
 } from 'swiper/modules';
 import { CarContext } from '../../../../contexts/CarContext';
-
+import styles from './reservation_css/CarSwiper.module.scss';
 const CarSwiperReal = () => {
   // DB에서 전기차 목록 불러오기
   // rentCar = 전기차 목록 배열
@@ -57,11 +57,13 @@ const CarSwiperReal = () => {
       }}
       loop
       autoplay={{ delay: 2000 }}
+      className={styles.carswipercontainer}
     >
       {rentCar.map((car, index) => (
         <SwiperSlide
           key={index}
           onClick={() => clickCarHandler(car)}
+          className={styles.swiperSlide}
         >
           <img
             src={car.carPicture}
@@ -69,10 +71,12 @@ const CarSwiperReal = () => {
             style={{
               width: '100%',
               height: 'auto',
-              marginTop: '20px',
+              marginTop: '5%',
             }}
           />
-          <div>차종 : {car.carName}</div>
+          <div className={styles.swipercarname}>
+            {car.carName}
+          </div>
         </SwiperSlide>
       ))}
     </Swiper>

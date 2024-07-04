@@ -1,9 +1,9 @@
 import React from 'react';
-import './Frame.scss';
+import styles from './Frame.module.scss';
 const Frame = ({ children }) => {
   return (
-    <div className='maincontainer'>
-      <div className='contentline'>{children}</div>
+    <div className={styles.maincontainer}>
+      <div className={styles.contentline}>{children}</div>
     </div>
   );
 };

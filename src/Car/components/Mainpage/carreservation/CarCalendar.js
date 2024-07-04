@@ -3,7 +3,7 @@ import DatePicker, {
   registerLocale,
 } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import './reservation_css/CarCalendar.scss';
+import styles from './reservation_css/CarCalendar.module.scss';
 import { ko } from 'date-fns/locale';
 import { addMonths, setHours, setMinutes } from 'date-fns';
 
@@ -96,10 +96,10 @@ const CarCalendar = ({
   const maxDate = addMonths(new Date(), 12); // 최대 날짜를 12개월 후로 설정합니다.
 
   return (
-    <div className='car-calendar-content'>
+    <div className={styles.carCalendarContent}>
       <div>
         <DatePicker
-          id='calendar'
+          id={styles.calendar}
           locale={ko}
           renderCustomHeader={({
             monthDate,
@@ -152,12 +152,12 @@ const CarCalendar = ({
         />
       </div>
 
-      <div className='time-container'>
-        <div className='time-block'>
-          <div className='pickupTitle' />
+      <div className={styles.timeContainer}>
+        <div className={styles.timeBlock}>
+          <div className={styles.pickupTitle} />
           픽업 시간
           <DatePicker
-            id='pickupTime'
+            id={styles.pickupTime}
             selected={startTime}
             onChange={handleStartTimeChange} // 시작 시간 변경 핸들러 연결
             showTimeSelect
@@ -175,11 +175,11 @@ const CarCalendar = ({
           />
         </div>
 
-        <div className='time-block'>
-          <div className='returnTitle' />
+        <div className={styles.timeBlock}>
+          <div className={styles.returnTitle} />
           반납 시간
           <DatePicker
-            id='returnTime'
+            id={styles.returnTime}
             selected={endTime}
             onChange={handleEndTimeChange} // 종료 시간 변경 핸들러 연결
             showTimeSelect

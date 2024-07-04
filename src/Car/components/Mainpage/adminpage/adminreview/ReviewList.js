@@ -7,7 +7,7 @@ import ReservedCarSelect from '../admincar/ReservedCarSelect';
 import ReservedStationList from '../adminstation/ReservedStationList';
 import ReservedCarList from '../admincar/ReservedCarList';
 import { TestRvProvider } from './TestRvContext';
-
+import styles from '../AdminPage.module.scss';
 const ReviewList = () => {
   const [selected, setSelected] = useState(null);
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const ReviewList = () => {
   return (
     <TestRvProvider>
       <Frame>
-        <div className='admin-page-select'>
+        <div className={styles.adminPageSelect}>
           <ReservedStationSelect
             isSelected={selected === 'station'}
             onClick={() =>
@@ -32,15 +32,17 @@ const ReviewList = () => {
               handleSelect('car', '/admin/car')
             }
           />
-          <div className={'admin-select review selected'}>
+          <div
+            className={`${styles.adminSelect} ${styles.review} ${styles.selected}`}
+          >
             작성된 리뷰
           </div>
         </div>
-        <div className='list-header'>
-          <div className='res-no'>번호</div>
-          <div className='res-user-name'>회원명</div>
+        <div className={styles.listHeader}>
+          <div className={styles.resNo}>번호</div>
+          <div className={styles.resUserName}>회원명</div>
           <div
-            className='res-selected-ad'
+            className={styles.resSelectedAd}
             style={{
               fontSize: '0.83em',
               lineHeight: '31px',
@@ -48,12 +50,14 @@ const ReviewList = () => {
           >
             충전소/렌트카
           </div>
-          <div className='res-selected-name'>리뷰내용</div>
-          <div className='res-selected-time'>작성날짜</div>
-          <div className='hidden-text'></div>
+          <div className={styles.resSelectedName}>리뷰내용</div>
+          <div className={styles.resSelectedTime}>작성날짜</div>
+          <div className={styles.hiddenText}></div>
         </div>
-        <div className='admin-page-list'>
-          <div className='admin-list review'>
+        <div className={styles.adminPageSelect}>
+          <div className={`${styles.adminList} ${styles.review}`}>
+
+
             <ReviewMap />
           </div>
           {selected === 'station' && (

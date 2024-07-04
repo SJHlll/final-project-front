@@ -1,4 +1,4 @@
-import '../scss/SearchList.scss';
+import styles from '../scss/SearchList.module.scss';
 
 const OpenBtn = ({
   toggleSearchBox,
@@ -8,7 +8,7 @@ const OpenBtn = ({
     <>
       {/* 검색창 및 목록 열기/닫기 */}
       <div
-        className={`open-btn ${isSearchBoxVisible ? 'hidden' : 'visible'}`}
+        className={`${styles.openBtn} ${isSearchBoxVisible ? styles.hidden : styles.visible}`}
         onClick={toggleSearchBox}
       >
         {isSearchBoxVisible ? '>' : '<'}

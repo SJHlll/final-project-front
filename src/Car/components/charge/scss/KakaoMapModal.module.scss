@@ -1,0 +1,112 @@
+
+.header {
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
+
+    .close-btn {
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 32px;
+    }
+
+}
+
+.stationContainer {
+
+    .stationName { // 충전소 이름
+        text-align: left;
+        font-size: 1.5rem;
+        letter-spacing: 3px;
+        margin-top: 60px;
+    }
+
+    .manAva { // 회사, 이용가능여부
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+        width: 100%;
+        margin: 0 auto 20px;
+
+        p {
+            margin: 0;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        p:first-child {
+            width: 60%;
+        }
+
+        p:last-child {
+            width: 30%;
+        }
+
+        .stationManagement {
+            border: 2px solid #999;
+        }  
+
+        .able { // 이용가능
+            border: 2px solid #5298F2;
+        }
+
+        .disable { // 이용자제한
+            border: 2px solid #F18D8A;
+        }
+
+    }
+
+    .idSpeTyp { // 충전기ID, 충전기종류
+        display: flex;
+        justify-content: center;
+        border: 1px solid black;
+        width: 95%;
+        margin: 0 auto;
+
+        div {
+            text-align: center;
+            
+            div:first-child {
+                background-color: #ccc;
+                border-bottom: 1px solid black;
+                font-weight: bold;
+                padding: 10px 0 10px;
+                font-size: 1.1rem;
+            }
+            div:last-child {
+                padding: 10px 0 10px;
+                font-size: 0.9rem;
+            }
+        }
+
+        .stationId {
+            width: 35%;
+            border-right: 1px solid black;
+        }
+    
+        .stationSpeed {
+            width: 15%;
+            border-right: 1px solid black;
+        }
+    
+        .stationType {
+            width: 50%;
+        }
+
+    }
+}
+
+.footer { // 주소, 길찾기
+    margin-left: auto;
+
+    .stationAddress {
+        font-size: 0.95rem;
+    }
+    
+    a {
+        font-size: 0.9rem;
+        text-decoration-line: none;
+        float: right;
+    }
+}

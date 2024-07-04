@@ -1,0 +1,44 @@
+.reservationList {
+  width: 450px;
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 10px;
+
+  .flex {
+    display: flex;
+    height: 30px;
+    margin: 10px 5px;
+    align-items: center;
+  }
+
+  .value {
+    width: 30%;
+    font-size: 15px;
+  }
+
+  .read-only-date {
+    width: 220px;
+  }
+}
+
+.myChargeContent {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  align-content: center;
+}
+
+.myChargeModalButton {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+  .cancelChargeBtn {
+    margin: 0px 10px 0px 10px;
+  }
+}
+
+.noReserve {
+  text-align: center;
+  font-size: 1.2em;
+}

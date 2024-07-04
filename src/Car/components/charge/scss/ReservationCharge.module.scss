@@ -1,0 +1,41 @@
+.App {
+  min-height: 50vh;
+}
+
+.button-wrapper {
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+}
+
+.modal-header {
+  justify-content: right;
+  height: 80px;
+}
+
+.modal-content {
+  width: fit-content;
+  padding: 20px;
+  position: relative;
+  //   bottom: 25%;
+  left: 50%;
+  transform: translate(-50%, 15%);
+  justify-content: center;
+  border: 1px solid black;
+}
+
+.modalFooter {
+  justify-content: center;
+  height: 80px;
+  padding: 16px;
+}
+
+.reservation {
+  position: absolute;
+  right: 50%;
+  transform: translate(50%, 0%);
+}
+
+.tossPay {
+  cursor: pointer;
+}

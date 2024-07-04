@@ -1,9 +1,9 @@
 import React from 'react';
-
+import styles from '../AdminPage.module.scss';
 const ReservedCarSelect = ({ onClick, isSelected }) => {
   return (
     <div
-      className='admin-select reserve-car'
+      className={`${styles.adminSelect} ${styles.reserveCar}`}
       onClick={onClick}
     >
       예약된 렌트카

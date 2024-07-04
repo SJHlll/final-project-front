@@ -6,8 +6,8 @@ import React, {
 } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.module.css';
-import '../scss/ReservationModal.scss';
-import '../../../../scss/Button.scss';
+import styles from '../scss/ReservationModal.module.scss';
+import style from '../../../../scss/Button.module.scss';
 import AuthContext from '../../../../util/AuthContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -208,30 +208,36 @@ const ReservationModal = ({
         message={modalMessage}
       />
       <div
-        className='form-wrapper'
+        className={styles.formWrapper}
         style={{ fontFamily: 'font2' }}
       >
         <form
-          className='reservation-charge'
+          className={styles.reservationCharge}
           onSubmit={reservationHandler}
         >
           {userName ? (
             <>
-              <div className='flex'>
-                <div className='column'>이름</div>
-                <div className='data'>{userName}</div>
+              <div className={styles.flex}>
+                <div className={styles.column}>이름</div>
+                <div className={styles.data}>
+                  {userName}
+                </div>
               </div>
-              <div className='flex'>
-                <div className='column'>핸드폰 번호</div>
-                <div className='data'>{phoneNumber}</div>
+              <div className={styles.flex}>
+                <div className={styles.column}>
+                  핸드폰 번호
+                </div>
+                <div className={styles.data}>
+                  {phoneNumber}
+                </div>
               </div>
             </>
           ) : (
             <>
-              <div className='flex'>
-                <div className='column'>이름</div>
+              <div className={styles.flex}>
+                <div className={styles.column}>이름</div>
                 <div
-                  className='data'
+                  className={styles.data}
                   style={{
                     color: '#F18D8A',
                     cursor: 'pointer',
@@ -241,10 +247,12 @@ const ReservationModal = ({
                   회원 정보 없음!
                 </div>
               </div>
-              <div className='flex'>
-                <div className='column'>핸드폰 번호</div>
+              <div className={styles.flex}>
+                <div className={styles.column}>
+                  핸드폰 번호
+                </div>
                 <div
-                  className='data'
+                  className={styles.data}
                   style={{
                     color: '#F18D8A',
                     cursor: 'pointer',
@@ -256,22 +264,24 @@ const ReservationModal = ({
               </div>
             </>
           )}
-          <div className='flex'>
-            <div className='column'>충전소 이름</div>
-            <div className='data'>{stationName}</div>
+          <div className={styles.flex}>
+            <div className={styles.column}>충전소 이름</div>
+            <div className={styles.data}>{stationName}</div>
           </div>
-          <div className='flex'>
-            <div className='column'>충전소 위치</div>
-            <div className='data'>{address}</div>
+          <div className={styles.flex}>
+            <div className={styles.column}>충전소 위치</div>
+            <div className={styles.data}>{address}</div>
           </div>
-          <div className='flex'>
-            <div className='column'>충전 타입</div>
-            <div className='data'>{type}</div>
+          <div className={styles.flex}>
+            <div className={styles.column}>충전 타입</div>
+            <div className={styles.data}>{type}</div>
           </div>
-          <div className='flex'>
-            <div className='column'>예약 날짜 및 시간</div>
+          <div className={styles.flex}>
+            <div className={styles.column}>
+              예약 날짜 및 시간
+            </div>
             <DatePicker
-              className='date-picker'
+              className={styles.datePicker}
               selected={startDate}
               // showIcon
               onChange={(date) => setStartDate(date)}
@@ -284,8 +294,8 @@ const ReservationModal = ({
               dateFormat={'yyyy년 MM월 dd일 aa hh:mm'}
             />
           </div>
-          <div className='flex'>
-            <div className='column'>충전시간</div>
+          <div className={styles.flex}>
+            <div className={styles.column}>충전시간</div>
             {selectedOption === 'option1' && (
               <SelectBox options={FAST} defaultValue='10' />
             )}
@@ -293,11 +303,11 @@ const ReservationModal = ({
               <SelectBox options={SLOW} defaultValue='1' />
             )}
             <div
-              className='form-check form-check-inline'
+              className={`{styles.formCheck} {styles.formCheckInline}`}
               style={{ marginLeft: '16px' }}
             >
               <input
-                className='form-check-input'
+                className={styles.formCheckInput}
                 type='radio'
                 name='inlineRadioOptions'
                 id='inlineRadio1'
@@ -306,11 +316,15 @@ const ReservationModal = ({
                 onChange={handlerRadioChange}
                 disabled
               />
-              <label className='check-label'>급속</label>
+              <label className={styles.checkLabel}>
+                급속
+              </label>
             </div>
-            <div className='form-check form-check-inline'>
+            <div
+              className={`${styles.formCheck} ${styles.formCheckInline}`}
+            >
               <input
-                className='form-check-input'
+                className={styles.formCheckInput}
                 type='radio'
                 name='inlineRadioOptions'
                 id='inlineRadio2'
@@ -319,12 +333,14 @@ const ReservationModal = ({
                 onChange={handlerRadioChange}
                 disabled
               />
-              <label className='check-label'>완속</label>
+              <label className={styles.checkLabel}>
+                완속
+              </label>
             </div>
           </div>
-          <div className='flex'>
-            <div className='column'>가격</div>
-            <div className='data'>
+          <div className={styles.flex}>
+            <div className={styles.column}>가격</div>
+            <div className={styles.data}>
               {calculateTotalPrice()}원 (약{' '}
               {speed === '급속'
                 ? parseFloat(
@@ -345,9 +361,11 @@ const ReservationModal = ({
               margin: '10px',
             }}
           >
-            <button className='public-btn'>
+            <button className={style.publicBtn}>
               <div>
-                <span className='pay-button'>결제하기</span>
+                <span className={style.payButton}>
+                  결제하기
+                </span>
               </div>
             </button>
           </div>

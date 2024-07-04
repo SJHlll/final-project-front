@@ -5,7 +5,7 @@ import React, {
   useState,
 } from 'react';
 import { Button, Container } from 'reactstrap';
-import '../../../scss/Login.scss';
+import styles from '../../../scss/Login.module.scss';
 import { KAKAO_AUTH_URL } from '../../../config/kakao-config';
 import { NAVER_AUTH_URL } from '../../../config/naver-config';
 import { useNavigate } from 'react-router-dom';
@@ -103,11 +103,11 @@ const Login = () => {
   return (
     <>
       <form
-        className='loginform'
+        className={styles.loginform}
         noValidate
         onSubmit={loginHandler}
       >
-        <Container className='body-top'>
+        <Container className={styles.bodyTop}>
           <Grid container spacing={2}>
             <div
               style={{
@@ -143,7 +143,7 @@ const Login = () => {
             </div>
             <Grid item xs={12}>
               <Button
-                className='Loginbtn'
+                className={styles.Loginbtn}
                 type='submit'
                 fullWidth
                 variant='contained'

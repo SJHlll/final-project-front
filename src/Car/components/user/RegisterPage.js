@@ -19,7 +19,7 @@ import {
   API_BASE_URL,
   USER,
 } from '../../../config/host-config';
-import '../../../scss/RegisterPage.scss';
+import styles from '../../../scss/RegisterPage.module.scss';
 
 const RegisterPage = () => {
   // useRef를 사용해서 태그 참조하기
@@ -346,7 +346,7 @@ const RegisterPage = () => {
           </Grid>
           <Grid item xs={12}>
             <div
-              className='thumbnail-box'
+              className={styles.thumbnailBox}
               onClick={() => $fileTag.current.click()}
             >
               <img
@@ -358,7 +358,7 @@ const RegisterPage = () => {
               />
             </div>
             <label
-              className='signup-img-label'
+              className={styles.signupImgLabel}
               htmlFor='profile-img'
             >
               프로필 이미지 추가

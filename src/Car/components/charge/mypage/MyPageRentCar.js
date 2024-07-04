@@ -2,7 +2,8 @@ import { TextField } from '@mui/material';
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { Modal, ModalBody } from 'reactstrap';
-
+import styles from '../scss/MyPageCharge.module.scss';
+import style from '../../../../scss/Button.module.scss';
 const MyPageRentCar = () => {
   const [updateRentCar, setUpdateRentCar] = useState(false);
 
@@ -16,22 +17,22 @@ const MyPageRentCar = () => {
   );
 
   return (
-    <div className='reservation-list'>
+    <div className={styles.reservationList}>
       <h3 style={{ textAlign: 'center' }}>
         렌트카 예약현황
       </h3>
-      <div className='flex'>
+      <div className={styles.flex}>
         <div className='value'>예약번호</div>
         <div>123456</div>
       </div>
-      <div className='flex'>
+      <div className={styles.flex}>
         <div className='value'>차 이름</div>
         <div>차 이름</div>
       </div>
-      <div className='flex'>
+      <div className={styles.flex}>
         <div className='value'>예약 날짜/시간</div>
         <DatePicker
-          className='read-only-date'
+          className={styles.readOnlyDate}
           selected={new Date()}
           showTimeSelect
           dateFormat={'yyyy년 MM월 dd일 aa hh:mm'}
@@ -44,7 +45,7 @@ const MyPageRentCar = () => {
       >
         <div className='value'>비고</div>
         <TextField
-          id='outlined-multiline-static'
+          id={styles.outlinedMultilineStatic}
           multiline
           rows={4}
           InputProps={{
@@ -54,7 +55,10 @@ const MyPageRentCar = () => {
         />
       </div>
       <div style={{ width: '100%', textAlign: 'center' }}>
-        <button className='public-btn' onClick={toggle}>
+        <button
+          className={style.publicBtn}
+          onClick={toggle}
+        >
           수정하기
         </button>
       </div>

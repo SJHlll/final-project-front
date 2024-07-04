@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ChargeStationSearch from './ChargeStationSearch';
 import ChargeStationList from './ChargeStationList';
-import '../scss/SearchList.scss';
+import styles from '../scss/SearchList.module.scss';
 import OpenBtn from './OpenBtn';
 
 const SearchList = ({ visible }) => {
@@ -37,9 +37,9 @@ const SearchList = ({ visible }) => {
   return (
     <>
       <div
-        className={`search-list-container ${isVisible ? 'hidden' : 'visible'}`}
+        className={`${styles.searchListContainer} ${isVisible ? styles.hidden : styles.visible}`}
       >
-        <div className='search-list-content'>
+        <div className={styles.searchListContent}>
           <ChargeStationSearch />
           <ChargeStationList />
         </div>

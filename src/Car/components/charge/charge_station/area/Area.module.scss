@@ -1,0 +1,60 @@
+/* AreaSelector.css */
+
+.areaSelector {
+    width: 300px;
+    align-items: center;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.searchBox {
+    width: 400px;
+    margin: 0 auto;
+    display: flex;
+    margin-left: 1%;
+}
+
+.selectBox {
+    width: 39%;
+    padding: 4px;
+    margin-right: 3px;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.searchInput {
+    width: 60%;
+    padding: 5px;
+    margin: 5px;
+}
+
+.searchBtn {
+    padding: 8px 16px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+.searchBtn:hover {
+    background-color: #0056b3;
+}
+
+.resetBtn {
+    // padding: 8px 16px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: #ebf5ff;
+    color: #2c7fdf;
+    border: 1px solid #2c7fdf;
+    border-radius: 5px;
+}
+
+.resetBtn:hover {
+    background-color: #c2e1ff;
+}
+.checkboxBox{
+    margin-top: 15%;
+}

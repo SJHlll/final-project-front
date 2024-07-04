@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReviewItem from './ReviewItem';
 import Modal from './Modal';
 import Modal2 from './Modal2'; // Modal2 가져오기
-import './ReviewPage.scss';
+import styles from './ReviewPage.module.scss';
 
 // ReviewPage 컴포넌트 정의
 const ReviewPage = ({ ReviewList }) => {
@@ -136,13 +136,12 @@ const ReviewPage = ({ ReviewList }) => {
         );
 
   return (
-    <div className='review-page'>
-      <div className='type-switch'>
-        {/* 렌트카 리뷰 버튼 */}
+    <div className={styles.reviewPage}>
+      <div className={styles.typeSwitch}>
         <button
           onClick={() => handleTypeChange('rental')}
           className={
-            selectedType === 'rental' ? 'active' : ''
+            selectedType === 'rental' ? styles.active : ''
           }
         >
           렌트카 리뷰
@@ -151,7 +150,7 @@ const ReviewPage = ({ ReviewList }) => {
         <button
           onClick={() => handleTypeChange('charging')}
           className={
-            selectedType === 'charging' ? 'active' : ''
+            selectedType === 'charging' ? styles.active : ''
           }
         >
           충전소 리뷰
@@ -160,11 +159,11 @@ const ReviewPage = ({ ReviewList }) => {
       {/* 후기 작성 버튼 */}
       <button
         onClick={() => setIsModalOpen(true)}
-        className='write-review-button'
+        className={styles.writeReviewButton}
       >
         후기 작성
       </button>
-      <div className='review-list'>
+      <div className={styles.reviewList}>
         {/* 현재 페이지의 리뷰 아이템 렌더링 */}
         {currentReviews.map((review) => (
           <ReviewItem
@@ -174,7 +173,7 @@ const ReviewPage = ({ ReviewList }) => {
           />
         ))}
       </div>
-      <div className='pagination'>
+      <div className={styles.pagination}>
         {/* 페이지 네비게이션 버튼 렌더링 */}
         {Array.from(
           {

@@ -4,7 +4,7 @@ import {
   useNavigate,
   useParams,
 } from 'react-router-dom';
-import './Event.scss';
+import styles from './Event.module.scss';
 
 const EventDetail = () => {
   const location = useLocation();
@@ -17,29 +17,46 @@ const EventDetail = () => {
 
   return (
     <>
-      <div className='maincontainer'>
-        <div className='contentline'>
-          <div className='event-detail-header'>
-            <div className='event-current margin-box'>
+      <div className={styles.maincontainer}>
+        <div className={styles.contentline}>
+          <div className={styles.eventDetailHeader}>
+            <div
+              className={`${styles.eventCurrent} ${styles.marginBox}`}
+            >
               {status}
             </div>
-            <div className='event-detail-title'>
+            <div className={styles.eventDetailTitle}>
               {title}
             </div>
-            <div className='flex-box margin-box'>
+            <div
+              className={`${styles.flexBox} ${styles.marginBox}`}
+            >
               <div>글번호</div>
               <div>{id}</div>
             </div>
           </div>
-          <div className='event-detail-body'>
+          <div className={styles.eventDetailBody}>
             {img && (
               <img
-                className='event-detail-img'
+                className={styles.eventDetailImg}
                 src={img}
                 alt={title}
               />
             )}
-            <button className='public-btn' onClick={toList}>
+            <button
+              className={`${styles.publicBtn} ${styles.eventButton}`}
+            >
+              수정
+            </button>
+            <button
+              className={`${styles.publicBtn} ${styles.eventButton}`}
+            >
+              삭제
+            </button>
+            <button
+              className={styles.publicBtn}
+              onClick={toList}
+            >
               목록
             </button>
           </div>

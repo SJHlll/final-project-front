@@ -1,5 +1,5 @@
 import React from 'react';
-import './Pay.scss';
+import styles from './Pay.module.scss';
 
 // 토스페이먼트 여는 컴포넌트
 const OpenTossPayments = ({ totalPrice }) => {
@@ -18,7 +18,7 @@ const OpenTossPayments = ({ totalPrice }) => {
   return (
     <div>
       <span
-        className='pay-button'
+        className={styles.payButton}
         onClick={handleNavigation}
       >
         결제하기
