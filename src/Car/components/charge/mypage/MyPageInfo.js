@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import AuthContext from '../../../../util/AuthContext';
+// import '../scss/MyPageInfo.scss';
 import '../scss/MyPageInfo.scss';
 import UserInfoSave from './UserInfoSave';
 import { Modal, ModalBody } from 'reactstrap';
@@ -27,7 +28,7 @@ const MyPageInfo = () => {
 
   return (
     <div className='reservation-list'>
-      <h3 style={{ textAlign: 'center' }}>내 정보</h3>
+      <h3 style={{ textAlign: 'center' }}>프로필</h3>
       <div className='flex'>
         <div className='value'>이름</div>
         <div>{userName}</div>
