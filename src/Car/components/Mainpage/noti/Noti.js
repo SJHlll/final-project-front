@@ -92,16 +92,16 @@ const Noti = () => {
       <Frame>
         <div className={styles.notiline}>
           <Notilist notiList={notiList}
-                    fetchNotiList={fetchNotiList}/>
+                    fetchNotiList={fetchNotiList} />
           <div style={{ display: 'flex' }}>
-          {role === 'ADMIN' && (
-            <button
-              className={styles.createnotilist}
-              onClick={toggle}
-            >
-              등록
-            </button>
-          )}
+            {role === 'ADMIN' && (
+              <button
+                className={styles.createnotilist}
+                onClick={toggle}
+              >
+                등록
+              </button>
+            )}
           </div>
         </div>
       </Frame>
