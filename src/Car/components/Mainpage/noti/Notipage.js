@@ -9,7 +9,7 @@ import {
   useParams,
 } from 'react-router-dom';
 import Frame from '../Frame';
-import './NotiPage.scss';
+import styles from './NotiPage.module.scss';
 import AuthContext from '../../../../util/AuthContext';
 import axios from 'axios';
 

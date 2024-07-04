@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReviewItem from './ReviewItem';
 import Modal from './Modal';
 import Modal2 from './Modal2'; // Modal2 가져오기
-import './ReviewPage.scss';
+import styles from './ReviewPage.module.scss';
 
 // ReviewPage 컴포넌트 정의
 const ReviewPage = ({ ReviewList }) => {

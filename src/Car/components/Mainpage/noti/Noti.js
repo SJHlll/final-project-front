@@ -1,10 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import styles from './Noti.module.scss';
 import Notilist from './Notilist';
 import Frame from '../Frame';
 import { Modal, ModalBody } from 'reactstrap';
 import styled from 'styled-components';
-
 import AuthContext from '../../../../util/AuthContext';
 import axios from 'axios';
 
@@ -91,8 +94,10 @@ const Noti = () => {
     <>
       <Frame>
         <div className={styles.notiline}>
-          <Notilist notiList={notiList}
-                    fetchNotiList={fetchNotiList} />
+          <Notilist
+            notiList={notiList}
+            fetchNotiList={fetchNotiList}
+          />
           <div style={{ display: 'flex' }}>
             {role === 'ADMIN' && (
               <button

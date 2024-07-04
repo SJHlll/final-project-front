@@ -36,17 +36,6 @@
         }
     }
 
-    // .reserve-station {
-    //     border: 1px solid red;
-    // }
-
-    // .reserve-car {
-    //     border: 1px solid blue;
-    // }
-
-    // .review {
-    //     border: 1px solid green;
-    // }
 }
 
 .listHeader {
@@ -59,27 +48,27 @@
     border-top: 2px solid black;
     border-bottom: 2px solid black;
 
-    .res-no {
+    .resNo {
         width: 5%;
     }
 
-    .res-user-name {
+    .resUserName {
         width: 20%;
     }
 
-    .res-selected-name {
+    .resSelectedName {
         width: 35%;
     }
 
-    .res-selected-ad {
+    .resSelectedAd {
         width: 10%;
     }
 
-    .res-selected-time {
+    .resSelectedTime {
         width: 20%;
     }
 
-    .hidden-text {
+    .hiddenText {
         width: 10%;
     }
 }
@@ -118,7 +107,7 @@
         border-bottom: 2px solid black;
     }
 
-
+}
     .adminList {
         font-size: 1em;
 
@@ -151,7 +140,7 @@
                 width: 10%;
             }
         }
-
+    }
         .listBody {
             display: flex;
             height: 70px;
@@ -176,13 +165,13 @@
                 width: 30%;
             }
 
-            .res-selected-time {
+            .resSelectedTime {
                 width: 20%;
             }
 
-            .space-blank {
+            .spaceBlank {
                 margin-left: auto;
-
+            }
             .resCancelBtn {
                 width: 60px;
                 padding: 5px 0;
@@ -212,17 +201,4 @@
             left: 280px;
             font-size: 0.8em;
         }
-    }
-
-    // .reserve-station {
-    //     border: 1px solid red;
-    // }
-
-    // .reserve-car {
-    //     border: 1px solid blue;
-    // }
-
-    // .review {
-    //     border: 1px solid green;
-    // }
 }

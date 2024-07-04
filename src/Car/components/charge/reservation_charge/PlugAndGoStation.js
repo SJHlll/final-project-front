@@ -1,13 +1,12 @@
 import React, { useContext, useState } from 'react';
-import '../scss/PlugAndGoStation.scss';
+import styles from '../scss/PlugAndGoStation.module.scss';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import styled from 'styled-components';
 import ReservationModal from './ReservationModal';
-import '../../../../scss/Button.scss';
 import { SecondMapContext } from '../../../../contexts/SecondMapContext';
 import AuthContext from '../../../../util/AuthContext';
 import { useNavigate } from 'react-router-dom';
-
+import style from '../../../../scss/Button.module.scss';
 const PlugAndGoStation = ({
   lat,
   lng,
@@ -141,14 +140,4 @@ const ModalBackground = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 10;
-`;
-
-const HoverATag = styled.a`
-  color: black;
-  text-decoration: none;
-
-  &:hover {
-    color: blue;
-    text-decoration: underline;
-  }
 `;
