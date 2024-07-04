@@ -3,13 +3,44 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import { TestRcContext } from './TestRcContext';
 import AuthContext from '../../../../../util/AuthContext';
 
 const ReservedCarMap = () => {
+  const { reserveCar, setReserveCar } =
+    useContext(TestRcContext);
   const { role } = useContext(AuthContext); // 관리자 확인용
   const [filterPhoneNumber, setFilterPhoneNumber] =
     useState(''); // 전화번호 필터링
   const [filteredCar, setfilteredCar] = useState([]); // 필터링된 렌트카
+
+  // DB에서 예약한 렌트카 가져오기
+  useEffect(() => {
+    const fetchStations = async () => {
+      try {
+        const token = localStorage.getItem('ACCESS_TOKEN');
+        const response = await fetch(
+          'http://localhost:8181/admin/car',
+          {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          },
+        );
+        if (!response.ok) {
+          throw new Error('Failed to fetch stations');
+        }
+        const data = await response.json();
+        setReserveCar(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchStations();
+  }, [setReserveCar]);
 
   // 날짜 / 시간 시작일
   const formatRentTime = (rentTime) => {
@@ -50,32 +81,34 @@ const ReservedCarMap = () => {
   };
 
   // 전화번호 뒷자리 4개로 필터링
-  // useEffect(() => {
-  //   if (filterPhoneNumber.length === 4) {
-  //     const filtered = reserveStation.filter((e) =>
-  //       e.phoneNumber.endsWith(filterPhoneNumber),
-  //     );
-  //     setfilteredCar(filtered);
-  //   } else {
-  //     setfilteredCar(reserveStation);
-  //   }
-  // }, [filterPhoneNumber, reserveStation]);
+  useEffect(() => {
+    if (filterPhoneNumber.length === 4) {
+      const filtered = reserveCar.filter((e) =>
+        e.phoneNumber.endsWith(filterPhoneNumber),
+      );
+      setfilteredCar(filtered);
+    } else {
+      setfilteredCar(reserveCar);
+    }
+  }, [filterPhoneNumber, reserveCar]);
 
   // 회원이 예약한 렌트카 목록
   const AdminContents = ({ cars }) => {
     return (
       <>
         {cars.map((e) => (
-          <div className='list-body' key={e.reservationNo}>
-            <div className='res-no'>{e.reservationNo}</div>
+          <div className='list-body' key={e.carNo}>
+            <div className='res-no'>{e.carNo}</div>
             <div className='res-user-name'>
-              <div>{e.name}</div>
+              <div>{e.userName}</div>
               <div>{e.phoneNumber}</div>
             </div>
             <div className='res-selected-name'>
-              {truncateText(e.stationName, 20)}
+              {truncateText(e.carName, 20)}
             </div>
-            <div className='res-selected-ad'>1</div>
+            <div className='res-selected-ad'>
+              {e.rentCarPrice}원
+            </div>
             <div className='res-selected-time'>
               <div>{formatRentTime(e.rentTime)}</div>
               <div>
@@ -101,7 +134,7 @@ const ReservedCarMap = () => {
   // 본체
   return (
     <>
-      {role === 'ADMIN' ? ( // && reserveStation.length > 0
+      {role === 'ADMIN' && reserveCar.length > 0 ? (
         <AdminContents cars={filteredCar} />
       ) : (
         <div

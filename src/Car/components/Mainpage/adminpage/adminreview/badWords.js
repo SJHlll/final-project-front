@@ -1,4 +1,4 @@
-export const badWords = [
+export const badwords = [
   {
     word: [
       'ㅅㅂ',

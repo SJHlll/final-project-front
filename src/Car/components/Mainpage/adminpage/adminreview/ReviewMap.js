@@ -3,9 +3,9 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import AuthContext from '../../../../../util/AuthContext';
 import { TestRvContext } from './TestRvContext';
-import { badWords } from './badWords';
+import AuthContext from '../../../../../util/AuthContext';
+import { badwords } from './badwords';
 
 const ReviewMap = () => {
   const { review, setReview } = useContext(TestRvContext);
@@ -13,7 +13,7 @@ const ReviewMap = () => {
   const [filterEmailDomain, setFilterEmailDomain] =
     useState(''); // 이메일 필터링
   const [filteredReview, setFilteredReview] = useState([]); // 필터링된 리뷰
-  const [isConfirmFilter, setIsConfirmFilter] =
+  const [isBadWordFilter, setIsBadWordFilter] =
     useState(false); // 특정 단어 필터링 체크박스 상태
 
   useEffect(() => {
@@ -77,16 +77,16 @@ const ReviewMap = () => {
       );
     }
 
-    if (isConfirmFilter) {
+    if (isBadWordFilter) {
       filtered = filtered.filter((e) =>
-        badWords[0].word.some((badWord) =>
-          e.content.includes(badWord),
+        badwords[0].word.some((bad) =>
+          e.content.includes(bad),
         ),
       );
     }
 
     setFilteredReview(filtered);
-  }, [filterEmailDomain, isConfirmFilter, review]);
+  }, [filterEmailDomain, isBadWordFilter, review]);
 
   // 회원이 작성한 리뷰 목록
   const AdminContents = ({ reviews }) => {
@@ -156,9 +156,9 @@ const ReviewMap = () => {
       <label className='admin-filter2'>
         <input
           type='checkbox'
-          checked={isConfirmFilter}
+          checked={isBadWordFilter}
           onChange={(e) =>
-            setIsConfirmFilter(e.target.checked)
+            setIsBadWordFilter(e.target.checked)
           }
           style={{ marginRight: '5px' }}
         />
