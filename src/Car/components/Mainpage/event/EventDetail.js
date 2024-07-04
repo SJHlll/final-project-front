@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import styles from './Event.module.scss';
 
-const EventDetail = () => {
+const EventDetail = ({ item, remove }) => {
   const location = useLocation();
   const { id } = useParams();
   const { img, title, status } = location.state || {};
@@ -58,6 +58,12 @@ const EventDetail = () => {
               onClick={toList}
             >
               목록
+            </button>
+            <button
+              className='pulic-btn'
+              onClick={() => remove(id)}
+            >
+              삭제
             </button>
           </div>
         </div>

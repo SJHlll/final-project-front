@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styles from './Event.module.scss';
 import { useNavigate } from 'react-router-dom';
-import style from '../../../../scss/Button.module.scss';
-const Eventlist = () => {
+import style from '../../../../scss/Button.module.scss';import EventDetail from './EventDetail';
+
+const Eventlist = ({ eventList, remove }) => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('전체');
 
@@ -47,13 +48,12 @@ const Eventlist = () => {
 
   // 상세보기 들어감
   const handleClick = (item) => {
-    navigate(`/event/${item.id}`, {
-      state: {
-        img: item.img,
-        title: item.title,
-        status: item.status,
-      },
-    });
+    navigate(`/event/${item.id}`);
+    <EventDetail
+      key={item.id}
+      item={item}
+      remove={remove}
+    />;
   };
 
   // 필터링 진행중 / 종료
