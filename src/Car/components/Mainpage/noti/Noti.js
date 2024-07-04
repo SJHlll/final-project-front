@@ -1,4 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import './Noti.scss';
 import Notilist from './Notilist';
 import Frame from '../Frame';
@@ -6,6 +10,7 @@ import { Modal, ModalBody } from 'reactstrap';
 import styled from 'styled-components';
 
 import AuthContext from '../../../../util/AuthContext';
+import axios from 'axios';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -23,14 +28,65 @@ const Noti = () => {
   const [Create, setCreate] = useState(false);
   const [NotiTitle, setNotiTitle] = useState('');
   const [NotiContent, setNotiContent] = useState('');
-  const { role } = useContext(AuthContext);
-  const handleSubmit = (e) => {
+  const { role, token } = useContext(AuthContext);
+  const [notiList, setNotiList] = useState([]);
+  const [error, setError] = useState(null);
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   alert('게시물이 등록 되었습니다');
+  //   setNotiTitle('');
+  //   setNotiContent('');
+  //   setCreate(false);
+  // };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert('게시물이 등록 되었습니다');
-    setNotiTitle('');
-    setNotiContent('');
-    setCreate(false);
+    try {
+      const response = await axios.post(
+        'http://localhost:8181/noti',
+        {
+          title: NotiTitle,
+          content: NotiContent,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      setNotiList([...notiList, response.data]);
+      console.log('게시물이 등록 되었습니다.');
+      setNotiTitle('');
+      setNotiContent('');
+      setCreate(false);
+    } catch (err) {
+      setError(err.message);
+      console.log('등록이 실패하였습니다.');
+      console.log(err.message);
+    }
   };
+
+  const fetchNotiList = async () => {
+    try {
+      const response = await axios.get(
+        'http://localhost:8181/car/info',
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      setNotiList(response.data);
+    } catch (err) {
+      setError(err.message);
+      console.log(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchNotiList();
+  }, [token]);
 
   const cancelcreatenoti = () => {
     alert('등록이 취소되었습니다.');
@@ -45,7 +101,7 @@ const Noti = () => {
     <>
       <Frame>
         <div className='notiline'>
-          <Notilist />
+          <Notilist notiList={notiList} />
           <div style={{ display: 'flex' }}>
             {role === 'ADMIN' && (
               <button

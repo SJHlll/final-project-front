@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Frame from '../Frame';
 import './NotiPage.scss';
 import AuthContext from '../../../../util/AuthContext';
+import axios from 'axios';
 
 const NotiPage = () => {
   const location = useLocation();
@@ -18,6 +19,8 @@ const NotiPage = () => {
   const [currentContents, setCurrentContents] =
     useState(contents);
 
+  const { role, token } = useContext(AuthContext);
+
   const click = () => {
     navigate('/noti');
   };
@@ -26,43 +29,40 @@ const NotiPage = () => {
     setIsEditing(true);
   };
 
-  const saveUpdateHandler = () => {
-    const storedHits = JSON.parse(
-      localStorage.getItem('hits'),
-    );
-    const updatedHits = storedHits.map((item) => {
-      if (item.header === header) {
-        return {
-          ...item,
+  const saveUpdateHandler = async () => {
+    try {
+      const response = await axios.patch(
+        `/noti/${location.state.num}`,
+        {
           header: editedHeader,
           contents: editedContents,
-        };
-      }
-      return item;
-    });
-    localStorage.setItem(
-      'hits',
-      JSON.stringify(updatedHits),
-    );
-    setCurrentHeader(editedHeader);
-    setCurrentContents(editedContents);
-    setIsEditing(false);
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      setCurrentHeader(response.data.header);
+      setCurrentContents(response.data.contents);
+      setIsEditing(false);
+    } catch (err) {
+      console.error('Error updating notification:', err);
+    }
   };
 
-  const deleteNotiHandler = () => {
-    const storedHits = JSON.parse(
-      localStorage.getItem('hits'),
-    );
-    const updatedHits = storedHits.filter(
-      (item) => item.header !== header,
-    );
-    localStorage.setItem(
-      'hits',
-      JSON.stringify(updatedHits),
-    );
-    navigate('/noti');
+  const deleteNotiHandler = async () => {
+    try {
+      await axios.delete(`/noti/${location.state.num}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      navigate('/noti');
+    } catch (err) {
+      console.error('Error deleting notification:', err);
+    }
   };
-  const { role } = useContext(AuthContext);
 
   return (
     <Frame>
