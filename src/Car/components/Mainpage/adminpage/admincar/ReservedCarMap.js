@@ -82,14 +82,16 @@ const ReservedCarMap = () => {
                 ~ {formatRentEndTime(e.rentTime, e.time)}
               </div>
             </div>
-            <button
-              className='res-cancel-btn'
-              // onDoubleClick={() =>
-              //   handleCancelReservation(e.reservationNo)
-              // }
-            >
-              취소
-            </button>
+            <div className='space-blank'>
+              <button
+                className='res-cancel-btn'
+                // onDoubleClick={() =>
+                //   handleCancelReservation(e.reservationNo)
+                // }
+              >
+                취소
+              </button>
+            </div>
           </div>
         ))}
       </>

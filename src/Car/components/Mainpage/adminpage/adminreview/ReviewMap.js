@@ -100,14 +100,16 @@ const ReviewMap = () => {
             <div className='res-selected-time'>
               <div>{formatRentTime(e.updateDate)}</div>
             </div>
-            <button
-              className='res-cancel-btn'
-              // onDoubleClick={() =>
-              //   handleCancelReservation(e.reservationNo)
-              // }
-            >
-              삭제
-            </button>
+            <div className='space-blank'>
+              <button
+                className='res-cancel-btn'
+                // onDoubleClick={() =>
+                //   handleCancelReservation(e.reservationNo)
+                // }
+              >
+                삭제
+              </button>
+            </div>
           </div>
         ))}
       </>
