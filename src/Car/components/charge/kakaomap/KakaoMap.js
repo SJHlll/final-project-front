@@ -18,6 +18,7 @@ const MapContainer = styled(Map)`
   width: 100%;
   height: 86vh;
   border: 1px solid #888;
+  border-radius: 15px;
 `;
 
 const KakaoMap = () => {

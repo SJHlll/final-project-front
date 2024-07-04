@@ -40,6 +40,9 @@ const ReservedCarMap = () => {
 
   // ?글자 이상 시 ... 처리
   const truncateText = (text, length) => {
+    if (!text) {
+      return '';
+    }
     if (text.length > length) {
       return text.substring(0, length) + '...';
     }
@@ -69,24 +72,26 @@ const ReservedCarMap = () => {
               <div>{e.name}</div>
               <div>{e.phoneNumber}</div>
             </div>
-            <div className='res-user-no'></div>
-            <div className='res-station-name'>
+            <div className='res-selected-name'>
               {truncateText(e.stationName, 20)}
             </div>
-            <div className='res-station-time'>
+            <div className='res-selected-ad'>1</div>
+            <div className='res-selected-time'>
               <div>{formatRentTime(e.rentTime)}</div>
               <div>
                 ~ {formatRentEndTime(e.rentTime, e.time)}
               </div>
             </div>
-            <button
-              className='res-cancel-btn'
-              // onDoubleClick={() =>
-              //   handleCancelReservation(e.reservationNo)
-              // }
-            >
-              취소
-            </button>
+            <div className='space-blank'>
+              <button
+                className='res-cancel-btn'
+                // onDoubleClick={() =>
+                //   handleCancelReservation(e.reservationNo)
+                // }
+              >
+                취소
+              </button>
+            </div>
           </div>
         ))}
       </>
@@ -110,7 +115,7 @@ const ReservedCarMap = () => {
         </div>
       )}
       <input
-        className='phone-last-four'
+        className='admin-filter'
         type='text'
         placeholder='전화번호 뒷자리 4개 입력'
         value={filterPhoneNumber}

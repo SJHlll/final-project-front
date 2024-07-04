@@ -49,11 +49,45 @@
     // }
 }
 
+.list-header {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    padding: 10px 10px;
+    font-size: 1.3em;
+    text-align: center;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+
+    .res-no {
+        width: 5%;
+    }
+
+    .res-user-name {
+        width: 20%;
+    }
+
+    .res-selected-name {
+        width: 35%;
+    }
+
+    .res-selected-ad {
+        width: 10%;
+    }
+
+    .res-selected-time {
+        width: 20%;
+    }
+
+    .hidden-text {
+        width: 10%;
+    }
+}
 
 
 .admin-page-list {
     width: 80%;
-    height: 600px;
+    height: 545px;
     margin: 0 auto;
     overflow-y: auto;
 
@@ -85,37 +119,6 @@
     }
 
     .admin-list {
-        font-size: 1em;
-
-
-        .list-header {
-            display: flex;
-            padding: 10px 10px;
-            font-size: 1.3em;
-            text-align: center;
-            border-top: 2px solid black;
-            border-bottom: 2px solid black;
-
-            .res-no {
-                width: 7%;
-            }
-
-            .res-user-name {
-                width: 18%;
-            }
-
-            .res-selected-name {
-                width: 35%;
-            }
-
-            .res-selected-time {
-                width: 30%;
-            }
-
-            .hidden-text {
-                width: 10%;
-            }
-        }
 
         .list-body {
             display: flex;
@@ -126,40 +129,54 @@
             border-bottom: 1px solid #aaa;
 
             .res-no {
-                width: 7%;
+                width: 5%;
             }
 
             .res-user-name {
-                width: 18%;
+                width: 20%;
             }
 
-            .res-station-name {
+            .res-selected-name {
                 width: 35%;
             }
 
-            .res-station-time {
-                width: 30%;
+            .res-selected-ad {
+                width: 10%;
             }
 
-            .res-cancel-btn {
-                width: 60px;
-                padding: 5px 0;
-                border-radius: 10px;
-                margin-left: auto;
-                background-color: #ebf5ff;
-                color: #2c7fdf;
-                border: 1px solid #2c7fdf;
+            .res-selected-time {
+                width: 20%;
+            }
 
-                &:hover {
-                    background-color: #c2e1ff;
+            .space-blank {
+                margin-left: auto;
+
+                .res-cancel-btn {
+                    width: 60px;
+                    padding: 5px 0;
+                    border-radius: 10px;
+                    background-color: #ebf5ff;
+                    color: #2c7fdf;
+                    border: 1px solid #2c7fdf;
+
+                    &:hover {
+                        background-color: #c2e1ff;
+                    }
                 }
             }
         }
 
-        .phone-last-four {
+        .admin-filter {
             position: absolute;
             top: 120px;
             width: 137px;
+            font-size: 0.8em;
+        }
+
+        .admin-filter2 {
+            position: absolute;
+            top: 125px;
+            left: 280px;
             font-size: 0.8em;
         }
     }
