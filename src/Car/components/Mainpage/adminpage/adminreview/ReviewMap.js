@@ -45,6 +45,35 @@ const ReviewMap = () => {
     fetchReviews();
   }, [setReview]);
 
+  const handleDeleteReview = async (reviewNo) => {
+    try {
+      const token = localStorage.getItem('ACCESS_TOKEN');
+      const response = await fetch(
+        `http://localhost:8181/admin/review?reviewNo=${reviewNo}`,
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+      if (!response.ok) {
+        throw new Error('Failed to delete review');
+      }
+
+      // 리뷰 삭제가 성공하면 UI에서 해당 리뷰 제거
+      setReview((prevReview) => {
+        const updatedReview = prevReview.filter(
+          (review) => review.reviewNo !== reviewNo,
+        );
+        return updatedReview;
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   // 날짜 / 시간 작성일
   const formatRentTime = (rentTime) => {
     const date = new Date(rentTime);
@@ -139,9 +168,9 @@ const ReviewMap = () => {
             <div className='space-blank'>
               <button
                 className='res-cancel-btn'
-                // onDoubleClick={() =>
-                //   handleCancelReservation(e.reservationNo)
-                // }
+                onDoubleClick={() =>
+                  handleDeleteReview(e.reviewNo)
+                }
               >
                 삭제
               </button>
