@@ -9,6 +9,15 @@ const Event = () => {
         <div className='eventbody'>
           <Eventlist />
         </div>
+        <button className='public-btn event-button'>
+          추가
+        </button>
+        <button className='public-btn event-button'>
+          수정
+        </button>
+        <button className='public-btn event-button'>
+          삭제
+        </button>
       </div>
     </div>
   );
