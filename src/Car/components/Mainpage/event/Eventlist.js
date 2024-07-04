@@ -9,38 +9,38 @@ const Eventlist = () => {
   const Notilist = [
     {
       id: 1,
-      img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/event1.jpg',
+      img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/Event/event1.jpg',
       title: '렌트카 하면 커피',
       status: '진행중',
     },
     {
       id: 2,
-      img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/event3.jpg',
+      img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/Event/event3.jpg',
       title: '회원가입 시 할인',
       status: '진행중',
     },
     {
       id: 3,
-      img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/event2.jpg',
+      img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/Event/event2.jpg',
       title: '열번충전 -> 기프티콘',
       status: '진행중',
     },
     {
       id: 4,
-      img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/eventbanner2.png',
+      img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/Event/event4.png',
       title: '이용후기 남기면 확률1일이용권',
       status: '진행중',
     },
     {
       id: 5,
-      img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/eventbanner1.png',
-      title: '인스타 홍보 시 확률1일이용권',
+      img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/Event/event6.png',
+      title: '생일 이벤트',
       status: '진행중',
     },
     {
       id: 6,
-      img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/eventbanner2.png',
-      title: '가족과 함께 안전하게! 카시트 무료 증정',
+      img: 'https://plugngo.s3.ap-northeast-2.amazonaws.com/Event/event5.png',
+      title: '가족과 함께 안전하게! 할인 쿠폰 증정',
       status: '진행중',
     },
   ];

@@ -36,21 +36,16 @@ const ReservedCarList = () => {
           }
         />
       </div>
+      <div className={styles.listHeader}>>
+        <div className={styles.resNo}>번호</div>
+        <div className={styles.resUserName}>회원명</div>
+        <div className={styles.resSelectedName}>차종</div>
+        <div className={styles.resSelectedAd}>렌트비용</div>
+        <div className={styles.resSelectedTime}>렌트기간</div>
+        <div className={styles.hiddenText}></div>
+      </div>
       <div className={styles.adminPageList}>
-        <div
-          className={`${styles.adminList} ${styles.reserveCar}`}
-        >
-          <div className={styles.listHeader}>
-            <div className={styles.resNo}>예약번호</div>
-            <div className={styles.resUserName}>회원명</div>
-            <div className={styles.resSelectedName}>
-              차종
-            </div>
-            <div className={styles.resSelectedTime}>
-              렌트기간
-            </div>
-            <div className={styles.hiddenText}></div>
-          </div>
+        <div className={`${styles.adminList} ${styles.reserveCar}`}>
           <ReservedCarMap />
         </div>
         {selected === 'station' && <ReservedStationList />}

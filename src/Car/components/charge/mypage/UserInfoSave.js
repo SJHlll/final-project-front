@@ -21,6 +21,15 @@ import AuthContext from '../../../../util/AuthContext';
 const UserInfoSave = () => {
   const navigate = useNavigate();
 
+  const {
+    userName,
+    email,
+    phoneNumber,
+    birthDay,
+    setUserName,
+    setPhoneNumber,
+  } = useContext(AuthContext);
+
   // 리듀서 함수 등록
   const [state, dispatch] = useReducer(
     userInfoReducer,
@@ -148,7 +157,8 @@ const UserInfoSave = () => {
       );
 
       if (res.ok) {
-        const data = await res.json();
+        setUserName(userValue.userName);
+        setPhoneNumber(userValue.phoneNumber);
         alert(
           `${userValue.userName}님 회원정보 수정이 완료되었습니다!`,
         );
@@ -183,24 +193,7 @@ const UserInfoSave = () => {
     }
   };
 
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const { userName, email, phoneNumber, birthDay } =
-    useContext(AuthContext);
-
-  const toggle = () => setModalOpen(!modalOpen);
-
   const infoModal = () => (
-    // <Modal
-    //   isOpen={modalOpen}
-    //   toggle={toggle}
-    //   backdrop='static'
-    //   style={{
-    //     fontFamily: 'font2',
-    //     top: '25%',
-    //     width: '400px',
-    //   }}
-    // >
     <form>
       <Grid container spacing={2}>
         <Grid item xs={12} style={{ display: 'flex' }}>

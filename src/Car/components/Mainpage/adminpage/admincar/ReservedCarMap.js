@@ -40,6 +40,9 @@ const ReservedCarMap = () => {
 
   // ?글자 이상 시 ... 처리
   const truncateText = (text, length) => {
+    if (!text) {
+      return '';
+    }
     if (text.length > length) {
       return text.substring(0, length) + '...';
     }
@@ -84,14 +87,16 @@ const ReservedCarMap = () => {
                 ~ {formatRentEndTime(e.rentTime, e.time)}
               </div>
             </div>
-            <button
-              className={styles.resCancelBtn}
-              // onDoubleClick={() =>
-              //   handleCancelReservation(e.reservationNo)
-              // }
-            >
-              취소
-            </button>
+            <div className={styles.spaceBlank}>
+              <button
+                className={styles.resCancelBtn}
+                // onDoubleClick={() =>
+                //   handleCancelReservation(e.reservationNo)
+                // }
+              >
+                취소
+              </button>
+            </div>
           </div>
         ))}
       </>

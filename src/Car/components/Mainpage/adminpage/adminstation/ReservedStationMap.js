@@ -105,6 +105,9 @@ const ReservedStationMap = () => {
 
   // ?글자 이상 시 ... 처리
   const truncateText = (text, length) => {
+    if (!text) {
+      return '';
+    }
     if (text.length > length) {
       return text.substring(0, length) + '...';
     }
@@ -128,35 +131,37 @@ const ReservedStationMap = () => {
     return (
       <>
         {stations.map((e) => (
-          <div
-            className={styles.listBody}
-            key={e.reservationNo}
-          >
-            <div className={styles.resNo}>
-              {e.reservationNo}
-            </div>
+          <div className={styles.listBody} key={e.reservationNo}>
+            <div className={styles.resNo}>{e.chargeNo}</div>
             <div className={styles.resUserName}>
               <div>{e.name}</div>
               <div>{e.phoneNumber}</div>
             </div>
-            <div className={styles.resUserNo}></div>
-            <div className={styles.resStationName}>
-              {truncateText(e.stationName, 20)}
+            <div className={styles.resSelectedName}>
+              <div>{truncateText(e.stationName, 20)}</div>
+              <div style={{ fontSize: '0.8em' }}>
+                {truncateText(e.address, 35)}
+              </div>
             </div>
-            <div className={styles.resStationTime}>
+            <div className={styles.resSelectedAd}>
+              {e.rentChargePrice}원
+            </div>
+            <div className={styles.resSelectedTime}>
               <div>{formatRentTime(e.rentTime)}</div>
               <div>
                 ~ {formatRentEndTime(e.rentTime, e.time)}
               </div>
             </div>
-            <button
-              className={styles.resCancelBtn}
-              onDoubleClick={() =>
-                handleCancelReservation(e.reservationNo)
-              }
-            >
-              취소
-            </button>
+            <div className={styles.spaceBlank}>
+              <button
+                className={styles.resCancelBtn}
+                onDoubleClick={() =>
+                  handleCancelReservation(e.reservationNo)
+                }
+              >
+                취소
+              </button>
+            </div>
           </div>
         ))}
       </>
@@ -180,7 +185,7 @@ const ReservedStationMap = () => {
         </div>
       )}
       <input
-        className={styles.phoneLastFour}
+        className={styles.adminFilter}
         type='text'
         placeholder='전화번호 뒷자리 4개 입력'
         value={filterPhoneNumber}

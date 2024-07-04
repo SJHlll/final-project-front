@@ -6,6 +6,7 @@ import { Modal, ModalBody } from 'reactstrap';
 import styled from 'styled-components';
 
 import AuthContext from '../../../../util/AuthContext';
+import axios from 'axios';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -24,13 +25,58 @@ const Noti = () => {
   const [NotiTitle, setNotiTitle] = useState('');
   const [NotiContent, setNotiContent] = useState('');
   const { role } = useContext(AuthContext);
-  const handleSubmit = (e) => {
+  const [notiList, setNotiList] = useState([]);
+  const [error, setError] = useState(null);
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   alert('게시물이 등록 되었습니다');
+  //   setNotiTitle('');
+  //   setNotiContent('');
+  //   setCreate(false);
+  // };
+
+  const handleSubmit = async (e) => {
+    const token = localStorage.getItem('ACCESS_TOKEN');
     e.preventDefault();
-    alert('게시물이 등록 되었습니다');
-    setNotiTitle('');
-    setNotiContent('');
-    setCreate(false);
+    try {
+      const response = await axios.post(
+        'http://localhost:8181/noti',
+        {
+          notiTitle: NotiTitle,
+          notiContent: NotiContent,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      setNotiList([...notiList, response.data]);
+      alert('게시물이 등록 되었습니다.');
+      setCreate(false);
+    } catch (err) {
+      setError(err.message);
+      alert('등록이 실패하였습니다.');
+      console.error(err.message);
+    }
   };
+
+  const fetchNotiList = async () => {
+    try {
+      const response = await axios.get(
+        'http://localhost:8181/noti/info',
+      );
+      setNotiList(response.data.notiList);
+    } catch (err) {
+      setError(err.message);
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchNotiList();
+  }, []);
 
   const cancelcreatenoti = () => {
     alert('등록이 취소되었습니다.');
@@ -45,8 +91,9 @@ const Noti = () => {
     <>
       <Frame>
         <div className={styles.notiline}>
-          <Notilist />
-
+          <Notilist notiList={notiList}
+                    fetchNotiList={fetchNotiList}/>
+          <div style={{ display: 'flex' }}>
           {role === 'ADMIN' && (
             <button
               className={styles.createnotilist}
@@ -55,6 +102,7 @@ const Noti = () => {
               등록
             </button>
           )}
+          </div>
         </div>
       </Frame>
 

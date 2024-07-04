@@ -38,23 +38,26 @@ const ReviewList = () => {
             작성된 리뷰
           </div>
         </div>
-        <div className={styles.adminPageList}>
+        <div className={styles.listHeader}>
+          <div className={styles.resNo}>번호</div>
+          <div className={styles.resUserName}>회원명</div>
           <div
-            className={`${styles.adminList} ${styles.review}`}
+            className={styles.resSelectedAd}
+            style={{
+              fontSize: '0.83em',
+              lineHeight: '31px',
+            }}
           >
-            <div className={styles.listHeader}>
-              <div className={styles.resNo}>리뷰번호</div>
-              <div className={styles.resUserName}>
-                회원명
-              </div>
-              <div className={styles.resSelectedName}>
-                리뷰내용
-              </div>
-              <div className={styles.resSelectedTime}>
-                작성날짜
-              </div>
-              <div className={styles.hiddenText}></div>
-            </div>
+            충전소/렌트카
+          </div>
+          <div className={styles.resSelectedName}>리뷰내용</div>
+          <div className={styles.resSelectedTime}>작성날짜</div>
+          <div className={styles.hiddenText}></div>
+        </div>
+        <div className={styles.adminPageSelect}>
+          <div className={`${styles.adminList} ${styles.review}`}>
+
+
             <ReviewMap />
           </div>
           {selected === 'station' && (
