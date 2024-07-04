@@ -6,7 +6,6 @@ import React, {
 import './Modal2.scss';
 import axios from 'axios';
 import axiosInstance from '../../../../config/axios-config';
-import { CarContext } from '../../../../contexts/CarContext';
 import AuthContext from '../../../../util/AuthContext';
 
 const Modal2 = ({ onClose, onSave, selectedType }) => {
@@ -132,32 +131,57 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
       return;
     }
 
-    const reviewData = {
-      content,
-      rating,
-      carId: selectedItem,
-    };
+    if (selectedType !== 'rental') {
+      const reviewChargeData = {
+        content,
+        rating,
+        stationName: selectedItem,
+      };
 
-    try {
-      const response = await axiosInstance.post(
-        'http://localhost:8181/review/charge',
-        reviewData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
+      try {
+        const response = await axiosInstance.post(
+          'http://localhost:8181/review/charge',
+          reviewChargeData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
           },
-        },
-      );
-      setReviewList([...reviewList, response.data]);
-      alert('리뷰 작성이 완성되었습니다.');
-      onSave(content, selectedItem, rating);
-    } catch (err) {
-      setError(err.message);
-      alert('리뷰 등록에 실패하였습니다.');
-    }
+        );
+        setReviewList([...reviewList, response.data]);
+        alert('리뷰 작성이 완성되었습니다.');
+        onSave(content, selectedItem, rating);
+      } catch (err) {
+        setError(err.message);
+        alert('리뷰 등록에 실패하였습니다.');
+      }
+    } else {
+      const reviewCarData = {
+        content,
+        rating,
+        carName: selectedItem,
+      };
 
-    onSave(content, selectedItem, rating); // 부모 컴포넌트에 후기 저장 요청
+      try {
+        const response = await axiosInstance.post(
+          'http://localhost:8181/review/car',
+          reviewCarData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          },
+        );
+        setReviewList([...reviewList, response.data]);
+        alert('리뷰 작성이 완성되었습니다.');
+        onSave(content, selectedItem, rating);
+      } catch (err) {
+        setError(err.message);
+        alert('리뷰 등록에 실패하였습니다.');
+      }
+    }
     setContent(''); // 폼 초기화
     setSelectedItem(''); // 폼 초기화
     setRating(1); // 폼 초기화
