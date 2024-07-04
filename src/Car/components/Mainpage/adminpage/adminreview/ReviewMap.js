@@ -82,12 +82,14 @@ const ReviewMap = () => {
             <div className='res-no'>{e.reviewNo}</div>
             <div className='res-user-name'>
               <div>{e.name}</div>
+              <div>{e.email}</div>
             </div>
             <div className='res-user-no'></div>
-            <div className='res-station-name'>
+            <div className='res-selected-name'>
               {truncateText(e.content, 50)}
             </div>
-            <div className='res-station-time'>
+            <div className='res-selected-ad'>1</div>
+            <div className='res-selected-time'>
               <div>{formatRentTime(e.updateDate)}</div>
             </div>
             <button

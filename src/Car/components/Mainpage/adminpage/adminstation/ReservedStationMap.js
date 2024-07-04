@@ -129,16 +129,17 @@ const ReservedStationMap = () => {
       <>
         {stations.map((e) => (
           <div className='list-body' key={e.reservationNo}>
-            <div className='res-no'>{e.reservationNo}</div>
+            <div className='res-no'>{e.chargeNo}</div>
             <div className='res-user-name'>
               <div>{e.name}</div>
               <div>{e.phoneNumber}</div>
             </div>
             <div className='res-user-no'></div>
-            <div className='res-station-name'>
+            <div className='res-selected-name'>
               {truncateText(e.stationName, 20)}
             </div>
-            <div className='res-station-time'>
+            <div className='res-selected-ad'>1</div>
+            <div className='res-selected-time'>
               <div>{formatRentTime(e.rentTime)}</div>
               <div>
                 ~ {formatRentEndTime(e.rentTime, e.time)}

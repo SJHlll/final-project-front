@@ -39,11 +39,12 @@ const ReviewList = () => {
         <div className='admin-page-list'>
           <div className='admin-list review'>
             <div className='list-header'>
-              <div className='res-no'>리뷰번호</div>
+              <div className='res-no'>번호</div>
               <div className='res-user-name'>회원명</div>
               <div className='res-selected-name'>
                 리뷰내용
               </div>
+              <div className='res-selected-ad'>무언가</div>
               <div className='res-selected-time'>
                 작성날짜
               </div>

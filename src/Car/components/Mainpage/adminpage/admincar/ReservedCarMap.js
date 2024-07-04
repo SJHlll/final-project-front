@@ -70,10 +70,11 @@ const ReservedCarMap = () => {
               <div>{e.phoneNumber}</div>
             </div>
             <div className='res-user-no'></div>
-            <div className='res-station-name'>
+            <div className='res-selected-name'>
               {truncateText(e.stationName, 20)}
             </div>
-            <div className='res-station-time'>
+            <div className='res-selected-ad'>1</div>
+            <div className='res-selected-time'>
               <div>{formatRentTime(e.rentTime)}</div>
               <div>
                 ~ {formatRentEndTime(e.rentTime, e.time)}

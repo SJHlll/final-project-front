@@ -39,9 +39,10 @@ const ReservedCarList = () => {
       <div className='admin-page-list'>
         <div className='admin-list reserve-car'>
           <div className='list-header'>
-            <div className='res-no'>예약번호</div>
+            <div className='res-no'>번호</div>
             <div className='res-user-name'>회원명</div>
             <div className='res-selected-name'>차종</div>
+            <div className='res-selected-ad'>무언가</div>
             <div className='res-selected-time'>
               렌트기간
             </div>

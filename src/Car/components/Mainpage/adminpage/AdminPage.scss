@@ -97,19 +97,23 @@
             border-bottom: 2px solid black;
 
             .res-no {
-                width: 7%;
+                width: 5%;
             }
 
             .res-user-name {
-                width: 18%;
+                width: 20%;
             }
 
             .res-selected-name {
                 width: 35%;
             }
 
+            .res-selected-ad {
+                width: 10%;
+            }
+
             .res-selected-time {
-                width: 30%;
+                width: 20%;
             }
 
             .hidden-text {
@@ -126,19 +130,23 @@
             border-bottom: 1px solid #aaa;
 
             .res-no {
-                width: 7%;
+                width: 5%;
             }
 
             .res-user-name {
-                width: 18%;
+                width: 20%;
             }
 
-            .res-station-name {
+            .res-selected-name {
                 width: 35%;
             }
 
-            .res-station-time {
-                width: 30%;
+            .res-selected-ad {
+                width: 10%;
+            }
+
+            .res-selected-time {
+                width: 20%;
             }
 
             .res-cancel-btn {
