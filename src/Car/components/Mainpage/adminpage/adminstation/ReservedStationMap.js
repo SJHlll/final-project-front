@@ -130,7 +130,10 @@ const ReservedStationMap = () => {
     return (
       <>
         {stations.map((e) => (
-          <div className={styles.listBody} key={e.reservationNo}>
+          <div
+            className={styles.listBody}
+            key={e.reservationNo}
+          >
             <div className={styles.resNo}>{e.chargeNo}</div>
             <div className={styles.resUserName}>
               <div>{e.name}</div>

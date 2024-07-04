@@ -5,9 +5,8 @@ import React, {
 } from 'react';
 import { TestRvContext } from './TestRvContext';
 import AuthContext from '../../../../../util/AuthContext';
-import { TestRvContext } from './TestRvContext';
 import styles from '../AdminPage.module.scss';
-import { badWords } from './badWords';
+import { badwords, badWords } from './badWords';
 
 const ReviewMap = () => {
   const { review, setReview } = useContext(TestRvContext);
@@ -173,7 +172,7 @@ const ReviewMap = () => {
               {truncateText(e.content, 50)}
             </div>
             <div className={styles.resSelectedTime}>
-              <div>{formatRentTime(e.updateDate)}</div>
+              <div>{formatTime(e.updateDate)}</div>
             </div>
             <div className={styles.spaceBlank}>
               <button

@@ -30,18 +30,13 @@ const CarResInfo = ({ pickup, returning }) => {
   return (
     <>
       <div className={styles.resInfo}>
-        <div className={styles.resName}>이름: ooo</div>
+        <div className={styles.resName}>이름: {}</div>
         <div className={styles.phonNumber}>
-          전화번호: 010-0000-0000
+          {' '}
+          전화번호: {}
         </div>
-        <div>자동차 정보</div>
-        <div>볼보 뭐시깽이</div>
-        <div className={styles.date}>
-      <div className='resInfo'>
-        <div className='resName'>이름: {}</div>
-        <div className='phonNumber'>전화번호: {}</div>
         <div>예약하실 자동차: {selectedCar.carName}</div>
-        <div className='date'>
+        <div className={styles.date}>
           픽업 날짜: {formatDate(pickup.date)}
         </div>
         <div className={styles.date}>
