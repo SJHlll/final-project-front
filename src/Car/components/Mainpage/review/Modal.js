@@ -41,7 +41,7 @@ const Modal = ({ review, onClose }) => {
           </span>{' '}
           {/* 리뷰 날짜 */}
         </div>
-        <h3>{review.name}</h3> {/* 리뷰 이름 */}
+        <h3>{review.stationName}</h3> {/* 리뷰 이름 */}
         <div className='rating'>
           {fullStars} {/* 꽉 찬 별 배열 */}
           {emptyStars} {/* 빈 별 배열 */}

@@ -1,43 +1,88 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReviewItem from './ReviewItem';
 import Modal from './Modal';
 import Modal2 from './Modal2'; // Modal2 가져오기
 import './ReviewPage.scss';
 
-const ReviewPage = () => {
-  const generateDummyReviews = (type, count) => {
-    const reviews = [];
-    const baseImageUrl =
-      type === 'rental'
-        ? 'https://www.economicpost.co.kr/imgdata/economicpost_co_kr/202304/2023041259109115.jpg'
-        : 'https://image.zdnet.co.kr/2021/03/23/207af597d815193c998b06d41b704937.jpg';
-
-    for (let i = 1; i <= count; i++) {
-      reviews.push({
-        id: i,
-        imageUrl: baseImageUrl,
-        name: `${type === 'rental' ? '렌트카' : '충전소'} ${i}`,
-        rating: Math.floor(Math.random() * (5 - 1 + 1)) + 1,
-        content: `후기 내용 ${type === 'rental' ? '렌트카' : '충전소'} ${i}`,
-        date: new Date().toLocaleDateString(),
-        item: `${type === 'rental' ? '차량' : '충전소'} ${i}`,
-      });
-    }
-
-    return reviews;
-  };
-
+const ReviewPage = ({ ReviewList }) => {
   const [selectedType, setSelectedType] =
     useState('rental');
   const [selectedReview, setSelectedReview] =
     useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [reviews, setReviews] = useState({
-    rental: generateDummyReviews('rental', 50),
-    charging: generateDummyReviews('charging', 50),
+    rental: ReviewList
+      ? ReviewList.filter(
+          (review) => review.type === 'rental',
+        )
+      : [],
+    charging: ReviewList
+      ? ReviewList.filter(
+          (review) => review.type === 'charging',
+        )
+      : [],
   });
   const reviewsPerPage = 12;
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [reviewList, setReviewList] = useState([]);
+
+  useEffect(() => {
+    const fetchChargeReviews = async () => {
+      try {
+        // const token = localStorage.getItem('ACCESS_TOKEN');
+        const response = await fetch(
+          'http://localhost:8181/review/list',
+          {
+            method: 'GET',
+            headers: {
+              // Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          },
+        );
+        if (!response.ok) {
+          throw new Error('Failed to fetch reviews');
+        }
+        const data = await response.json();
+        setReviewList(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (selectedType !== 'rental') {
+      fetchChargeReviews();
+    }
+  }, [selectedType]);
+
+  useEffect(() => {
+    const fetchChargeReviews = async () => {
+      try {
+        // const token = localStorage.getItem('ACCESS_TOKEN');
+        const response = await fetch(
+          'http://localhost:8181/review/list',
+          {
+            method: 'GET',
+            headers: {
+              // Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          },
+        );
+        if (!response.ok) {
+          throw new Error('Failed to fetch reviews');
+        }
+        const data = await response.json();
+        setReviewList(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (selectedType === 'rental') {
+      fetchChargeReviews();
+    }
+  }, [selectedType]);
 
   const handleTypeChange = (type) => {
     setSelectedType(type);
@@ -91,10 +136,10 @@ const ReviewPage = () => {
     setIsModalOpen(false);
   };
 
-  const currentReviews = reviews[selectedType].slice(
-    (currentPage - 1) * reviewsPerPage,
-    currentPage * reviewsPerPage,
-  );
+  // const currentReviews = reviews[selectedType].slice(
+  //   (currentPage - 1) * reviewsPerPage,
+  //   currentPage * reviewsPerPage,
+  // );
 
   return (
     <div className='review-page'>
@@ -123,7 +168,7 @@ const ReviewPage = () => {
         후기 작성
       </button>
       <div className='review-list'>
-        {currentReviews.map((review) => (
+        {reviewList.map((review) => (
           <ReviewItem
             key={review.id}
             review={review}
