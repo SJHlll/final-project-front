@@ -55,6 +55,9 @@ const ReviewMap = () => {
 
   // ?글자 이상 시 ... 처리
   const truncateText = (text, length) => {
+    if (!text) {
+      return '';
+    }
     if (text.length > length) {
       return text.substring(0, length) + '...';
     }
@@ -84,11 +87,16 @@ const ReviewMap = () => {
               <div>{e.name}</div>
               <div>{e.email}</div>
             </div>
-            <div className='res-user-no'></div>
-            <div className='res-selected-name'>
-              {truncateText(e.content, 50)}
+            <div className='res-selected-ad'>
+              {e.carName && e.carName.length > 1
+                ? truncateText(e.carName, 14)
+                : e.stationName && e.stationName.length > 1
+                  ? truncateText(e.stationName, 14)
+                  : null}
             </div>
-            <div className='res-selected-ad'>1</div>
+            <div className='res-selected-name'>
+              {truncateText(e.content, 35)}
+            </div>
             <div className='res-selected-time'>
               <div>{formatRentTime(e.updateDate)}</div>
             </div>

@@ -105,6 +105,9 @@ const ReservedStationMap = () => {
 
   // ?글자 이상 시 ... 처리
   const truncateText = (text, length) => {
+    if (!text) {
+      return '';
+    }
     if (text.length > length) {
       return text.substring(0, length) + '...';
     }
@@ -134,7 +137,6 @@ const ReservedStationMap = () => {
               <div>{e.name}</div>
               <div>{e.phoneNumber}</div>
             </div>
-            <div className='res-user-no'></div>
             <div className='res-selected-name'>
               {truncateText(e.stationName, 20)}
             </div>
