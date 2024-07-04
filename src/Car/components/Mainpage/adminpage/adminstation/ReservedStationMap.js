@@ -50,7 +50,6 @@ const ReservedStationMap = () => {
     try {
       const token = localStorage.getItem('ACCESS_TOKEN');
       const response = await fetch(
-        // 마이페이지에 예약번호 기준으로 예약 취소되는거 훔쳐옴.
         `http://localhost:8181/mypage?reservationNo=${reservationNo}`,
         {
           method: 'DELETE',
@@ -85,7 +84,7 @@ const ReservedStationMap = () => {
       day: '2-digit',
       hour: '2-digit',
       minute: 'numeric',
-      hour12: true,
+      hour12: false,
     });
   };
 
@@ -99,7 +98,7 @@ const ReservedStationMap = () => {
       day: '2-digit',
       hour: '2-digit',
       minute: 'numeric',
-      hour12: true,
+      hour12: false,
     });
   };
 
@@ -132,7 +131,7 @@ const ReservedStationMap = () => {
       <>
         {stations.map((e) => (
           <div className='list-body' key={e.reservationNo}>
-            <div className='res-no'>{e.chargeNo}</div>
+            <div className='res-no'>{e.reservationNo}</div>
             <div className='res-user-name'>
               <div>{e.name}</div>
               <div>{e.phoneNumber}</div>
@@ -172,7 +171,26 @@ const ReservedStationMap = () => {
   return (
     <>
       {role === 'ADMIN' && reserveStation.length > 0 ? (
-        <AdminContents stations={filteredStations} />
+        <>
+          <AdminContents stations={filteredStations} />
+          <input
+            className='admin-filter'
+            type='text'
+            placeholder='전화번호 뒷자리 4개 입력'
+            value={filterPhoneNumber}
+            onChange={(e) =>
+              setFilterPhoneNumber(e.target.value)
+            }
+            maxLength='4'
+          />
+          <p className='filtered-count'>
+            예약된 충전소 :{' '}
+            <span className='filtered-num'>
+              {filteredStations.length}
+            </span>
+            개
+          </p>
+        </>
       ) : (
         <div
           style={{
@@ -180,20 +198,11 @@ const ReservedStationMap = () => {
             marginTop: '100px',
             fontSize: '1.5rem',
           }}
+          onClick={() => console.log(filteredStations)}
         >
           예약된 충전소가 없습니다.
         </div>
       )}
-      <input
-        className='admin-filter'
-        type='text'
-        placeholder='전화번호 뒷자리 4개 입력'
-        value={filterPhoneNumber}
-        onChange={(e) =>
-          setFilterPhoneNumber(e.target.value)
-        }
-        maxLength='4'
-      />
     </>
   );
 };

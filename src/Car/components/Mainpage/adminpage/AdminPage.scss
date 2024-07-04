@@ -173,10 +173,35 @@
             font-size: 0.8em;
         }
 
+        .filtered-count {
+            position: absolute;
+            top: 120px;
+            left: 280px;
+            font-size: 0.8em;
+
+            .filtered-num {
+                font-size: 1.1rem;
+            }
+        }
+
         .admin-filter2 {
             position: absolute;
             top: 125px;
-            left: 280px;
+            right: 370px;
+            font-size: 0.8em;
+        }
+
+        .admin-filter3 {
+            position: absolute;
+            top: 125px;
+            right: 250px;
+            font-size: 0.8em;
+        }
+
+        .admin-filter4 {
+            position: absolute;
+            top: 125px;
+            right: 150px;
             font-size: 0.8em;
         }
     }
