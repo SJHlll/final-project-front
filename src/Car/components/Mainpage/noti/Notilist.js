@@ -150,6 +150,18 @@ const Notilist = ({ notiList, fetchNotiList }) => {
     }
   };
 
+  const formatTime = (time) => {
+    const date = new Date(time);
+    return date.toLocaleString('ko-KR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: 'numeric',
+      hour12: false,
+    });
+  };
+
   return (
     <>
       <header
@@ -191,7 +203,7 @@ const Notilist = ({ notiList, fetchNotiList }) => {
               </div>
               <div style={{ width: '10%' }}>{'관리자'}</div>
               <div style={{ width: '20%' }}>
-                {list.regDate}
+                {formatTime(list.regDate)}
               </div>
               <div style={{ width: '15%' }}>
                 {list.views}

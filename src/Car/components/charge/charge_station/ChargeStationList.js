@@ -69,16 +69,17 @@ const ChargeStationList = () => {
   const filteredStations = stations.filter((station) => {
     // 데이터베이스 주소, 시/도 매치
     const isAreaMatch = selectedArea
-      ? station.address.includes(selectedArea)
+      ? station.province === selectedArea
       : true;
     // 데이터베이스 주소, 시/군/구 매치
     const isSubAreaMatch = selectedSubArea
-      ? station.address.includes(selectedSubArea)
+      ? station.districts === selectedSubArea
       : true;
     // 데이터베이스 이름, 검색어 매치
     const isFacilityMatch = facilitySearch
       ? station.stationName.includes(facilitySearch)
       : true;
+    // 이용 가능한 충전소 필터
     const isAvailableMatch = isAvailableOnly
       ? station.available === '이용가능'
       : true;
