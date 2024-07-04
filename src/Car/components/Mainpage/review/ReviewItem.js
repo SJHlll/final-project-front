@@ -47,7 +47,9 @@ const ReviewItem = ({ review, onMoreClick }) => {
         </div>
         <h2>충전소: {review.stationName}</h2>
         {/* 리뷰 날짜 */}
-        <span className={styles.reviewDate}>{review.date}</span>
+        <span className={styles.reviewDate}>
+          {review.date}
+        </span>
         {/* 리뷰 내용 (길이 제한 적용) */}
         <p>{truncateContent(review.content, 30)}</p>
       </div>

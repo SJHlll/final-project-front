@@ -80,8 +80,8 @@
                 transform: translateY(-5px);
             }
 
-          .imageContainer {
-          
+            .imageContainer {
+
 
                 border: 1px solid lightgray;
                 border-radius: 8px;
@@ -97,12 +97,12 @@
                 }
             }
 
-            .contentContainer  {
+            .contentContainer {
                 display: flex;
                 flex-wrap: wrap;
                 border-top: 1px solid lightgray;
 
-              .nameRating {
+                .nameRating {
                     margin-top: 5px;
                     display: flex;
                     // flex: wrap;
