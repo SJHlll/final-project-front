@@ -9,7 +9,7 @@ import '../../../../scss/Button.scss';
 import AuthContext from '../../../../util/AuthContext';
 import axios from 'axios';
 
-const Notilist = () => {
+const Notilist = ({ notiList, fetchNotiList }) => {
   // const currentDate = new Date();
   // const year = currentDate.getFullYear();
   // const month = currentDate.getMonth() + 1;
@@ -118,38 +118,36 @@ const Notilist = () => {
   //   });
   // };
 
-  const [notiList, setNotiList] = useState([]);
-  const [error, setError] = useState(null);
+  // const handleHitClick = (list) => {
+  //   const updatedNoti = { ...list, views: list.views + 1 };
+  //   navigate(`${updatedNoti.notiId}`, {
+  //     state: {
+  //       header: updatedNoti.notiTitle,
+  //       contents: updatedNoti.notiContent,
+  //       hits: updatedNoti.views,
+  //     },
+  //   });
+  // };
+
   const navigate = useNavigate();
-  const { token } = useContext(AuthContext);
 
-  const fetchNotiList = async () => {
+  const handleHitClick = async (list) => {
     try {
-      const response = await axios.get(
-        'http://localhost:8181/noti/info',
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
+      await axios.patch(
+        `http://localhost:8181/noti/views/${list.notiId}`,
       );
-      setNotiList(response.data);
+      fetchNotiList();
+      navigate(`${list.notiId}`, {
+        state: {
+          header: list.notiTitle,
+          contents: list.notiContent,
+          views: list.views + 1,
+          notiId: list.notiId,
+        },
+      });
     } catch (err) {
-      setError(err.message);
+      console.error('Error updating views: ', err.message);
     }
-  };
-
-  useEffect(() => {
-    fetchNotiList();
-  }, []);
-
-  const handleHitClick = (noti) => {
-    const updatedNoti = { ...noti, hits: noti.hits + 1 };
-    navigate(`/noti/${updatedNoti.num}`, {
-      state: {
-        header: updatedNoti.header,
-        contents: updatedNoti.contents,
-        hits: updatedNoti.hits,
-      },
-    });
   };
 
   return (
@@ -168,9 +166,6 @@ const Notilist = () => {
       >
         이용방법
       </header>
-      {error && (
-        <p style={{ color: 'red' }}> Error: {error}</p>
-      )}
       <div className='noticontent'>
         <div className='notibody'>
           <div style={{ width: '10%' }}>글번호</div>
@@ -179,24 +174,30 @@ const Notilist = () => {
           <div style={{ width: '20%' }}>작성일</div>
           <div style={{ width: '15%' }}>조회수</div>
         </div>
-        {notiList.map((noti) => (
-          <div className='notilist' key={noti.num}>
-            <div style={{ width: '10%' }}>{noti.num}</div>
-            <div
-              onClick={() => handleHitClick(noti)}
-              style={{ width: '45%', cursor: 'pointer' }}
-            >
-              {noti.header}
+        {Array.isArray(notiList) &&
+          notiList.map((list) => (
+            <div className='notilist' key={list.notiId}>
+              <div style={{ width: '10%' }}>
+                {list.notiId}
+              </div>
+              <div
+                onClick={() => handleHitClick(list)}
+                style={{
+                  width: '45%',
+                  cursor: 'pointer',
+                }}
+              >
+                {list.notiTitle}
+              </div>
+              <div style={{ width: '10%' }}>{'관리자'}</div>
+              <div style={{ width: '20%' }}>
+                {list.regDate}
+              </div>
+              <div style={{ width: '15%' }}>
+                {list.views}
+              </div>
             </div>
-            <div style={{ width: '10%' }}>
-              {noti.writer}
-            </div>
-            <div style={{ width: '20%' }}>
-              {noti.datetime}
-            </div>
-            <div style={{ width: '15%' }}>{noti.hits}</div>
-          </div>
-        ))}
+          ))}
       </div>
     </>
   );

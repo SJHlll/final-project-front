@@ -1,5 +1,13 @@
-import React, { useContext, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+} from 'react-router-dom';
 import Frame from '../Frame';
 import './NotiPage.scss';
 import AuthContext from '../../../../util/AuthContext';
@@ -7,7 +15,8 @@ import axios from 'axios';
 
 const NotiPage = () => {
   const location = useLocation();
-  const { header, contents, hits } = location.state || {};
+  const { header, contents, views, notiId } =
+    location.state || {};
   const navigate = useNavigate();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -18,8 +27,19 @@ const NotiPage = () => {
     useState(header);
   const [currentContents, setCurrentContents] =
     useState(contents);
+  const [currentViews, setCurrentViews] = useState(views);
 
-  const { role, token } = useContext(AuthContext);
+  const { role } = useContext(AuthContext);
+  const token = localStorage.getItem('ACCESS_TOKEN');
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (!id) {
+      console.error('Noti Id 없습니다.');
+      navigate('/noti');
+    }
+  }, [notiId, navigate]);
 
   const click = () => {
     navigate('/noti');
@@ -32,10 +52,11 @@ const NotiPage = () => {
   const saveUpdateHandler = async () => {
     try {
       const response = await axios.patch(
-        `/noti/${location.state.num}`,
+        `http://localhost:8181/noti/${id}`,
         {
-          header: editedHeader,
-          contents: editedContents,
+          notiId,
+          notiTitle: editedHeader,
+          notiContent: editedContents,
         },
         {
           headers: {
@@ -43,9 +64,11 @@ const NotiPage = () => {
           },
         },
       );
-      setCurrentHeader(response.data.header);
-      setCurrentContents(response.data.contents);
+      // setCurrentHeader(response.data.notiTitle);
+      // setCurrentContents(response.data.notiContent);
       setIsEditing(false);
+      alert('수정 완료!');
+      navigate('/noti/' + id);
     } catch (err) {
       console.error('Error updating notification:', err);
     }
@@ -53,16 +76,42 @@ const NotiPage = () => {
 
   const deleteNotiHandler = async () => {
     try {
-      await axios.delete(`/noti/${location.state.num}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      await axios.delete(
+        `http://localhost:8181/noti/${notiId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
+      alert('삭제 완료');
       navigate('/noti');
     } catch (err) {
       console.error('Error deleting notification:', err);
     }
   };
+
+  const getNotiInfo = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8181/noti/info/${id}`,
+      );
+      setCurrentHeader(response.data.notiList[0].notiTitle);
+      setCurrentContents(
+        response.data.notiList[0].notiContent,
+      );
+      setCurrentViews(response.data.notiList[0].views);
+    } catch (err) {
+      console.error(
+        'Error getting notification info:',
+        err,
+      );
+    }
+  };
+
+  useEffect(() => {
+    getNotiInfo();
+  }, [notiId]);
 
   return (
     <Frame>
@@ -97,8 +146,15 @@ const NotiPage = () => {
               <h1 className='Notiheader'>
                 제목 : {currentHeader}
               </h1>
-              <p className='Notihits'>조회수: {hits}</p>
-              <p className='Notibody'>{currentContents}</p>
+              <p className='Notihits'>
+                조회수: {currentViews}
+              </p>
+              <p
+                className='Notibody'
+                style={{ whiteSpace: 'pre-wrap' }}
+              >
+                {currentContents}
+              </p>
             </>
           )}
           <div
@@ -113,7 +169,7 @@ const NotiPage = () => {
             <button className='notibtn' onClick={click}>
               이전
             </button>
-            {role === 'COMMON' &&
+            {/* {role === 'COMMON' &&
               (isEditing ? (
                 <button
                   className='notibtn'
@@ -126,9 +182,9 @@ const NotiPage = () => {
                   className='notibtn'
                   onClick={updateHandler}
                 >
-                  수정이가능
+                  수정불가능
                 </button>
-              ))}
+              ))} */}
             {role === 'ADMIN' && (
               <>
                 <button
@@ -149,7 +205,7 @@ const NotiPage = () => {
                     className='notibtn'
                     onClick={updateHandler}
                   >
-                    수정불가
+                    수정
                   </button>
                 )}
               </>

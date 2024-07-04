@@ -28,7 +28,7 @@ const Noti = () => {
   const [Create, setCreate] = useState(false);
   const [NotiTitle, setNotiTitle] = useState('');
   const [NotiContent, setNotiContent] = useState('');
-  const { role, token } = useContext(AuthContext);
+  const { role } = useContext(AuthContext);
   const [notiList, setNotiList] = useState([]);
   const [error, setError] = useState(null);
 
@@ -41,13 +41,14 @@ const Noti = () => {
   // };
 
   const handleSubmit = async (e) => {
+    const token = localStorage.getItem('ACCESS_TOKEN');
     e.preventDefault();
     try {
       const response = await axios.post(
         'http://localhost:8181/noti',
         {
-          title: NotiTitle,
-          content: NotiContent,
+          notiTitle: NotiTitle,
+          notiContent: NotiContent,
         },
         {
           headers: {
@@ -56,37 +57,30 @@ const Noti = () => {
         },
       );
       setNotiList([...notiList, response.data]);
-      console.log('게시물이 등록 되었습니다.');
-      setNotiTitle('');
-      setNotiContent('');
+      alert('게시물이 등록 되었습니다.');
       setCreate(false);
     } catch (err) {
       setError(err.message);
-      console.log('등록이 실패하였습니다.');
-      console.log(err.message);
+      alert('등록이 실패하였습니다.');
+      console.error(err.message);
     }
   };
 
   const fetchNotiList = async () => {
     try {
       const response = await axios.get(
-        'http://localhost:8181/car/info',
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
+        'http://localhost:8181/noti/info',
       );
-      setNotiList(response.data);
+      setNotiList(response.data.notiList);
     } catch (err) {
       setError(err.message);
-      console.log(err.message);
+      console.error(err.message);
     }
   };
 
   useEffect(() => {
     fetchNotiList();
-  }, [token]);
+  }, []);
 
   const cancelcreatenoti = () => {
     alert('등록이 취소되었습니다.');
@@ -101,7 +95,10 @@ const Noti = () => {
     <>
       <Frame>
         <div className='notiline'>
-          <Notilist notiList={notiList} />
+          <Notilist
+            notiList={notiList}
+            fetchNotiList={fetchNotiList}
+          />
           <div style={{ display: 'flex' }}>
             {role === 'ADMIN' && (
               <button
