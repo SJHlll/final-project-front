@@ -30,6 +30,7 @@ const ReviewPage = ({ ReviewList }) => {
   // 컴포넌트 마운트 시 리뷰 데이터를 가져오는 useEffect
   useEffect(() => {
     const fetchReviews = async () => {
+    const fetchReviews = async () => {
       try {
         const response = await fetch(
           'http://localhost:8181/review/list', // 리뷰 리스트를 가져오는 API 엔드포인트
@@ -169,6 +170,7 @@ const ReviewPage = ({ ReviewList }) => {
           <ReviewItem
             key={review.id}
             review={review}
+            selectedType={selectedType}
             onMoreClick={handleMoreClick}
           />
         ))}
@@ -178,6 +180,9 @@ const ReviewPage = ({ ReviewList }) => {
         {Array.from(
           {
             length: Math.ceil(
+              (selectedType === 'rental'
+                ? rentalReviews.length
+                : chargingReviews.length) / reviewsPerPage,
               (selectedType === 'rental'
                 ? rentalReviews.length
                 : chargingReviews.length) / reviewsPerPage,

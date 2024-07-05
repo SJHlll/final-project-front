@@ -1,7 +1,11 @@
 import React from 'react';
 import styles from './ReviewPage.module.scss';
 // ReviewItem 컴포넌트: 리뷰 항목을 렌더링하는 컴포넌트
-const ReviewItem = ({ review, onMoreClick }) => {
+const ReviewItem = ({
+  review,
+  onMoreClick,
+  seletedType,
+}) => {
   // 긴 리뷰 내용을 특정 길이로 자르는 함수
   const truncateContent = (content, maxLength) => {
     if (content.length > maxLength) {
@@ -24,7 +28,12 @@ const ReviewItem = ({ review, onMoreClick }) => {
       {/* 내용 컨테이너 */}
       <div className={styles.contentContainer}>
         {/* 이름 및 평점 */}
-        <div className={styles.nameRating}>
+        {seletedType === 'rental' ? (
+          <div>{review.carName}</div>
+        ) : (
+          <div>{review.stationName}</div>
+        )}
+        <div className='name-rating'>
           {/* 평점 표시 */}
           <div className={styles.rating}>
             {/* 이름 */}
