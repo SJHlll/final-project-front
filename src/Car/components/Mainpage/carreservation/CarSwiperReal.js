@@ -49,8 +49,8 @@ const CarSwiperReal = () => {
   return (
     <Swiper
       modules={[Navigation, Pagination, Autoplay]}
-      spaceBetween={60}
-      slidesPerView={3}
+      spaceBetween={1}
+      slidesPerView={5}
       navigation
       pagination={{
         clickable: true,
