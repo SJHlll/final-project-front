@@ -5,7 +5,7 @@
     justify-content: center;
     position: fixed;
     height: auto;
-    overflow-y: hidden;
+    overflow: hidden;
   }
   
   .contentline{
@@ -14,7 +14,7 @@
     height: 100%;
     background-size: contain;
     background-color: white;
-    border-radius: 15px;
+    // border-radius: 15px;
     overflow: hidden;
     padding-top: 0;
     // background-color: gray;
