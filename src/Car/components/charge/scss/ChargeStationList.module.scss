@@ -1,6 +1,7 @@
 .ListContainer {
   width: 100%;
-  max-height: 65vh;
+  max-height: 669px;
+  border-bottom: 1px solid #aaa;
   // background-color: rgb(143, 178, 255);
   overflow-y: auto;
 
@@ -42,6 +43,7 @@
         span {
           cursor: pointer;
         }
+
         span:hover {
           color: blue;
         }
@@ -57,6 +59,7 @@
           color: black;
           text-decoration: none;
         }
+
         a:hover {
           color: blue;
           text-decoration: underline;
@@ -74,6 +77,7 @@
         font-size: 0.8rem;
         margin-bottom: 5px;
       }
+
       div:nth-child(2) {
         margin-bottom: 5px;
       }

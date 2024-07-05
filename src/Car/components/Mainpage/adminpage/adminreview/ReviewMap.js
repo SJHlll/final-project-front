@@ -159,7 +159,13 @@ const ReviewMap = () => {
             <div className={styles.resNo}>{e.reviewNo}</div>
             <div className={styles.resUserName}>
               <div>{e.name}</div>
-              <div>{truncateText(e.email, 20)}</div>
+              <div
+                style={{
+                  fontSize: '0.9em',
+                }}
+              >
+                {truncateText(e.email, 20)}
+              </div>
             </div>
             <div className={styles.resSelectedAd}>
               {e.carName && e.carName.length > 1

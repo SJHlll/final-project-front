@@ -10,6 +10,7 @@ import { Modal, ModalBody } from 'reactstrap';
 import styled from 'styled-components';
 import AuthContext from '../../../../util/AuthContext';
 import axios from 'axios';
+import { redirect } from 'react-router-dom';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -57,7 +58,8 @@ const Noti = () => {
       );
       setNotiList([...notiList, response.data]);
       alert('게시물이 등록 되었습니다.');
-      setCreate(false);
+      // setCreate(false);
+      window.location.reload(); // F5, 글번호 제목 작성일 조회수 안보이던거 새로고침으로 보이게
     } catch (err) {
       setError(err.message);
       alert('등록이 실패하였습니다.');

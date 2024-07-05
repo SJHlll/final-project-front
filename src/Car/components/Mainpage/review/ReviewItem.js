@@ -4,7 +4,7 @@ import styles from './ReviewPage.module.scss';
 const ReviewItem = ({
   review,
   onMoreClick,
-  seletedType,
+  selectedType,
 }) => {
   // 긴 리뷰 내용을 특정 길이로 자르는 함수
   const truncateContent = (content, maxLength) => {
@@ -28,7 +28,7 @@ const ReviewItem = ({
       {/* 내용 컨테이너 */}
       <div className={styles.contentContainer}>
         {/* 이름 및 평점 */}
-        {seletedType === 'rental' ? (
+        {selectedType === 'rental' ? (
           <div>{review.carName}</div>
         ) : (
           <div>{review.stationName}</div>
