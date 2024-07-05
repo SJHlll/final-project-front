@@ -35,6 +35,7 @@ const CarInfo = () => {
           key={selectedCar.carId}
           style={{
             display: 'flex',
+            marginTop: '50px',
           }}
         >
           <img
