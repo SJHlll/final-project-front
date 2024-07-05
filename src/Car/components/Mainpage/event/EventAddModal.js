@@ -9,9 +9,6 @@ import { API_BASE_URL } from '../../../../config/host-config';
 import AuthContext from '../../../../util/AuthContext';
 import axiosInstance from '../../../../config/axios-config';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import React, { useState } from 'react';
-import styles from './EventAddModal.module.scss'; // CSS 파일 경로
 
 const EventAddModal = ({
   isOpen,
@@ -193,82 +190,59 @@ const EventAddModal = ({
   };
 
   return (
-    <div className={styles.modalOverlay}>
-      <div className={styles.modalContent}>
-        <span className={styles.close} onClick={toggle}>
-          ×
-        </span>
-        <h2>
-          {isEditMode ? '이벤트 수정' : '이벤트 추가'}
-        </h2>
-        <form
-          className={styles.formTop}
-          onSubmit={isEditMode ? updateHandler : handleSave}
-  if (!isOpen) return null;
-  return (
-    <div
-      className={styles.modalOverlay}
-      onClick={handleOutsideClick}
-    >
-      <div className={styles.modalContent}>
-        <span className={styles.close} onClick={onClose}>
-          ×
-        </span>
-        <h2>이벤트 추가</h2>
-        <form
-          className={styles.formTop}
-          onSubmit={handleSave}
-        >
-          <div className={styles.formGroup}>
-            <label htmlFor='title'>제목:</label>
-            <input
-              type='text'
-              id={styles.title}
-              name='title'
-              value={title}
-              onChange={handleTitleChange}
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <label
-              htmlFor='imageUpload'
-              className={styles.imageUploadLabel}
-              onClick={handleUploadClick}
-            >
-              upload
-            </label>
-            <input
-              type='file'
-              id={styles.imageUpload}
-              name='imageUpload'
-              accept='image/*'
-              onChange={handleImageChange}
-              className={styles.hiddenFileInput}
-              ref={$fileInputRef}
-            />
-            {imageName && (
-              <div className={styles.imageName}>
-                {imageName}
-              </div>
-            )}
-          </div>
-          {imagePreview && (
-            <div className={styles.imagePreview}>
-              <img src={imagePreview} alt='미리보기' />
+    <div className={styles.modalContent}>
+      <span className={styles.close}>×</span>
+      <h2>이벤트 추가</h2>
+      <form
+        className={styles.formTop}
+        onSubmit={handleSave}
+      >
+        <div className={styles.formGroup}>
+          <label htmlFor='title'>제목:</label>
+          <input
+            type='text'
+            id={styles.title}
+            name='title'
+            value={title}
+            onChange={handleTitleChange}
+          />
+        </div>
+        <div className={styles.formGroup}>
+          <label
+            htmlFor='imageUpload'
+            className={styles.imageUploadLabel}
+            onClick={handleUploadClick}
+          >
+            upload
+          </label>
+          <input
+            type='file'
+            id={styles.imageUpload}
+            name='imageUpload'
+            accept='image/*'
+            onChange={handleImageChange}
+            className={styles.hiddenFileInput}
+            ref={$fileInputRef}
+          />
+          {imageName && (
+            <div className={styles.imageName}>
+              {imageName}
             </div>
           )}
-          <div className={styles.formButtons}>
-            <button type='submit'>
-              {isEditMode ? '수정' : '저장'}
-            </button>
-            <button type='button' onClick={toggle}>
-            <button type='submit'>저장</button>
-            <button type='button' onClick={onClose}>
-              닫기
-            </button>
+        </div>
+        {imagePreview && (
+          <div className={styles.imagePreview}>
+            <img src={imagePreview} alt='미리보기' />
           </div>
-        </form>
-      </div>
+        )}
+        <div className={styles.formButtons}>
+          <button type='submit'>
+            {isEditMode ? '수정' : '저장'}
+          </button>
+          <button type='submit'>저장</button>
+          <button type='button'>닫기</button>
+        </div>
+      </form>
     </div>
   );
 };

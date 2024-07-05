@@ -15,7 +15,6 @@ import EventAddModal from './EventAddModal';
 import { Modal } from 'reactstrap';
 import Frame from '../Frame';
 
-
 const Event = () => {
   const redirection = useNavigate();
   const { onLogout } = useContext(AuthContext);
@@ -77,7 +76,6 @@ const Event = () => {
           <EventAddModal />
         </Modal>
       )}
-      </div>
     </Frame>
   );
 };

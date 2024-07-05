@@ -1,13 +1,3 @@
-import React, {
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
-import styles from '../scss/MyPageCharge.module.scss';
-import { TestRvContext } from '../../Mainpage/adminpage/adminreview/TestRvContext';
-import AuthContext from '../../../../util/AuthContext';
-import { Modal } from 'reactstrap';
-import Modal2 from '../../Mainpage/review/Modal2';
 import React, { useContext, useEffect } from 'react';
 import styles from '../scss/MyPageCharge.module.scss';
 import { TestRvContext } from '../../Mainpage/adminpage/adminreview/TestRvContext';
@@ -16,7 +6,6 @@ import AuthContext from '../../../../util/AuthContext';
 const MyPageReview = () => {
   const { review, setReview } = useContext(TestRvContext);
   const { email } = useContext(AuthContext);
-  const [updateModal, setUpdateModal] = useState(false);
 
   // 날짜 / 시간
   const formatTime = (time) => {
@@ -102,8 +91,6 @@ const MyPageReview = () => {
     }
   };
 
-  const updateReview = () => setUpdateModal(true);
-
   return (
     <div className={styles.userReviewList}>
       {review.length > 0 ? (
@@ -164,27 +151,6 @@ const MyPageReview = () => {
                 >
                   삭제
                 </button>
-                <button
-                  className={styles.deleteButton}
-                  onClick={updateReview}
-                >
-                  수정
-                </button>
-              </div>
-            ))}
-            {updateModal && (
-              <Modal
-                isOpen={updateModal}
-                toggle={() => setUpdateModal(false)}
-              >
-                <Modal2
-                  isOpen={updateModal}
-                  toggle={() => setUpdateModal(false)}
-                  reviewNo={review.reviewNo}
-                  content={review.content}
-                />
-              </Modal>
-            )}
               </div>
             ))}
           </div>
