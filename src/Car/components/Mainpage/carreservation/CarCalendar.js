@@ -54,8 +54,8 @@ const CarCalendar = ({
           (1000 * 60 * 60 * 24) +
           1,
       );
-      console.log('Calculated Days Between:', daysBetween); // 디버깅용 콘솔 출력
       setDaysBetween(daysBetween); // 일 수를 설정
+      console.log('렌트기간: ', daysBetween, '일'); // 디버깅용 콘솔 출력
     }
   };
 
