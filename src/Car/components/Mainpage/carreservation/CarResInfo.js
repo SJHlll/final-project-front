@@ -1,6 +1,5 @@
 import styles from './reservation_css/CarResInfo.module.scss';
 import React, { useContext } from 'react';
-import './reservation_css/CarResInfo.scss';
 import { CarContext } from '../../../../contexts/CarContext';
 
 const CarResInfo = ({ pickup, returning }) => {

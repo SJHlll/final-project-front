@@ -7,7 +7,7 @@ import {
   USER,
 } from '../../../config/host-config';
 import ChargeFooter from '../charge/footer/ChargeFooter';
-
+import style from '../../../scss/Button.module.scss';
 const Testheader = () => {
   const navigate = useNavigate();
   const [state, setState] = useState(1);
@@ -97,7 +97,7 @@ const Testheader = () => {
           className={
             state === 6 ? styles.tabliactive : styles.tabli
           }
-          onClick={() => onClick(6, '/event')}
+          onClick={() => onClick(6, '/events')}
         >
           이벤트
         </button>
@@ -118,7 +118,10 @@ const Testheader = () => {
           마이페이지 {name}
         </button>
         {!isLoggedIn ? (
-          <button className='loginbtn' onClick={click}>
+          <button
+            className={styles.loginbtn}
+            onClick={click}
+          >
             로그인
           </button>
         ) : (

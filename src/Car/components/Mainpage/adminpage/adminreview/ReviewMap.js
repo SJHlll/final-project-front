@@ -6,7 +6,7 @@ import React, {
 import { TestRvContext } from './TestRvContext';
 import AuthContext from '../../../../../util/AuthContext';
 import styles from '../AdminPage.module.scss';
-import { badwords, badWords } from './badWords';
+import { badwords } from './badwords';
 
 const ReviewMap = () => {
   const { review, setReview } = useContext(TestRvContext);
