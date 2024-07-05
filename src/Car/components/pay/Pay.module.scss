@@ -1,53 +1,30 @@
-// checkout.js
-#paymentButton {
-    float: right;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 10px;
-    border: none;
-    color: white;
-    background-color: #007bff;
-    border-radius: 5px;
-    // 드래그 못하게
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none;
-}
-
-#paymentButton:hover {
-    background-color: #0056b3;
-}
-
 // OpenTossPayments.js
 .payButton {
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 18px;
-    // 드래그 못하게
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 18px;
+  // 드래그 못하게
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 // Success.js, Fail.js
 .resultWrapper {
-    background-color: #fff;
-    border: 1px solid #007bff;
-    border-radius: 8px;
-    margin: 100px auto 0;
-    padding: 20px;
-    padding-bottom: 5px;
-    max-width: 400px;
-    width: 100%;
-    // 드래그 못하게
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none;
+  background-color: #fff;
+  border: 1px solid #007bff;
+  border-radius: 8px;
+  margin: 100px auto 0;
+  padding: 20px;
+  padding-bottom: 5px;
+  max-width: 400px;
+  width: 100%;
+  // 드래그 못하게
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .boxSection {
@@ -71,9 +48,23 @@
 }
 
 .payButton {
-    cursor: pointer;
-    text-align: center;
-    width: 70px;
-    padding: 5px;
-    margin-left: auto;
+  cursor: pointer;
+  text-align: center;
+  width: 70px;
+  padding: 5px;
+  margin-left: auto;
+}
+
+.publicBtn {
+  background-color: #ebf5ff;
+  color: #2c7fdf;
+  border: 1px solid #2c7fdf;
+  border-radius: 5px;
+}
+
+.publicBtn:hover {
+  background-color: #c2e1ff;
+  color: #2c7fdf;
+  border: 1px solid #2c7fdf;
+  border-radius: 5px;
 }

@@ -1,10 +1,9 @@
-
 .header {
     float: right;
     margin-top: 10px;
     margin-right: 10px;
 
-    .close-btn {
+    .closeBtn {
         cursor: pointer;
         font-weight: bold;
         font-size: 32px;
@@ -14,14 +13,16 @@
 
 .stationContainer {
 
-    .stationName { // 충전소 이름
+    .stationName {
+        // 충전소 이름
         text-align: left;
         font-size: 1.5rem;
         letter-spacing: 3px;
         margin-top: 60px;
     }
 
-    .manAva { // 회사, 이용가능여부
+    .manAva {
+        // 회사, 이용가능여부
         display: flex;
         justify-content: space-around;
         text-align: center;
@@ -45,19 +46,22 @@
 
         .stationManagement {
             border: 2px solid #999;
-        }  
+        }
 
-        .able { // 이용가능
+        .able {
+            // 이용가능
             border: 2px solid #5298F2;
         }
 
-        .disable { // 이용자제한
+        .disable {
+            // 이용자제한
             border: 2px solid #F18D8A;
         }
 
     }
 
-    .idSpeTyp { // 충전기ID, 충전기종류
+    .idSpeTyp {
+        // 충전기ID, 충전기종류
         display: flex;
         justify-content: center;
         border: 1px solid black;
@@ -66,7 +70,7 @@
 
         div {
             text-align: center;
-            
+
             div:first-child {
                 background-color: #ccc;
                 border-bottom: 1px solid black;
@@ -74,6 +78,7 @@
                 padding: 10px 0 10px;
                 font-size: 1.1rem;
             }
+
             div:last-child {
                 padding: 10px 0 10px;
                 font-size: 0.9rem;
@@ -84,12 +89,12 @@
             width: 35%;
             border-right: 1px solid black;
         }
-    
+
         .stationSpeed {
             width: 15%;
             border-right: 1px solid black;
         }
-    
+
         .stationType {
             width: 50%;
         }
@@ -97,13 +102,15 @@
     }
 }
 
-.footer { // 주소, 길찾기
+.footer {
+    // 주소, 길찾기
     margin-left: auto;
+    margin-bottom: 10px;
 
     .stationAddress {
         font-size: 0.95rem;
     }
-    
+
     a {
         font-size: 0.9rem;
         text-decoration-line: none;

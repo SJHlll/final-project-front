@@ -16,7 +16,7 @@
     font-size: 15px;
   }
 
-  .read-only-date {
+  .readOnlyDate {
     width: 220px;
   }
 }
@@ -41,4 +41,18 @@
 .noReserve {
   text-align: center;
   font-size: 1.2em;
+}
+
+.publicBtn {
+  background-color: #ebf5ff;
+  color: #2c7fdf;
+  border: 1px solid #2c7fdf;
+  border-radius: 5px;
+}
+
+.publicBtn:hover {
+  background-color: #c2e1ff;
+  color: #2c7fdf;
+  border: 1px solid #2c7fdf;
+  border-radius: 5px;
 }

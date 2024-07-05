@@ -8,6 +8,7 @@ import ReviewList from '../adminreview/ReviewList';
 import ReservedStationList from '../adminstation/ReservedStationList';
 import { TestRcProvider } from './TestRcContext';
 import styles from '../AdminPage.module.scss';
+
 const ReservedCarList = () => {
   const [selected, setSelected] = useState(null);
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const ReservedCarList = () => {
     setSelected(selection);
     navigate(path);
   };
+
   return (
     <TestRcProvider>
       <Frame>
