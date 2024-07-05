@@ -11,11 +11,10 @@ import {
 } from 'swiper/modules';
 import { CarContext } from '../../../../contexts/CarContext';
 import styles from './reservation_css/CarSwiper.module.scss';
-const CarSwiperReal = () => {
+const CarSwiperReal = ({ setSelectedCar }) => {
   // DB에서 전기차 목록 불러오기
   // rentCar = 전기차 목록 배열
-  const { rentCar, setRentCar, setSelectedCar } =
-    useContext(CarContext); // 전기차 목록
+  const { rentCar, setRentCar } = useContext(CarContext); // 전기차 목록
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -40,7 +39,7 @@ const CarSwiperReal = () => {
   // 차 이미지를 클릭시 선택되는 자동차
   const clickCarHandler = (car) => {
     setSelectedCar(car);
-    console.log('setSelectedCar: ', car);
+    console.log('setSelected car: ', car);
   };
 
   return (

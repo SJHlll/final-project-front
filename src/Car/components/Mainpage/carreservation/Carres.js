@@ -40,7 +40,6 @@ const ModalContent = styled.div`
 
 const Carres = () => {
   const [modal, setModal] = useState(false);
-  //const [selectedCar, setSelectedCar] = useState(null); // 선택된 차의 정보를 저장할 상태
   const [daysBetween, setDaysBetween] = useState(0); // 렌트 기간 상태 추가
   const toggle = () => setModal(!modal);
 
@@ -48,8 +47,13 @@ const Carres = () => {
 
   const { selectedCar, setSelectedCar } =
     useContext(CarContext);
-
   const { isLoggedIn } = useContext(AuthContext); // 유저 정보
+
+  const [extra, setExtra] = useState(''); // 비고
+
+  const handleExtraChange = (newExtra) => {
+    setExtra(newExtra);
+  };
 
   const totalPrice = selectedCar
     ? (
@@ -92,9 +96,8 @@ const Carres = () => {
     setSelectedCar(car);
   };
 
-  const token = localStorage.getItem('ACCESS_TOKEN'); // 로컬 토큰
-
   const saveReservation = async (reservationData) => {
+    const token = localStorage.getItem('ACCESS_TOKEN'); // 로컬 토큰
     try {
       const response = await fetch('/rentcar/reservation', {
         method: 'POST',
@@ -111,8 +114,16 @@ const Carres = () => {
         throw new Error('Network response was not ok');
       }
 
-      const result = await response.json();
-      console.log('Reservation saved:', result);
+      // JSON으로 구문 분석하기 전에 응답 본문이 비어 있지 않은지 확인합니다.
+      const result = await response.text();
+      if (result) {
+        const jsonResponse = JSON.parse(result);
+        console.log('Reservation saved:', jsonResponse);
+      } else {
+        console.log(
+          '예약이 저장되었지만 JSON 응답이 수신되지 않았습니다',
+        );
+      }
     } catch (error) {
       console.error('Error saving reservation:', error);
     }
@@ -135,13 +146,24 @@ const Carres = () => {
       alert('반납 시간을 선택하세요.');
       return;
     }
+    if (!selectedCar) {
+      alert('차량을 선택하세요.');
+      return;
+    }
 
     alert('예약이 완료되어 결제창으로 넘어갑니다.');
     setModal(!modal);
 
     const reservationData = {
-      pickup,
-      returning,
+      carId: selectedCar.id,
+      rentDate: `${pickup.date.toISOString().split('T')[0]}T${pickup.time.toTimeString().split(' ')[0]}`,
+      turninDate: `${returning.date.toISOString().split('T')[0]}T${returning.time.toTimeString().split(' ')[0]}`,
+      rentTime: pickup.time.toTimeString().split(' ')[0],
+      turninTime: returning.time
+        .toTimeString()
+        .split(' ')[0],
+      totalPrice: totalPrice.replace(/,/g, ''),
+      extra: `${extra}`,
     };
 
     saveReservation(reservationData);
@@ -151,6 +173,7 @@ const Carres = () => {
     <button
       className={`${style.resBtn} ${style.publicBtn}`}
       onClick={toggle}
+      type='submit'
     >
       예약 하기
     </button>
@@ -190,6 +213,7 @@ const Carres = () => {
                   pickup={pickup}
                   returning={returning}
                   totalPrice={totalPrice} // 프롭스 전달!!
+                  onExtraChange={handleExtraChange} // 비고
                 />
               </div>
             </div>
