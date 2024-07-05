@@ -9,6 +9,7 @@ const Notilist = ({ notiList, fetchNotiList }) => {
 
   const handleHitClick = async (list) => {
     try {
+      console.log(list.notiId);
       await axios.patch(
         `http://localhost:8181/noti/views/${list.notiId}`,
       );

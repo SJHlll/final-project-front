@@ -43,13 +43,21 @@ const ReservedStationList = () => {
         <div className={styles.listHeader}>
           <div className={styles.resNo}>번호</div>
           <div className={styles.resUserName}>회원명</div>
-          <div className={styles.resSelectedName}>충전소</div>
-          <div className={styles.resSelectedAd}>충전비용</div>
-          <div className={styles.resSelectedTime}>충전기간</div>
+          <div className={styles.resSelectedName}>
+            충전소
+          </div>
+          <div className={styles.resSelectedAd}>
+            충전비용
+          </div>
+          <div className={styles.resSelectedTime}>
+            충전기간
+          </div>
           <div className={styles.hiddenText}></div>
         </div>
         <div className={styles.adminPageList}>
-          <div className={`${styles.adminList} ${styles.reserveStation}`}>
+          <div
+            className={`${styles.adminList} ${styles.reserveStation}`}
+          >
             <ReservedStationMap />
           </div>
           {selected === 'car' && <ReservedCarList />}

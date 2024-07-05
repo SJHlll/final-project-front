@@ -42,6 +42,7 @@
         span {
           cursor: pointer;
         }
+
         span:hover {
           color: blue;
         }
@@ -57,6 +58,7 @@
           color: black;
           text-decoration: none;
         }
+
         a:hover {
           color: blue;
           text-decoration: underline;
@@ -74,6 +76,7 @@
         font-size: 0.8rem;
         margin-bottom: 5px;
       }
+
       div:nth-child(2) {
         margin-bottom: 5px;
       }

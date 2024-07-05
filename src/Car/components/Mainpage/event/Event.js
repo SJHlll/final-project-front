@@ -19,7 +19,19 @@ const Event = () => {
   const API_EVENT_URL = API_BASE_URL + '/events';
 
   const [events, setEvents] = useState([]);
+
   const [loading, setLoading] = useState(true);
+
+  // 이벤트 삭제 처리 함수
+  const removeEvent = async (no) => {
+    handleRequest(
+      () => () =>
+        axiosInstance.delete(`${API_EVENT_URL}/${no}`),
+      (data) => setEvents(data.events),
+      onLogout,
+      redirection,
+    );
+  };
 
   useEffect(() => {
     const fetchEvents = async () => {
