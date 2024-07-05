@@ -11,12 +11,14 @@ import myPageInfoImg from '../assets/img/MyInfo.jpg'; // 이미지 경로는 실
 import myPageChargeImg from '../assets/img/StaReser.jpg'; // 충전소 예약 내역 이미지
 import myPageRentCarImg from '../assets/img/carReser.jpg'; // 렌트카 예약현황 이미지
 import myPageReviewImg from '../assets/img/Myreview.jpg'; // 내가 쓴 리뷰 이미지
+import { useNavigate } from 'react-router-dom';
 
 Modal.setAppElement('#root'); // root 엘리먼트를 지정합니다. 이는 모달 접근성을 위해 필요합니다.
 
 const MyPageBtn = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
+  const navigate = useNavigate('');
 
   const openModal = (content) => {
     setModalContent(content);
@@ -64,7 +66,7 @@ const MyPageBtn = () => {
         </button>
         <button
           className='GridButton'
-          onClick={() => openModal(<MyPageReview />)}
+          onClick={() => navigate('/mypage/review')}
         >
           <img
             src={myPageReviewImg}

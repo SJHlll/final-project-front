@@ -1,0 +1,103 @@
+.listHeader {
+    width: 80%;
+    margin: 60px auto 0;
+    display: flex;
+    padding: 10px 10px;
+    font-size: 1.3em;
+    text-align: center;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+
+    .resSelectedAd {
+        width: 20%;
+    }
+
+    .resSelectedName {
+        width: 60%;
+    }
+
+    .resSelectedTime {
+        width: 20%;
+    }
+}
+
+.listBody {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    height: 70px;
+    padding: 10px 10px;
+    text-align: center;
+    align-items: center;
+    border-bottom: 1px solid #aaa;
+
+    .resSelectedName {
+        width: 60%;
+    }
+
+    .resSelectedAd {
+        width: 20%;
+    }
+
+    .resSelectedTime {
+        width: 20%;
+    }
+
+    .resCancelBtn {
+        width: 60px;
+        padding: 5px 0;
+        border-radius: 10px;
+        margin-left: auto;
+        background-color: #ebf5ff;
+        color: #2c7fdf;
+        border: 1px solid #2c7fdf;
+
+        &:hover {
+            background-color: #c2e1ff;
+        }
+    }
+}
+
+.filteredCount {
+    position: absolute;
+    top: 120px;
+    left: 200px;
+    font-size: 0.8em;
+
+    .filteredNum {
+        font-size: 1.1rem;
+    }
+}
+
+// Modal.module.scss
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+    width: 80%;
+    max-width: 500px;
+}
+
+.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
