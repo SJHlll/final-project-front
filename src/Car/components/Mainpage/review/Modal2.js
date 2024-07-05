@@ -8,19 +8,54 @@ import axios from 'axios';
 import axiosInstance from '../../../../config/axios-config';
 import AuthContext from '../../../../util/AuthContext';
 import style from '../../../../scss/Button.module.scss';
+import { useNavigate } from 'react-router-dom';
+const Modal2 = ({
+  onClose,
+  onSave,
+  selectedType,
+  reviewContent,
+  reviewRating,
+  reviewPhotoPreview,
+  reviewItem,
+  isEditMode,
+}) => {
+  const [content, setContent] = useState(
+    reviewContent || null,
+  );
 
 const Modal2 = ({ onClose, onSave, selectedType }) => {
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
-  const [selectedItem, setSelectedItem] = useState('');
-  const [rating, setRating] = useState(1);
+  const [selectedItem, setSelectedItem] = useState(
+    reviewItem || '',
+  );
+  const [rating, setRating] = useState(reviewRating || 1);
   const [photo, setPhoto] = useState(null);
-  const [photoPreview, setPhotoPreview] = useState(null);
+  const [photoPreview, setPhotoPreview] = useState(
+    reviewPhotoPreview || '',
+  );
   const [reviewList, setReviewList] = useState([]);
   const [carList, setCarList] = useState([]);
   const [chargeList, setChargeList] = useState([]);
 
+  const navigate = useNavigate();
+
   const { token } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (isEditMode) {
+      setContent(reviewContent);
+      setSelectedItem(reviewItem);
+      setRating(reviewRating);
+      setPhotoPreview(reviewPhotoPreview);
+    }
+  }, [
+    isEditMode,
+    reviewContent,
+    reviewItem,
+    reviewRating,
+    reviewPhotoPreview,
+  ]);
 
   useEffect(() => {
     const fetchCarList = async () => {
@@ -184,6 +219,64 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
       }
     }
     onSave(content, selectedItem, rating, photo);
+    setContent(''); // 폼 초기화
+    setSelectedItem(''); // 폼 초기화
+    setRating(1); // 폼 초기화
+  };
+
+  // 리뷰 수정하기
+  const updateHandler = async (e) => {
+    e.preventDefault();
+
+    if (selectedType !== 'rental') {
+      const reviewChargeData = {
+        content,
+        rating,
+        stationName: selectedItem,
+      };
+
+      try {
+        await axiosInstance.patch(
+          `http://localhost:8181/review/`,
+          reviewChargeData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+        alert('리뷰 수정이 완료 되었습니다.');
+        navigate('/mypage');
+      } catch (err) {
+        console.log('Error : ', err.response);
+        alert('리뷰 수정에 실패하였습니다.');
+      }
+    } else {
+      const reviewCarData = {
+        content,
+        rating,
+        carName: selectedItem,
+      };
+
+      try {
+        const response = await axiosInstance.post(
+          'http://localhost:8181/review/car',
+          reviewCarData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          },
+        );
+        setReviewList([...reviewList, response.data]);
+        alert('리뷰 수정이 완료 되었습니다.');
+        navigate('/mypage');
+      } catch (err) {
+        setError(err.message);
+        alert('리뷰 수정에 실패하였습니다.');
+      }
+    }
     setContent(''); // 폼 초기화
     setSelectedItem(''); // 폼 초기화
     setRating(1); // 폼 초기화

@@ -88,6 +88,14 @@ const EventDetail = () => {
               isOpen={isModal}
               toggle={() => setIsModal(false)}
             >
+              <EventAddModal
+                isOpen={isModal}
+                toggle={() => setIsModal(false)}
+                eventId={id}
+                eventTitle={title}
+                eventImage={img}
+                isEditMode={true}
+              />
               <EventAddModal />
             </Modal>
           )}
