@@ -52,7 +52,7 @@ const MyPageCharge = () => {
   const button = (reservations) => (
     <div style={{ width: '100%', textAlign: 'center' }}>
       <button
-        className='public-btn'
+        className={styles.publicBtn}
         onClick={() => toggleCancel(reservations)}
       >
         예약 취소
