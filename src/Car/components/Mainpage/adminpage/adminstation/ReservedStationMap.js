@@ -158,9 +158,20 @@ const ReservedStationMap = () => {
             <div className={styles.spaceBlank}>
               <button
                 className={styles.resCancelBtn}
-                onDoubleClick={() =>
-                  handleCancelReservation(e.reservationNo)
-                }
+                onDoubleClick={() => {
+                  if (
+                    window.confirm(
+                      '정말 예약을 취소하시겠습니까?',
+                    )
+                  ) {
+                    handleCancelReservation(
+                      e.reservationNo,
+                    );
+                    alert(
+                      `${e.name} 회원님의 ${e.stationName} 충전소 예약을 취소했습니다.\n충전금액 : ${e.rentChargePrice}원`,
+                    );
+                  }
+                }}
               >
                 취소
               </button>

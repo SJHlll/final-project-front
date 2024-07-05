@@ -183,9 +183,18 @@ const ReviewMap = () => {
             <div className={styles.spaceBlank}>
               <button
                 className={styles.resCancelBtn}
-                onDoubleClick={() =>
-                  handleDeleteReview(e.reviewNo)
-                }
+                onDoubleClick={() => {
+                  if (
+                    window.confirm(
+                      '정말 리뷰를 삭제하시겠습니까?',
+                    )
+                  ) {
+                    handleDeleteReview(e.reviewNo);
+                    alert(
+                      `${e.name} 회원님의 리뷰를 삭제했습니다.`,
+                    );
+                  }
+                }}
               >
                 삭제
               </button>
