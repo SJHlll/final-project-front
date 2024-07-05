@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
 import { loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
 import { nanoid } from 'nanoid';
-import styles from './Pay.module.scss';
 
 // 구매자의 고유 아이디를 불러와서 customerKey로 설정하세요.
 // 이메일・전화번호와 같이 유추가 가능한 값은 안전하지 않습니다.
@@ -79,16 +79,38 @@ export function Checkout() {
 
   return (
     <div>
+      {/* 아이디 바꾸면 오류뜸 바꾸기 X */}
       {/* 결제 UI, 이용약관 UI 영역 */}
-      <div id={styles.paymentWidget} />
-      <div id={styles.agreement} />
+      <div id='payment-widget' />
+      <div id='agreement' />
       {/* 결제하기 버튼 */}
-      <button
-        id={styles.paymentButton}
+      <PaymentButton
+        id='payment-button'
         onClick={handlePaymentRequest}
       >
         결제하기
-      </button>
+      </PaymentButton>
     </div>
   );
 }
+
+const PaymentButton = styled.button`
+  float: right;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  border: none;
+  color: white;
+  background-color: #007bff;
+  border-radius: 5px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;

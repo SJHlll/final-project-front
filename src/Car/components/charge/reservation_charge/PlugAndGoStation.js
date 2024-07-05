@@ -1,12 +1,11 @@
 import React, { useContext, useState } from 'react';
 import styles from '../scss/PlugAndGoStation.module.scss';
-import { Modal, ModalBody, ModalHeader } from 'reactstrap';
+import { Modal, ModalBody } from 'reactstrap';
 import styled from 'styled-components';
 import ReservationModal from './ReservationModal';
 import { SecondMapContext } from '../../../../contexts/SecondMapContext';
 import AuthContext from '../../../../util/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import style from '../../../../scss/Button.module.scss';
 const PlugAndGoStation = ({
   lat,
   lng,
@@ -36,7 +35,7 @@ const PlugAndGoStation = ({
     <div>
       {!userName ? (
         <button
-          className={`${style.publicBtn} ${style.reserveButton}`}
+          className={`${styles.publicBtn} ${styles.reserveButton}`}
           onClick={() => navigate('/Login')}
           style={{ fontSize: '0.8em' }}
         >
@@ -44,7 +43,7 @@ const PlugAndGoStation = ({
         </button>
       ) : (
         <button
-          className='public-btn reserve-button'
+          className={`${styles.publicBtn} ${styles.reserveButton}`}
           onClick={toggle}
         >
           예약하기
@@ -54,7 +53,7 @@ const PlugAndGoStation = ({
   );
 
   const closeBtn = (
-    <button className={style.publicBtn} onClick={toggle}>
+    <button className={styles.publicBtn} onClick={toggle}>
       &times;
     </button>
   );
@@ -82,7 +81,12 @@ const PlugAndGoStation = ({
   );
 
   return (
-    <div className={styles.OurStation}>
+    <div
+      className={styles.OurStation}
+      style={{
+        backgroundColor: 'white',
+      }}
+    >
       <div className={styles.stationContent}>
         <div className={styles.Name}>
           <span

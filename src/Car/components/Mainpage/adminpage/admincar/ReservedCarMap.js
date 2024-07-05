@@ -6,6 +6,7 @@ import React, {
 import { TestRcContext } from './TestRcContext';
 import AuthContext from '../../../../../util/AuthContext';
 import styles from '../AdminPage.module.scss';
+
 const ReservedCarMap = () => {
   const { reserveCar, setReserveCar } =
     useContext(TestRcContext);
@@ -123,22 +124,33 @@ const ReservedCarMap = () => {
               <div>{e.userName}</div>
               <div>{e.phoneNumber}</div>
             </div>
-            <div className='res-selected-name'>
+            <div className={styles.resSelectedName}>
               {truncateText(e.carName, 20)}
             </div>
-            <div className='res-selected-ad'>
+            <div className={styles.resSelectedAd}>
               {e.rentCarPrice}원
             </div>
-            <div className='res-selected-time'>
+            <div className={styles.resSelectedTime}>
               <div>{formatRentTime(e.rentDate)}</div>
               <div>~ {formatRentTime(e.turninDate)}</div>
             </div>
             <div className={styles.spaceBlank}>
               <button
                 className={styles.resCancelBtn}
-                onDoubleClick={() =>
-                  handleCancelReservation(e.reservationNo)
-                }
+                onDoubleClick={() => {
+                  if (
+                    window.confirm(
+                      '정말 예약을 취소하시겠습니까?',
+                    )
+                  ) {
+                    handleCancelReservation(
+                      e.reservationNo,
+                    );
+                    alert(
+                      `${e.name} 회원님의 ${e.carName} 렌트카 예약을 취소했습니다.\n충전금액 : ${e.rentCarPrice}원`,
+                    );
+                  }
+                }}
               >
                 취소
               </button>
@@ -156,7 +168,7 @@ const ReservedCarMap = () => {
         <>
           <AdminContents cars={filteredCar} />
           <input
-            className='admin-filter'
+            className={styles.adminFilter}
             type='text'
             placeholder='전화번호 뒷자리 4개 입력'
             value={filterPhoneNumber}
@@ -165,9 +177,9 @@ const ReservedCarMap = () => {
             }
             maxLength='4'
           />
-          <p className='filtered-count'>
+          <p className={styles.filteredCount}>
             예약된 렌트카 :{' '}
-            <span className='filtered-num'>
+            <span className={styles.filteredNum}>
               {filteredCar.length}
             </span>
             개
@@ -185,16 +197,6 @@ const ReservedCarMap = () => {
           예약된 렌트카가 없습니다.
         </div>
       )}
-      <input
-        className='admin-filter'
-        type='text'
-        placeholder='전화번호 뒷자리 4개 입력'
-        value={filterPhoneNumber}
-        onChange={(e) =>
-          setFilterPhoneNumber(e.target.value)
-        }
-        maxLength='4'
-      />
     </>
   );
 };

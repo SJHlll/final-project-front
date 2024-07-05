@@ -8,6 +8,10 @@ import { TestRvContext } from '../../Mainpage/adminpage/adminreview/TestRvContex
 import AuthContext from '../../../../util/AuthContext';
 import { Modal } from 'reactstrap';
 import Modal2 from '../../Mainpage/review/Modal2';
+import React, { useContext, useEffect } from 'react';
+import styles from '../scss/MyPageCharge.module.scss';
+import { TestRvContext } from '../../Mainpage/adminpage/adminreview/TestRvContext';
+import AuthContext from '../../../../util/AuthContext';
 
 const MyPageReview = () => {
   const { review, setReview } = useContext(TestRvContext);
@@ -181,6 +185,8 @@ const MyPageReview = () => {
                 />
               </Modal>
             )}
+              </div>
+            ))}
           </div>
         </>
       ) : (

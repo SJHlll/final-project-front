@@ -116,10 +116,10 @@ const NotiPage = () => {
   return (
     <Frame>
       <div style={{ padding: '1%' }}>
-        <div className='categoriheader'>이용방법</div>
-        <p className='backnoti' onClick={click}>
-          목록
-        </p>
+        <div className={styles.categoriheader}>
+          이용방법
+        </div>
+
         <div
           style={{ position: 'relative', bottom: '80px' }}
         >
@@ -146,9 +146,7 @@ const NotiPage = () => {
               <h1 className={styles.Notiheader}>
                 제목 : {currentHeader}
               </h1>
-              <p className={styles.Notihits}>
-                조회수: {currentViews}
-              </p>
+              <p className={styles.Notihits}></p>
               <p
                 className={styles.Notibody}
                 style={{ whiteSpace: 'pre-wrap' }}

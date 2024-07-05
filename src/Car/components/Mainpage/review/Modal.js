@@ -36,12 +36,13 @@ const Modal = ({ review, onClose }) => {
 
   // 모달 컴포넌트의 렌더링 부분
   return (
-    <div className='modal' onClick={handleOutsideClick}>
-      {' '}
+    <div
+      className={styles.modal}
+      onClick={handleOutsideClick}
+    >
       {/* 모달 외부 클릭 이벤트 처리 */}
-      <div className='modal-content'>
-        <span className='close' onClick={onClose}>
-          {' '}
+      <div className={styles.modalContent}>
+        <span className={styles.close} onClick={onClose}>
           {/* 모달 닫기 버튼 */}
           &times; {/* '×' 문자 */}
         </span>

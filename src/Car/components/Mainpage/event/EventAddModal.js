@@ -10,6 +10,8 @@ import AuthContext from '../../../../util/AuthContext';
 import axiosInstance from '../../../../config/axios-config';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import React, { useState } from 'react';
+import styles from './EventAddModal.module.scss'; // CSS 파일 경로
 
 const EventAddModal = ({
   isOpen,
@@ -202,6 +204,20 @@ const EventAddModal = ({
         <form
           className={styles.formTop}
           onSubmit={isEditMode ? updateHandler : handleSave}
+  if (!isOpen) return null;
+  return (
+    <div
+      className={styles.modalOverlay}
+      onClick={handleOutsideClick}
+    >
+      <div className={styles.modalContent}>
+        <span className={styles.close} onClick={onClose}>
+          ×
+        </span>
+        <h2>이벤트 추가</h2>
+        <form
+          className={styles.formTop}
+          onSubmit={handleSave}
         >
           <div className={styles.formGroup}>
             <label htmlFor='title'>제목:</label>
@@ -246,6 +262,8 @@ const EventAddModal = ({
               {isEditMode ? '수정' : '저장'}
             </button>
             <button type='button' onClick={toggle}>
+            <button type='submit'>저장</button>
+            <button type='button' onClick={onClose}>
               닫기
             </button>
           </div>

@@ -12,6 +12,10 @@ const EventDetail = () => {
   const navigate = useNavigate();
   const toList = () => navigate('/events');
   const [isModal, setIsModal] = useState(false);
+  const [editedContents, setEditedContents] = useState(img);
+  const [currentHeader, setCurrentHeader] = useState(title);
+  const [currentContents, setCurrentContents] =
+    useState(img);
 
   const token = localStorage.getItem('ACCESS_TOKEN');
 
@@ -92,6 +96,7 @@ const EventDetail = () => {
                 eventImage={img}
                 isEditMode={true}
               />
+              <EventAddModal />
             </Modal>
           )}
         </div>
