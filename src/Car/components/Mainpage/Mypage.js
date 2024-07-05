@@ -7,21 +7,23 @@ import MyPageBtn from '../charge/mypage/MyPageBtn';
 // import MyPageReview from '../charge/mypage/MyPageReview';
 import backgroundVideo from '../charge/assets/mp4/myPage.mp4';
 import { ReserveStationProvider } from '../../../contexts/ReserveStationContext';
+import { TestRvProvider } from './adminpage/adminreview/TestRvContext';
 
 const Mypage = () => {
   return (
     <>
       <ReserveStationProvider>
-        <Frame>
-          <div
-            style={{
-              // width: '100%',
-              // height: '100%',
-              overflow: 'auto',
-            }}
-          >
-            {/* 비디오 배경 */}
-            {/* <video
+        <TestRvProvider>
+          <Frame>
+            <div
+              style={{
+                // width: '100%',
+                // height: '100%',
+                overflow: 'auto',
+              }}
+            >
+              {/* 비디오 배경 */}
+              {/* <video
             className='BackgroundVideo'
             autoPlay
             loop
@@ -32,13 +34,14 @@ const Mypage = () => {
               type='video/mp4'
             />
           </video> */}
-            {/* <MyPageInfo />
+              {/* <MyPageInfo />
           <MyPageCharge />
           <MyPageRentCar />
           <MyPageReview /> */}
-            <MyPageBtn />
-          </div>
-        </Frame>
+              <MyPageBtn />
+            </div>
+          </Frame>
+        </TestRvProvider>
       </ReserveStationProvider>
     </>
   );
