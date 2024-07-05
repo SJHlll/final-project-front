@@ -1,4 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import styled from 'styled-components';
 import { ModalBody, ModalFooter } from 'reactstrap';
 import CarCalendar from './CarCalendar';
@@ -9,6 +13,8 @@ import { StationProvider } from '../../../../contexts/StationContext';
 import styles from './reservation_css/Carres.module.scss';
 import CarSwiperReal from './CarSwiperReal';
 import CarInfo from './CarInfo';
+import { CarContext } from '../../../../contexts/CarContext';
+import AuthContext from '../../../../util/AuthContext';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -35,7 +41,12 @@ const ModalContent = styled.div`
 const Carres = () => {
   const [modal, setModal] = useState(false);
   const [selectedCar, setSelectedCar] = useState(null); // 선택된 차의 정보를 저장할 상태
+  const [daysBetween, setDaysBetween] = useState(0); // 렌트 기간 상태 추가
   const toggle = () => setModal(!modal);
+
+  const { carId, rentCar } = useContext(CarContext); // 자동차 정보
+
+  const { isLoggedIn } = useContext(AuthContext); // 유저 정보
 
   const [pickup, setPickup] = useState({
     date: new Date(),
@@ -57,15 +68,24 @@ const Carres = () => {
     console.log('반납 시간:', returning.time);
   }, [returning]);
 
+  useEffect(() => {
+    console.log('렌트 기간 (일):', daysBetween); // 픽업날짜 ~ 반납날짜 개수
+  }, [daysBetween]);
+
+  const token = localStorage.getItem('ACCESS_TOKEN'); // 로컬 토큰
+
   const saveReservation = async (reservationData) => {
     try {
-      const response = await fetch('/api/saveReservation', {
+      const response = await fetch('/rentcar/reservation', {
         method: 'POST',
         headers: {
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(reservationData),
       });
+
+      console.log('reservation Data: ', reservationData);
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -197,6 +217,7 @@ const Carres = () => {
             onChangeEndTime={(time) =>
               setReturning((prev) => ({ ...prev, time }))
             }
+            setDaysBetween={setDaysBetween} // setDaysBetween 전달
           />
           <div className={styles.reservationBtn}>
             {modal ? modalOpen : button}
@@ -212,7 +233,9 @@ const Carres = () => {
             <div className={styles.caltotalbox1}>
               렌트기간
             </div>
-            <div className={styles.caltotalbox2}>일</div>
+            <div className={styles.caltotalbox2}>
+              {daysBetween} 일
+            </div>
             <div className={styles.caltotalbox3}>금액</div>
             <div className={styles.caltotalbox4}>???원</div>
           </div>

@@ -41,7 +41,7 @@ const CarSwiperReal = () => {
     fetchCars();
   }, [setRentCar]);
 
-  // 차 이미지 를 클릭시 선택되는 자동차
+  // 차 이미지를 클릭시 선택되는 자동차
   const clickCarHandler = (car) => {
     setSelectedCar(car);
   };

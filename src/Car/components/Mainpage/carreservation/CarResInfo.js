@@ -1,9 +1,14 @@
 import styles from './reservation_css/CarResInfo.module.scss';
 import React, { useContext } from 'react';
 import { CarContext } from '../../../../contexts/CarContext';
+import AuthContext from '../../../../util/AuthContext';
 
 const CarResInfo = ({ pickup, returning }) => {
   const { selectedCar } = useContext(CarContext); // db에서 자동차 정보 가져온 것.
+
+  const { isLoggedIn } = useContext(AuthContext);
+
+  const token = localStorage.getItem('ACCESS_TOKEN'); // 로컬 토큰
 
   const formatDate = (date) => {
     if (!date) return '선택되지 않음';
@@ -31,7 +36,6 @@ const CarResInfo = ({ pickup, returning }) => {
       <div className={styles.resInfo}>
         <div className={styles.resName}>이름: {}</div>
         <div className={styles.phonNumber}>
-          {' '}
           전화번호: {}
         </div>
         <div>예약하실 자동차: {selectedCar.carName}</div>

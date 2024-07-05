@@ -18,6 +18,7 @@ const CarCalendar = ({
   endTime,
   onChangeStartTime,
   onChangeEndTime,
+  setDaysBetween, // 일 수를 설정하는 콜백 함수 추가
 }) => {
   // 날짜 변경 핸들러
   const handleDateChange = (dates) => {
@@ -47,6 +48,14 @@ const CarCalendar = ({
           endTime.getHours(),
         ),
       );
+      // 시작 날짜와 종료 날짜 사이의 일 수를 계산
+      const daysBetween = Math.ceil(
+        (new Date(end) - new Date(start)) /
+          (1000 * 60 * 60 * 24) +
+          1,
+      );
+      console.log('Calculated Days Between:', daysBetween); // 디버깅용 콘솔 출력
+      setDaysBetween(daysBetween); // 일 수를 설정
     }
   };
 
