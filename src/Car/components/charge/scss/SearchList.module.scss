@@ -1,6 +1,6 @@
 .searchListContainer {
   width: 30%;
-  height: 86vh;
+  height: 89vh;
   background-color: white;
   border-right: 1px solid #888;
   position: absolute;
@@ -38,7 +38,8 @@
   cursor: pointer;
   position: absolute;
   border: 1px solid #888;
-  border-left-color: #ddd;
+  // border-left-color: #ddd;
+  border-left: none;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   top: 37vh;
@@ -51,9 +52,9 @@
 }
 
 .openBtn.visible {
-  left: 29.8%;
+  left: 30%;
 }
 
 .openBtn.hidden {
-  left: -0.2%;
+  left: 0;
 }

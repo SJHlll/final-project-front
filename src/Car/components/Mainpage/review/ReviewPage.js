@@ -19,7 +19,7 @@ const ReviewPage = ({ ReviewList }) => {
     [],
   );
 
-  const reviewsPerPage = 12;
+  const reviewsPerPage = 10;
 
   useEffect(() => {
     const fetchReviews = async () => {

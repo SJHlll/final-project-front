@@ -12,7 +12,11 @@ const ChargeStation = () => {
       <StationProvider>
         <SearchProvider>
           <MapProvider>
-            <div style={{ position: 'relative' }}>
+            <div
+              style={{
+                position: 'relative',
+              }}
+            >
               <KakaoMap /* 카카오지도 */ />
               <SearchList />
             </div>

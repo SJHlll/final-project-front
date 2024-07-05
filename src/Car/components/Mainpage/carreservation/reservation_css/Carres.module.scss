@@ -9,14 +9,18 @@
     // justify-content: flex-end;
     width: 60%;
  height: auto;
- margin: 0 auto;
+ margin-top: 1%;
+ 
     .resBtn { // 예약하기 버튼
-       
-        width: 100%;
+       position: relative;
+       left: 120%;
+       bottom: 84%;
+        width: 35%;
+        height: 40px;
         margin-top: 20px;
         margin-bottom: 20px;
-        height: 30px;
-        align-self: center; /* 부모의 정렬 속성을 무시하고 중앙에 정렬 */
+    font-size: 1.3em;
+    border-radius: 15px;   
     }
 }
 
@@ -52,9 +56,10 @@
 .selectCar { // 선택한 차 정보
     width: 50%;
     height: auto;
-    border: 1px solid black;
-    align-content: center;
-    
+    // border: 1px solid black;
+    display: flex;
+    padding-top: 4%;
+    background-color: white;
 }
 
 .calendarbtn{
@@ -68,12 +73,17 @@
     text-align: center;
     border-right: 1px solid black;
 }
-.caltotalbox2{width: 30%;
-    text-align: right;
-    padding-right: 5%;
+.caltotalbox2{width: 20%;
+    text-align: end;
+padding-right: 3%;
     border-right: 1px solid black;}
 .caltotalbox3{width: 20%;
     text-align: center;
     border-right: 1px solid black;}
-.caltotalbox4{width: 30%;
-text-align: center;}
+.caltotalbox4{width: 35%;
+text-align: end;
+}
+.payBtn{
+    position: absolute;
+    right: 80%;
+}

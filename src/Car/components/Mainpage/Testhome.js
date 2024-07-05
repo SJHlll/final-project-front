@@ -1,37 +1,37 @@
 import React from 'react';
 import styles from './Testhome.module.scss';
 import Frame from './Frame';
+import coverImage from '../../assets/pexels-bertellifotografia-799443.jpg'; // 이미지 import
 
+import { useNavigate } from 'react-router-dom';
 const Testhome = () => {
+  const navigate = useNavigate();
+  const goreservation = () => {
+    navigate('/car/res');
+  };
   return (
-    <div>
+    <div className={styles.testhomeContainer}>
       <Frame>
-        <video
+        <img
           className={styles.covervideo}
-          muted
-          autoPlay
-          loop
-          src={
-            'https://plugngo.s3.ap-northeast-2.amazonaws.com/mainback.mp4'
-          }
-          type='video/mp4'
+          src={coverImage} // import한 이미지 사용
+          alt='Cover Image'
+        />
+        <div className={styles.hometext}>Plug & </div>
+        <div
+          className={`${styles.hometext} ${styles.hometext2}`}
         >
-          <strong>
-            Your browser does not support the video tag.
-          </strong>
-        </video>
-
-        <div className={styles.coverheader}>
-          <h1 className={styles.covercon}>
-            나도 여행가고싶다
-          </h1>
-          <p className={styles.covercontent}>
-            I want to go
-            <br /> on a trip
-          </p>
+          Go
         </div>
+        <button
+          className={styles.marquee}
+          onClick={goreservation}
+        >
+          <span data-text='예약하러가기'>예약하러가기</span>
+        </button>
       </Frame>
     </div>
   );
 };
+
 export default Testhome;

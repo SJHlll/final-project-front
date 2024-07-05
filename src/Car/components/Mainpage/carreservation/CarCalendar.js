@@ -154,8 +154,14 @@ const CarCalendar = ({
 
       <div className={styles.timeContainer}>
         <div className={styles.timeBlock}>
-          <div className={styles.pickupTitle} />
-          픽업 시간
+          <div
+            style={{
+              display: 'flex',
+            }}
+            className={styles.pickupTitle}
+          >
+            픽업 :
+          </div>
           <DatePicker
             id={styles.pickupTime}
             selected={startTime}
@@ -176,8 +182,7 @@ const CarCalendar = ({
         </div>
 
         <div className={styles.timeBlock}>
-          <div className={styles.returnTitle} />
-          반납 시간
+          <div className={styles.returnTitle}>반납 :</div>
           <DatePicker
             id={styles.returnTime}
             selected={endTime}

@@ -59,12 +59,17 @@ const PlugAndGoStationContainer = styled.div`
   width: 850px;
   display: flex;
   flex-wrap: wrap;
-  max-height: 676px;
+  max-height: 696px;
   overflow-y: auto;
-
+  background-color: lightblue;
+  position: relative;
+  left: 48%;
+  position: relative;
+  left: 843px;
+  border-bottom: 3px solid lightblue;
   // 스크롤바 몸통
   &::-webkit-scrollbar {
-    width: 8px;
+    width: 0px;
   }
 
   // 스크롤바 배경

@@ -33,6 +33,9 @@ const CarInfo = () => {
         <div
           className={styles.selectedCar}
           key={selectedCar.carId}
+          style={{
+            display: 'flex',
+          }}
         >
           <img
             src={selectedCar.carPicture}
@@ -44,59 +47,24 @@ const CarInfo = () => {
           {/* <div>===================</div> */}
           <div className={styles.selectinfo}>
             <div className={styles.selectcarbox}>
-              <div className={styles.selinformation}>
-                차종
-              </div>
-              :
-              <div className={styles.selinformation2}>
-                {selectedCar.carName}
-              </div>
+              차종 :{selectedCar.carName}
             </div>
             <div className={styles.selectcarbox}>
-              <div className={styles.selinformation}>
-                제조회사
-              </div>
-              :
-              <div className={styles.selinformation2}>
-                {selectedCar.carCompany}
-              </div>
+              제조회사 :{selectedCar.carCompany}
             </div>
             <div className={styles.selectcarbox}>
-              <div className={styles.selinformation}>
-                연식
-              </div>
-              :
-              <div className={styles.selinformation2}>
-                {selectedCar.carYear}년
-              </div>
+              연식 :{selectedCar.carYear}년
             </div>
 
             <div className={styles.selectcarbox}>
-              <div className={styles.selinformation}>
-                종류
-              </div>
-              :
-              <div className={styles.selinformation2}>
-                {selectedCar.category}
-              </div>
+              종류 :{selectedCar.category}
             </div>
             <div className={styles.selectcarbox}>
-              <div className={styles.selinformation}>
-                탑승인원
-              </div>
-              :
-              <div className={styles.selinformation2}>
-                최대 {selectedCar.maximumPassenger}명
-              </div>
+              탑승인원 : 최대 {selectedCar.maximumPassenger}
+              명
             </div>
             <div className={styles.selectcarbox}>
-              <div className={styles.selinformation}>
-                가격
-              </div>
-              :
-              <div className={styles.selinformation2}>
-                {selectedCar.carPrice}원 (렌트가격)
-              </div>
+              가격 :{selectedCar.carPrice}원 (렌트가격)
             </div>
           </div>
         </div>

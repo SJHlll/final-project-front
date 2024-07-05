@@ -81,7 +81,12 @@ const PlugAndGoStation = ({
   );
 
   return (
-    <div className={styles.OurStation}>
+    <div
+      className={styles.OurStation}
+      style={{
+        backgroundColor: 'white',
+      }}
+    >
       <div className={styles.stationContent}>
         <div className={styles.Name}>
           <span

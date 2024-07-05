@@ -6,7 +6,7 @@
     padding: 10px;
     text-align: center;
     border-radius: 5px;
-    margin-bottom: 1%;
+    margin-bottom: 90px;
 }
 .backnoti{
     width: 150px;
@@ -37,13 +37,14 @@
     padding-left: 2%;
     width: 100%;
     font-size: 2.5rem;
+    margin-bottom: 50px;
 }
 
 .Notihits{
     width: 100px;
     position: relative;
-    left: 1200px;
-    margin-top: 0px;
+    left: 1800px;
+    margin-top: 50px;
     bottom: 60px;
 }
 
@@ -58,7 +59,13 @@
     text-align: start;
     padding: 2%;
     overflow: auto;
+    scrollbar-width: 0;
+    &::-webkit-scrollbar {
+        width: 0px;
+      }
 }
+  
+// .Notibody::scrollbar-color: white;
 .notibtn{
     width: 150px;
     color: #2c7fdf;
