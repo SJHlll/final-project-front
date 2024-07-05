@@ -168,9 +168,9 @@ const ReviewMap = () => {
               </div>
             </div>
             <div className={styles.resSelectedAd}>
-              {e.carName && e.carName.length > 1
+              {e.carName && e.carName.length > 0
                 ? truncateText(e.carName, 14)
-                : e.stationName && e.stationName.length > 1
+                : e.stationName && e.stationName.length > 0
                   ? truncateText(e.stationName, 14)
                   : null}
             </div>
