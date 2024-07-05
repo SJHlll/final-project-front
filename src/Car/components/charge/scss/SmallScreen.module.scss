@@ -2,7 +2,7 @@
     z-index: 10;
     position: absolute;
     right: 10px;
-    bottom: 65px;
+    bottom: 10px;
     background-color: white;
     border: 1px solid #aaa;
     border-radius: 10px;
@@ -13,10 +13,10 @@
     opacity: 0.95;
 
     // 드래그 못하게
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
     .markerList {
         line-height: 45px;
@@ -40,6 +40,6 @@
         }
     }
 
-    
-    
+
+
 }

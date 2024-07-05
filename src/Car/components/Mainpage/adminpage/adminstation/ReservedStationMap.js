@@ -6,6 +6,7 @@ import React, {
 import { ReserveStationContext } from '../../../../../contexts/ReserveStationContext';
 import AuthContext from '../../../../../util/AuthContext';
 import styles from '../AdminPage.module.scss';
+
 const ReservedStationMap = () => {
   const { reserveStation, setReserveStation } = useContext(
     ReserveStationContext,
@@ -177,7 +178,7 @@ const ReservedStationMap = () => {
         <>
           <AdminContents stations={filteredStations} />
           <input
-            className='admin-filter'
+            className={styles.adminFilter}
             type='text'
             placeholder='전화번호 뒷자리 4개 입력'
             value={filterPhoneNumber}
@@ -186,9 +187,9 @@ const ReservedStationMap = () => {
             }
             maxLength='4'
           />
-          <p className='filtered-count'>
+          <p className={styles.filteredCount}>
             예약된 충전소 :{' '}
-            <span className='filtered-num'>
+            <span className={styles.filteredNum}>
               {filteredStations.length}
             </span>
             개
@@ -206,16 +207,6 @@ const ReservedStationMap = () => {
           예약된 충전소가 없습니다.
         </div>
       )}
-      <input
-        className={styles.adminFilter}
-        type='text'
-        placeholder='전화번호 뒷자리 4개 입력'
-        value={filterPhoneNumber}
-        onChange={(e) =>
-          setFilterPhoneNumber(e.target.value)
-        }
-        maxLength='4'
-      />
     </>
   );
 };

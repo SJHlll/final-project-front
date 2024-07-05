@@ -8,6 +8,7 @@ import ReservedCarList from '../admincar/ReservedCarList';
 import ReviewList from '../adminreview/ReviewList';
 import { ReserveStationProvider } from '../../../../../contexts/ReserveStationContext';
 import styles from '../AdminPage.module.scss';
+
 const ReservedStationList = () => {
   const [selected, setSelected] = useState(null);
   const navigate = useNavigate();
@@ -16,14 +17,13 @@ const ReservedStationList = () => {
     setSelected(selection);
     navigate(path);
   };
+
   return (
     <ReserveStationProvider>
       <Frame>
         <div className={styles.adminPageSelect}>
           <div
-            className={
-              'admin-select reserve-station selected'
-            }
+            className={`${styles.adminSelect} ${styles.reserveStation} ${styles.selected}`}
           >
             예약된 충전소
           </div>

@@ -159,9 +159,15 @@ const ReviewMap = () => {
             <div className={styles.resNo}>{e.reviewNo}</div>
             <div className={styles.resUserName}>
               <div>{e.name}</div>
-              <div>{truncateText(e.email, 20)}</div>
+              <div
+                style={{
+                  fontSize: '0.9em',
+                }}
+              >
+                {truncateText(e.email, 20)}
+              </div>
             </div>
-            <div className='res-selected-ad'>
+            <div className={styles.resSelectedAd}>
               {e.carName && e.carName.length > 1
                 ? truncateText(e.carName, 14)
                 : e.stationName && e.stationName.length > 1
@@ -205,7 +211,7 @@ const ReviewMap = () => {
               setFilterEmailDomain(e.target.value)
             }
           />
-          <label className={styles.adminiFlter2}>
+          <label className={styles.adminFilter2}>
             <input
               type='checkbox'
               checked={isBadWordFilter}
@@ -219,7 +225,7 @@ const ReviewMap = () => {
               필터링에 추가)
             </span>
           </label>
-          <label className='admin-filter3'>
+          <label className={styles.adminFilter3}>
             <input
               type='checkbox'
               checked={isStation}
@@ -233,7 +239,7 @@ const ReviewMap = () => {
             />
             <span>충전소만 보기</span>
           </label>
-          <label className='admin-filter4'>
+          <label className={styles.adminFilter4}>
             <input
               type='checkbox'
               checked={isCar}
@@ -247,9 +253,9 @@ const ReviewMap = () => {
             />
             <span>렌트카만 보기</span>
           </label>
-          <p className='filtered-count'>
+          <p className={styles.filteredCount}>
             작성된 리뷰 :{' '}
-            <span className='filtered-num'>
+            <span className={styles.filteredNum}>
               {filteredReview.length}
             </span>
             개
