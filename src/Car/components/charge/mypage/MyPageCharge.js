@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import '../scss/MyPageCharge.scss';
+import styles from '../scss/MyPageCharge.module.scss';
 import styled from 'styled-components';
 import { Modal, ModalBody } from 'reactstrap';
 import DatePicker from 'react-datepicker';
-import '../../../../scss/Button.scss';
+import style from '../../../../scss/Button.module.scss';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -44,18 +44,18 @@ const MyPageCharge = () => {
       <Modal isOpen={cancel} toggle={toggle}>
         <ModalBody>
           <div style={{ fontFamily: 'font2' }}>
-            <div className='content'>
+            <div className={styles.content}>
               <div>예약을 취소하시겠습니까?</div>
             </div>
-            <div className='flex modal-button'>
+            <div className={styles.flexModalButton}>
               <button
-                className='public-btn cancel-charge-btn'
+                className={`${style.publicBtn} ${styles.cancelChargeBtn}`}
                 onClick={cancelReservation}
               >
                 예약 취소
               </button>
               <button
-                className='public-btn cancel-charge-btn'
+                className={`${style.publicBtn} ${styles.cancelChargeBtn}`}
                 onClick={toggle}
               >
                 뒤로 가기
@@ -74,22 +74,22 @@ const MyPageCharge = () => {
   const YesReservation = () => {
     return (
       <>
-        <div className='flex'>
-          <div className='value'>날짜 및 시간</div>
+        <div className={styles.flex}>
+          <div className={styles.value}>날짜 및 시간</div>
           <DatePicker
-            className='read-only-date'
+            className={styles.readOnlyDate}
             selected={new Date()}
             showTimeSelect
             dateFormat={'yyyy년 MM월 dd일 aa hh:mm'}
             readOnly
           />
         </div>
-        <div className='flex'>
-          <div className='value'>충전소명</div>
+        <div className={styles.flex}>
+          <div className={styles.value}>충전소명</div>
           <div>OOO 충전소</div>
         </div>
-        <div className='flex'>
-          <div className='value'>예약번호</div>
+        <div className={styles.flex}>
+          <div className={styles.value}>예약번호</div>
           <div>123456</div>
         </div>
         {button()}
@@ -99,7 +99,7 @@ const MyPageCharge = () => {
   };
 
   return (
-    <div className='reservation-list'>
+    <div className={styles.reservationList}>
       <h3 style={{ textAlign: 'center' }}>
         전기차 충전소 예약 내역
       </h3>

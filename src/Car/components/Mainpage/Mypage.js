@@ -1,6 +1,4 @@
 import React from 'react';
-import styles from './Mypage.module.scss';
-
 import Frame from './Frame';
 import MyPageBtn from '../charge/mypage/MyPageBtn';
 // import MyPageCharge from '../charge/mypage/MyPageCharge';

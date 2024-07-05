@@ -10,6 +10,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    
 
     .adminSelect {
         width: 30%;
@@ -19,7 +20,7 @@
         border-top: 1px solid #aaa;
         border-bottom: 1px solid #aaa;
         transition: transform 0.2s ease;
-
+        overflow: auto;
         &:hover {
             transform: scale(1.04);
             border-color: black;

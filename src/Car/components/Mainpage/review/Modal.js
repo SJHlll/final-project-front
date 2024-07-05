@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './ReviewPage.module.scss';
-
 // Modal 컴포넌트: 리뷰의 세부 사항을 표시하는 모달 창
 const Modal = ({ review, onClose }) => {
   // 모달 외부를 클릭하면 모달을 닫는 함수

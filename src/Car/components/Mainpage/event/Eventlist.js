@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Event.module.scss';
 import { useNavigate } from 'react-router-dom';
+import style from '../../../../scss/Button.module.scss';
 
 const Eventlist = ({ eventList }) => {
   const navigate = useNavigate();
@@ -8,10 +9,6 @@ const Eventlist = ({ eventList }) => {
 
   // 상세보기 들어감
   const handleClick = (item) => {
-    console.log('item ', item);
-    console.log('eventList ', eventList);
-    console.log('eventNo ', item.eventNo);
-
     navigate(`/events/${item.eventNo}`, {
       state: {
         id: item.eventNo,
@@ -23,12 +20,12 @@ const Eventlist = ({ eventList }) => {
   };
 
   // 필터링 진행중 / 종료
-  // const filteredList =
-  //   activeTab === '전체'
-  //     ? Notilist
-  //     : Notilist.filter(
-  //         (item) => item.status === activeTab,
-  //       );
+  const filteredList =
+    activeTab === '전체'
+      ? eventList
+      : eventList.filter(
+          (item) => item.status === activeTab,
+        );
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -63,11 +60,11 @@ const Eventlist = ({ eventList }) => {
             종료된 이벤트보기
           </button>
         </div>
-        <div className={styles.notiParent}>
-          {eventList.map((item) => (
+        <div className={styles.eventParent}>
+          {filteredList.map((item) => (
             <div
-              className={styles.notiItem}
-              key={item.eventNo}
+              className={styles.eventItem}
+              key={item.id}
               onClick={() => handleClick(item)}
             >
               <img src={item.img} alt={item.title} />

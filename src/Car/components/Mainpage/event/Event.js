@@ -22,17 +22,32 @@ const Event = () => {
 
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  // 이벤트 삭제 처리 함수
+  const removeEvent = async (no) => {
     handleRequest(
-      () => axiosInstance.get(`${API_EVENT_URL}/list`),
-      (data) => {
-        setEvents(data.events);
-        setLoading(false);
-      },
+      () => () =>
+        axiosInstance.delete(`${API_EVENT_URL}/${no}`),
+      (data) => setEvents(data.events),
       onLogout,
       redirection,
     );
-  }, []);
+  };
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      await handleRequest(
+        () => axiosInstance.get(`${API_EVENT_URL}/list`),
+        (data) => {
+          setEvents(data.events);
+          setLoading(false);
+        },
+        onLogout,
+        redirection,
+      );
+    };
+
+    fetchEvents();
+  }, [API_EVENT_URL, onLogout, redirection]);
 
   return (
     <div className={styles.maincontainer}>
@@ -40,12 +55,12 @@ const Event = () => {
         <div className={styles.eventbody}>
           <Eventlist eventList={events} />
         </div>
-        <button
-          className={`${style.publicBtn} ${style.eventButton}`}
-        >
-          추가
-        </button>
       </div>
+      <button
+        className={`${style.publicBtn} ${style.eventButton}`}
+      >
+        추가
+      </button>
     </div>
   );
 };

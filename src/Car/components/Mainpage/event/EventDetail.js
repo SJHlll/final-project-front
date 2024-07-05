@@ -12,7 +12,6 @@ const EventDetail = () => {
 
   const token = localStorage.getItem('ACCESS_TOKEN');
 
-  // 이벤트 삭제 처리 함수
   const removeEvent = async () => {
     try {
       await axios.delete(
@@ -31,54 +30,52 @@ const EventDetail = () => {
   };
 
   return (
-    <>
-      <div className={styles.maincontainer}>
-        <div className={styles.contentline}>
-          <div className={styles.eventDetailHeader}>
-            <div
-              className={`${styles.eventCurrent} ${styles.marginBox}`}
-            >
-              {status}
-            </div>
-            <div className={styles.eventDetailTitle}>
-              {title}
-            </div>
-            <div
-              className={`${styles.flexBox} ${styles.marginBox}`}
-            >
-              <div>글번호</div>
-              <div>{id}</div>
-            </div>
+    <div className={styles.maincontainer}>
+      <div className={styles.contentline}>
+        <div className={styles.eventDetailHeader}>
+          <div
+            className={`${styles.eventCurrent} ${styles.marginBox}`}
+          >
+            {status}
           </div>
-          <div className={styles.eventDetailBody}>
-            {img && (
-              <img
-                className={styles.eventDetailImg}
-                src={img}
-                alt={img}
-              />
-            )}
-            <button
-              className={`${style.publicBtn} ${styles.eventButton}`}
-            >
-              수정
-            </button>
-            <button
-              className={`${style.publicBtn} ${styles.eventButton}`}
-              onClick={removeEvent}
-            >
-              삭제
-            </button>
-            <button
-              className={style.publicBtn}
-              onClick={toList}
-            >
-              목록
-            </button>
+          <div className={styles.eventDetailTitle}>
+            {title}
+          </div>
+          <div
+            className={`${styles.flexBox} ${styles.marginBox}`}
+          >
+            <div>글번호</div>
+            <div>{id}</div>
           </div>
         </div>
+        <div className={styles.eventDetailBody}>
+          {img && (
+            <img
+              className={styles.eventDetailImg}
+              src={img}
+              alt={img}
+            />
+          )}
+          <button
+            className={`${style.publicBtn} ${styles.eventButton}`}
+          >
+            수정
+          </button>
+          <button
+            className={`${style.publicBtn} ${styles.eventButton}`}
+            onClick={removeEvent}
+          >
+            삭제
+          </button>
+          <button
+            className={style.publicBtn}
+            onClick={toList}
+          >
+            목록
+          </button>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
