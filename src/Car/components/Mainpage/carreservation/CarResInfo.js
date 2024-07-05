@@ -4,7 +4,7 @@ import { CarContext } from '../../../../contexts/CarContext';
 import AuthContext from '../../../../util/AuthContext';
 
 const CarResInfo = ({ pickup, returning, totalPrice }) => {
-  const { enterCar } = useContext(CarContext); // db에서 자동차 정보 가져온 것.
+  const { selectedCar } = useContext(CarContext); // db에서 자동차 정보 가져온 것.
 
   const { isLoggedIn } = useContext(AuthContext);
 
@@ -38,7 +38,7 @@ const CarResInfo = ({ pickup, returning, totalPrice }) => {
         <div className={styles.phonNumber}>
           전화번호: {}
         </div>
-        <div>예약하실 자동차: {enterCar.carName}</div>
+        <div>예약하실 자동차: {selectedCar.carName}</div>
         <div className={styles.date}>
           픽업 날짜: {formatDate(pickup.date)}
         </div>

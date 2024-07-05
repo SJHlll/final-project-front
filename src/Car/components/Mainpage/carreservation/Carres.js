@@ -40,19 +40,20 @@ const ModalContent = styled.div`
 
 const Carres = () => {
   const [modal, setModal] = useState(false);
-  const [selectedCar, setSelectedCar] = useState(null); // 선택된 차의 정보를 저장할 상태
+  //const [selectedCar, setSelectedCar] = useState(null); // 선택된 차의 정보를 저장할 상태
   const [daysBetween, setDaysBetween] = useState(0); // 렌트 기간 상태 추가
   const toggle = () => setModal(!modal);
 
   const { carId, rentCar } = useContext(CarContext); // 자동차 정보
 
-  const { enterCar, setEnterCar } = useContext(CarContext);
+  const { selectedCar, setSelectedCar } =
+    useContext(CarContext);
 
   const { isLoggedIn } = useContext(AuthContext); // 유저 정보
 
-  const totalPrice = enterCar
+  const totalPrice = selectedCar
     ? (
-        parseInt(daysBetween, 10) * enterCar.carPrice
+        parseInt(daysBetween, 10) * selectedCar.carPrice
       ).toLocaleString('ko-KR')
     : 0;
 
@@ -79,10 +80,10 @@ const Carres = () => {
   useEffect(() => {
     console.log('렌트 기간 (일):', daysBetween); // 픽업날짜 ~ 반납날짜 개수
 
-    if (enterCar) {
+    if (selectedCar) {
       console.log(
         '총 렌트 금액: ',
-        daysBetween * enterCar.carPrice,
+        daysBetween * selectedCar.carPrice,
       );
     }
   }, [daysBetween, selectedCar]);

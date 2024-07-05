@@ -4,9 +4,9 @@ import { CarContext } from '../../../../contexts/CarContext';
 
 // CarSwiperReal.js에서 불러온 rentCar를 집어넣음
 const CarInfo = () => {
-  const { enterCar } = useContext(CarContext);
+  const { selectedCar } = useContext(CarContext);
 
-  if (!enterCar) {
+  if (!selectedCar) {
     return (
       <div className={styles.thisCar}>
         예약하실 차량을 선택해 주세요.
@@ -32,10 +32,10 @@ const CarInfo = () => {
          */}
         <div
           className={styles.selectedCar}
-          key={enterCar.carId}
+          key={selectedCar.carId}
         >
           <img
-            src={enterCar.carPicture}
+            src={selectedCar.carPicture}
             alt='자동차 이미지'
             style={{
               width: '100%',
@@ -49,7 +49,7 @@ const CarInfo = () => {
               </div>
               :
               <div className={styles.selinformation2}>
-                {enterCar.carName}
+                {selectedCar.carName}
               </div>
             </div>
             <div className={styles.selectcarbox}>
@@ -58,7 +58,7 @@ const CarInfo = () => {
               </div>
               :
               <div className={styles.selinformation2}>
-                {enterCar.carCompany}
+                {selectedCar.carCompany}
               </div>
             </div>
             <div className={styles.selectcarbox}>
@@ -67,7 +67,7 @@ const CarInfo = () => {
               </div>
               :
               <div className={styles.selinformation2}>
-                {enterCar.carYear}년
+                {selectedCar.carYear}년
               </div>
             </div>
 
@@ -77,7 +77,7 @@ const CarInfo = () => {
               </div>
               :
               <div className={styles.selinformation2}>
-                {enterCar.category}
+                {selectedCar.category}
               </div>
             </div>
             <div className={styles.selectcarbox}>
@@ -86,7 +86,7 @@ const CarInfo = () => {
               </div>
               :
               <div className={styles.selinformation2}>
-                최대 {enterCar.maximumPassenger}명
+                최대 {selectedCar.maximumPassenger}명
               </div>
             </div>
             <div className={styles.selectcarbox}>
@@ -95,7 +95,9 @@ const CarInfo = () => {
               </div>
               :
               <div className={styles.selinformation2}>
-                {enterCar.carPrice.toLocaleString('ko-KR')}
+                {selectedCar.carPrice.toLocaleString(
+                  'ko-KR',
+                )}
                 원
               </div>
             </div>
