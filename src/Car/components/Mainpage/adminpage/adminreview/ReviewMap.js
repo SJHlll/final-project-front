@@ -168,10 +168,11 @@ const ReviewMap = () => {
               </div>
             </div>
             <div className={styles.resSelectedAd}>
-              {e.carName && e.carName.length > 1
-                ? truncateText(e.carName, 14)
-                : e.stationName && e.stationName.length > 1
-                  ? truncateText(e.stationName, 14)
+              {e.carName && e.carName.length > 0
+                ? '(렌트카) ' + truncateText(e.carName, 14)
+                : e.stationName && e.stationName.length > 0
+                  ? '(충전소) ' +
+                    truncateText(e.stationName, 14)
                   : null}
             </div>
             <div className={styles.resSelectedName}>
