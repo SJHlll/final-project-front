@@ -11,7 +11,8 @@ const ReviewPage = ({ ReviewList }) => {
   const [selectedReview, setSelectedReview] =
     useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // 리뷰 상세보기 모달 상태
+  const [isModalOpen2, setIsModalOpen2] = useState(false); // 후기 작성 모달 상태
   const [reviewList, setReviewList] = useState([]);
   const [rentalReviews, setRentalReviews] = useState([]);
   const [chargingReviews, setChargingReviews] = useState(
@@ -33,15 +34,11 @@ const ReviewPage = ({ ReviewList }) => {
         setReviewList(data);
 
         const rental = data
-          .filter(
-            (review) => review.carName !== null, // carName이 있는 경우 렌트카 리뷰로 분류
-          )
-          .reverse();
+          .filter((review) => review.carName !== null)
+          .reverse(); // carName이 있는 경우 렌트카 리뷰로 분류
         const charging = data
-          .filter(
-            (review) => review.stationName !== null, // stationName이 있는 경우 충전소 리뷰로 분류
-          )
-          .reverse();
+          .filter((review) => review.stationName !== null)
+          .reverse(); // stationName이 있는 경우 충전소 리뷰로 분류
         setRentalReviews(rental);
         setChargingReviews(charging);
       } catch (err) {
@@ -62,9 +59,17 @@ const ReviewPage = ({ ReviewList }) => {
     setIsModalOpen(true);
   };
 
+  const handleWriteReviewClick = () => {
+    setIsModalOpen2(true);
+  };
+
   const handleCloseModal = () => {
     setSelectedReview(null);
     setIsModalOpen(false);
+  };
+
+  const handleCloseModal2 = () => {
+    setIsModalOpen2(false);
   };
 
   const handleSaveReview = (
@@ -90,26 +95,24 @@ const ReviewPage = ({ ReviewList }) => {
           ? rentalReviews.length
           : chargingReviews.length) + 1,
       imageUrl,
-      name: `${selectedType === 'rental' ? '렌트카' : '충전소'} ${
-        (selectedType === 'rental'
-          ? rentalReviews.length
-          : chargingReviews.length) + 1
-      }`,
+      name: `${selectedType === 'rental' ? '렌트카' : '충전소'} ${(selectedType === 'rental' ? rentalReviews.length : chargingReviews.length) + 1}`,
       rating,
       content,
       date: new Date().toLocaleDateString(),
       item: selectedItem,
       stationId,
       stationName,
+      carName:
+        selectedType === 'rental' ? selectedItem : null,
     };
 
     if (selectedType === 'rental') {
       setRentalReviews([newReview, ...rentalReviews]);
-    } else if (selectedType === 'charging') {
+    } else {
       setChargingReviews([newReview, ...chargingReviews]);
     }
 
-    setIsModalOpen(false);
+    setIsModalOpen2(false);
   };
 
   const currentReviews =
@@ -144,7 +147,7 @@ const ReviewPage = ({ ReviewList }) => {
         </button>
       </div>
       <button
-        onClick={() => setIsModalOpen(true)}
+        onClick={handleWriteReviewClick}
         className={styles.writeReviewButton}
       >
         후기 작성
@@ -183,15 +186,15 @@ const ReviewPage = ({ ReviewList }) => {
           ),
         )}
       </div>
-      {isModalOpen && selectedReview && (
+      {isModalOpen && (
         <Modal
           review={selectedReview}
           onClose={handleCloseModal}
         />
       )}
-      {isModalOpen && (
+      {isModalOpen2 && (
         <Modal2
-          onClose={handleCloseModal}
+          onClose={handleCloseModal2}
           onSave={handleSaveReview}
           selectedType={selectedType}
         />

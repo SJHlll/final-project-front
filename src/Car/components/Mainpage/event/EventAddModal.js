@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './EventAddModal.scss'; // CSS 파일 경로
+import styles from './EventAddModal.module.scss'; // CSS 파일 경로
 
 const EventAddModal = ({ isOpen, onClose }) => {
   const [imagePreview, setImagePreview] = useState(null);
@@ -44,91 +44,65 @@ const EventAddModal = ({ isOpen, onClose }) => {
   };
 
   if (!isOpen) return null;
-
-  return React.createElement(
-    'div',
-    {
-      className: 'modalOverlay',
-      onClick: handleOutsideClick,
-    },
-    React.createElement(
-      'div',
-      { className: 'modalContent' },
-      React.createElement(
-        'span',
-        { className: 'close', onClick: onClose },
-        '×',
-      ),
-      React.createElement('h2', null, '이벤트 추가'),
-      React.createElement(
-        'form',
-        { className: 'formTop', onSubmit: handleSave }, // 수정된 부분
-        React.createElement(
-          'div',
-          { className: 'formGroup' },
-          React.createElement(
-            'label',
-            { htmlFor: 'title' },
-            '제목:',
-          ),
-          React.createElement('input', {
-            type: 'text',
-            id: 'title',
-            name: 'title',
-            value: title,
-            onChange: handleTitleChange,
-          }),
-        ),
-        React.createElement(
-          'div',
-          { className: 'formGroup' },
-          React.createElement(
-            'label',
-            {
-              htmlFor: 'imageUpload',
-              className: 'imageUploadLabel',
-            },
-            'upload',
-          ),
-          React.createElement('input', {
-            type: 'file',
-            id: 'imageUpload',
-            name: 'imageUpload',
-            accept: 'image/*',
-            onChange: handleImageChange,
-            className: 'hiddenFileInput',
-          }),
-          imageName &&
-            React.createElement('div', {
-              className: 'imageName',
-            }),
-        ),
-        imagePreview &&
-          React.createElement(
-            'div',
-            { className: 'imagePreview' },
-            React.createElement('img', {
-              src: imagePreview,
-              alt: '미리보기',
-            }),
-          ),
-        React.createElement(
-          'div',
-          { className: 'formButtons' },
-          React.createElement(
-            'button',
-            { type: 'submit' },
-            '저장',
-          ),
-          React.createElement(
-            'button',
-            { type: 'button', onClick: onClose },
-            '닫기',
-          ),
-        ),
-      ),
-    ),
+  return (
+    <div
+      className={styles.modalOverlay}
+      onClick={handleOutsideClick}
+    >
+      <div className={styles.modalContent}>
+        <span className={styles.close} onClick={onClose}>
+          ×
+        </span>
+        <h2>이벤트 추가</h2>
+        <form
+          className={styles.formTop}
+          onSubmit={handleSave}
+        >
+          <div className={styles.formGroup}>
+            <label htmlFor='title'>제목:</label>
+            <input
+              type='text'
+              id='title'
+              name='title'
+              value={title}
+              onChange={handleTitleChange}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label
+              htmlFor='imageUpload'
+              className={styles.imageUploadLabel}
+            >
+              upload
+            </label>
+            <input
+              type='file'
+              id='imageUpload'
+              name='imageUpload'
+              accept='image/*'
+              onChange={handleImageChange}
+              className={styles.hiddenFileInput}
+            />
+            {imageName && (
+              <div className={styles.imageName}>
+                {imageName}
+              </div>
+            )}
+          </div>
+          {imagePreview && (
+            <div className={styles.imagePreview}>
+              <img src={imagePreview} alt='미리보기' />
+            </div>
+          )}
+          <div className={styles.formButtons}>
+            <button type='submit'>저장</button>
+            <button type='button' onClick={onClose}>
+              닫기
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };
-
 export default EventAddModal;

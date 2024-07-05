@@ -8,6 +8,7 @@ import axios from 'axios';
 import axiosInstance from '../../../../config/axios-config';
 import AuthContext from '../../../../util/AuthContext';
 import style from '../../../../scss/Button.module.scss';
+
 const Modal2 = ({ onClose, onSave, selectedType }) => {
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
@@ -182,6 +183,7 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
         alert('리뷰 등록에 실패하였습니다.');
       }
     }
+    onSave(content, selectedItem, rating, photo);
     setContent(''); // 폼 초기화
     setSelectedItem(''); // 폼 초기화
     setRating(1); // 폼 초기화
@@ -189,7 +191,10 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
 
   return (
     <div className={styles.modal2}>
-      <div className={styles.modal2Content}>
+      <div
+        className={styles.modal2Content}
+        onClick={(e) => e.stopPropagation()}
+      >
         <span className={styles.close} onClick={onClose}>
           &times;
         </span>
@@ -198,7 +203,7 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
             <div>
               <label htmlFor='item'>{`${selectedType === 'rental' ? '차량' : '충전소'} 선택:`}</label>
               <select
-                id={styles.item}
+                id='item'
                 value={selectedItem}
                 onChange={handleItemChange}
               >
@@ -225,7 +230,7 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
             <div>
               <label htmlFor='rating'>별점 선택:</label>
               <select
-                id={styles.rating}
+                id='rating'
                 value={rating}
                 onChange={handleRatingChange}
               >
@@ -241,7 +246,7 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
             <label htmlFor='photo'>upload</label>
             <input
               type='file'
-              id={styles.photo}
+              id='photo'
               accept='image/*'
               onChange={handlePhotoChange}
             />
