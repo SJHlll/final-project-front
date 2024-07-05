@@ -3,6 +3,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import React, { useState } from 'react';
 import './Event.scss';
 import Eventlist from './Eventlist';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +11,7 @@ import AuthContext from '../../../../util/AuthContext';
 import handleRequest from '../../../../util/handleRequest';
 import { API_BASE_URL } from '../../../../config/host-config';
 import axiosInstance from '../../../../config/axios-config';
+import style from '../../../../scss/Button.module.scss';
 
 const Event = () => {
   const redirection = useNavigate();
@@ -65,7 +67,7 @@ const Event = () => {
       >
         추가
       </button>
-    </Frame>
+    </div>
   );
 };
 
