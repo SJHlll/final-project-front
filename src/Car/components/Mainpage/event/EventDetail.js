@@ -1,18 +1,33 @@
 import React from 'react';
-import {
-  useLocation,
-  useNavigate,
-  useParams,
-} from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './Event.module.scss';
+import style from '../../../../scss/Button.module.scss';
+import axios from 'axios';
 
-const EventDetail = ({ item, remove }) => {
+const EventDetail = () => {
   const location = useLocation();
-  const { id } = useParams();
-  const { img, title, status } = location.state || {};
+  const { id, img, title, status } = location.state || {};
   const navigate = useNavigate();
-  const toList = () => {
-    navigate('/event');
+  const toList = () => navigate('/events');
+
+  const token = localStorage.getItem('ACCESS_TOKEN');
+
+  // 이벤트 삭제 처리 함수
+  const removeEvent = async () => {
+    try {
+      await axios.delete(
+        `http://localhost:8181/events/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      alert('삭제 완료');
+      navigate('/events');
+    } catch (err) {
+      console.error('Error deleting notification:', err);
+    }
   };
 
   return (
@@ -40,30 +55,25 @@ const EventDetail = ({ item, remove }) => {
               <img
                 className={styles.eventDetailImg}
                 src={img}
-                alt={title}
+                alt={img}
               />
             )}
             <button
-              className={`${styles.publicBtn} ${styles.eventButton}`}
+              className={`${style.publicBtn} ${styles.eventButton}`}
             >
               수정
             </button>
             <button
-              className={`${styles.publicBtn} ${styles.eventButton}`}
+              className={`${style.publicBtn} ${styles.eventButton}`}
+              onClick={removeEvent}
             >
               삭제
             </button>
             <button
-              className={styles.publicBtn}
+              className={style.publicBtn}
               onClick={toList}
             >
               목록
-            </button>
-            <button
-              className='pulic-btn'
-              onClick={() => remove(id)}
-            >
-              삭제
             </button>
           </div>
         </div>

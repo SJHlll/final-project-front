@@ -97,7 +97,7 @@ const Testheader = () => {
           className={
             state === 6 ? styles.tabliactive : styles.tabli
           }
-          onClick={() => onClick(6, '/event')}
+          onClick={() => onClick(6, '/events')}
         >
           이벤트
         </button>

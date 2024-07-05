@@ -132,16 +132,16 @@
     }
   }
 
-  .margin-box {
+  .marginBox {
     margin: 0 50px;
   }
 
-  .margin-box:first-child {
+  .marginBox:first-child {
     border-right: 1px solid black;
     padding-right: 50px;
   }
 
-  .margin-box:last-child {
+  .marginBox:last-child {
     border-left: 1px solid black;
     padding-left: 50px;
   }
@@ -159,7 +159,6 @@
   }
 
   button {
-    position: absolute;
     right: 25px;
     bottom: -10px;
     padding: 5px 15px;
