@@ -6,6 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import styles from './reservation_css/CarCalendar.module.scss';
 import { ko } from 'date-fns/locale';
 import { addMonths, setHours, setMinutes } from 'date-fns';
+import { Height } from '@mui/icons-material';
 
 registerLocale('ko', ko); // 한국어 등록
 
@@ -101,6 +102,9 @@ const CarCalendar = ({
         <DatePicker
           id={styles.calendar}
           locale={ko}
+          style={{
+            Height: '400px',
+          }}
           renderCustomHeader={({
             monthDate,
             customHeaderCount,
@@ -152,7 +156,31 @@ const CarCalendar = ({
         />
       </div>
 
-      <div className={styles.timeContainer}>
+      <div
+        style={{
+          border: '1px solid lightgray',
+          position: 'relative',
+          width: '482px',
+          left: '0%',
+          bottom: '80%',
+          marginTop: '167px',
+          display: 'flex',
+          flexDirection: 'column',
+          borderRadius: '5px',
+        }}
+        className={styles.timeContainer}
+      >
+        <header
+          style={{
+            fontSize: '20px',
+            width: '70%',
+            margin: '0 auto',
+            padding: '1.5%',
+            borderBottom: '1px solid black',
+          }}
+        >
+          시간선택
+        </header>
         <div className={styles.timeBlock}>
           <div
             style={{

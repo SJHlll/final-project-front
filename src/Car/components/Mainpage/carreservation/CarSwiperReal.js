@@ -69,7 +69,7 @@ const CarSwiperReal = () => {
             src={car.carPicture}
             alt={`Car ${index}`}
             style={{
-              width: '100%',
+              width: '70%',
               height: 'auto',
               marginTop: '5%',
             }}
