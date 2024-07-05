@@ -8,6 +8,7 @@ import ReservedStationList from '../adminstation/ReservedStationList';
 import ReservedCarList from '../admincar/ReservedCarList';
 import { TestRvProvider } from './TestRvContext';
 import styles from '../AdminPage.module.scss';
+
 const ReviewList = () => {
   const [selected, setSelected] = useState(null);
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const ReviewList = () => {
     setSelected(selection);
     navigate(path);
   };
+
   return (
     <TestRvProvider>
       <Frame>
@@ -58,9 +60,9 @@ const ReviewList = () => {
           </div>
           <div className={styles.hiddenText}></div>
         </div>
-        <div className={styles.adminPageSelect}>
+        <div className={styles.adminPageList}>
           <div
-            className={`${styles.adminList} ${styles.review}`}
+            className={`${styles.adminList} ${styles.Writtenreview}`}
           >
             <ReviewMap />
           </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from '../AdminPage.module.scss';
-const ReservedCarSelect = ({ onClick, isSelected }) => {
+
+const ReservedCarSelect = ({ onClick }) => {
   return (
     <div
       className={`${styles.adminSelect} ${styles.reserveCar}`}
