@@ -1,26 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Event.scss';
-import Eventlist from './Eventlist';
+import Eventlist from './Eventlist'; // 실제 파일 이름과 일치시킴
+import EventAddModal from './EventAddModal';
 
-const Event = () => {
-  return (
-    <div className='maincontainer'>
-      <div className='contentline'>
-        <div className='eventbody'>
-          <Eventlist />
-        </div>
-        <button className='public-btn event-button'>
-          추가
-        </button>
-        <button className='public-btn event-button'>
-          수정
-        </button>
-        <button className='public-btn event-button'>
-          삭제
-        </button>
-      </div>
-    </div>
+function Event() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  return React.createElement(
+    'div',
+    { className: 'mainContainer' },
+    React.createElement(
+      'div',
+      { className: 'contentLine' },
+      React.createElement(
+        'div',
+        { className: 'eventBody' },
+        React.createElement(Eventlist, null), // 실제 파일 이름과 일치시킴
+      ),
+      React.createElement(
+        'button',
+        {
+          className: 'publicBtn eventButton',
+          onClick: openModal,
+        },
+        '추가',
+      ),
+      React.createElement(
+        'button',
+        { className: 'publicBtn eventButton' },
+        '수정',
+      ),
+      React.createElement(
+        'button',
+        { className: 'publicBtn eventButton' },
+        '삭제',
+      ),
+    ),
+    React.createElement(EventAddModal, {
+      isOpen: isModalOpen,
+      onClose: closeModal,
+    }),
   );
-};
+}
 
 export default Event;
