@@ -91,11 +91,14 @@ const CarInfo = () => {
             </div>
             <div className={styles.selectcarbox}>
               <div className={styles.selinformation}>
-                가격
+                1일 렌트 가격
               </div>
               :
               <div className={styles.selinformation2}>
-                {selectedCar.carPrice}원 (렌트가격)
+                {selectedCar.carPrice.toLocaleString(
+                  'ko-KR',
+                )}
+                원
               </div>
             </div>
           </div>
