@@ -7,7 +7,7 @@ import styles from './Modal2.module.scss';
 import axios from 'axios';
 import axiosInstance from '../../../../config/axios-config';
 import AuthContext from '../../../../util/AuthContext';
-
+import style from '../../../../scss/Button.module.scss';
 const Modal2 = ({ onClose, onSave, selectedType }) => {
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
@@ -198,7 +198,7 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
             <div>
               <label htmlFor='item'>{`${selectedType === 'rental' ? '차량' : '충전소'} 선택:`}</label>
               <select
-                id='item'
+                id={styles.item}
                 value={selectedItem}
                 onChange={handleItemChange}
               >
@@ -225,7 +225,7 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
             <div>
               <label htmlFor='rating'>별점 선택:</label>
               <select
-                id='rating'
+                id={styles.rating}
                 value={rating}
                 onChange={handleRatingChange}
               >
@@ -241,7 +241,7 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
             <label htmlFor='photo'>upload</label>
             <input
               type='file'
-              id='photo'
+              id={styles.photo}
               accept='image/*'
               onChange={handlePhotoChange}
             />
@@ -263,7 +263,7 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
             />
           </div>
           {error && <p className={styles.error}>{error}</p>}
-          <div className={styles.submitButton}>
+          <div className={style.submitButton}>
             <button type='submit'>저장</button>
           </div>
         </form>

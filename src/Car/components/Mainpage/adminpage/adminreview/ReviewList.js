@@ -60,9 +60,9 @@ const ReviewList = () => {
           </div>
           <div className={styles.hiddenText}></div>
         </div>
-        <div className={styles.adminPageList}>
+        <div className={styles.adminPageSelect}>
           <div
-            className={`${styles.adminList} ${styles.Writtenreview}`}
+            className={`${styles.adminList} ${styles.review}`}
           >
             <ReviewMap />
           </div>

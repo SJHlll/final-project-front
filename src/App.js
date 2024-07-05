@@ -24,7 +24,6 @@ import { Fail } from './Car/components/pay/Fail';
 import Chargelist from './Car/components/Mainpage/Chargelist';
 import Carreservation from './Car/components/Mainpage/carreservation/Carreservation';
 import EventDetail from './Car/components/Mainpage/event/EventDetail';
-import Carres from './Car/components/Mainpage/carreservation/Carres';
 import UserInfoSave from './Car/components/charge/mypage/UserInfoSave';
 import RegisterPage from './Car/components/user/RegisterPage';
 import NotiPage from './Car/components/Mainpage/noti/Notipage';
@@ -32,7 +31,6 @@ import Loginpage from './Car/components/Mainpage/Loginpage';
 import KakaoLoginHandler from './Car/components/user/KakaoLoginHandler';
 import NaverLoginHandler from './Car/components/user/NaverLoginHandler';
 import AdminPage from './Car/components/Mainpage/adminpage/AdminPage';
-import ReviewPage from './Car/components/Mainpage/review/ReviewPage';
 import ReservedStationList from './Car/components/Mainpage/adminpage/adminstation/ReservedStationList';
 import ReservedCarList from './Car/components/Mainpage/adminpage/admincar/ReservedCarList';
 import ReviewList from './Car/components/Mainpage/adminpage/adminreview/ReviewList';
@@ -78,9 +76,9 @@ const App = () => {
               element={<NotiPage />}
             />
             {/* 이벤트 페이지 */}
-            <Route path='/event' element={<Event />} />
+            <Route path='/events' element={<Event />} />
             <Route
-              path='/event/:id'
+              path='/events/:id'
               element={<EventDetail />}
             />
             {/* 이용후기 페이지 */}
