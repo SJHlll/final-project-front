@@ -27,13 +27,14 @@
 }
 
 .carCalendarContent { // 달력전체
+  // border: 1px solid black;
   width: 100%;
   display: flex;
   //justify-content: flex-end;
   flex-direction: column;
   align-items: center;
   //margin: 0; // 전체 컨테이너의 외부 여백 제거
-  margin-left: auto;
+  margin-left: 100px;
   // margin-top: 50px;
   margin-bottom: 0px;
   padding-bottom: 0px;
@@ -57,31 +58,45 @@
     justify-content: center; // 요소를 중앙으로 정렬
     align-items: center;
     gap: 20px; // 요소 간의 간격을 조정
-    margin-top: 10px;
     width: 100%; // 부모 요소에 맞게 100%로 설정
+    margin-top: 1%;
   }
-
-  .pickupTitle,
-  .returnTitle {
-    flex-wrap: wrap-reverse;
-    font-size: 18px;
-     margin-bottom: 0px;
-  }
+.pickupTitle{
+  width: 30%;
+}
+  
 
   .timeBlock {
     display: flex;
-    flex-direction: column;
+ 
     align-items: center;
-    width: auto;
-    margin-left: 50px;
-    margin-right: 50px;
+    width: 200px;
+    margin-right: 10px;
+margin-bottom: 1%;
+ 
   }
 
   #pickupTime,
   #returnTime {
     margin-top: 5px;
-    width: 150px; // 적절한 너비 설정
+    width: 83px; // 적절한 너비 설정
+    z-index: 5;
+    text-align: center;
+  margin-right: 5px;
   }
 
 }
-
+#pickupTime{
+  margin-left: 30px;
+}
+.pickupTitle{
+font-size: 19px;
+  width: 30%;
+}
+.returnTitle{
+  width: 30%;
+  font-size: 19px;
+}
+#returnTime{
+  margin-left: 30px;
+}

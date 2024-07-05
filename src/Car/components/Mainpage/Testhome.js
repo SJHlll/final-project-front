@@ -1,37 +1,27 @@
 import React from 'react';
 import styles from './Testhome.module.scss';
 import Frame from './Frame';
+import coverImage from '../../assets/175944.png'; // 이미지 import
 
 const Testhome = () => {
   return (
-    <div>
+    <div
+      style={{
+        overFlow: 'hidden',
+      }}
+    >
       <Frame>
-        <video
+        <img
           className={styles.covervideo}
-          muted
-          autoPlay
-          loop
-          src={
-            'https://plugngo.s3.ap-northeast-2.amazonaws.com/mainback.mp4'
-          }
-          type='video/mp4'
-        >
-          <strong>
-            Your browser does not support the video tag.
-          </strong>
-        </video>
-
+          src={coverImage} // import한 이미지 사용
+          alt='Cover Image'
+        />
         <div className={styles.coverheader}>
-          <h1 className={styles.covercon}>
-            나도 여행가고싶다
-          </h1>
-          <p className={styles.covercontent}>
-            I want to go
-            <br /> on a trip
-          </p>
+          <h1 className={styles.covercon}></h1>
         </div>
       </Frame>
     </div>
   );
 };
+
 export default Testhome;

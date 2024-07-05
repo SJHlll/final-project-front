@@ -15,10 +15,9 @@ import SmallScreen from './SmallScreen';
 
 // 카카오 지도 스타일
 const MapContainer = styled(Map)`
-  width: 100%;
-  height: 86vh;
+  width: 1920px;
+  height: 89vh;
   border: 1px solid #888;
-  border-radius: 15px;
 `;
 
 const KakaoMap = () => {

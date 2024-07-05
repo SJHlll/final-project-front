@@ -94,11 +94,11 @@ const PlugAndGoMap = ({ markers }) => {
 export default PlugAndGoMap;
 
 const MapContainer = styled(Map)`
-  width: 450px;
+  width: 584px;
   height: 726px;
-  border: 2px solid black;
+  border: 2px solid #999;
   border-radius: 15px;
   position: absolute;
-  right: 15px;
+  left: 264px;
   top: 15px;
 `;

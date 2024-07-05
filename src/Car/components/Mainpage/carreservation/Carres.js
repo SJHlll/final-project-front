@@ -109,7 +109,7 @@ const Carres = () => {
 
   const button = (
     <button
-      className={`${style.resBtn} ${style.publicBtn}`}
+      className={`${styles.resBtn} ${style.publicBtn}`}
       onClick={toggle}
     >
       예약 하기
@@ -198,23 +198,33 @@ const Carres = () => {
               setReturning((prev) => ({ ...prev, time }))
             }
           />
-          <div className={styles.reservationBtn}>
-            {modal ? modalOpen : button}
-          </div>
+
           <div
             style={{
               display: 'flex',
               border: '1px solid black',
-              width: '70%',
-              margin: '0 auto',
+              width: '50%',
+              marginLeft: '20%',
+              marginTop: '2%',
+              height: '40px',
+              alignContent: 'center',
+              lineHeight: '2.5',
+              backgroundColor: 'white',
             }}
           >
             <div className={styles.caltotalbox1}>
               렌트기간
             </div>
-            <div className={styles.caltotalbox2}>일</div>
+            <div className={styles.caltotalbox2}>
+              3000 일
+            </div>
             <div className={styles.caltotalbox3}>금액</div>
-            <div className={styles.caltotalbox4}>???원</div>
+            <div className={styles.caltotalbox4}>
+              4000000 원
+            </div>
+          </div>
+          <div className={styles.reservationBtn}>
+            {modal ? modalOpen : button}
           </div>
         </div>
       </div>
