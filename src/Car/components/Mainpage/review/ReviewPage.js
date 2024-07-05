@@ -11,7 +11,8 @@ const ReviewPage = ({ ReviewList }) => {
   const [selectedReview, setSelectedReview] =
     useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal1 상태
+  const [isModal2Open, setIsModal2Open] = useState(false); // Modal2 상태 추가
   const [reviewList, setReviewList] = useState([]);
   const [rentalReviews, setRentalReviews] = useState([]);
   const [chargingReviews, setChargingReviews] = useState(
@@ -33,14 +34,10 @@ const ReviewPage = ({ ReviewList }) => {
         setReviewList(data);
 
         const rental = data
-          .filter(
-            (review) => review.carName !== null, // carName이 있는 경우 렌트카 리뷰로 분류
-          )
+          .filter((review) => review.carName !== null) // carName이 있는 경우 렌트카 리뷰로 분류
           .reverse();
         const charging = data
-          .filter(
-            (review) => review.stationName !== null, // stationName이 있는 경우 충전소 리뷰로 분류
-          )
+          .filter((review) => review.stationName !== null) // stationName이 있는 경우 충전소 리뷰로 분류
           .reverse();
         setRentalReviews(rental);
         setChargingReviews(charging);
@@ -59,12 +56,18 @@ const ReviewPage = ({ ReviewList }) => {
 
   const handleMoreClick = (review) => {
     setSelectedReview(review);
-    setIsModalOpen(true);
+    setIsModalOpen(true); // Modal1 열기
   };
 
   const handleCloseModal = () => {
     setSelectedReview(null);
-    setIsModalOpen(false);
+    setIsModalOpen(false); // Modal1 닫기
+  };
+
+  // Modal2 열기 함수 추가
+  const handleOpenModal2 = () => {
+    setIsModalOpen(false); // Modal1을 닫음
+    setIsModal2Open(true); // Modal2를 엶
   };
 
   const handleSaveReview = (
@@ -109,7 +112,8 @@ const ReviewPage = ({ ReviewList }) => {
       setChargingReviews([newReview, ...chargingReviews]);
     }
 
-    setIsModalOpen(false);
+    setIsModal2Open(false); // Modal2 닫기
+    setIsModalOpen(true); // Modal1 다시 열기
   };
 
   const currentReviews =
@@ -144,7 +148,7 @@ const ReviewPage = ({ ReviewList }) => {
         </button>
       </div>
       <button
-        onClick={() => setIsModalOpen(true)}
+        onClick={handleOpenModal2} // 수정된 부분: Modal2 열기
         className={styles.writeReviewButton}
       >
         후기 작성
@@ -189,9 +193,9 @@ const ReviewPage = ({ ReviewList }) => {
           onClose={handleCloseModal}
         />
       )}
-      {isModalOpen && (
+      {isModal2Open && ( // 수정된 부분: Modal2 열림 상태 추가
         <Modal2
-          onClose={handleCloseModal}
+          onClose={() => setIsModal2Open(false)}
           onSave={handleSaveReview}
           selectedType={selectedType}
         />
