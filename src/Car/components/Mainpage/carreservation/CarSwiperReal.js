@@ -18,7 +18,7 @@ import styles from './reservation_css/CarSwiper.module.scss';
 const CarSwiperReal = () => {
   // DB에서 전기차 목록 불러오기
   // rentCar = 전기차 목록 배열
-  const { rentCar, setRentCar, setSelectedCar } =
+  const { rentCar, setRentCar, setEnterCar } =
     useContext(CarContext); // 전기차 목록
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const CarSwiperReal = () => {
 
   // 차 이미지를 클릭시 선택되는 자동차
   const clickCarHandler = (car) => {
-    setSelectedCar(car);
+    setEnterCar(car);
   };
 
   return (

@@ -40,16 +40,21 @@ const ModalContent = styled.div`
 
 const Carres = () => {
   const [modal, setModal] = useState(false);
-  //const [selectedCar, setSelectedCar] = useState(null); // 선택된 차의 정보를 저장할 상태
+  const [selectedCar, setSelectedCar] = useState(null); // 선택된 차의 정보를 저장할 상태
   const [daysBetween, setDaysBetween] = useState(0); // 렌트 기간 상태 추가
   const toggle = () => setModal(!modal);
 
   const { carId, rentCar } = useContext(CarContext); // 자동차 정보
 
-  const { selectedCar, setSelectedCar } =
-    useContext(CarContext);
+  const { enterCar, setEnterCar } = useContext(CarContext);
 
   const { isLoggedIn } = useContext(AuthContext); // 유저 정보
+
+  const totalPrice = enterCar
+    ? (
+        parseInt(daysBetween, 10) * enterCar.carPrice
+      ).toLocaleString('ko-KR')
+    : 0;
 
   const [pickup, setPickup] = useState({
     date: new Date(),
@@ -74,10 +79,10 @@ const Carres = () => {
   useEffect(() => {
     console.log('렌트 기간 (일):', daysBetween); // 픽업날짜 ~ 반납날짜 개수
 
-    if (selectedCar) {
+    if (enterCar) {
       console.log(
         '총 렌트 금액: ',
-        daysBetween * selectedCar.carPrice,
+        daysBetween * enterCar.carPrice,
       );
     }
   }, [daysBetween, selectedCar]);
@@ -183,6 +188,7 @@ const Carres = () => {
                 <CarResInfo
                   pickup={pickup}
                   returning={returning}
+                  totalPrice={totalPrice} // 프롭스 전달!!
                 />
               </div>
             </div>
@@ -252,13 +258,7 @@ const Carres = () => {
             </div>
             <div className={styles.caltotalbox3}>금액</div>
             <div className={styles.caltotalbox4}>
-              {selectedCar
-                ? (
-                    parseInt(daysBetween, 10) *
-                    selectedCar.carPrice
-                  ).toLocaleString('ko-KR')
-                : 0}
-              원
+              {totalPrice} 원
             </div>
           </div>
         </div>

@@ -3,8 +3,8 @@ import React, { useContext } from 'react';
 import { CarContext } from '../../../../contexts/CarContext';
 import AuthContext from '../../../../util/AuthContext';
 
-const CarResInfo = ({ pickup, returning }) => {
-  const { selectedCar } = useContext(CarContext); // db에서 자동차 정보 가져온 것.
+const CarResInfo = ({ pickup, returning, totalPrice }) => {
+  const { enterCar } = useContext(CarContext); // db에서 자동차 정보 가져온 것.
 
   const { isLoggedIn } = useContext(AuthContext);
 
@@ -19,7 +19,7 @@ const CarResInfo = ({ pickup, returning }) => {
     }).format(date);
 
     // 마지막 마침표 제거
-    return formattedDate.replace(/\.$/, '');
+    return formattedDate.replace(/.$/, '');
   };
 
   const formatTime = (time) => {
@@ -38,7 +38,7 @@ const CarResInfo = ({ pickup, returning }) => {
         <div className={styles.phonNumber}>
           전화번호: {}
         </div>
-        <div>예약하실 자동차: {selectedCar.carName}</div>
+        <div>예약하실 자동차: {enterCar.carName}</div>
         <div className={styles.date}>
           픽업 날짜: {formatDate(pickup.date)}
         </div>
@@ -51,7 +51,7 @@ const CarResInfo = ({ pickup, returning }) => {
         <div className={styles.time}>
           반납 시간: {formatTime(returning.time)}
         </div>
-        <div>결제 금액: {}</div>
+        <div>결제 금액: {totalPrice} 원</div>
         비고:
         <input type='text' />
       </div>
