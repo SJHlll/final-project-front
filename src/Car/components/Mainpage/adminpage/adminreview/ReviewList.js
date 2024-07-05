@@ -50,14 +50,18 @@ const ReviewList = () => {
           >
             충전소/렌트카
           </div>
-          <div className={styles.resSelectedName}>리뷰내용</div>
-          <div className={styles.resSelectedTime}>작성날짜</div>
+          <div className={styles.resSelectedName}>
+            리뷰내용
+          </div>
+          <div className={styles.resSelectedTime}>
+            작성날짜
+          </div>
           <div className={styles.hiddenText}></div>
         </div>
         <div className={styles.adminPageSelect}>
-          <div className={`${styles.adminList} ${styles.review}`}>
-
-
+          <div
+            className={`${styles.adminList} ${styles.review}`}
+          >
             <ReviewMap />
           </div>
           {selected === 'station' && (

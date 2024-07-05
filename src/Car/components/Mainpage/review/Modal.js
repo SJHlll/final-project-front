@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './ReviewPage.module.scss';
 
 // Modal 컴포넌트: 리뷰의 세부 사항을 표시하는 모달 창
 const Modal = ({ review, onClose }) => {

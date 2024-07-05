@@ -78,9 +78,9 @@ const App = () => {
               element={<NotiPage />}
             />
             {/* 이벤트 페이지 */}
-            <Route path='/event' element={<Event />} />
+            <Route path='/events' element={<Event />} />
             <Route
-              path='/event/:id'
+              path='/events/:id'
               element={<EventDetail />}
             />
             {/* 이용후기 페이지 */}
