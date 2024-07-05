@@ -112,7 +112,7 @@ const Carres = () => {
       className={`${styles.resBtn} ${style.publicBtn}`}
       onClick={toggle}
     >
-      예약 하기
+      예약하기
     </button>
   );
 
@@ -173,10 +173,14 @@ const Carres = () => {
         style={{
           display: 'flex',
           width: '100%',
-          paddingTop: '1%',
+          marginLeft: '3%',
+          marginTop: '1%',
         }}
       >
         <div className={styles.selectCar}>
+          <div className={styles.pickCarTitle}>
+            선택된 차량
+          </div>
           <CarInfo selectedCar={selectedCar} />
         </div>
         <div className={styles.calendarbtn}>
@@ -198,33 +202,63 @@ const Carres = () => {
               setReturning((prev) => ({ ...prev, time }))
             }
           />
+        </div>
 
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            border: '1px solid lightgrey',
+            width: '403px',
+            height: '400px',
+            top: '10px',
+            // alignContent: 'center',
+            // lineHeight: '2.5',
+            backgroundColor: 'white',
+            position: 'relative',
+            left: '0px',
+            borderRadius: '15px',
+          }}
+        >
+          <header
+            style={{
+              fontSize: '20px',
+              width: '70%',
+              margin: '0 auto',
+              padding: '1.5%',
+              borderBottom: '1px solid black',
+              marginTop: '5px',
+            }}
+          >
+            요금상세정보
+          </header>
+          <div className={styles.caltotalbox1}>
+            렌트기간
+            <div className={styles.caltotalbox2}>30 일</div>
+          </div>
+          <div className={styles.caltotalbox1}>
+            1일 렌트금액
+            <div className={styles.caltotalbox2}>
+              2000000 원
+            </div>
+          </div>
           <div
             style={{
               display: 'flex',
-              border: '1px solid black',
-              width: '50%',
-              marginLeft: '20%',
-              marginTop: '2%',
-              height: '40px',
-              alignContent: 'center',
-              lineHeight: '2.5',
-              backgroundColor: 'white',
+              flexDirection: 'column',
+              width: '100%',
+              height: '100%',
             }}
           >
-            <div className={styles.caltotalbox1}>
-              렌트기간
+            <div className={styles.caltotalbox3}>
+              총 렌트금액
+              <div className={styles.caltotalbox4}>
+                4000000 원
+              </div>
             </div>
-            <div className={styles.caltotalbox2}>
-              3000 일
+            <div className={styles.reservationBtn}>
+              {modal ? modalOpen : button}
             </div>
-            <div className={styles.caltotalbox3}>금액</div>
-            <div className={styles.caltotalbox4}>
-              4000000 원
-            </div>
-          </div>
-          <div className={styles.reservationBtn}>
-            {modal ? modalOpen : button}
           </div>
         </div>
       </div>

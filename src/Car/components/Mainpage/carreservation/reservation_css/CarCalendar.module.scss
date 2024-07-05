@@ -34,11 +34,12 @@
   flex-direction: column;
   align-items: center;
   //margin: 0; // 전체 컨테이너의 외부 여백 제거
-  margin-left: 100px;
+  // margin-left: 100px;
   // margin-top: 50px;
   margin-bottom: 0px;
   padding-bottom: 0px;
-
+  margin-top: 10px;
+  height: 200px;
   .reactDatepicker {
     width: 100%; // 부모 요소에 맞게 100%로 설정
     border: 1px solid silver; // 테두리 설정
@@ -68,18 +69,19 @@
 
   .timeBlock {
     display: flex;
- 
     align-items: center;
     width: 200px;
     margin-right: 10px;
-margin-bottom: 1%;
+    position: relative;
+    top: -14px;
+
  
   }
 
   #pickupTime,
   #returnTime {
-    margin-top: 5px;
-    width: 83px; // 적절한 너비 설정
+    // margin-top: 5px;
+    width: 113px; // 적절한 너비 설정
     z-index: 5;
     text-align: center;
   margin-right: 5px;

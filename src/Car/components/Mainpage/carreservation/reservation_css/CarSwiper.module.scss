@@ -1,17 +1,14 @@
 .carswipercontainer{
     height: 350px;
-    // border: 1px solid black;
-   
+    border: 1px solid lightgray;
     position: relative;
-    bottom: 25px;
-  
-    
+    top: 10px;
 }
 .swiperSlide{
     height: 100%;
 }
 .swipercarname{
-    width: 100%;
+    width: 70%;
     text-align: center;
     font-size: 20px;
     background-color: white;
