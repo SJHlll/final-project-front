@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './Event.module.scss';
 import style from '../../../../scss/Button.module.scss';
 import axios from 'axios';
+import { Modal } from 'reactstrap';
+import EventAddModal from './EventAddModal';
 
 const EventDetail = () => {
   const location = useLocation();
   const { id, img, title, status } = location.state || {};
   const navigate = useNavigate();
   const toList = () => navigate('/events');
+  const [isModal, setIsModal] = useState(false);
+  const [editedContents, setEditedContents] = useState(img);
+  const [currentHeader, setCurrentHeader] = useState(title);
+  const [currentContents, setCurrentContents] =
+    useState(img);
 
   const token = localStorage.getItem('ACCESS_TOKEN');
 
@@ -28,6 +35,8 @@ const EventDetail = () => {
       console.error('Error deleting notification:', err);
     }
   };
+
+  const updateEvent = () => setIsModal(true);
 
   return (
     <div className={styles.maincontainer}>
@@ -58,6 +67,7 @@ const EventDetail = () => {
           )}
           <button
             className={`${style.publicBtn} ${styles.eventButton}`}
+            onClick={updateEvent}
           >
             수정
           </button>
@@ -73,6 +83,14 @@ const EventDetail = () => {
           >
             목록
           </button>
+          {isModal && (
+            <Modal
+              isOpen={isModal}
+              toggle={() => setIsModal(false)}
+            >
+              <EventAddModal />
+            </Modal>
+          )}
         </div>
       </div>
     </div>

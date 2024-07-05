@@ -11,6 +11,7 @@ import handleRequest from '../../../../util/handleRequest';
 import { API_BASE_URL } from '../../../../config/host-config';
 import axiosInstance from '../../../../config/axios-config';
 import style from '../../../../scss/Button.module.scss';
+import Frame from '../Frame';
 
 const Event = () => {
   const redirection = useNavigate();
@@ -50,18 +51,11 @@ const Event = () => {
   }, [API_EVENT_URL, onLogout, redirection]);
 
   return (
-    <div className={styles.maincontainer}>
-      <div className={styles.contentline}>
-        <div className={styles.eventbody}>
-          <Eventlist eventList={events} />
-        </div>
+    <Frame>
+      <div className={styles.eventbody}>
+        <Eventlist eventList={events} />
       </div>
-      <button
-        className={`${style.publicBtn} ${style.eventButton}`}
-      >
-        추가
-      </button>
-    </div>
+    </Frame>
   );
 };
 
