@@ -10,7 +10,7 @@
     width: 100%;
  height: auto;
  margin-top: 1%;
- 
+
     .resBtn { // 예약하기 버튼
        /* position: relative; */
     /* top: 100px; */
@@ -34,15 +34,15 @@
     flex: 1; /* 여유 공간을 차지하여 왼쪽으로 정렬 */
 }
 
-.closeBtn { // 모달 닫기 버튼 
+.closeBtn{ // 모달 닫기 버튼 
     width: 20px;
     height: 20px;
     font-size: 20px;
     margin-top: 0px;
     color: #2c7fdf;
     display: block;
-    cursor: pointer;
     text-align: right;
+    cursor: pointer;
 }
 
 .closeBtn:hover { 
@@ -59,6 +59,8 @@
 }
 .reservationContainer {
     margin-left: 10px;
+    justify-content: center
+
 }
 
 .selectCar { // 선택한 차 정보
@@ -72,6 +74,21 @@
     margin-top: 10px;
     margin-left: 7px;
     padding-top: 11px;
+}
+
+.payBtnParent{
+    display: flex;
+    //align-items: center; /* 자식 요소들을 수평 중앙에 정렬 */
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 20px;
+    
+   
+//     .payBtn {
+//     width: auto;
+//     margin-bottom: 20px;
+//     text-align: center;
+//     }
 }
 
 .calendarbtn{

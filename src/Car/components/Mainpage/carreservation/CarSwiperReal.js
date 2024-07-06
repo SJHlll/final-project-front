@@ -1,8 +1,4 @@
-import React, {
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -15,11 +11,10 @@ import {
 } from 'swiper/modules';
 import { CarContext } from '../../../../contexts/CarContext';
 import styles from './reservation_css/CarSwiper.module.scss';
-const CarSwiperReal = () => {
+const CarSwiperReal = ({ setSelectedCar }) => {
   // DB에서 전기차 목록 불러오기
   // rentCar = 전기차 목록 배열
-  const { rentCar, setRentCar, setSelectedCar } =
-    useContext(CarContext); // 전기차 목록
+  const { rentCar, setRentCar } = useContext(CarContext); // 전기차 목록
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -41,9 +36,10 @@ const CarSwiperReal = () => {
     fetchCars();
   }, [setRentCar]);
 
-  // 차 이미지 를 클릭시 선택되는 자동차
+  // 차 이미지를 클릭시 선택되는 자동차
   const clickCarHandler = (car) => {
     setSelectedCar(car);
+    console.log('setSelected car: ', car);
   };
 
   return (

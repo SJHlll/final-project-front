@@ -1,4 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import styled from 'styled-components';
 import { ModalBody, ModalFooter } from 'reactstrap';
 import CarCalendar from './CarCalendar';
@@ -9,6 +13,9 @@ import { StationProvider } from '../../../../contexts/StationContext';
 import styles from './reservation_css/Carres.module.scss';
 import CarSwiperReal from './CarSwiperReal';
 import CarInfo from './CarInfo';
+import { CarContext } from '../../../../contexts/CarContext';
+import AuthContext from '../../../../util/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -34,8 +41,28 @@ const ModalContent = styled.div`
 
 const Carres = () => {
   const [modal, setModal] = useState(false);
-  const [selectedCar, setSelectedCar] = useState(null); // 선택된 차의 정보를 저장할 상태
+  const [daysBetween, setDaysBetween] = useState(0); // 렌트 기간 상태 추가
+
+  const { selectedCar, setSelectedCar } =
+    useContext(CarContext); // 자동차 정보
+
+  const { isLoggedIn } = useContext(AuthContext); // 유저 정보
+
+  const [extra, setExtra] = useState(''); // 비고
+
+  const navigate = useNavigate(); // 비회원 로그인 화면으로 이동용
+
   const toggle = () => setModal(!modal);
+
+  const handleExtraChange = (newExtra) => {
+    setExtra(newExtra);
+  };
+
+  const totalPrice = selectedCar
+    ? (
+        parseInt(daysBetween, 10) * selectedCar.carPrice
+      ).toLocaleString('ko-KR')
+    : 0;
 
   const [pickup, setPickup] = useState({
     date: new Date(),
@@ -57,60 +84,144 @@ const Carres = () => {
     console.log('반납 시간:', returning.time);
   }, [returning]);
 
+  useEffect(() => {
+    console.log('렌트 기간 (일):', daysBetween); // 픽업날짜 ~ 반납날짜 개수
+
+    if (selectedCar) {
+      console.log(
+        '총 렌트 금액: ',
+        daysBetween * selectedCar.carPrice,
+      );
+    }
+  }, [daysBetween, selectedCar]);
+
+  const onSelectCar = (car) => {
+    setSelectedCar(car);
+  };
+
   const saveReservation = async (reservationData) => {
+    const token = localStorage.getItem('ACCESS_TOKEN'); // 로컬 토큰
     try {
-      const response = await fetch('/api/saveReservation', {
+      const response = await fetch('/rentcar/reservation', {
         method: 'POST',
         headers: {
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(reservationData),
       });
 
+      console.log('reservation Data: ', reservationData);
+
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
 
-      const result = await response.json();
-      console.log('Reservation saved:', result);
+      // JSON으로 구문 분석하기 전에 응답 본문이 비어 있지 않은지 확인합니다.
+      const result = await response.text();
+      if (result) {
+        const jsonResponse = JSON.parse(result);
+        console.log('Reservation saved:', jsonResponse);
+      } else {
+        console.log(
+          '예약이 저장되었지만 JSON 응답이 수신되지 않았습니다',
+        );
+      }
     } catch (error) {
       console.error('Error saving reservation:', error);
     }
   };
 
+  // 회원일 시 알림 창
   const reservationHandler = () => {
     if (!pickup.date) {
       alert('픽업 날짜를 선택하세요.');
       return;
     }
+
     if (!returning.date) {
       alert('반납 날짜를 선택하세요.');
       return;
     }
-    if (!pickup.time) {
-      alert('픽업 시간을 선택하세요.');
+
+    if (!selectedCar) {
+      alert('차량을 선택하세요.');
       return;
     }
-    if (!returning.time) {
-      alert('반납 시간을 선택하세요.');
-      return;
-    }
+
+    const reservationData = {
+      carId: selectedCar.id,
+      rentDate: `${pickup.date.toISOString().split('T')[0]}T${pickup.time.toTimeString().split(' ')[0]}`,
+      turninDate: `${returning.date.toISOString().split('T')[0]}T${returning.time.toTimeString().split(' ')[0]}`,
+      rentTime: pickup.time.toTimeString().split(' ')[0],
+      turninTime: returning.time
+        .toTimeString()
+        .split(' ')[0],
+      totalPrice: totalPrice.replace(/,/g, ''),
+      extra: `${extra}`,
+    };
 
     alert('예약이 완료되어 결제창으로 넘어갑니다.');
     setModal(!modal);
 
-    const reservationData = {
-      pickup,
-      returning,
-    };
-
     saveReservation(reservationData);
   };
 
+  // 비회원 예약 방지 핸들러
+  const confirmReservationHandler = () => {
+    if (!isLoggedIn) {
+      alert('로그인 후 예약이 가능합니다.');
+      navigate('/Login');
+    } else {
+      reservationHandler();
+    }
+  };
+
+  // const reservationHandler = () => {
+  //   if (!pickup.date) {
+  //     alert('픽업 날짜를 선택하세요.');
+  //     return;
+  //   }
+  //   if (!returning.date) {
+  //     alert('반납 날짜를 선택하세요.');
+  //     return;
+  //   }
+  //   if (!pickup.time) {
+  //     alert('픽업 시간을 선택하세요.');
+  //     return;
+  //   }
+  //   if (!returning.time) {
+  //     alert('반납 시간을 선택하세요.');
+  //     return;
+  //   }
+  //   if (!selectedCar) {
+  //     alert('차량을 선택하세요.');
+  //     return;
+  //   }
+
+  //   alert('예약이 완료되어 결제창으로 넘어갑니다.');
+  //   setModal(!modal);
+
+  //   const reservationData = {
+  //     carId: selectedCar.id,
+  //     rentDate: `${pickup.date.toISOString().split('T')[0]}T${pickup.time.toTimeString().split(' ')[0]}`,
+  //     turninDate: `${returning.date.toISOString().split('T')[0]}T${returning.time.toTimeString().split(' ')[0]}`,
+  //     rentTime: pickup.time.toTimeString().split(' ')[0],
+  //     turninTime: returning.time
+  //       .toTimeString()
+  //       .split(' ')[0],
+  //     totalPrice: totalPrice.replace(/,/g, ''),
+  //     extra: `${extra}`,
+  //   };
+
+  //   saveReservation(reservationData);
+  // };
+
   const button = (
     <button
-      className={`${styles.resBtn} ${style.publicBtn}`}
-      onClick={toggle}
+      className={`${style.resBtn} ${style.publicBtn}`}
+      onClick={confirmReservationHandler}
+      type='button'
     >
       예약하기
     </button>
@@ -135,7 +246,7 @@ const Carres = () => {
           >
             <h1 className={styles.resTitle}>예약 확인</h1>
             <span
-              className={style.closeBtn}
+              className={`${styles.publicBtn} ${styles.closeBtn}`}
               onClick={toggle}
             >
               X
@@ -149,18 +260,22 @@ const Carres = () => {
                 <CarResInfo
                   pickup={pickup}
                   returning={returning}
+                  totalPrice={totalPrice} // 프롭스 전달!!
+                  onExtraChange={handleExtraChange} // 비고
                 />
               </div>
             </div>
           </ModalBody>
           <hr />
           <ModalFooter>
-            <button
-              className={`${style.publicBtn} ${style.payBtn}`}
-              onClick={reservationHandler}
-            >
-              예약 확정 하기
-            </button>
+            <div className={styles.payBtnParent}>
+              <button
+                className={`${style.publicBtn} ${style.payBtn}`}
+                onClick={reservationHandler}
+              >
+                예약 확정 하기
+              </button>
+            </div>
           </ModalFooter>
         </div>
       </ModalContent>
@@ -201,6 +316,7 @@ const Carres = () => {
             onChangeEndTime={(time) =>
               setReturning((prev) => ({ ...prev, time }))
             }
+            setDaysBetween={setDaysBetween} // setDaysBetween 전달
           />
         </div>
 
@@ -258,6 +374,13 @@ const Carres = () => {
             </div>
             <div className={styles.reservationBtn}>
               {modal ? modalOpen : button}
+            </div>
+            <div className={styles.caltotalbox2}>
+              {daysBetween} 일
+            </div>
+            <div className={styles.caltotalbox3}>금액</div>
+            <div className={styles.caltotalbox4}>
+              {totalPrice} 원
             </div>
           </div>
         </div>
