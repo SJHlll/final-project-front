@@ -246,7 +246,7 @@ const Carres = () => {
           >
             <h1 className={styles.resTitle}>예약 확인</h1>
             <span
-              className={style.closeBtn}
+              className={`${styles.publicBtn} ${styles.closeBtn}`}
               onClick={toggle}
             >
               X
@@ -268,12 +268,14 @@ const Carres = () => {
           </ModalBody>
           <hr />
           <ModalFooter>
-            <button
-              className={`${style.publicBtn} ${style.payBtn}`}
-              onClick={reservationHandler}
-            >
-              예약 확정 하기
-            </button>
+            <div className={styles.payBtnParent}>
+              <button
+                className={`${style.publicBtn} ${style.payBtn}`}
+                onClick={reservationHandler}
+              >
+                예약 확정 하기
+              </button>
+            </div>
           </ModalFooter>
         </div>
       </ModalContent>
