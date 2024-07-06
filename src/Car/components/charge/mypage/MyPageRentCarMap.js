@@ -17,6 +17,11 @@ const MyPageRentCarMap = () => {
   const [selectedCar, setSelectedCar] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [newRentDate, setNewRentDate] = useState('');
+  const [newTurninDate, setNewTurninDate] = useState('');
+  const [isEditDateMode, setIsEditDateMode] =
+    useState(false);
+
   // DB에서 예약한 렌트카 가져오기
   useEffect(() => {
     const fetchStations = async () => {
@@ -52,6 +57,42 @@ const MyPageRentCarMap = () => {
 
     fetchStations();
   }, [setReserveCar]);
+
+  //   const handleUpdateReservation = async (reservationNo) => {
+  //     try {
+  //       const token = localStorage.getItem('ACCESS_TOKEN');
+  //       const response = await fetch(
+  //         `http://localhost:8181/admin/car`,
+  //         {
+  //           method: 'PUT', // 수정 요청이므로 PUT 메서드를 사용합니다.
+  //           headers: {
+  //             Authorization: `Bearer ${token}`,
+  //             'Content-Type': 'application/json',
+  //           },
+  //           body: JSON.stringify({
+  //             reservationNo,
+  //             rentDate: newRentDate,
+  //             turninDate: newTurninDate,
+  //           }),
+  //         },
+  //       );
+  //       if (!response.ok) {
+  //         throw new Error('Failed to update reservation');
+  //       }
+
+  //       const updatedCar = await response.json();
+  //       setReserveCar((prevCar) =>
+  //         prevCar.map((car) =>
+  //           car.reservationNo === reservationNo
+  //             ? updatedCar
+  //             : car,
+  //         ),
+  //       );
+  //       closeModal();
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
 
   // 예약한 충전소 DB에 지우기 (예약번호를 기준으로)
   const handleCancelReservation = async (reservationNo) => {
@@ -113,11 +154,18 @@ const MyPageRentCarMap = () => {
   const handlerentCarClick = (rentCar) => {
     setSelectedCar(rentCar);
     setIsModalOpen(true);
+    setNewRentDate(rentCar.rentDate);
+    setNewTurninDate(rentCar.turninDate);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedCar(null);
+    setIsEditDateMode(false);
+  };
+
+  const toggleEditDateMode = () => {
+    setIsEditDateMode(!isEditDateMode);
   };
 
   const AdminContents = ({ car }) => {
@@ -167,16 +215,43 @@ const MyPageRentCarMap = () => {
                   가격:{' '}
                   {formatPrice(selectedCar.totalPrice)}원
                 </p>
-                <p>
-                  <div>
-                    렌트 시작일 :{' '}
-                    {formatRentTime(selectedCar.rentDate)}
-                  </div>
-                  <div>
-                    렌트 반납일 :{' '}
-                    {formatRentTime(selectedCar.turninDate)}
-                  </div>
-                </p>
+                {isEditDateMode ? (
+                  <p>
+                    <div>
+                      렌트 시작일 :
+                      <input
+                        type='datetime-local'
+                        value={newRentDate}
+                        onChange={(e) =>
+                          setNewRentDate(e.target.value)
+                        }
+                      />
+                    </div>
+                    <div>
+                      렌트 반납일 :
+                      <input
+                        type='datetime-local'
+                        value={newTurninDate}
+                        onChange={(e) =>
+                          setNewTurninDate(e.target.value)
+                        }
+                      />
+                    </div>
+                  </p>
+                ) : (
+                  <p>
+                    <div>
+                      렌트 시작일 :{' '}
+                      {formatRentTime(selectedCar.rentDate)}
+                    </div>
+                    <div>
+                      렌트 반납일 :{' '}
+                      {formatRentTime(
+                        selectedCar.turninDate,
+                      )}
+                    </div>
+                  </p>
+                )}
                 <button
                   className={styles.buttonbutton}
                   onClick={() => {
@@ -191,11 +266,34 @@ const MyPageRentCarMap = () => {
                     }
                   }}
                 >
-                  취소
+                  예약 취소
                 </button>
-                <button className={styles.buttonbutton}>
-                  수정
+                <button
+                  className={styles.buttonbutton}
+                  onClick={toggleEditDateMode}
+                >
+                  {isEditDateMode
+                    ? '수정 취소'
+                    : '날짜 수정하기'}
                 </button>
+                {isEditDateMode && (
+                  <button
+                    className={styles.buttonbutton}
+                    // onClick={() => {
+                    //   if (
+                    //     window.confirm(
+                    //       '정말 예약을 수정하시겠습니까?',
+                    //     )
+                    //   ) {
+                    //     handleUpdateReservation(
+                    //       selectedCar.reservationNo,
+                    //     );
+                    //   }
+                    // }}
+                  >
+                    수정 완료
+                  </button>
+                )}
               </div>
             )}
           </MyPageModal>
