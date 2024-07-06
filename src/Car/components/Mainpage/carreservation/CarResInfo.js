@@ -31,7 +31,6 @@ const CarResInfo = ({
   const navigate = useNavigate();
 
   const handleExtraChange = (e) => {
-    // 비고를 부모에게 넘기기 위해
     const newExtra = e.target.value;
     setExtra(newExtra);
     onExtraChange(newExtra); // 부모 컴포넌트에 extra 값 전달
@@ -80,7 +79,7 @@ const CarResInfo = ({
       rentTime: formatTime(pickup.time),
       turninTime: formatTime(returning.time),
       totalPrice,
-      extra,
+      extra: `${extra}`,
     };
 
     try {

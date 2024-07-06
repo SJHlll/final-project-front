@@ -102,7 +102,7 @@ const Carres = () => {
   const saveReservation = async (reservationData) => {
     const token = localStorage.getItem('ACCESS_TOKEN'); // 로컬 토큰
     try {
-      const response = await fetch('/rentcar/reservation', {
+      const res = await fetch('/rentcar/reservation', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -113,12 +113,12 @@ const Carres = () => {
 
       console.log('reservation Data: ', reservationData);
 
-      if (!response.ok) {
+      if (!res.ok) {
         throw new Error('Network response was not ok');
       }
 
       // JSON으로 구문 분석하기 전에 응답 본문이 비어 있지 않은지 확인합니다.
-      const result = await response.text();
+      const result = await res.text();
       if (result) {
         const jsonResponse = JSON.parse(result);
         console.log('Reservation saved:', jsonResponse);
@@ -158,7 +158,7 @@ const Carres = () => {
         .toTimeString()
         .split(' ')[0],
       totalPrice: totalPrice.replace(/,/g, ''),
-      extra: `${extra}`,
+      extra,
     };
 
     alert('예약이 완료되어 결제창으로 넘어갑니다.');
@@ -173,7 +173,7 @@ const Carres = () => {
       alert('로그인 후 예약이 가능합니다.');
       navigate('/Login');
     } else {
-      reservationHandler();
+      toggle();
     }
   };
 
@@ -350,12 +350,18 @@ const Carres = () => {
           </header>
           <div className={styles.caltotalbox1}>
             렌트기간
-            <div className={styles.caltotalbox2}>30 일</div>
+            <div className={styles.caltotalbox2}>
+              {daysBetween} 일
+            </div>
           </div>
           <div className={styles.caltotalbox1}>
             1일 렌트금액
             <div className={styles.caltotalbox2}>
-              2000000 원
+              {(selectedCar
+                ? selectedCar.carPrice
+                : 0
+              ).toLocaleString('ko-KR')}{' '}
+              원
             </div>
           </div>
           <div
@@ -369,7 +375,7 @@ const Carres = () => {
             <div className={styles.caltotalbox3}>
               총 렌트금액
               <div className={styles.caltotalbox4}>
-                4000000 원
+                {totalPrice} 원
               </div>
             </div>
             <div className={styles.reservationBtn}>
