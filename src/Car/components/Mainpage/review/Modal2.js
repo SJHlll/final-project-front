@@ -8,18 +8,47 @@ import axios from 'axios';
 import axiosInstance from '../../../../config/axios-config';
 import AuthContext from '../../../../util/AuthContext';
 import style from '../../../../scss/Button.module.scss';
-const Modal2 = ({ onClose, onSave, selectedType }) => {
-  const [content, setContent] = useState('');
+import { useNavigate } from 'react-router-dom';
+
+const Modal2 = ({
+  onClose,
+  onSave,
+  selectedType,
+  reviewContent = '',
+  reviewRating = 1,
+  reviewPhotoPreview = '',
+  reviewItem = '',
+  isEditMode,
+}) => {
+  const [content, setContent] = useState(reviewContent);
   const [error, setError] = useState('');
-  const [selectedItem, setSelectedItem] = useState('');
-  const [rating, setRating] = useState(1);
+  const [selectedItem, setSelectedItem] =
+    useState(reviewItem);
+  const [rating, setRating] = useState(reviewRating);
   const [photo, setPhoto] = useState(null);
-  const [photoPreview, setPhotoPreview] = useState(null);
+  const [photoPreview, setPhotoPreview] = useState(
+    reviewPhotoPreview,
+  );
   const [reviewList, setReviewList] = useState([]);
   const [carList, setCarList] = useState([]);
   const [chargeList, setChargeList] = useState([]);
-
+  const navigate = useNavigate();
   const { token } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (isEditMode) {
+      setContent(reviewContent);
+      setSelectedItem(reviewItem);
+      setRating(reviewRating);
+      setPhotoPreview(reviewPhotoPreview);
+    }
+  }, [
+    isEditMode,
+    reviewContent,
+    reviewItem,
+    reviewRating,
+    reviewPhotoPreview,
+  ]);
 
   useEffect(() => {
     const fetchCarList = async () => {
@@ -73,6 +102,7 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
         );
       }
     };
+
     if (selectedType !== 'rental') {
       fetchChargeList();
     }
@@ -131,74 +161,91 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
       return;
     }
 
-    if (selectedType !== 'rental') {
-      const reviewChargeData = {
-        content,
-        rating,
-        stationName: selectedItem,
-      };
+    const reviewData = {
+      content,
+      rating,
+      [selectedType === 'rental'
+        ? 'carName'
+        : 'stationName']: selectedItem,
+    };
 
-      try {
-        const response = await axiosInstance.post(
-          'http://localhost:8181/review/charge',
-          reviewChargeData,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            },
-          },
-        );
-        setReviewList([...reviewList, response.data]);
-        alert('리뷰 작성이 완성되었습니다.');
-        onSave(content, selectedItem, rating);
-      } catch (err) {
-        setError(err.message);
-        alert('리뷰 등록에 실패하였습니다.');
-      }
-    } else {
-      const reviewCarData = {
-        content,
-        rating,
-        carName: selectedItem,
-      };
+    const url = `http://localhost:8181/review/${selectedType === 'rental' ? 'car' : 'charge'}`;
 
-      try {
-        const response = await axiosInstance.post(
-          'http://localhost:8181/review/car',
-          reviewCarData,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            },
+    try {
+      const response = await axiosInstance.post(
+        url,
+        reviewData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
           },
-        );
-        setReviewList([...reviewList, response.data]);
-        alert('리뷰 작성이 완성되었습니다.');
-        onSave(content, selectedItem, rating);
-      } catch (err) {
-        setError(err.message);
-        alert('리뷰 등록에 실패하였습니다.');
-      }
+        },
+      );
+      setReviewList([...reviewList, response.data]);
+      alert('리뷰 작성이 완료되었습니다.');
+      onSave(content, selectedItem, rating, photo);
+      setContent('');
+      setSelectedItem('');
+      setRating(1);
+    } catch (err) {
+      setError(err.message);
+      alert('리뷰 등록에 실패하였습니다.');
     }
-    setContent(''); // 폼 초기화
-    setSelectedItem(''); // 폼 초기화
-    setRating(1); // 폼 초기화
+  };
+
+  const updateHandler = async (e) => {
+    e.preventDefault();
+
+    const reviewData = {
+      content,
+      rating,
+      [selectedType === 'rental'
+        ? 'carName'
+        : 'stationName']: selectedItem,
+    };
+
+    try {
+      await axiosInstance.patch(
+        'http://localhost:8181/review/',
+        reviewData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      alert('리뷰 수정이 완료되었습니다.');
+      navigate('/mypage');
+    } catch (err) {
+      console.log('Error : ', err.response);
+      alert('리뷰 수정에 실패하였습니다.');
+    }
+
+    setContent('');
+    setSelectedItem('');
+    setRating(1);
   };
 
   return (
-    <div className={styles.modal2}>
-      <div className={styles.modal2Content}>
+    <div className={styles.modal2} onClick={onClose}>
+      <div
+        className={styles.modal2Content}
+        onClick={(e) => e.stopPropagation()}
+      >
         <span className={styles.close} onClick={onClose}>
           &times;
         </span>
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={
+            isEditMode ? updateHandler : handleSubmit
+          }
+        >
           <div className={styles.selectionRow}>
             <div>
               <label htmlFor='item'>{`${selectedType === 'rental' ? '차량' : '충전소'} 선택:`}</label>
               <select
-                id={styles.item}
+                id='item'
                 value={selectedItem}
                 onChange={handleItemChange}
               >
@@ -225,7 +272,7 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
             <div>
               <label htmlFor='rating'>별점 선택:</label>
               <select
-                id={styles.rating}
+                id='rating'
                 value={rating}
                 onChange={handleRatingChange}
               >
@@ -241,7 +288,7 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
             <label htmlFor='photo'>upload</label>
             <input
               type='file'
-              id={styles.photo}
+              id='photo'
               accept='image/*'
               onChange={handlePhotoChange}
             />
@@ -264,7 +311,9 @@ const Modal2 = ({ onClose, onSave, selectedType }) => {
           </div>
           {error && <p className={styles.error}>{error}</p>}
           <div className={style.submitButton}>
-            <button type='submit'>저장</button>
+            <button type='submit'>
+              {isEditMode ? '수정' : '저장'}
+            </button>
           </div>
         </form>
       </div>

@@ -11,7 +11,7 @@ import styled from 'styled-components';
 import AuthContext from '../../../../util/AuthContext';
 import axios from 'axios';
 import { redirect } from 'react-router-dom';
-
+import style from '../../../../scss/Button.module.scss';
 const ModalBackground = styled.div`
   position: fixed;
   top: 0;
@@ -158,7 +158,11 @@ const Noti = () => {
                     >
                       <button
                         type='submit'
-                        className={styles.publicBtn}
+                        className={style.publicBtn}
+                        style={{
+                          width: '50%',
+                          height: '80%',
+                        }}
                       >
                         등록
                       </button>
@@ -172,8 +176,12 @@ const Noti = () => {
                       }}
                     >
                       <button
-                        className={styles.publicBtn}
+                        className={style.publicBtn}
                         onClick={cancelcreatenoti}
+                        style={{
+                          width: '50%',
+                          height: '80%',
+                        }}
                       >
                         취소
                       </button>

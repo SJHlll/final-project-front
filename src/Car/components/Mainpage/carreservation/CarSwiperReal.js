@@ -45,8 +45,8 @@ const CarSwiperReal = ({ setSelectedCar }) => {
   return (
     <Swiper
       modules={[Navigation, Pagination, Autoplay]}
-      spaceBetween={60}
-      slidesPerView={3}
+      spaceBetween={1}
+      slidesPerView={5}
       navigation
       pagination={{
         clickable: true,
@@ -65,7 +65,7 @@ const CarSwiperReal = ({ setSelectedCar }) => {
             src={car.carPicture}
             alt={`Car ${index}`}
             style={{
-              width: '100%',
+              width: '70%',
               height: 'auto',
               marginTop: '5%',
             }}

@@ -168,10 +168,11 @@ const ReviewMap = () => {
               </div>
             </div>
             <div className={styles.resSelectedAd}>
-              {e.carName && e.carName.length > 1
-                ? truncateText(e.carName, 14)
-                : e.stationName && e.stationName.length > 1
-                  ? truncateText(e.stationName, 14)
+              {e.carName && e.carName.length > 0
+                ? '(렌트카) ' + truncateText(e.carName, 14)
+                : e.stationName && e.stationName.length > 0
+                  ? '(충전소) ' +
+                    truncateText(e.stationName, 14)
                   : null}
             </div>
             <div className={styles.resSelectedName}>
@@ -183,9 +184,18 @@ const ReviewMap = () => {
             <div className={styles.spaceBlank}>
               <button
                 className={styles.resCancelBtn}
-                onDoubleClick={() =>
-                  handleDeleteReview(e.reviewNo)
-                }
+                onDoubleClick={() => {
+                  if (
+                    window.confirm(
+                      '정말 리뷰를 삭제하시겠습니까?',
+                    )
+                  ) {
+                    handleDeleteReview(e.reviewNo);
+                    alert(
+                      `${e.name} 회원님의 리뷰를 삭제했습니다.`,
+                    );
+                  }
+                }}
               >
                 삭제
               </button>
@@ -199,80 +209,94 @@ const ReviewMap = () => {
   // 본체
   return (
     <>
-      {role === 'ADMIN' && review.length > 0 ? (
-        <>
-          <AdminContents reviews={filteredReview} />
-          <input
-            className={styles.adminFilter}
-            type='text'
-            placeholder='이메일 도메인 입력'
-            value={filterEmailDomain}
-            onChange={(e) =>
-              setFilterEmailDomain(e.target.value)
-            }
-          />
-          <label className={styles.adminFilter2}>
+      <div>
+        {role === 'ADMIN' && review.length > 0 ? (
+          <>
+            <AdminContents reviews={filteredReview} />
             <input
-              type='checkbox'
-              checked={isBadWordFilter}
+              className={styles.adminFilter}
+              type='text'
+              placeholder='이메일 도메인 입력'
+              value={filterEmailDomain}
               onChange={(e) =>
-                setIsBadWordFilter(e.target.checked)
+                setFilterEmailDomain(e.target.value)
               }
-              style={{ marginRight: '5px' }}
             />
-            <span>
-              비속어가 포함된 리뷰 보기 (&apos;?&apos;도
-              필터링에 추가)
-            </span>
-          </label>
-          <label className={styles.adminFilter3}>
-            <input
-              type='checkbox'
-              checked={isStation}
-              onChange={(e) => {
-                setIsStation(e.target.checked);
-                if (e.target.checked) {
-                  setIsCar(false);
+            <label className={styles.adminFilter2}>
+              <input
+                type='checkbox'
+                checked={isBadWordFilter}
+                onChange={(e) =>
+                  setIsBadWordFilter(e.target.checked)
                 }
-              }}
-              style={{ marginRight: '5px' }}
-            />
-            <span>충전소만 보기</span>
-          </label>
-          <label className={styles.adminFilter4}>
-            <input
-              type='checkbox'
-              checked={isCar}
-              onChange={(e) => {
-                setIsCar(e.target.checked);
-                if (e.target.checked) {
-                  setIsStation(false);
-                }
-              }}
-              style={{ marginRight: '5px' }}
-            />
-            <span>렌트카만 보기</span>
-          </label>
-          <p className={styles.filteredCount}>
-            작성된 리뷰 :{' '}
-            <span className={styles.filteredNum}>
-              {filteredReview.length}
-            </span>
-            개
-          </p>
-        </>
-      ) : (
-        <div
-          style={{
-            textAlign: 'center',
-            marginTop: '100px',
-            fontSize: '1.5rem',
-          }}
-          onClick={() => console.log(filteredReview)}
-        >
-          작성된 리뷰가 없습니다.
-        </div>
-      )}
+                style={{
+                  marginRight: '5px',
+                  position: 'relative',
+                  top: '2px',
+                }}
+              />
+              <span>
+                비속어가 포함된 리뷰 보기 (&apos;?&apos;도
+                필터링에 추가)
+              </span>
+            </label>
+            <label className={styles.adminFilter3}>
+              <input
+                type='checkbox'
+                checked={isStation}
+                onChange={(e) => {
+                  setIsStation(e.target.checked);
+                  if (e.target.checked) {
+                    setIsCar(false);
+                  }
+                }}
+                style={{
+                  marginRight: '5px',
+                  position: 'relative',
+                  top: '2px',
+                }}
+              />
+              <span>충전소만 보기</span>
+            </label>
+            <label className={styles.adminFilter4}>
+              <input
+                type='checkbox'
+                checked={isCar}
+                onChange={(e) => {
+                  setIsCar(e.target.checked);
+                  if (e.target.checked) {
+                    setIsStation(false);
+                  }
+                }}
+                style={{
+                  marginRight: '5px',
+                  position: 'relative',
+                  top: '2px',
+                }}
+              />
+              <span>렌트카만 보기</span>
+            </label>
+            <p className={styles.filteredCount}>
+              작성된 리뷰 :{' '}
+              <span className={styles.filteredNum}>
+                {filteredReview.length}
+              </span>
+              개
+            </p>
+          </>
+        ) : (
+          <div
+            style={{
+              textAlign: 'center',
+              marginTop: '100px',
+              fontSize: '1.5rem',
+            }}
+            onClick={() => console.log(filteredReview)}
+          >
+            작성된 리뷰가 없습니다.
+          </div>
+        )}
+      </div>
     </>
   );
 };

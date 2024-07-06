@@ -1,94 +1,137 @@
-// 버튼 컨테이너 스타일
+/* 버튼 컨테이너 스타일 */
 .ButtonContainer {
     display: grid;
-    grid-template-columns: repeat(4, 200px); // 버튼 너비를 250px로 설정
-    gap: 100px; // 버튼 사이의 간격
-    max-width: 1180px; // 최대 너비 설정 (필요에 따라 조정 가능)
-    margin: 250px auto; // 가운데 정렬 및 상단 마진 추가
-    z-index: 1; // 비디오 위에 버튼이 배치되도록 설정
-    position: relative; // 애니메이션 효과를 위한 상대적 위치 설정
+    grid-template-columns: repeat(4, 200px);
+    /* 버튼 너비를 250px로 설정 */
+    gap: 100px;
+    /* 버튼 사이의 간격 */
+    max-width: 1180px;
+    /* 최대 너비 설정 (필요에 따라 조정 가능) */
+    margin: 250px auto;
+    /* 가운데 정렬 및 상단 마진 추가 */
+    z-index: 1;
+    /* 비디오 위에 버튼이 배치되도록 설정 */
+    position: relative;
+    /* 애니메이션 효과를 위한 상대적 위치 설정 */
 }
 
-// 버튼 스타일
+/* 버튼 스타일 */
 .GridButton {
-    width: 250px; // 버튼 너비 설정
-    height: 250px; // 버튼 높이 설정
-    border: 2px solid #ffff; // 버튼 테두리 설정 (기본적으로 투명)
-    border-radius: 50%; // 버튼을 동그랗게 설정
-    cursor: pointer; // 마우스 커서 변경
-    display: flex; // 버튼 내용 중앙 정렬을 위한 flex 사용
-    align-items: center; // 버튼 내용 수직 중앙 정렬
-    justify-content: center; // 버튼 내용 수평 중앙 정렬
-    overflow: hidden; // 이미지가 버튼 영역을 벗어나지 않도록 설정
-    padding: 0; // 패딩 제거
-    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease; // 배경색, 테두리 색상, 스케일 전환 효과
+    width: 250px;
+    /* 버튼 너비 설정 */
+    height: 250px;
+    /* 버튼 높이 설정 */
+    border: 2px solid #ffff;
+    /* 버튼 테두리 설정 (기본적으로 투명) */
+    border-radius: 50%;
+    /* 버튼을 동그랗게 설정 */
+    cursor: pointer;
+    /* 마우스 커서 변경 */
+    display: flex;
+    /* 버튼 내용 중앙 정렬을 위한 flex 사용 */
+    align-items: center;
+    /* 버튼 내용 수직 중앙 정렬 */
+    justify-content: center;
+    /* 버튼 내용 수평 중앙 정렬 */
+    overflow: hidden;
+    /* 이미지가 버튼 영역을 벗어나지 않도록 설정 */
+    padding: 0;
+    /* 패딩 제거 */
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    /* 배경색, 테두리 색상, 스케일 전환 효과 */
     opacity: 0.8;
-    position: relative; // 테두리 효과를 위해 상대적 위치 설정
+    position: relative;
+    /* 테두리 효과를 위해 상대적 위치 설정 */
 
-    // 버튼 애니메이션
-    animation: slideIn 0.8s ease-out; // 애니메이션 추가
-    // 애니메이션 딜레이 설정
-    animation-delay: calc(var(--i) * 0.2s); // 버튼 순서에 따라 지연 시간 적용
+    /* 버튼 애니메이션 */
+    animation: slideIn 0.8s ease-out;
+    /* 애니메이션 추가 */
+    /* 애니메이션 딜레이 설정 */
+    animation-delay: calc(var(--i) * 0.2s);
+    /* 버튼 순서에 따라 지연 시간 적용 */
 
-    // 호버 시 배경색과 테두리 색상 변경
+    /* 호버 시 배경색과 테두리 색상 변경 */
     &:hover {
-        background-color: #41464b; // 호버 시 배경색 변경
-        border-color: black; // 호버 시 테두리 색상 변경
+        background-color: #41464b;
+        /* 호버 시 배경색 변경 */
+        border-color: black;
+        /* 호버 시 테두리 색상 변경 */
     }
 }
 
-// 버튼에 그림자 효과 추가
+/* 버튼에 그림자 효과 추가 */
 .GridButton::before {
-    content: ''; // 내용 없음
-    position: absolute; // 절대 위치 설정
-    top: 50%; // 상단 위치 중앙
-    left: 50%; // 좌측 위치 중앙
-    width: 100%; // 너비를 버튼의 너비와 동일하게 설정
-    height: 100%; // 높이를 버튼의 높이와 동일하게 설정
-    border-radius: 50%; // 버튼과 동일한 동그란 모양으로 설정
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); // 그림자 효과 설정
-    transform: translate(-50%, -50%); // 중앙 정렬
-    pointer-events: none; // 클릭 이벤트 무시
+    content: '';
+    /* 내용 없음 */
+    position: absolute;
+    /* 절대 위치 설정 */
+    top: 50%;
+    /* 상단 위치 중앙 */
+    left: 50%;
+    /* 좌측 위치 중앙 */
+    width: 100%;
+    /* 너비를 버튼의 너비와 동일하게 설정 */
+    height: 100%;
+    /* 높이를 버튼의 높이와 동일하게 설정 */
+    border-radius: 50%;
+    /* 버튼과 동일한 동그란 모양으로 설정 */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    /* 그림자 효과 설정 */
+    transform: translate(-50%, -50%);
+    /* 중앙 정렬 */
+    pointer-events: none;
+    /* 클릭 이벤트 무시 */
 }
 
-// 버튼 애니메이션
+/* 버튼 애니메이션 */
 @keyframes slideIn {
     from {
-        transform: translateX(calc(var(--start) * 1vw)) scale(0.2); // 시작 위치 설정
-        opacity: 0; // 시작 시 불투명도 0
+        transform: translateX(calc(var(--start) * 1vw)) scale(0.2);
+        /* 시작 위치 설정 */
+        opacity: 0;
+        /* 시작 시 불투명도 0 */
     }
 
     to {
-        transform: translateX(0) scale(1); // 버튼을 원래 위치로 이동
-        opacity: 1; // 끝나면서 불투명도 1
+        transform: translateX(0) scale(1);
+        /* 버튼을 원래 위치로 이동 */
+        opacity: 1;
+        /* 끝나면서 불투명도 1 */
     }
 }
 
-// 각 버튼의 애니메이션 시작 위치 설정
+/* 각 버튼의 애니메이션 시작 위치 설정 */
 .GridButton:nth-child(1) {
-    --start: 55; // 첫 번째 버튼: 100vw
+    --start: 55;
+    /* 첫 번째 버튼: 100vw */
 }
 
 .GridButton:nth-child(2) {
-    --start: 35; // 두 번째 버튼: 75vw
+    --start: 35;
+    /* 두 번째 버튼: 75vw */
 }
 
 .GridButton:nth-child(3) {
-    --start: 25; // 세 번째 버튼: 40vw
+    --start: 25;
+    /* 세 번째 버튼: 40vw */
 }
 
 .GridButton:nth-child(4) {
-    --start: 10; // 네 번째 버튼: 10vw
+    --start: 10;
+    /* 네 번째 버튼: 10vw */
 }
 
-// 이미지 스타일
+/* 이미지 스타일 */
 .ButtonImage {
-    width: 100%; // 버튼의 너비에 맞춰서 이미지 크기 조정
-    height: 100%; // 버튼의 높이에 맞춰서 이미지 크기 조정
-    object-fit: cover; // 이미지가 버튼에 맞게 잘림
+    width: 100%;
+    /* 버튼의 너비에 맞춰서 이미지 크기 조정 */
+    height: 100%;
+    /* 버튼의 높이에 맞춰서 이미지 크기 조정 */
+    object-fit: cover;
+    /* 이미지가 버튼에 맞게 잘림 */
 }
 
-// 모달 스타일
+/* 모달 스타일 */
 .ModalContent {
     top: 50%;
     left: 50%;
@@ -100,23 +143,44 @@
     border: 1px solid #ccc;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     padding: 20px;
-    max-width: 500px;
-    width: 90%;
-    position: relative; // 상대적 위치 설정
-    overflow: hidden; // 모달 내용의 스크롤바를 숨깁니다.
+    width: 500px;
+    height: 700px;
+    position: relative;
+    /* 상대적 위치 설정 */
+    overflow: auto;
+    /* 모달 내용의 스크롤바를 숨깁니다. */
+    border: 1px solid gray;
+    display: flex;
+    flex-direction: column;
+    /* 모달 내의 내용을 수직으로 쌓이게 설정 */
 }
 
-// 오버레이 스타일
+/* 모달 본문 스타일 */
+.ModalBody {
+    flex: 1;
+    /* 모달 본문이 가능한 공간을 모두 차지하도록 설정 */
+    overflow-y: auto;
+    /* 수직 스크롤 가능하게 설정 */
+    padding: 10px;
+}
+
+/* 오버레이 스타일 */
 .ModalOverlay {
-    position: fixed; // 전체 화면을 채우기 위해 고정 위치 설정
-    top: 0; // 화면 상단
-    left: 0; // 화면 왼쪽
-    right: 0; // 화면 오른쪽
-    bottom: 0; // 화면 하단
-    background-color: rgba(0, 0, 0, 0.75); // 반투명 배경
+    position: fixed;
+    /* 전체 화면을 채우기 위해 고정 위치 설정 */
+    top: 0;
+    /* 화면 상단 */
+    left: 0;
+    /* 화면 왼쪽 */
+    right: 0;
+    /* 화면 오른쪽 */
+    bottom: 0;
+    /* 화면 하단 */
+    background-color: rgba(0, 0, 0, 0.75);
+    /* 반투명 배경 */
 }
 
-// 닫기 버튼 스타일
+/* 닫기 버튼 스타일 */
 .CloseButton {
     font-size: 15px;
     float: right;
@@ -129,5 +193,354 @@
     text-align: center;
     line-height: 25px;
     cursor: pointer;
-    margin: 5px 10px 0 0; // 닫기 버튼을 왼쪽으로 10px 이동
+    margin: 5px 10px 0 0;
+    /* 닫기 버튼을 왼쪽으로 10px 이동 */
+}
+
+/* 리뷰 목록 스타일 */
+.userReviewList {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    max-width: 800px;
+    margin: 0 auto;
+    height: 400px;
+    /* 높이 고정 */
+    overflow-y: auto;
+
+    /* 스크롤 가능하게 설정 */
+}
+
+/* 스크롤바 스타일 */
+.userReviewList::-webkit-scrollbar {
+    width: 0;
+    /* 웹킷 브라우저용 스크롤바 너비를 0으로 설정 */
+}
+
+.userReviewList {
+    -ms-overflow-style: none;
+    /* IE 및 Edge용 스크롤바 숨기기 */
+    scrollbar-width: none;
+    /* Firefox용 스크롤바 숨기기 */
+}
+
+.reviewList {
+    display: flex;
+
+    /* 버튼 컨테이너 스타일 */
+    .ButtonContainer {
+        display: grid;
+        grid-template-columns: repeat(4, 200px);
+        /* 버튼 너비를 200px로 설정 */
+        gap: 100px;
+        /* 버튼 사이의 간격 */
+        max-width: 1180px;
+        /* 최대 너비 설정 (필요에 따라 조정 가능) */
+        margin: 250px auto;
+        /* 가운데 정렬 및 상단 마진 추가 */
+        z-index: 1;
+        /* 비디오 위에 버튼이 배치되도록 설정 */
+        position: relative;
+        /* 애니메이션 효과를 위한 상대적 위치 설정 */
+    }
+
+    /* 버튼 스타일 */
+    .GridButton {
+        width: 250px;
+        /* 버튼 너비 설정 */
+        height: 250px;
+        /* 버튼 높이 설정 */
+        border: 2px solid #ffff;
+        /* 버튼 테두리 설정 (기본적으로 투명) */
+        border-radius: 50%;
+        /* 버튼을 동그랗게 설정 */
+        cursor: pointer;
+        /* 마우스 커서 변경 */
+        display: flex;
+        /* 버튼 내용 중앙 정렬을 위한 flex 사용 */
+        align-items: center;
+        /* 버튼 내용 수직 중앙 정렬 */
+        justify-content: center;
+        /* 버튼 내용 수평 중앙 정렬 */
+        overflow: hidden;
+        /* 이미지가 버튼 영역을 벗어나지 않도록 설정 */
+        padding: 0;
+        /* 패딩 제거 */
+        transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        /* 배경색, 테두리 색상, 스케일 전환 효과 */
+        opacity: 0.8;
+        position: relative;
+        /* 테두리 효과를 위해 상대적 위치 설정 */
+
+        /* 버튼 애니메이션 */
+        animation: slideIn 0.8s ease-out;
+        /* 애니메이션 추가 */
+        /* 애니메이션 딜레이 설정 */
+        animation-delay: calc(var(--i) * 0.2s);
+        /* 버튼 순서에 따라 지연 시간 적용 */
+
+        /* 호버 시 배경색과 테두리 색상 변경 */
+        &:hover {
+            background-color: #41464b;
+            /* 호버 시 배경색 변경 */
+            border-color: black;
+            /* 호버 시 테두리 색상 변경 */
+        }
+    }
+
+    /* 버튼에 그림자 효과 추가 */
+    .GridButton::before {
+        content: '';
+        /* 내용 없음 */
+        position: absolute;
+        /* 절대 위치 설정 */
+        top: 50%;
+        /* 상단 위치 중앙 */
+        left: 50%;
+        /* 좌측 위치 중앙 */
+        width: 100%;
+        /* 너비를 버튼의 너비와 동일하게 설정 */
+        height: 100%;
+        /* 높이를 버튼의 높이와 동일하게 설정 */
+        border-radius: 50%;
+        /* 버튼과 동일한 동그란 모양으로 설정 */
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        /* 그림자 효과 설정 */
+        transform: translate(-50%, -50%);
+        /* 중앙 정렬 */
+        pointer-events: none;
+        /* 클릭 이벤트 무시 */
+    }
+
+    /* 버튼 애니메이션 */
+    @keyframes slideIn {
+        from {
+            transform: translateX(calc(var(--start) * 1vw)) scale(0.2);
+            /* 시작 위치 설정 */
+            opacity: 0;
+            /* 시작 시 불투명도 0 */
+        }
+
+        to {
+            transform: translateX(0) scale(1);
+            /* 버튼을 원래 위치로 이동 */
+            opacity: 1;
+            /* 끝나면서 불투명도 1 */
+        }
+    }
+
+    /* 각 버튼의 애니메이션 시작 위치 설정 */
+    .GridButton:nth-child(1) {
+        --start: 55;
+        /* 첫 번째 버튼: 55vw */
+    }
+
+    .GridButton:nth-child(2) {
+        --start: 35;
+        /* 두 번째 버튼: 35vw */
+    }
+
+    .GridButton:nth-child(3) {
+        --start: 25;
+        /* 세 번째 버튼: 25vw */
+    }
+
+    .GridButton:nth-child(4) {
+        --start: 10;
+        /* 네 번째 버튼: 10vw */
+    }
+
+    /* 이미지 스타일 */
+    .ButtonImage {
+        width: 100%;
+        /* 버튼의 너비에 맞춰서 이미지 크기 조정 */
+        height: 100%;
+        /* 버튼의 높이에 맞춰서 이미지 크기 조정 */
+        object-fit: cover;
+        /* 이미지가 버튼에 맞게 잘림 */
+    }
+
+    /* 모달 오버레이 스타일 */
+    .ModalOverlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.75);
+        /* 반투명 배경 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+    }
+
+    /* 모달 콘텐츠 스타일 */
+    .ModalContent {
+        background-color: #fefefe;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        padding: 20px;
+        width: 500px;
+        max-height: 80vh;
+        /* 최대 높이 설정 */
+        position: relative;
+        overflow: hidden;
+        /* 기본적으로 숨김 */
+    }
+
+    /* 모달 본문 스타일 */
+    .ModalBody {
+        overflow-y: auto;
+        /* 수직 스크롤 가능하게 설정 */
+        padding: 10px;
+        max-height: calc(80vh - 40px);
+        /* 모달 본문 최대 높이 설정 (모달 바닥 여백을 고려) */
+        box-sizing: border-box;
+        /* 패딩을 포함한 전체 높이 계산 */
+    }
+
+    /* 닫기 버튼 스타일 */
+    .CloseButton {
+        font-size: 15px;
+        float: right;
+        background: #222020;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        line-height: 25px;
+        cursor: pointer;
+        margin: 5px 10px 0 0;
+        /* 닫기 버튼을 왼쪽으로 10px 이동 */
+    }
+
+    /* 리뷰 목록 스타일 */
+    .userReviewList {
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        max-width: 800px;
+        margin: 0 auto;
+        height: 400px;
+        /* 높이 고정 */
+        overflow-y: auto;
+        /* 스크롤 가능하게 설정 */
+
+        /* 스크롤바 숨기기 */
+        ::-webkit-scrollbar {
+            width: 0;
+            /* 웹킷 브라우저용 스크롤바 너비를 0으로 설정 */
+        }
+
+        -ms-overflow-style: none;
+        /* IE 및 Edge용 스크롤바 숨기기 */
+        scrollbar-width: none;
+        /* Firefox용 스크롤바 숨기기 */
+    }
+
+    .reviewList {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* 리뷰 항목 스타일 */
+    .reviewItem {
+        border: 1px solid black;
+        background-color: #fff;
+        padding: 10px;
+        border: 1px solid #170a8f;
+        border-radius: 5px;
+        position: relative;
+        /* 상대적 위치 설정 */
+    }
+
+    .flex {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+    }
+
+    .value {
+        font-weight: bold;
+    }
+
+    /* 삭제 버튼 스타일 */
+    .deleteButton {
+        position: absolute;
+        /* 절대적 위치 설정 */
+        top: 10px;
+        /* 상단에서 10px 위치 */
+        right: 10px;
+        /* 오른쪽에서 10px 위치 */
+        background-color: #ff4d4f;
+        /* 빨간색 배경 */
+        color: #fff;
+        /* 흰색 글자 */
+        border: none;
+        /* 테두리 없음 */
+        border-radius: 5px;
+        /* 둥근 모서리 */
+        cursor: pointer;
+        /* 커서 포인터로 변경 */
+        padding: 5px 10px;
+        /* 패딩 설정 */
+    }
+
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.userReviewList {
+    border: 1px solid red;
+
+}
+
+.reviewItem {
+    border: 1px solid black;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #170a8f;
+    border-radius: 5px;
+    position: relative;
+    /* 상대적 위치 설정 */
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.value {
+    font-weight: bold;
+}
+
+/* 삭제 버튼 스타일 */
+.deleteButton {
+    position: absolute;
+    /* 절대적 위치 설정 */
+    top: 10px;
+    /* 상단에서 10px 위치 */
+    right: 10px;
+    /* 오른쪽에서 10px 위치 */
+    background-color: #ff4d4f;
+    /* 빨간색 배경 */
+    color: #fff;
+    /* 흰색 글자 */
+    border: none;
+    /* 테두리 없음 */
+    border-radius: 5px;
+    /* 둥근 모서리 */
+    cursor: pointer;
+    /* 커서 포인터로 변경 */
+    padding: 5px 10px;
+    /* 패딩 설정 */
 }

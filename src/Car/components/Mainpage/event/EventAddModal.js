@@ -1,10 +1,43 @@
-import React, { useState } from 'react';
-import './EventAddModal.scss'; // CSS 파일 경로
+import React, {
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import styles from './EventAddModal.module.scss'; // CSS 파일 경로
+import { API_BASE_URL } from '../../../../config/host-config';
+import AuthContext from '../../../../util/AuthContext';
+import axiosInstance from '../../../../config/axios-config';
+import { useNavigate } from 'react-router-dom';
 
-const EventAddModal = ({ isOpen, onClose }) => {
-  const [imagePreview, setImagePreview] = useState(null);
-  const [title, setTitle] = useState('');
-  const [imageName, setImageName] = useState('');
+const EventAddModal = ({
+  isOpen,
+  toggle,
+  eventId,
+  eventTitle,
+  eventImage,
+  isEditMode,
+}) => {
+  const [imagePreview, setImagePreview] = useState(
+    eventImage || null,
+  );
+  const [title, setTitle] = useState(eventTitle || '');
+  const [imageName, setImageName] = useState(
+    eventImage ? 'Uploaded Image' : '',
+  );
+  const $fileInputRef = useRef();
+  const navigate = useNavigate();
+
+  const API_EVENT_URL = API_BASE_URL + '/events';
+  const { token } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (isEditMode) {
+      setTitle(eventTitle);
+      setImagePreview(eventImage);
+      setImageName('Uploaded Image');
+    }
+  }, [isEditMode, eventTitle, eventImage]);
 
   // 이미지 파일이 선택되었을 때 미리보기 설정
   const handleImageChange = (event) => {
@@ -24,110 +57,155 @@ const EventAddModal = ({ isOpen, onClose }) => {
     setTitle(event.target.value);
   };
 
-  // 모달 외부를 클릭하면 모달을 닫는 함수
-  const handleOutsideClick = (e) => {
-    if (e.target.classList.contains('modalOverlay')) {
-      onClose();
-    }
+  // 파일 업로드 버튼 클릭 처리
+  const handleUploadClick = () => {
+    $fileInputRef.current.click();
   };
 
   // 저장 버튼 클릭 시 처리
-  const handleSave = (event) => {
-    event.preventDefault();
+  const handleSave = async (e) => {
+    e.preventDefault();
     if (!title || !imagePreview) {
       alert('제목과 이미지를 모두 입력해야 합니다.');
       return;
     }
-    // 여기에 실제 저장 로직을 수행합니다.
-    alert('이벤트가 저장되었습니다.');
-    onClose();
+
+    const formData = new FormData();
+    formData.append('eventData', JSON.stringify({ title }));
+    formData.append(
+      'eventImage',
+      $fileInputRef.current.files[0],
+    );
+
+    try {
+      const res = await axiosInstance.post(
+        API_EVENT_URL,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      if (res.status === 200) {
+        alert('이벤트가 저장되었습니다.');
+        navigate('/events');
+      } else {
+        console.log('Error: ', res.data);
+        alert('이벤트 등록에 실패하였습니다.');
+      }
+    } catch (err) {
+      console.error('Error:', err.response);
+      alert('이벤트 등록에 실패하였습니다.');
+    }
+    setTitle('');
+    setImageName('');
+    setImagePreview('');
   };
 
-  if (!isOpen) return null;
+  // 수정 버튼 클릭 시 처리
+  const updateHandler = async (e) => {
+    e.preventDefault();
+    if (!title || !imagePreview) {
+      alert('제목과 이미지를 모두 입력해야 합니다.');
+      return;
+    }
 
-  return React.createElement(
-    'div',
-    {
-      className: 'modalOverlay',
-      onClick: handleOutsideClick,
-    },
-    React.createElement(
-      'div',
-      { className: 'modalContent' },
-      React.createElement(
-        'span',
-        { className: 'close', onClick: onClose },
-        '×',
-      ),
-      React.createElement('h2', null, '이벤트 추가'),
-      React.createElement(
-        'form',
-        { className: 'formTop', onSubmit: handleSave }, // 수정된 부분
-        React.createElement(
-          'div',
-          { className: 'formGroup' },
-          React.createElement(
-            'label',
-            { htmlFor: 'title' },
-            '제목:',
-          ),
-          React.createElement('input', {
-            type: 'text',
-            id: 'title',
-            name: 'title',
-            value: title,
-            onChange: handleTitleChange,
-          }),
-        ),
-        React.createElement(
-          'div',
-          { className: 'formGroup' },
-          React.createElement(
-            'label',
-            {
-              htmlFor: 'imageUpload',
-              className: 'imageUploadLabel',
-            },
-            'upload',
-          ),
-          React.createElement('input', {
-            type: 'file',
-            id: 'imageUpload',
-            name: 'imageUpload',
-            accept: 'image/*',
-            onChange: handleImageChange,
-            className: 'hiddenFileInput',
-          }),
-          imageName &&
-            React.createElement('div', {
-              className: 'imageName',
-            }),
-        ),
-        imagePreview &&
-          React.createElement(
-            'div',
-            { className: 'imagePreview' },
-            React.createElement('img', {
-              src: imagePreview,
-              alt: '미리보기',
-            }),
-          ),
-        React.createElement(
-          'div',
-          { className: 'formButtons' },
-          React.createElement(
-            'button',
-            { type: 'submit' },
-            '저장',
-          ),
-          React.createElement(
-            'button',
-            { type: 'button', onClick: onClose },
-            '닫기',
-          ),
-        ),
-      ),
-    ),
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append(
+      'eventImage',
+      $fileInputRef.current.files[0],
+    );
+
+    try {
+      await axiosInstance.patch(
+        `${API_EVENT_URL}/${eventId}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data',
+          },
+        },
+      );
+      alert('수정 완료!');
+      navigate(`/events`);
+    } catch (err) {
+      console.error('Error updating event:', err);
+      alert('이벤트 수정에 실패하였습니다.');
+    }
+  };
+
+  return (
+    <div className={styles.modalOverlay}>
+      <div className={styles.modalContent}>
+        <span className={styles.close} onClick={toggle}>
+          ×
+        </span>
+        <h2>
+          {isEditMode ? '이벤트 수정' : '이벤트 추가'}
+        </h2>
+        <form
+          className={styles.formTop}
+          onSubmit={isEditMode ? updateHandler : handleSave}
+        >
+          <div className={styles.formGroup}>
+            <input
+              type='text'
+              id={styles.title}
+              name='title'
+              value={title}
+              placeholder='제목'
+              onChange={handleTitleChange}
+            />
+          </div>
+          <div className={styles.formGroup}>
+            <label
+              htmlFor='imageUpload'
+              className={styles.imageUploadLabel}
+              onClick={handleUploadClick}
+            >
+              {isEditMode ? '이미지 변경' : '이미지 업로드'}
+            </label>
+            <input
+              type='file'
+              id={styles.imageUpload}
+              name='imageUpload'
+              accept='image/*'
+              onChange={handleImageChange}
+              className={styles.hiddenFileInput}
+              ref={$fileInputRef}
+            />
+            {imageName && (
+              <div className={styles.imageName}>
+                {imageName}
+              </div>
+            )}
+          </div>
+          {imagePreview && (
+            <div className={styles.imagePreview}>
+              <img src={imagePreview} alt='미리보기' />
+            </div>
+          )}
+          <div className={styles.formButtons}>
+            <button type='submit'>
+              {isEditMode ? '수정' : '저장'}
+            </button>
+            <button type='button' onClick={toggle}>
+              취소
+            </button>
+          </div>
+        )}
+        <div className={styles.formButtons}>
+          <button type='submit'>
+            {isEditMode ? '수정' : '저장'}
+          </button>
+          <button type='button'>닫기</button>
+        </div>
+      </form>
+    </div>
   );
 };
 

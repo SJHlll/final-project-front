@@ -1,14 +1,14 @@
 /* AreaSelector.css */
 
 .areaSelector {
-    width: 300px;
+    width: 100%;
     align-items: center;
     border-radius: 5px;
     margin-bottom: 10px;
 }
 
 .searchBox {
-    width: 400px;
+    width: 600px;
     margin: 0 auto;
     display: flex;
     margin-left: 1%;
@@ -29,7 +29,7 @@
 }
 
 .searchBtn {
-    padding: 8px 16px;
+    padding: 8px 28px;
     margin: 5px;
     cursor: pointer;
     background-color: #007bff;
@@ -43,7 +43,7 @@
 }
 
 .resetBtn {
-    // padding: 8px 16px;
+    padding: 8px 20px;
     margin: 5px;
     cursor: pointer;
     background-color: #ebf5ff;
@@ -57,4 +57,5 @@
 }
 .checkboxBox{
     margin-top: 15%;
+    margin-left: 5px;
 }

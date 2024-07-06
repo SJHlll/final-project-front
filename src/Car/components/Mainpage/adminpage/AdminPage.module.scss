@@ -10,17 +10,18 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    
+
 
     .adminSelect {
         width: 30%;
-        height: 50px;
+        height: 55px;
         padding: 5px 0;
         cursor: pointer;
         border-top: 1px solid #aaa;
         border-bottom: 1px solid #aaa;
         transition: transform 0.2s ease;
         overflow: auto;
+
         &:hover {
             transform: scale(1.04);
             border-color: black;
@@ -49,11 +50,11 @@
     border-bottom: 2px solid black;
 
     .resNo {
-        width: 5%;
+        width: 7%;
     }
 
     .resUserName {
-        width: 20%;
+        width: 18%;
     }
 
     .resSelectedName {
@@ -203,28 +204,28 @@
     .adminFilter2 {
         position: absolute;
         top: 125px;
-        right: 370px;
+        left:  350px;
         font-size: 0.8em;
     }
 
     .adminFilter3 {
         position: absolute;
         top: 125px;
-        right: 250px;
+        left:  615px;
         font-size: 0.8em;
     }
 
     .adminFilter4 {
         position: absolute;
         top: 125px;
-        right: 150px;
+        left:  710px;
         font-size: 0.8em;
     }
 
     .filteredCount {
         position: absolute;
         top: 120px;
-        left: 280px;
+        right: 205px;
         font-size: 0.8em;
 
         .filteredNum {
