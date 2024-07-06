@@ -23,8 +23,8 @@
     padding: 20px;
     border-radius: 5px;
     /* 모서리를 둥글게 */
-    width: 400px;
-    height: 550px;
+    width: 500px;
+    height: 532.7px;
     /* 고정된 크기 설정 */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     /* 그림자 효과 */
@@ -49,7 +49,7 @@
 /* 제목 입력 필드와 사진 업로드 버튼 */
 .formGroup {
     margin-bottom: 15px;
-
+    width: 100%;
     /* 첫 번째 formGroup에만 적용 */
     &:first-child {
         border-bottom: 1px solid lightgray;
@@ -60,7 +60,7 @@
 
 /* 입력 필드 내부 여백 */
 .formGroup input[type='text'] {
-    width: calc(90% - 20px);
+    width: 100%;
     margin-left: 10;
     /* 입력 필드의 폭을 부모 요소에 맞춤 */
     padding: 8px;

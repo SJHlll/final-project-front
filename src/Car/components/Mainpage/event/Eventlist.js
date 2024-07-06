@@ -7,7 +7,7 @@ const Eventlist = ({ eventList }) => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('전체');
 
-  // 상세보기 들어감
+  // 상세보기로 이동
   const handleClick = (item) => {
     navigate(`/events/${item.eventNo}`, {
       state: {
@@ -64,10 +64,10 @@ const Eventlist = ({ eventList }) => {
           {filteredList.map((item) => (
             <div
               className={styles.eventItem}
-              key={item.id}
+              key={item.eventNo}
               onClick={() => handleClick(item)}
             >
-              <img src={item.img} alt={item.title} />
+              <img src={item.content} alt={item.title} />
               <span>
                 <span
                   className={

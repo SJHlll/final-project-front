@@ -11,7 +11,7 @@ const EventDetail = () => {
   const { id, img, title, status } = location.state || {};
   const navigate = useNavigate();
   const toList = () => navigate('/events');
-  const [isModal, setIsModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태
   const [editedContents, setEditedContents] = useState(img);
   const [currentHeader, setCurrentHeader] = useState(title);
   const [currentContents, setCurrentContents] =
@@ -36,7 +36,13 @@ const EventDetail = () => {
     }
   };
 
-  const updateEvent = () => setIsModal(true);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div className={styles.maincontainer}>
@@ -62,12 +68,12 @@ const EventDetail = () => {
             <img
               className={styles.eventDetailImg}
               src={img}
-              alt={img}
+              alt={title}
             />
           )}
           <button
             className={`${style.publicBtn} ${styles.eventButton}`}
-            onClick={updateEvent}
+            onClick={openModal}
           >
             수정
           </button>
@@ -83,21 +89,16 @@ const EventDetail = () => {
           >
             목록
           </button>
-          {isModal && (
-            <Modal
-              isOpen={isModal}
-              toggle={() => setIsModal(false)}
-            >
-              <EventAddModal
-                isOpen={isModal}
-                toggle={() => setIsModal(false)}
-                eventId={id}
-                eventTitle={title}
-                eventImage={img}
-                isEditMode={true}
-              />
-              <EventAddModal />
-            </Modal>
+
+          {isModalOpen && (
+            <EventAddModal
+              isOpen={isModalOpen}
+              toggle={closeModal}
+              eventId={id}
+              eventTitle={title}
+              eventImage={img}
+              isEditMode={true}
+            />
           )}
         </div>
       </div>

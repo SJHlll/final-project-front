@@ -21,45 +21,35 @@ const EventPage = () => {
     handleCloseModal(); // 모달 닫기
   };
 
-  return React.createElement(
-    'div',
-    null,
-    React.createElement(
-      'button',
-      { onClick: handleOpenModal },
-      '이벤트 추가',
-    ),
-    React.createElement(EventAddModal, {
-      isOpen: isModalOpen,
-      onClose: handleCloseModal,
-      onAddEvent: handleAddEvent,
-    }),
-    React.createElement(
-      'div',
-      null,
-      events.length === 0 &&
-        React.createElement(
-          'p',
-          null,
-          '등록된 이벤트가 없습니다.',
-        ),
-      events.map((event, index) =>
-        React.createElement(
-          'div',
-          { key: index, className: 'eventItem' },
-          React.createElement('h3', null, event.title),
-          event.image &&
-            React.createElement('img', {
-              src: event.image,
-              alt: 'Event',
-              style: {
-                maxWidth: '100px',
-                maxHeight: '100px',
-              },
-            }),
-        ),
-      ),
-    ),
+  return (
+    <div>
+      <button onClick={handleOpenModal}>이벤트 추가</button>
+      <EventAddModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onAddEvent={handleAddEvent}
+      />
+      <div>
+        {events.length === 0 && (
+          <p>등록된 이벤트가 없습니다.</p>
+        )}
+        {events.map((event, index) => (
+          <div key={index} className='eventItem'>
+            <h3>{event.title}</h3>
+            {event.image && (
+              <img
+                src={event.image}
+                alt='Event'
+                style={{
+                  maxWidth: '100px',
+                  maxHeight: '100px',
+                }}
+              />
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 

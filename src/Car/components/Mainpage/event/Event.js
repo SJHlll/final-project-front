@@ -29,17 +29,6 @@ const Event = () => {
     setIsModal(true);
   };
 
-  // 이벤트 삭제 처리 함수
-  // const removeEvent = async (no) => {
-  //   handleRequest(
-  //     () => () =>
-  //       axiosInstance.delete(`${API_EVENT_URL}/${no}`),
-  //     (data) => setEvents(data.events),
-  //     onLogout,
-  //     redirection,
-  //   );
-  // };
-
   useEffect(() => {
     const fetchEvents = async () => {
       await handleRequest(
@@ -61,20 +50,18 @@ const Event = () => {
       <div className={styles.eventbody}>
         <Eventlist eventList={events} />
       </div>
-
       <button
-        className={`${style.publicBtn} ${style.eventButton}`}
+        className={`${style.publicBtn} ${styles.eventButton}`}
         onClick={eventAddModalOpen}
       >
         추가
       </button>
+
       {isModal && (
-        <Modal
+        <EventAddModal
           isOpen={isModal}
           toggle={() => setIsModal(false)}
-        >
-          <EventAddModal />
-        </Modal>
+        />
       )}
     </Frame>
   );
