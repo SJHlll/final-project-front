@@ -15,6 +15,7 @@ import CarSwiperReal from './CarSwiperReal';
 import CarInfo from './CarInfo';
 import { CarContext } from '../../../../contexts/CarContext';
 import AuthContext from '../../../../util/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -41,15 +42,17 @@ const ModalContent = styled.div`
 const Carres = () => {
   const [modal, setModal] = useState(false);
   const [daysBetween, setDaysBetween] = useState(0); // 렌트 기간 상태 추가
-  const toggle = () => setModal(!modal);
-
-  const { carId, rentCar } = useContext(CarContext); // 자동차 정보
 
   const { selectedCar, setSelectedCar } =
-    useContext(CarContext);
+    useContext(CarContext); // 자동차 정보
+
   const { isLoggedIn } = useContext(AuthContext); // 유저 정보
 
   const [extra, setExtra] = useState(''); // 비고
+
+  const navigate = useNavigate(); // 비회원 로그인 화면으로 이동용
+
+  const toggle = () => setModal(!modal);
 
   const handleExtraChange = (newExtra) => {
     setExtra(newExtra);
@@ -129,30 +132,22 @@ const Carres = () => {
     }
   };
 
+  // 회원일 시 알림 창
   const reservationHandler = () => {
     if (!pickup.date) {
       alert('픽업 날짜를 선택하세요.');
       return;
     }
+
     if (!returning.date) {
       alert('반납 날짜를 선택하세요.');
       return;
     }
-    if (!pickup.time) {
-      alert('픽업 시간을 선택하세요.');
-      return;
-    }
-    if (!returning.time) {
-      alert('반납 시간을 선택하세요.');
-      return;
-    }
+
     if (!selectedCar) {
       alert('차량을 선택하세요.');
       return;
     }
-
-    alert('예약이 완료되어 결제창으로 넘어갑니다.');
-    setModal(!modal);
 
     const reservationData = {
       carId: selectedCar.id,
@@ -166,14 +161,67 @@ const Carres = () => {
       extra: `${extra}`,
     };
 
+    alert('예약이 완료되어 결제창으로 넘어갑니다.');
+    setModal(!modal);
+
     saveReservation(reservationData);
   };
+
+  // 비회원 예약 방지 핸들러
+  const confirmReservationHandler = () => {
+    if (!isLoggedIn) {
+      alert('로그인 후 예약이 가능합니다.');
+      navigate('/Login');
+    } else {
+      reservationHandler();
+    }
+  };
+
+  // const reservationHandler = () => {
+  //   if (!pickup.date) {
+  //     alert('픽업 날짜를 선택하세요.');
+  //     return;
+  //   }
+  //   if (!returning.date) {
+  //     alert('반납 날짜를 선택하세요.');
+  //     return;
+  //   }
+  //   if (!pickup.time) {
+  //     alert('픽업 시간을 선택하세요.');
+  //     return;
+  //   }
+  //   if (!returning.time) {
+  //     alert('반납 시간을 선택하세요.');
+  //     return;
+  //   }
+  //   if (!selectedCar) {
+  //     alert('차량을 선택하세요.');
+  //     return;
+  //   }
+
+  //   alert('예약이 완료되어 결제창으로 넘어갑니다.');
+  //   setModal(!modal);
+
+  //   const reservationData = {
+  //     carId: selectedCar.id,
+  //     rentDate: `${pickup.date.toISOString().split('T')[0]}T${pickup.time.toTimeString().split(' ')[0]}`,
+  //     turninDate: `${returning.date.toISOString().split('T')[0]}T${returning.time.toTimeString().split(' ')[0]}`,
+  //     rentTime: pickup.time.toTimeString().split(' ')[0],
+  //     turninTime: returning.time
+  //       .toTimeString()
+  //       .split(' ')[0],
+  //     totalPrice: totalPrice.replace(/,/g, ''),
+  //     extra: `${extra}`,
+  //   };
+
+  //   saveReservation(reservationData);
+  // };
 
   const button = (
     <button
       className={`${style.resBtn} ${style.publicBtn}`}
-      onClick={toggle}
-      type='submit'
+      onClick={confirmReservationHandler}
+      type='button'
     >
       예약 하기
     </button>

@@ -9,6 +9,7 @@ import AuthContext from '../../../../util/AuthContext';
 import axios from 'axios';
 import { API_BASE_URL } from '../../../../config/host-config';
 import { logDOM } from '@testing-library/react';
+import { useNavigate } from 'react-router-dom';
 
 const CarResInfo = ({
   pickup,
@@ -26,6 +27,8 @@ const CarResInfo = ({
     useContext(AuthContext); // 유저 정보 가져오기
 
   const token = localStorage.getItem('ACCESS_TOKEN'); // 로컬 토큰
+
+  const navigate = useNavigate();
 
   const handleExtraChange = (e) => {
     // 비고를 부모에게 넘기기 위해
@@ -99,6 +102,7 @@ const CarResInfo = ({
   };
 
   if (!isLoggedIn) {
+    navigate('/Login');
     return <div>회원만 예약이 가능합니다.</div>;
   }
 
