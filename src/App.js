@@ -8,7 +8,6 @@ import './App.scss';
 import Mypage from './Car/components/Mainpage/Mypage';
 import Error from '../src/Car/components/Errorpage/Error';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from './Car/components/user/Login';
 import Noti from './Car/components/Mainpage/noti/Noti';
 import Event from './Car/components/Mainpage/event/Event';
 import Review from './Car/components/Mainpage/review/Review';

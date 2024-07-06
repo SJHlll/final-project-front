@@ -7,6 +7,12 @@ import { TestRvContext } from '../../Mainpage/adminpage/adminreview/TestRvContex
 import styles from './MyPageReviewList.module.scss';
 import AuthContext from '../../../../util/AuthContext';
 import MyPageReviewModal from './MyPageReviewModal';
+import {
+  API_BASE_URL,
+  REVIEW,
+} from '../../../../config/host-config';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const MyPageReviewMap = () => {
   const { review, setReview } = useContext(TestRvContext);
@@ -15,6 +21,11 @@ const MyPageReviewMap = () => {
   const [selectedReview, setSelectedReview] =
     useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const API_REVIEW_URL = API_BASE_URL + REVIEW;
+
+  const navigate = useNavigate();
+  const [error, setError] = useState('');
 
   // DB에서 작성된 리뷰 가져오기
   useEffect(() => {
@@ -125,6 +136,38 @@ const MyPageReviewMap = () => {
     );
   };
 
+  const handleDelete = async (reviewNo) => {
+    try {
+      const token = localStorage.gettem('ACCESS_TOKEN');
+      const res = await axios.delete(
+        `http://localhost:8181/review/${reviewNo}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      if (res.staus === 200) {
+        alert('리뷰가 삭제되었습니다.');
+        setFilteredReview(
+          filteredReview.filter(
+            (r) => r.reviewNo !== reviewNo,
+          ),
+        );
+        setIsModalOpen(false);
+      }
+    } catch (err) {
+      console.error('Error: ', err.response);
+      setError(
+        err.response
+          ? err.response.data
+          : '알 수 없는 오류가 발생했습니다.',
+      );
+      alert('리뷰 삭제에 실패하였습니다.');
+    }
+  };
+
   // 본체
   return (
     <>
@@ -159,9 +202,7 @@ const MyPageReviewMap = () => {
                 <button onClick={() => console.log('수정')}>
                   수정
                 </button>
-                <button onClick={() => console.log('삭제')}>
-                  삭제
-                </button>
+                <button onClick={handleDelete}>삭제</button>
                 <button onClick={closeModal}>닫기</button>
               </div>
             )}

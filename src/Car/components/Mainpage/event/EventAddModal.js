@@ -197,8 +197,14 @@ const EventAddModal = ({
               취소
             </button>
           </div>
-        </form>
-      </div>
+        )}
+        <div className={styles.formButtons}>
+          <button type='submit'>
+            {isEditMode ? '수정' : '저장'}
+          </button>
+          <button type='button'>닫기</button>
+        </div>
+      </form>
     </div>
   );
 };
