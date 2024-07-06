@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import DatePicker, {
   registerLocale,
 } from 'react-datepicker';
@@ -20,6 +20,8 @@ const CarCalendar = ({
   onChangeEndTime,
   setDaysBetween, // 일 수를 설정하는 콜백 함수 추가
 }) => {
+  // const [start, end] = useState('');
+
   // 날짜 변경 핸들러
   const handleDateChange = (dates) => {
     const [start, end] = dates;
