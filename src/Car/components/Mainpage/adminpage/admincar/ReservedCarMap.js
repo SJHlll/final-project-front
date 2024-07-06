@@ -98,14 +98,20 @@ const ReservedCarMap = () => {
 
   // 전화번호 뒷자리 4개로 필터링
   useEffect(() => {
+    let filtered;
+
     if (filterPhoneNumber.length === 4) {
-      const filtered = reserveCar.filter((e) =>
+      filtered = reserveCar.filter((e) =>
         e.phoneNumber.endsWith(filterPhoneNumber),
       );
-      setfilteredCar(filtered);
     } else {
-      setfilteredCar(reserveCar);
+      filtered = [...reserveCar];
     }
+
+    filtered.sort(
+      (a, b) => new Date(a.rentDate) - new Date(b.rentDate),
+    );
+    setfilteredCar(filtered);
   }, [filterPhoneNumber, reserveCar]);
 
   // 회원이 예약한 렌트카 목록
@@ -128,7 +134,7 @@ const ReservedCarMap = () => {
               {truncateText(e.carName, 20)}
             </div>
             <div className={styles.resSelectedAd}>
-              {e.rentCarPrice}원
+              {e.totalPrice}원
             </div>
             <div className={styles.resSelectedTime}>
               <div>{formatRentTime(e.rentDate)}</div>

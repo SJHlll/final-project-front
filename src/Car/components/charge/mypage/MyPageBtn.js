@@ -56,7 +56,7 @@ const MyPageBtn = () => {
         </button>
         <button
           className='GridButton'
-          onClick={() => openModal(<MyPageRentCar />)}
+          onClick={() => navigate('/mypage/car')}
         >
           <img
             src={myPageRentCarImg}

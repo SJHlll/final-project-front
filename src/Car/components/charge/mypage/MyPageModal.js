@@ -1,11 +1,7 @@
 import React, { useEffect } from 'react';
 import styles from './MyPageReviewList.module.scss';
 
-const MyPageReviewModal = ({
-  isOpen,
-  onClose,
-  children,
-}) => {
+const MyPageModal = ({ isOpen, onClose, children }) => {
   if (!isOpen) {
     return null;
   }
@@ -54,4 +50,4 @@ const MyPageReviewModal = ({
   );
 };
 
-export default MyPageReviewModal;
+export default MyPageModal;

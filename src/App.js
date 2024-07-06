@@ -36,6 +36,7 @@ import ReviewList from './Car/components/Mainpage/adminpage/adminreview/ReviewLi
 import MyPageReviewList from './Car/components/charge/mypage/MyPageReviewList';
 import { TestRvProvider } from './Car/components/Mainpage/adminpage/adminreview/TestRvContext';
 import { TestRcProvider } from './Car/components/Mainpage/adminpage/admincar/TestRcContext';
+import MyPageRentCarList from './Car/components/charge/mypage/MyPageRentCarList';
 
 const App = () => {
   const location = useLocation();
@@ -112,6 +113,10 @@ const App = () => {
                 <Route
                   path='/mypage/review'
                   element={<MyPageReviewList />}
+                />
+                <Route
+                  path='/mypage/car'
+                  element={<MyPageRentCarList />}
                 />
 
                 {/* 공통 로그인페이지 */}

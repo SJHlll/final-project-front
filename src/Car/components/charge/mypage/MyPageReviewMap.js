@@ -6,8 +6,7 @@ import React, {
 import { TestRvContext } from '../../Mainpage/adminpage/adminreview/TestRvContext';
 import styles from './MyPageReviewList.module.scss';
 import AuthContext from '../../../../util/AuthContext';
-import MyPageReviewModal from './MyPageReviewModal';
-import { useNavigate } from 'react-router-dom';
+import MyPageModal from './MyPageModal';
 
 const MyPageReviewMap = () => {
   const { review, setReview } = useContext(TestRvContext);
@@ -16,7 +15,6 @@ const MyPageReviewMap = () => {
   const [selectedReview, setSelectedReview] =
     useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const navigate = useNavigate();
 
   // DB에서 작성된 리뷰 가져오기
   useEffect(() => {
@@ -163,7 +161,7 @@ const MyPageReviewMap = () => {
       {review.length > 0 ? (
         <>
           <AdminContents reviews={filteredReview} />
-          <MyPageReviewModal
+          <MyPageModal
             isOpen={isModalOpen}
             onClose={closeModal}
           >
@@ -202,7 +200,7 @@ const MyPageReviewMap = () => {
                 </button>
               </div>
             )}
-          </MyPageReviewModal>
+          </MyPageModal>
           <p className={styles.filteredCount}>
             작성한 리뷰 :{' '}
             <span className={styles.filteredNum}>
@@ -223,12 +221,6 @@ const MyPageReviewMap = () => {
           작성된 리뷰가 없습니다.
         </div>
       )}
-      <p
-        className={styles.navigateMypage}
-        onClick={() => navigate('/mypage')}
-      >
-        마이페이지로
-      </p>
     </>
   );
 };

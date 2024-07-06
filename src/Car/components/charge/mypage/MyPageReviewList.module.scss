@@ -19,6 +19,18 @@
     .resSelectedTime {
         width: 20%;
     }
+
+    .resSelectedAd2 {
+        width: 20%;
+    }
+
+    .resSelectedName2 {
+        width: 10%;
+    }
+
+    .resNote {
+        width: 30%;
+    }
 }
 
 .listBody {
@@ -31,16 +43,28 @@
     align-items: center;
     border-bottom: 1px solid #aaa;
 
-    .resSelectedName {
-        width: 60%;
-    }
-
     .resSelectedAd {
         width: 20%;
     }
 
+    .resSelectedName {
+        width: 60%;
+    }
+
     .resSelectedTime {
         width: 20%;
+    }
+
+    .resSelectedAd2 {
+        width: 20%;
+    }
+
+    .resSelectedName2 {
+        width: 10%;
+    }
+
+    .resNote {
+        width: 30%;
     }
 
     .resCancelBtn {
