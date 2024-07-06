@@ -239,7 +239,6 @@ const EventAddModal = ({
           <button type='submit'>
             {isEditMode ? '수정' : '저장'}
           </button>
-          <button type='submit'>저장</button>
           <button type='button'>닫기</button>
         </div>
       </form>
