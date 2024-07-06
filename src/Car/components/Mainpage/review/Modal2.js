@@ -20,11 +20,13 @@ const Modal2 = ({
   reviewItem = '',
   isEditMode,
 }) => {
-  const [content, setContent] = useState(reviewContent);
+  const [content, setContent] = useState(
+    reviewContent || null,
+  );
   const [error, setError] = useState('');
   const [selectedItem, setSelectedItem] =
     useState(reviewItem);
-  const [rating, setRating] = useState(reviewRating);
+  const [rating, setRating] = useState(reviewRating || 1);
   const [photo, setPhoto] = useState(null);
   const [photoPreview, setPhotoPreview] = useState(
     reviewPhotoPreview,
