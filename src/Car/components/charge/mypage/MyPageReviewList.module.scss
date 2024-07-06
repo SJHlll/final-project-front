@@ -60,12 +60,28 @@
 
 .filteredCount {
     position: absolute;
-    top: 120px;
-    left: 200px;
+    top: 150px;
+    right: 210px;
     font-size: 0.8em;
 
     .filteredNum {
         font-size: 1.1rem;
+    }
+}
+
+.navigateMypage {
+    position: absolute;
+    top: 142px;
+    left: 205px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #ebf5ff;
+    color: #2c7fdf;
+    border: 1px solid #2c7fdf;
+
+    &:hover {
+        background-color: #c2e1ff;
     }
 }
 
@@ -100,4 +116,19 @@
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
+}
+
+.buttonbutton {
+    width: 60px;
+    padding: 5px 0;
+    border-radius: 10px;
+    float: right;
+    margin-left: 15px;
+    background-color: #ebf5ff;
+    color: #2c7fdf;
+    border: 1px solid #2c7fdf;
+
+    &:hover {
+        background-color: #c2e1ff;
+    }
 }

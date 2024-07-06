@@ -7,12 +7,7 @@ import { TestRvContext } from '../../Mainpage/adminpage/adminreview/TestRvContex
 import styles from './MyPageReviewList.module.scss';
 import AuthContext from '../../../../util/AuthContext';
 import MyPageReviewModal from './MyPageReviewModal';
-import {
-  API_BASE_URL,
-  REVIEW,
-} from '../../../../config/host-config';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 const MyPageReviewMap = () => {
   const { review, setReview } = useContext(TestRvContext);
@@ -21,11 +16,7 @@ const MyPageReviewMap = () => {
   const [selectedReview, setSelectedReview] =
     useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const API_REVIEW_URL = API_BASE_URL + REVIEW;
-
   const navigate = useNavigate();
-  const [error, setError] = useState('');
 
   // DB에서 작성된 리뷰 가져오기
   useEffect(() => {
@@ -58,6 +49,36 @@ const MyPageReviewMap = () => {
 
     fetchReviews();
   }, [setReview]);
+
+  const handleDeleteReview = async (reviewNo) => {
+    try {
+      const token = localStorage.getItem('ACCESS_TOKEN');
+      const response = await fetch(
+        `http://localhost:8181/admin/review?reviewNo=${reviewNo}`,
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+      if (!response.ok) {
+        throw new Error('Failed to delete review');
+      }
+
+      // 리뷰 삭제가 성공하면 UI에서 해당 리뷰 제거
+      setReview((prevReview) => {
+        const updatedReview = prevReview.filter(
+          (review) => review.reviewNo !== reviewNo,
+        );
+        return updatedReview;
+      });
+      closeModal();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   // 날짜 / 시간
   const formatTime = (time) => {
@@ -136,51 +157,12 @@ const MyPageReviewMap = () => {
     );
   };
 
-  const handleDelete = async (reviewNo) => {
-    try {
-      const token = localStorage.gettem('ACCESS_TOKEN');
-      const res = await axios.delete(
-        `http://localhost:8181/review/${reviewNo}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-
-      if (res.staus === 200) {
-        alert('리뷰가 삭제되었습니다.');
-        setFilteredReview(
-          filteredReview.filter(
-            (r) => r.reviewNo !== reviewNo,
-          ),
-        );
-        setIsModalOpen(false);
-      }
-    } catch (err) {
-      console.error('Error: ', err.response);
-      setError(
-        err.response
-          ? err.response.data
-          : '알 수 없는 오류가 발생했습니다.',
-      );
-      alert('리뷰 삭제에 실패하였습니다.');
-    }
-  };
-
   // 본체
   return (
     <>
       {review.length > 0 ? (
         <>
           <AdminContents reviews={filteredReview} />
-          <p className={styles.filteredCount}>
-            작성한 리뷰 :{' '}
-            <span className={styles.filteredNum}>
-              {filteredReview.length}
-            </span>
-            개
-          </p>
           <MyPageReviewModal
             isOpen={isModalOpen}
             onClose={closeModal}
@@ -199,14 +181,35 @@ const MyPageReviewMap = () => {
                   작성일:{' '}
                   {formatTime(selectedReview.updateDate)}
                 </p>
-                <button onClick={() => console.log('수정')}>
+                <button
+                  className={styles.buttonbutton}
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        '정말 리뷰를 삭제하시겠습니까?',
+                      )
+                    ) {
+                      handleDeleteReview(
+                        selectedReview.reviewNo,
+                      );
+                    }
+                  }}
+                >
+                  삭제
+                </button>
+                <button className={styles.buttonbutton}>
                   수정
                 </button>
-                <button onClick={handleDelete}>삭제</button>
-                <button onClick={closeModal}>닫기</button>
               </div>
             )}
           </MyPageReviewModal>
+          <p className={styles.filteredCount}>
+            작성한 리뷰 :{' '}
+            <span className={styles.filteredNum}>
+              {filteredReview.length}
+            </span>
+            개
+          </p>
         </>
       ) : (
         <div
@@ -220,6 +223,12 @@ const MyPageReviewMap = () => {
           작성된 리뷰가 없습니다.
         </div>
       )}
+      <p
+        className={styles.navigateMypage}
+        onClick={() => navigate('/mypage')}
+      >
+        마이페이지로
+      </p>
     </>
   );
 };
