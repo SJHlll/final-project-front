@@ -155,7 +155,7 @@ const Carres = () => {
   // 비회원 예약 방지 및 차량, 날짜 선택 핸들러
   const confirmReservationHandler = () => {
     if (!isLoggedIn) {
-      alert('로그인 회원만 에약 학능 합니다.');
+      alert('로그인 회원만 예약 가능 합니다.');
       navigate('/Login');
     } else if (!selectedCar) {
       alert('차를 선택해 주세요.');
@@ -306,13 +306,9 @@ const Carres = () => {
             </div>
           </div>
           <div className={styles.caltotalbox1}>
-            1일 렌트금액
+            총 렌트 금액
             <div className={styles.caltotalbox2}>
-              {(selectedCar
-                ? selectedCar.carPrice
-                : 0
-              ).toLocaleString('ko-KR')}{' '}
-              원
+              {totalPrice}원
             </div>
           </div>
           <div className={styles.reservationBtn}>
