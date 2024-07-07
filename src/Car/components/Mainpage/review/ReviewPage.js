@@ -3,9 +3,6 @@ import ReviewItem from './ReviewItem';
 import Modal from './Modal';
 import Modal2 from './Modal2'; // Modal2 가져오기
 import styles from './ReviewPage.module.scss';
-import handleRequest from '../../../../util/handleRequest';
-import axiosInstance from '../../../../config/axios-config';
-import { API_BASE_URL } from '../../../../config/host-config';
 
 // ReviewPage 컴포넌트 정의
 const ReviewPage = ({ ReviewList }) => {

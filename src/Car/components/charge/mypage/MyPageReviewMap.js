@@ -7,6 +7,7 @@ import { TestRvContext } from '../../Mainpage/adminpage/adminreview/TestRvContex
 import styles from './MyPageReviewList.module.scss';
 import AuthContext from '../../../../util/AuthContext';
 import MyPageModal from './MyPageModal';
+import Modal2 from '../../Mainpage/review/Modal2';
 
 const MyPageReviewMap = () => {
   const { review, setReview } = useContext(TestRvContext);
@@ -15,6 +16,8 @@ const MyPageReviewMap = () => {
   const [selectedReview, setSelectedReview] =
     useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [updateModalOpen, setUpdateModalOpen] =
+    useState(false);
 
   // DB에서 작성된 리뷰 가져오기
   useEffect(() => {
@@ -124,6 +127,13 @@ const MyPageReviewMap = () => {
     setSelectedReview(null);
   };
 
+  const updateReviewHandler = (review) => {
+    setIsModalOpen(false);
+    setUpdateModalOpen(true);
+  };
+
+  const updateCloseModal = () => setUpdateModalOpen(false);
+
   // 회원이 작성한 리뷰 목록
   const AdminContents = ({ reviews }) => {
     return (
@@ -197,7 +207,10 @@ const MyPageReviewMap = () => {
                 >
                   삭제
                 </button>
-                <button className={styles.buttonbutton}>
+                <button
+                  className={styles.buttonbutton}
+                  onClick={updateReviewHandler}
+                >
                   수정
                 </button>
               </div>
@@ -222,6 +235,22 @@ const MyPageReviewMap = () => {
         >
           작성된 리뷰가 없습니다.
         </div>
+      )}
+      {updateModalOpen && (
+        <Modal2
+          isOpen={updateModalOpen}
+          onClose={updateCloseModal}
+          reviewNo={selectedReview.reviewNo}
+          reviewContent={selectedReview.content}
+          reviewRating={selectedReview.rating}
+          reviewPhotoPreview={selectedReview.photo}
+          reviewItem={
+            selectedReview.carName !== null
+              ? selectedReview.carName
+              : selectedReview.stationName
+          }
+          isEditMode={true}
+        />
       )}
     </>
   );

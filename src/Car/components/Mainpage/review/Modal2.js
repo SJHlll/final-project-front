@@ -10,38 +10,40 @@ import axiosInstance from '../../../../config/axios-config';
 import AuthContext from '../../../../util/AuthContext';
 import style from '../../../../scss/Button.module.scss';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../../../config/host-config';
 
 const Modal2 = ({
   onClose,
-  onAddEvent,
   reviewNo,
   selectedType,
-  reviewContent = '',
-  reviewRating = 1,
-  reviewPhotoPreview = '',
-  reviewItem = '',
+  reviewContent,
+  reviewRating,
+  reviewPhotoPreview,
+  reviewItem,
   isEditMode,
 }) => {
   const [content, setContent] = useState(
-    reviewContent || null,
+    reviewContent || '',
   );
   const [error, setError] = useState('');
-  const [selectedItem, setSelectedItem] =
-    useState(reviewItem);
+  const [selectedItem, setSelectedItem] = useState(
+    reviewItem || '',
+  );
   const [rating, setRating] = useState(reviewRating || 1);
   const [photo, setPhoto] = useState(null);
   const [photoPreview, setPhotoPreview] = useState(
-    reviewPhotoPreview,
+    reviewPhotoPreview || '',
   );
-  const [reviewList, setReviewList] = useState([]);
   const [carList, setCarList] = useState([]);
   const [chargeList, setChargeList] = useState([]);
-  const [car, setCar] = useState([]);
   const navigate = useNavigate();
   const { token } = useContext(AuthContext);
   const $fileInputRef = useRef();
 
+  const API_REVIEW_URL = API_BASE_URL + '/review';
+
   useEffect(() => {
+    console.log('isEditMode: ', isEditMode);
     if (isEditMode) {
       setContent(reviewContent);
       setSelectedItem(reviewItem);
@@ -83,6 +85,8 @@ const Modal2 = ({
     if (selectedType === 'rental') {
       fetchCarList();
     }
+
+    console.log('선택된 값: ', selectedItem);
   }, [token, selectedType]);
 
   useEffect(() => {
@@ -107,6 +111,7 @@ const Modal2 = ({
           error,
         );
       }
+      console.log('선택된 값: ', selectedItem);
     };
 
     if (selectedType !== 'rental') {
@@ -142,8 +147,14 @@ const Modal2 = ({
       };
       reader.readAsDataURL(file);
     } else {
+      selectedType === 'rental'
+        ? setPhotoPreview(
+            'https://plugngo.s3.ap-northeast-2.amazonaws.com/2023041259109115.jpg',
+          )
+        : setPhotoPreview(
+            'https://plugngo.s3.ap-northeast-2.amazonaws.com/207af597d815193c998b06d41b704937.jpg',
+          );
       setPhoto(null);
-      setPhotoPreview(null);
     }
   };
 
@@ -246,6 +257,7 @@ const Modal2 = ({
         JSON.stringify({
           content,
           rating,
+          stationName: selectedItem,
         }),
       ],
       { type: 'application/json' },
@@ -264,6 +276,7 @@ const Modal2 = ({
         JSON.stringify({
           content,
           rating,
+          carName: selectedItem,
         }),
       ],
       { type: 'application/json' },
@@ -276,7 +289,10 @@ const Modal2 = ({
       $fileInputRef.current.files[0],
     );
 
-    const url = `http://localhost:8181/review/${selectedType === 'rental' ? 'car' : 'charge'}/${reviewNo}`;
+    const url = `${API_REVIEW_URL}/charge/${reviewNo}`;
+
+    console.log('reviewNo: ', reviewNo);
+    console.log('url: ', url);
 
     try {
       const res = await axiosInstance.patch(
@@ -294,7 +310,7 @@ const Modal2 = ({
 
       if (res.status === 200) {
         alert('리뷰 수정이 완료되었습니다.');
-        navigate('/mypage');
+        navigate('/mypage/review');
         onClose();
       } else {
         console.log('Error: ', res.data);
@@ -327,6 +343,7 @@ const Modal2 = ({
                 id='item'
                 value={selectedItem}
                 onChange={handleItemChange}
+                disabled={isEditMode}
               >
                 <option value=''>선택하세요</option>
                 {selectedType === 'rental'
@@ -373,10 +390,20 @@ const Modal2 = ({
               ref={$fileInputRef}
             />
             <div className={styles.photoPreview}>
-              {photoPreview && (
+              {photoPreview ? (
                 <img
                   src={photoPreview}
                   alt='이미지 미리보기'
+                  className={styles.previewImage}
+                />
+              ) : (
+                <img
+                  src={
+                    selectedType === 'rental'
+                      ? 'https://plugngo.s3.ap-northeast-2.amazonaws.com/2023041259109115.jpg'
+                      : 'https://plugngo.s3.ap-northeast-2.amazonaws.com/207af597d815193c998b06d41b704937.jpg'
+                  }
+                  alt='기본 이미지'
                   className={styles.previewImage}
                 />
               )}

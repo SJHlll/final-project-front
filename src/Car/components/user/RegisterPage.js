@@ -352,7 +352,7 @@ const RegisterPage = () => {
               <img
                 src={
                   imgFile ||
-                  require('https://plugngo.s3.ap-northeast-2.amazonaws.com/anonymous.jpg')
+                  'https://plugngo.s3.ap-northeast-2.amazonaws.com/anonymous.jpg'
                 }
                 alt='profile'
               />
