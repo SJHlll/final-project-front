@@ -58,42 +58,6 @@ const MyPageRentCarMap = () => {
     fetchStations();
   }, [setReserveCar]);
 
-  //   const handleUpdateReservation = async (reservationNo) => {
-  //     try {
-  //       const token = localStorage.getItem('ACCESS_TOKEN');
-  //       const response = await fetch(
-  //         `http://localhost:8181/admin/car`,
-  //         {
-  //           method: 'PUT', // 수정 요청이므로 PUT 메서드를 사용합니다.
-  //           headers: {
-  //             Authorization: `Bearer ${token}`,
-  //             'Content-Type': 'application/json',
-  //           },
-  //           body: JSON.stringify({
-  //             reservationNo,
-  //             rentDate: newRentDate,
-  //             turninDate: newTurninDate,
-  //           }),
-  //         },
-  //       );
-  //       if (!response.ok) {
-  //         throw new Error('Failed to update reservation');
-  //       }
-
-  //       const updatedCar = await response.json();
-  //       setReserveCar((prevCar) =>
-  //         prevCar.map((car) =>
-  //           car.reservationNo === reservationNo
-  //             ? updatedCar
-  //             : car,
-  //         ),
-  //       );
-  //       closeModal();
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-
   // 예약한 충전소 DB에 지우기 (예약번호를 기준으로)
   const handleCancelReservation = async (reservationNo) => {
     try {
@@ -112,6 +76,9 @@ const MyPageRentCarMap = () => {
         throw new Error('Failed to cancel reservation');
       }
 
+      alert(
+        '예약이 취소되었습니다. 환불은 24시간 이내로 이루어집니다.',
+      );
       // 예약 취소가 성공하면 UI에서 해당 예약을 제거
       setReserveCar((prevCar) => {
         const updatedCar = prevCar.filter(
