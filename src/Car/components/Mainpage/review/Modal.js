@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './ReviewPage.module.scss';
 // Modal 컴포넌트: 리뷰의 세부 사항을 표시하는 모달 창
-const Modal = ({ review, onClose }) => {
+const Modal = ({ review, onClose, selectedType }) => {
   // 모달 외부를 클릭하면 모달을 닫는 함수
   const handleOutsideClick = (e) => {
     // 클릭한 요소가 모달 클래스를 포함하고 있으면
@@ -47,7 +47,7 @@ const Modal = ({ review, onClose }) => {
           &times; {/* '×' 문자 */}
         </span>
         <div className={styles.modalImageContainer}>
-          <img src={review.imageUrl} alt='이미지' />{' '}
+          <img src={review.photo} alt='이미지' />{' '}
           {/* 리뷰에 대한 이미지 */}
           <span className={styles.reviewDate}>
             {/* {review.updateDate} */}
@@ -61,7 +61,10 @@ const Modal = ({ review, onClose }) => {
           {fullStars} {/* 꽉 찬 별 배열 */}
           {emptyStars} {/* 빈 별 배열 */}
         </div>
-        <h2>충전소: {review.stationName}</h2>{' '}
+        <h2>
+          {`${selectedType === 'rental' ? '차량 : ' : '충전소 : '}`}
+          {`${selectedType === 'rental' ? `${review.carName}` : `${review.stationName}`}`}
+        </h2>{' '}
         {/* 리뷰의 이름 */}
         <p>{review.content}</p> {/* 리뷰 내용 */}
       </div>

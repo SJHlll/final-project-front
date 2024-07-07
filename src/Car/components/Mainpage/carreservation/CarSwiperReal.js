@@ -43,18 +43,18 @@ const CarSwiperReal = ({ setSelectedCar }) => {
       modules={[Navigation, Pagination, Autoplay]}
       spaceBetween={1}
       slidesPerView={5}
-      // slidesPerGroup={5} 그룹으로 묶기
       navigation
       pagination={{ clickable: true }}
-      loop={true}
+      loop={false}
       autoplay={{
-        delay: 2000,
+        delay: 3000,
         disableOnInteraction: false,
       }}
       className={styles.carswipercontainer}
       onAutoplayStart={() =>
         console.log('Autoplay started')
       }
+      onAutoplayStop={() => console.log('Autoplay stop')}
     >
       {rentCar.map((car, index) => (
         <SwiperSlide

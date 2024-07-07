@@ -20,7 +20,7 @@ const ReviewItem = ({
       onClick={() => onMoreClick(review)}
     >
       <div className={styles.imageContainer}>
-        <img src={review.imageUrl} alt='이미지' />
+        <img src={review.photo} alt='이미지' />
       </div>
       <div className={styles.contentContainer}>
         {selectedType === 'rental' ? (
