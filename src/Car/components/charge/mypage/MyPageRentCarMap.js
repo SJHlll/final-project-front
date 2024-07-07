@@ -235,7 +235,7 @@ const MyPageRentCarMap = () => {
                 >
                   예약 취소
                 </button>
-                <button
+                {/* <button
                   className={styles.buttonbutton}
                   onClick={toggleEditDateMode}
                 >
@@ -260,7 +260,7 @@ const MyPageRentCarMap = () => {
                   >
                     수정 완료
                   </button>
-                )}
+                )} */}
               </div>
             )}
           </MyPageModal>
