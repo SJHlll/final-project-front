@@ -153,7 +153,7 @@ const ReservedCarMap = () => {
                       e.reservationNo,
                     );
                     alert(
-                      `${e.name} 회원님의 ${e.carName} 렌트카 예약을 취소했습니다.\n충전금액 : ${e.rentCarPrice}원`,
+                      `${e.name} 회원님의 ${e.carName} 렌트카 예약을 취소했습니다.\n충전금액 : ${e.totalPrice}원`,
                     );
                   }
                 }}
