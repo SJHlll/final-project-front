@@ -8,10 +8,11 @@ const MyPageReviewList = () => {
   return (
     <>
       <div className={styles.listHeader}>
+        <div className={styles.resSelectedNo}>글번호</div>
         <div className={styles.resSelectedAd}>
           충전소/렌트카
         </div>
-        <div className={styles.resSelectedName}>
+        <div className={styles.resSelectedName3}>
           리뷰내용
         </div>
         <div className={styles.resSelectedTime}>

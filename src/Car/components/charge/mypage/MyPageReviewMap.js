@@ -25,7 +25,7 @@ const MyPageReviewMap = () => {
       try {
         const token = localStorage.getItem('ACCESS_TOKEN');
         const response = await fetch(
-          'http://localhost:8181/admin/review',
+          'http://localhost:8181/mypage/review',
           {
             method: 'GET',
             headers: {
@@ -55,7 +55,7 @@ const MyPageReviewMap = () => {
     try {
       const token = localStorage.getItem('ACCESS_TOKEN');
       const response = await fetch(
-        `http://localhost:8181/admin/review?reviewNo=${reviewNo}`,
+        `http://localhost:8181/mypage/review?reviewNo=${reviewNo}`,
         {
           method: 'DELETE',
           headers: {
@@ -144,7 +144,10 @@ const MyPageReviewMap = () => {
             key={e.reviewNo}
             onClick={() => handleReviewClick(e)}
           >
-            <div className={styles.resSelectedAd}>
+            <div className={styles.resSelectedNo}>
+              {e.reviewNo}
+            </div>
+            <div className={styles.resSelectedAd3}>
               {e.carName && e.carName.length > 0
                 ? '(렌트카) ' + truncateText(e.carName, 20)
                 : e.stationName && e.stationName.length > 0
@@ -152,7 +155,7 @@ const MyPageReviewMap = () => {
                     truncateText(e.stationName, 20)
                   : null}
             </div>
-            <div className={styles.resSelectedName}>
+            <div className={styles.resSelectedName3}>
               {truncateText(e.content, 150)}
             </div>
             <div className={styles.resSelectedTime}>
