@@ -1,6 +1,7 @@
 import React, {
   useContext,
   useEffect,
+  useRef,
   useState,
 } from 'react';
 import styles from './Modal2.module.scss';
@@ -12,7 +13,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Modal2 = ({
   onClose,
-  onSave,
+  onAddEvent,
+  reviewNo,
   selectedType,
   reviewContent = '',
   reviewRating = 1,
@@ -34,8 +36,10 @@ const Modal2 = ({
   const [reviewList, setReviewList] = useState([]);
   const [carList, setCarList] = useState([]);
   const [chargeList, setChargeList] = useState([]);
+  const [car, setCar] = useState([]);
   const navigate = useNavigate();
   const { token } = useContext(AuthContext);
+  const $fileInputRef = useRef();
 
   useEffect(() => {
     if (isEditMode) {
@@ -163,70 +167,143 @@ const Modal2 = ({
       return;
     }
 
-    const reviewData = {
-      content,
-      rating,
-      [selectedType === 'rental'
-        ? 'carName'
-        : 'stationName']: selectedItem,
-    };
-
     const url = `http://localhost:8181/review/${selectedType === 'rental' ? 'car' : 'charge'}`;
+
+    // 충전소 리뷰 데이터
+    const reviewChargeJsonBlob = new Blob(
+      [
+        JSON.stringify({
+          content,
+          rating,
+          stationName: selectedItem,
+        }),
+      ],
+      { type: 'application/json' },
+    );
+
+    const reviewChargeData = new FormData();
+    reviewChargeData.append('charge', reviewChargeJsonBlob);
+    reviewChargeData.append(
+      'reviewImage',
+      $fileInputRef.current.files[0],
+    );
+
+    // 렌트카 리뷰 데이터
+    const reviewCarJsonBlob = new Blob(
+      [
+        JSON.stringify({
+          content,
+          rating,
+          carName: selectedItem,
+        }),
+      ],
+      { type: 'application/json' },
+    );
+
+    const reviewCarData = new FormData();
+    reviewCarData.append('car', reviewCarJsonBlob);
+    reviewCarData.append(
+      'reviewImage',
+      $fileInputRef.current.files[0],
+    );
 
     try {
       const response = await axiosInstance.post(
         url,
-        reviewData,
+        selectedType === 'rental'
+          ? reviewCarData
+          : reviewChargeData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
+            'Content-Type': 'multipart/form-data',
           },
         },
       );
-      setReviewList([...reviewList, response.data]);
-      alert('리뷰 작성이 완료되었습니다.');
-      onSave(content, selectedItem, rating, photo);
-      setContent('');
-      setSelectedItem('');
-      setRating(1);
+
+      if (response.status === 200) {
+        alert('리뷰 등록이 완료되었습니다.');
+        navigate('/review');
+        onClose();
+        window.location.reload(); // 재렌더링
+      } else {
+        console.log('Error : ', response.data);
+        alert('리뷰 등록에 실패하였습니다.');
+      }
     } catch (err) {
-      setError(err.message);
+      console.log('Error: ', err.response);
       alert('리뷰 등록에 실패하였습니다.');
     }
   };
 
+  // 리뷰 수정 이벤트
   const updateHandler = async (e) => {
     e.preventDefault();
 
-    const reviewData = {
-      content,
-      rating,
-      [selectedType === 'rental'
-        ? 'carName'
-        : 'stationName']: selectedItem,
-    };
+    // 충전소 리뷰 데이터
+    const reviewChargeJsonBlob = new Blob(
+      [
+        JSON.stringify({
+          content,
+          rating,
+        }),
+      ],
+      { type: 'application/json' },
+    );
+
+    const reviewChargeData = new FormData();
+    reviewChargeData.append('charge', reviewChargeJsonBlob);
+    reviewChargeData.append(
+      'reviewImage',
+      $fileInputRef.current.files[0],
+    );
+
+    // 렌트카 리뷰 데이터
+    const reviewCarJsonBlob = new Blob(
+      [
+        JSON.stringify({
+          content,
+          rating,
+        }),
+      ],
+      { type: 'application/json' },
+    );
+
+    const reviewCarData = new FormData();
+    reviewCarData.append('car', reviewCarJsonBlob);
+    reviewCarData.append(
+      'reviewImage',
+      $fileInputRef.current.files[0],
+    );
+
+    const url = `http://localhost:8181/review/${selectedType === 'rental' ? 'car' : 'charge'}/${reviewNo}`;
 
     try {
-      await axiosInstance.patch(
-        'http://localhost:8181/review/',
-        reviewData,
+      const res = await axiosInstance.patch(
+        url,
+        selectedType === 'rental'
+          ? reviewCarData
+          : reviewChargeData,
         {
           headers: {
+            'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${token}`,
           },
         },
       );
-      alert('리뷰 수정이 완료되었습니다.');
-      navigate('/mypage');
+
+      if (res.status === 200) {
+        alert('리뷰 수정이 완료되었습니다.');
+        navigate('/mypage');
+        onClose();
+      } else {
+        console.log('Error: ', res.data);
+        alert('리뷰 수정에 실패하였습니다.');
+      }
     } catch (err) {
       console.log('Error : ', err.response);
       alert('리뷰 수정에 실패하였습니다.');
     }
-
-    setContent('');
-    setSelectedItem('');
-    setRating(1);
   };
 
   return (
@@ -293,6 +370,7 @@ const Modal2 = ({
               id='photo'
               accept='image/*'
               onChange={handlePhotoChange}
+              ref={$fileInputRef}
             />
             <div className={styles.photoPreview}>
               {photoPreview && (

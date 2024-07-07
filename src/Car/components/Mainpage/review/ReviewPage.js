@@ -3,6 +3,9 @@ import ReviewItem from './ReviewItem';
 import Modal from './Modal';
 import Modal2 from './Modal2'; // Modal2 가져오기
 import styles from './ReviewPage.module.scss';
+import handleRequest from '../../../../util/handleRequest';
+import axiosInstance from '../../../../config/axios-config';
+import { API_BASE_URL } from '../../../../config/host-config';
 
 // ReviewPage 컴포넌트 정의
 const ReviewPage = ({ ReviewList }) => {
@@ -60,6 +63,7 @@ const ReviewPage = ({ ReviewList }) => {
   };
 
   const handleWriteReviewClick = () => {
+    console.log('click event 발생!');
     setIsModalOpen2(true);
   };
 
@@ -72,47 +76,49 @@ const ReviewPage = ({ ReviewList }) => {
     setIsModalOpen2(false);
   };
 
-  const handleSaveReview = (
-    content,
-    selectedItem,
-    rating,
-    photo,
-    stationId,
-    stationName,
-  ) => {
-    const baseImageUrl =
-      selectedType === 'rental'
-        ? 'https://www.economicpost.co.kr/imgdata/economicpost_co_kr/202304/2023041259109115.jpg'
-        : 'https://image.zdnet.co.kr/2021/03/23/207af597d815193c998b06d41b704937.jpg';
+  // const handleSaveReview = (
+  //   content,
+  //   selectedItem,
+  //   rating,
+  //   photo,
+  //   stationId,
+  //   stationName,
+  // ) => {
+  //   const baseImageUrl =
+  //     selectedType === 'rental'
+  //       ? 'https://www.economicpost.co.kr/imgdata/economicpost_co_kr/202304/2023041259109115.jpg'
+  //       : 'https://image.zdnet.co.kr/2021/03/23/207af597d815193c998b06d41b704937.jpg';
 
-    const imageUrl = photo
-      ? URL.createObjectURL(photo)
-      : baseImageUrl;
+  //   const imageUrl = photo
+  //     ? URL.createObjectURL(photo)
+  //     : baseImageUrl;
 
-    const newReview = {
-      id:
-        (selectedType === 'rental'
-          ? rentalReviews.length
-          : chargingReviews.length) + 1,
-      imageUrl,
-      name: `${selectedType === 'rental' ? '렌트카' : '충전소'} ${(selectedType === 'rental' ? rentalReviews.length : chargingReviews.length) + 1}`,
-      rating,
-      content,
-      date: new Date().toLocaleDateString(),
-      item: selectedItem,
-      stationId,
-      stationName,
-      carName:
-        selectedType === 'rental' ? selectedItem : null,
-    };
+  //   const newReview = {
+  //     id:
+  //       (selectedType === 'rental'
+  //         ? rentalReviews.length
+  //         : chargingReviews.length) + 1,
+  //     imageUrl,
+  //     name: `${selectedType === 'rental' ? '렌트카' : '충전소'} ${(selectedType === 'rental' ? rentalReviews.length : chargingReviews.length) + 1}`,
+  //     rating,
+  //     content,
+  //     date: new Date().toLocaleDateString(),
+  //     item: selectedItem,
+  //     stationId,
+  //     stationName,
+  //     carName:
+  //       selectedType === 'rental' ? selectedItem : null,
+  //   };
 
+  //   setIsModalOpen2(false);
+  // };
+
+  const handleAddReview = (review) => {
     if (selectedType === 'rental') {
-      setRentalReviews([newReview, ...rentalReviews]);
+      setRentalReviews([...rentalReviews, review]);
     } else {
-      setChargingReviews([newReview, ...chargingReviews]);
+      setChargingReviews([...chargingReviews, review]);
     }
-
-    setIsModalOpen2(false);
   };
 
   const currentReviews =
@@ -189,13 +195,13 @@ const ReviewPage = ({ ReviewList }) => {
       {isModalOpen && (
         <Modal
           review={selectedReview}
+          selectedType={selectedType}
           onClose={handleCloseModal}
         />
       )}
       {isModalOpen2 && (
         <Modal2
           onClose={handleCloseModal2}
-          onSave={handleSaveReview}
           selectedType={selectedType}
         />
       )}

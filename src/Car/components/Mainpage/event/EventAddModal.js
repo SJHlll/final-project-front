@@ -11,7 +11,6 @@ import axiosInstance from '../../../../config/axios-config';
 import { useNavigate } from 'react-router-dom';
 
 const EventAddModal = ({
-  isOpen,
   toggle,
   eventId,
   eventTitle,
