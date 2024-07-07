@@ -1,4 +1,8 @@
-import React, { useContext, useEffect } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { StationContext } from '../../../../contexts/StationContext';
 import PlugAndGoStation from './PlugAndGoStation';
 import PlugAndGoMap from './PlugAndGoMap';
@@ -7,9 +11,11 @@ import styled from 'styled-components';
 const ReservationList = () => {
   const { stations, setStations } =
     useContext(StationContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchStations = async () => {
+      setIsLoading(true);
       try {
         const response = await fetch(
           'http://localhost:8181/charge/reservation',
@@ -20,12 +26,23 @@ const ReservationList = () => {
         const data = await response.json();
         console.log(data); // 데이터 형식 확인
         setStations(data.chargers || []); // 올바른 데이터 설정
+        setIsLoading(false);
       } catch (error) {
         console.error(error);
+        setIsLoading(false);
       }
     };
     fetchStations();
   }, []);
+
+  if (isLoading) {
+    return (
+      <>
+        <Loading />
+        <PlugAndGoMap markers={stations} />
+      </>
+    );
+  }
 
   return (
     <>
@@ -55,6 +72,14 @@ const ReservationList = () => {
 
 export default ReservationList;
 
+const Loading = styled.div`
+  width: 850px;
+  height: 696px;
+  background-color: lightblue;
+  position: relative;
+  left: 843px;
+`;
+
 const PlugAndGoStationContainer = styled.div`
   width: 850px;
   display: flex;
@@ -62,8 +87,6 @@ const PlugAndGoStationContainer = styled.div`
   max-height: 696px;
   overflow-y: auto;
   background-color: lightblue;
-  position: relative;
-  left: 48%;
   position: relative;
   left: 843px;
   border-bottom: 3px solid lightblue;

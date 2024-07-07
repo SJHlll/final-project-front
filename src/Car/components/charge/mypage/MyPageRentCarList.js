@@ -1,24 +1,24 @@
 import React from 'react';
 import styles from './MyPageReviewList.module.scss';
-import MyPageReviewMap from './MyPageReviewMap';
 import { useNavigate } from 'react-router-dom';
+import MyPageRentCarMap from './MyPageRentCarMap';
 
-const MyPageReviewList = () => {
+const MyPageRentCarList = () => {
   const navigate = useNavigate();
   return (
     <>
       <div className={styles.listHeader}>
-        <div className={styles.resSelectedAd}>
-          충전소/렌트카
-        </div>
-        <div className={styles.resSelectedName}>
-          리뷰내용
+        <div className={styles.resSelectedAd2}>차종</div>
+        <div className={styles.resSelectedName2}>가격</div>
+        <div className={styles.resSelectedTime}>
+          렌트 시작일
         </div>
         <div className={styles.resSelectedTime}>
-          작성날짜
+          렌트 반납일
         </div>
+        <div className={styles.resNote}>비고</div>
       </div>
-      <MyPageReviewMap />
+      <MyPageRentCarMap />
       <p
         className={styles.navigateMypage}
         onClick={() => navigate('/mypage')}
@@ -29,4 +29,4 @@ const MyPageReviewList = () => {
   );
 };
 
-export default MyPageReviewList;
+export default MyPageRentCarList;
