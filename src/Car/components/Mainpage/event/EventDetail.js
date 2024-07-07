@@ -56,7 +56,11 @@ const EventDetail = () => {
           <div
             className={`${styles.eventCurrent} ${styles.marginBox}`}
           >
-            {status}
+            {status === 'ACTIVE_EVENT'
+              ? '진행중'
+              : status === 'END_EVENT'
+                ? '종료'
+                : null}
           </div>
           <div className={styles.eventDetailTitle}>
             {title}
