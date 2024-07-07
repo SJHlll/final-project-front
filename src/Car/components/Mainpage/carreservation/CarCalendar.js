@@ -1,4 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import DatePicker, {
   registerLocale,
 } from 'react-datepicker';
@@ -7,6 +11,8 @@ import styles from './reservation_css/CarCalendar.module.scss';
 import { ko } from 'date-fns/locale';
 import { addMonths, setHours, setMinutes } from 'date-fns';
 import { Height } from '@mui/icons-material';
+import { CarContext } from '../../../../contexts/CarContext';
+import AuthContext from '../../../../util/AuthContext';
 
 registerLocale('ko', ko); // 한국어 등록
 
@@ -21,7 +27,40 @@ const CarCalendar = ({
   onChangeEndTime,
   setDaysBetween, // 일 수를 설정하는 콜백 함수 추가
 }) => {
-  // const [start, end] = useState('');
+  const { selectedCar } = useContext(CarContext);
+  const { isLoggedIn, token } = useContext(AuthContext); // AuthContext에서 로그인 상태와 토큰 가져오기
+  const [reservedDates, setReservedDates] = useState([]);
+
+  useEffect(() => {
+    const fetchReservedDates = async () => {
+      if (!selectedCar || !isLoggedIn) {
+        return;
+      }
+
+      try {
+        const res = await fetch(
+          `/rentcar/${selectedCar.id}`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
+        if (!res.ok) {
+          throw new Error('패치에 실패했음.');
+        }
+        const data = await res.json();
+        setReservedDates(
+          data.map((date) => new Date(date)),
+        );
+      } catch (error) {
+        console.error('에러 패치 예약 일~~~', error);
+      }
+    };
+    fetchReservedDates();
+  }, [selectedCar, isLoggedIn, token]);
 
   // 날짜 변경 핸들러
   const handleDateChange = (dates) => {
@@ -164,6 +203,7 @@ const CarCalendar = ({
           inline
           showDisabledMonthNavigation
           monthsShown={2} // 화면에 보여주는 월 갯수
+          excludeDates={reservedDates} // 예약된 날짜들을 제외
         />
       </div>
 
