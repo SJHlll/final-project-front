@@ -11,10 +11,9 @@ import {
 } from 'swiper/modules';
 import { CarContext } from '../../../../contexts/CarContext';
 import styles from './reservation_css/CarSwiper.module.scss';
+
 const CarSwiperReal = ({ setSelectedCar }) => {
-  // DB에서 전기차 목록 불러오기
-  // rentCar = 전기차 목록 배열
-  const { rentCar, setRentCar } = useContext(CarContext); // 전기차 목록
+  const { rentCar, setRentCar } = useContext(CarContext);
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -26,9 +25,7 @@ const CarSwiperReal = ({ setSelectedCar }) => {
           throw new Error('Failed to fetch cars');
         }
         const data = await response.json();
-        console.log('Fetched data:', data); // 데이터 형식 확인
-        // setRentCar = 백엔드에서 불러온 전기차들 rentCar에 집어넣음
-        setRentCar(data.carList || []); // CarListResponseDTO -> private List<CarDetailResponseDTO> carList;
+        setRentCar(data.carList || []);
       } catch (error) {
         console.error('Error fetching cars:', error);
       }
@@ -36,7 +33,6 @@ const CarSwiperReal = ({ setSelectedCar }) => {
     fetchCars();
   }, [setRentCar]);
 
-  // 차 이미지를 클릭시 선택되는 자동차
   const clickCarHandler = (car) => {
     setSelectedCar(car);
     console.log('setSelected car: ', car);
@@ -47,13 +43,18 @@ const CarSwiperReal = ({ setSelectedCar }) => {
       modules={[Navigation, Pagination, Autoplay]}
       spaceBetween={1}
       slidesPerView={5}
+      // slidesPerGroup={5} 그룹으로 묶기
       navigation
-      pagination={{
-        clickable: true,
+      pagination={{ clickable: true }}
+      loop={true}
+      autoplay={{
+        delay: 2000,
+        disableOnInteraction: false,
       }}
-      loop
-      autoplay={{ delay: 2000 }}
       className={styles.carswipercontainer}
+      onAutoplayStart={() =>
+        console.log('Autoplay started')
+      }
     >
       {rentCar.map((car, index) => (
         <SwiperSlide

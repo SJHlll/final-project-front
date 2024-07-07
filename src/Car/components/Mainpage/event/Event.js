@@ -16,7 +16,7 @@ import Frame from '../Frame';
 
 const Event = () => {
   const redirection = useNavigate();
-  const { onLogout } = useContext(AuthContext);
+  const { onLogout, role } = useContext(AuthContext);
   const [isModal, setIsModal] = useState(false);
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -48,13 +48,15 @@ const Event = () => {
     <Frame>
       <div className={styles.eventbody}>
         <Eventlist eventList={events} />
+        {role === 'ADMIN' && (
+          <button
+            className={`${style.publicBtn} ${styles.eventButton}`}
+            onClick={eventAddModalOpen}
+          >
+            추가
+          </button>
+        )}
       </div>
-      <button
-        className={`${style.publicBtn} ${styles.eventButton}`}
-        onClick={eventAddModalOpen}
-      >
-        추가
-      </button>
 
       {isModal && (
         <EventAddModal

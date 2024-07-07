@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './Event.module.scss';
 import style from '../../../../scss/Button.module.scss';
 import axios from 'axios';
 import EventAddModal from './EventAddModal';
+import Frame from '../Frame';
+import AuthContext from '../../../../util/AuthContext';
 
 const EventDetail = () => {
   const location = useLocation();
@@ -11,7 +13,7 @@ const EventDetail = () => {
   const navigate = useNavigate();
   const toList = () => navigate('/events');
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태
-
+  const { role } = useContext(AuthContext);
   const token = localStorage.getItem('ACCESS_TOKEN');
 
   const removeEvent = async () => {
@@ -40,8 +42,16 @@ const EventDetail = () => {
   };
 
   return (
-    <div className={styles.maincontainer}>
-      <div className={styles.contentline}>
+    <Frame>
+      <div
+        style={{
+          // padding: '1% 5%',
+          border: '1px solid black',
+          width: '70%',
+          margin: '0 auto',
+          overflow: 'auto',
+        }}
+      >
         <div className={styles.eventDetailHeader}>
           <div
             className={`${styles.eventCurrent} ${styles.marginBox}`}
@@ -54,8 +64,15 @@ const EventDetail = () => {
           <div
             className={`${styles.flexBox} ${styles.marginBox}`}
           >
-            <div>글번호</div>
-            <div>{id}</div>
+            <button
+              style={{
+                marginTop: '30%',
+              }}
+              className={style.publicBtn}
+              onClick={toList}
+            >
+              목록
+            </button>
           </div>
         </div>
         <div className={styles.eventDetailBody}>
@@ -66,24 +83,22 @@ const EventDetail = () => {
               alt={title}
             />
           )}
-          <button
-            className={`${style.publicBtn} ${styles.eventButton}`}
-            onClick={openModal}
-          >
-            수정
-          </button>
-          <button
-            className={`${style.publicBtn} ${styles.eventButton}`}
-            onClick={removeEvent}
-          >
-            삭제
-          </button>
-          <button
-            className={style.publicBtn}
-            onClick={toList}
-          >
-            목록
-          </button>
+          {role === 'ADMIN' && (
+            <>
+              <button
+                className={`${style.publicBtn} ${styles.updateButton}`}
+                onClick={openModal}
+              >
+                수정
+              </button>
+              <button
+                className={`${style.publicBtn} ${styles.deleteButton}`}
+                onClick={removeEvent}
+              >
+                삭제
+              </button>
+            </>
+          )}
 
           {isModalOpen && (
             <EventAddModal
@@ -97,7 +112,7 @@ const EventDetail = () => {
           )}
         </div>
       </div>
-    </div>
+    </Frame>
   );
 };
 
