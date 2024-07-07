@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Event.module.scss';
 import { useNavigate } from 'react-router-dom';
 import style from '../../../../scss/Button.module.scss';
@@ -22,10 +22,10 @@ const Eventlist = ({ eventList }) => {
   // 필터링 진행중 / 종료
   const filteredList =
     activeTab === '전체'
-      ? eventList
-      : eventList.filter(
-          (item) => item.status === activeTab,
-        );
+      ? eventList.reverse()
+      : eventList
+          .filter((item) => item.status === activeTab)
+          .reverse();
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);

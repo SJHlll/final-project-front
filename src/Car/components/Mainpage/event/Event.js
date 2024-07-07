@@ -12,7 +12,6 @@ import { API_BASE_URL } from '../../../../config/host-config';
 import axiosInstance from '../../../../config/axios-config';
 import style from '../../../../scss/Button.module.scss';
 import EventAddModal from './EventAddModal';
-import { Modal } from 'reactstrap';
 import Frame from '../Frame';
 
 const Event = () => {

@@ -64,15 +64,23 @@ const EventAddModal = ({
 
   // 저장 버튼 클릭 시 처리
   const handleSave = async (e) => {
+    console.log({ isEditMode });
     e.preventDefault();
     if (!title || !imagePreview) {
       alert('제목과 이미지를 모두 입력해야 합니다.');
       return;
     }
 
-    const formData = new FormData();
-    formData.append('eventData', JSON.stringify({ title }));
-    formData.append(
+    const eventJsonBlob = new Blob(
+      [JSON.stringify(title)],
+      {
+        type: 'application/json',
+      },
+    );
+
+    const eventFormData = new FormData();
+    eventFormData.append('title', eventJsonBlob);
+    eventFormData.append(
       'eventImage',
       $fileInputRef.current.files[0],
     );
@@ -80,7 +88,7 @@ const EventAddModal = ({
     try {
       const res = await axiosInstance.post(
         API_EVENT_URL,
-        formData,
+        eventFormData,
         {
           headers: {
             'Content-Type': 'multipart/form-data',
@@ -91,6 +99,7 @@ const EventAddModal = ({
       if (res.status === 200) {
         alert('이벤트가 저장되었습니다.');
         navigate('/events');
+        toggle(false);
       } else {
         console.log('Error: ', res.data);
         alert('이벤트 등록에 실패하였습니다.');
@@ -99,41 +108,52 @@ const EventAddModal = ({
       console.error('Error:', err.response);
       alert('이벤트 등록에 실패하였습니다.');
     }
-    setTitle('');
-    setImageName('');
-    setImagePreview('');
   };
 
   // 수정 버튼 클릭 시 처리
   const updateHandler = async (e) => {
+    console.log({ isEditMode });
     e.preventDefault();
     if (!title || !imagePreview) {
       alert('제목과 이미지를 모두 입력해야 합니다.');
       return;
     }
 
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append(
+    const eventJsonBlob = new Blob(
+      [JSON.stringify(title)],
+      {
+        type: 'application/json',
+      },
+    );
+
+    const eventFormData = new FormData();
+    eventFormData.append('title', eventJsonBlob);
+    eventFormData.append(
       'eventImage',
       $fileInputRef.current.files[0],
     );
 
     try {
-      await axiosInstance.patch(
+      const res = await axiosInstance.patch(
         `${API_EVENT_URL}/${eventId}`,
-        formData,
+        eventFormData,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`,
           },
         },
       );
-      alert('수정 완료!');
-      navigate(`/events`);
+      if (res.status === 200) {
+        alert('이벤트가 수정되었습니다.');
+        navigate('/events');
+        toggle(false);
+      } else {
+        console.log('Error: ', res.data);
+        alert('이벤트 수정에 실패하였습니다.');
+      }
     } catch (err) {
-      console.error('Error updating event:', err);
+      console.error('Error updating event:', err.response);
       alert('이벤트 수정에 실패하였습니다.');
     }
   };
@@ -196,13 +216,6 @@ const EventAddModal = ({
             <button type='button' onClick={toggle}>
               취소
             </button>
-          </div>
-          )
-          <div className={styles.formButtons}>
-            <button type='submit'>
-              {isEditMode ? '수정' : '저장'}
-            </button>
-            <button type='button'>닫기</button>
           </div>
         </form>
       </div>
