@@ -24,7 +24,9 @@ const Eventlist = ({ eventList }) => {
     activeTab === '전체'
       ? eventList.reverse()
       : eventList
-          .filter((item) => item.status === activeTab)
+          .filter(
+            (item) => item.eventCategory === activeTab,
+          )
           .reverse();
 
   const handleTabClick = (tab) => {
@@ -45,17 +47,19 @@ const Eventlist = ({ eventList }) => {
           </button>
           <button
             className={
-              activeTab === '진행중' ? styles.active : ''
+              activeTab === 'ACTIVE_EVENT'
+                ? styles.active
+                : ''
             }
-            onClick={() => handleTabClick('진행중')}
+            onClick={() => handleTabClick('ACTIVE_EVENT')}
           >
             진행 중인 이벤트보기
           </button>
           <button
             className={
-              activeTab === '종료' ? styles.active : ''
+              activeTab === 'END_EVENT' ? styles.active : ''
             }
-            onClick={() => handleTabClick('종료')}
+            onClick={() => handleTabClick('END_EVENT')}
           >
             종료된 이벤트보기
           </button>
@@ -71,12 +75,14 @@ const Eventlist = ({ eventList }) => {
               <span>
                 <span
                   className={
-                    item.status === '진행중'
+                    item.eventCategory === 'ACTIVE_EVENT'
                       ? styles.active
                       : styles.done
                   }
                 >
-                  {item.status}
+                  {item.eventCategory === 'ACTIVE_EVENT'
+                    ? '진행중'
+                    : '종료'}
                 </span>
                 {item.title}
               </span>
