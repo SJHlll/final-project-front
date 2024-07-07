@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import MyPageInfo from './MyPageInfo';
 import MyPageCharge from './MyPageCharge';
-import MyPageRentCar from './MyPageRentCar';
-import MyPageReview from './MyPageReview';
 import './MyPageBtn.scss'; // SCSS 파일을 import합니다.
 
 // 이미지 파일을 import합니다.
