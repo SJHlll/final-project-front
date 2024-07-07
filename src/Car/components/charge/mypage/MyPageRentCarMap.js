@@ -28,7 +28,7 @@ const MyPageRentCarMap = () => {
       try {
         const token = localStorage.getItem('ACCESS_TOKEN');
         const response = await fetch(
-          'http://localhost:8181/admin/car',
+          'http://localhost:8181/mypage/car',
           {
             method: 'GET',
             headers: {
@@ -63,7 +63,7 @@ const MyPageRentCarMap = () => {
     try {
       const token = localStorage.getItem('ACCESS_TOKEN');
       const response = await fetch(
-        `http://localhost:8181/admin/car?reservationNo=${reservationNo}`,
+        `http://localhost:8181/mypage/car?reservationNo=${reservationNo}`,
         {
           method: 'DELETE',
           headers: {
