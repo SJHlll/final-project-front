@@ -132,23 +132,8 @@ const Carres = () => {
     }
   };
 
-  // 회원일 시 알림 창
+  // 예약 완료 알림창
   const reservationHandler = () => {
-    if (!pickup.date) {
-      alert('픽업 날짜를 선택하세요.');
-      return;
-    }
-
-    if (!returning.date) {
-      alert('반납 날짜를 선택하세요.');
-      return;
-    }
-
-    if (!selectedCar) {
-      alert('차량을 선택하세요.');
-      return;
-    }
-
     const reservationData = {
       carId: selectedCar.id,
       rentDate: `${pickup.date.toISOString().split('T')[0]}T${pickup.time.toTimeString().split(' ')[0]}`,
@@ -167,55 +152,21 @@ const Carres = () => {
     saveReservation(reservationData);
   };
 
-  // 비회원 예약 방지 핸들러
+  // 비회원 예약 방지 및 차량, 날짜 선택 핸들러
   const confirmReservationHandler = () => {
     if (!isLoggedIn) {
-      alert('로그인 후 예약이 가능합니다.');
+      alert('로그인 회원만 에약 학능 합니다.');
       navigate('/Login');
+    } else if (!selectedCar) {
+      alert('차를 선택해 주세요.');
+    } else if (!pickup.date) {
+      alert('대여 시작 날짜를 선택 해 주세요.');
+    } else if (!returning.date) {
+      alert('반납 날짜를 선턱해 주세요.');
     } else {
       toggle();
     }
   };
-
-  // const reservationHandler = () => {
-  //   if (!pickup.date) {
-  //     alert('픽업 날짜를 선택하세요.');
-  //     return;
-  //   }
-  //   if (!returning.date) {
-  //     alert('반납 날짜를 선택하세요.');
-  //     return;
-  //   }
-  //   if (!pickup.time) {
-  //     alert('픽업 시간을 선택하세요.');
-  //     return;
-  //   }
-  //   if (!returning.time) {
-  //     alert('반납 시간을 선택하세요.');
-  //     return;
-  //   }
-  //   if (!selectedCar) {
-  //     alert('차량을 선택하세요.');
-  //     return;
-  //   }
-
-  //   alert('예약이 완료되어 결제창으로 넘어갑니다.');
-  //   setModal(!modal);
-
-  //   const reservationData = {
-  //     carId: selectedCar.id,
-  //     rentDate: `${pickup.date.toISOString().split('T')[0]}T${pickup.time.toTimeString().split(' ')[0]}`,
-  //     turninDate: `${returning.date.toISOString().split('T')[0]}T${returning.time.toTimeString().split(' ')[0]}`,
-  //     rentTime: pickup.time.toTimeString().split(' ')[0],
-  //     turninTime: returning.time
-  //       .toTimeString()
-  //       .split(' ')[0],
-  //     totalPrice: totalPrice.replace(/,/g, ''),
-  //     extra: `${extra}`,
-  //   };
-
-  //   saveReservation(reservationData);
-  // };
 
   const button = (
     <button
