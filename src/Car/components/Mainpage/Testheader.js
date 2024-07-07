@@ -1,4 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, {
+  useContext,
+  useState,
+  useEffect,
+} from 'react';
 import styles from './Testheader.module.scss';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../../util/AuthContext';
@@ -6,59 +10,62 @@ import {
   API_BASE_URL,
   USER,
 } from '../../../config/host-config';
-import ChargeFooter from '../charge/footer/ChargeFooter';
-import style from '../../../scss/Button.module.scss';
 
 const Testheader = () => {
   const navigate = useNavigate();
   const [state, setState] = useState(1);
 
-  const onClick = (index, text) => {
-    navigate(text === '' ? '/' : text);
-    setState(index);
-  };
-
-  const onclick = () => {
-    navigate('/');
-  };
-  const click = () => {
-    navigate('/Login');
-  };
-
+  // Context에서 인증 정보 가져오기
   const { isLoggedIn, name, onLogout, role } =
     useContext(AuthContext);
 
+  // 컴포넌트가 마운트될 때 저장된 탭 상태를 로드
+  useEffect(() => {
+    const savedState = localStorage.getItem('activeTab');
+    if (savedState) {
+      setState(Number(savedState));
+    }
+  }, []);
+
+  // 탭 클릭 시 로컬 저장소에 상태 저장하고 페이지 이동
+  const handleTabClick = (index, path) => {
+    navigate(path === '' ? '/' : path);
+    setState(index);
+    localStorage.setItem('activeTab', index);
+  };
+
   // 로그아웃 핸들러
   const logoutHandler = async () => {
-    const res = await fetch(
-      `${API_BASE_URL}${USER}/logout`,
-      {
+    try {
+      await fetch(`${API_BASE_URL}${USER}/logout`, {
         method: 'GET',
         headers: {
           Authorization:
             'Bearer ' +
             localStorage.getItem('ACCESS_TOKEN'),
         },
-      },
-    );
+      });
+      // AuthContext의 onLogout 함수를 호출하여 로그인 상태를 업데이트
+      onLogout();
+      navigate('/'); // 로그아웃 후 홈으로 이동
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
 
-    // AuthContext의 onLogout 함수를 호출하여 로그인 상태를 업데이트 합니다.
-    onLogout();
-  };
-  const cllick = () => {
-    navigate('/');
-    setState(1);
-  };
   return (
     <div className={styles.Testheader}>
-      <div className={styles.logo} onClick={cllick} />
+      <div
+        className={styles.logo}
+        onClick={() => handleTabClick(1, '/')}
+      />
 
       <div className={styles.tabline}>
         <button
           className={
             state === 1 ? styles.tabliactive : styles.tabli
           }
-          onClick={() => onClick(1, '/')}
+          onClick={() => handleTabClick(1, '/')}
         >
           Home
         </button>
@@ -66,7 +73,7 @@ const Testheader = () => {
           className={
             state === 2 ? styles.tabliactive : styles.tabli
           }
-          onClick={() => onClick(2, '/car/res')}
+          onClick={() => handleTabClick(2, '/car/res')}
         >
           전기차 렌트
         </button>
@@ -74,7 +81,7 @@ const Testheader = () => {
           className={
             state === 3 ? styles.tabliactive : styles.tabli
           }
-          onClick={() => onClick(3, '/charge/list')}
+          onClick={() => handleTabClick(3, '/charge/list')}
         >
           충전소 보기
         </button>
@@ -82,7 +89,9 @@ const Testheader = () => {
           className={
             state === 4 ? styles.tabliactive : styles.tabli
           }
-          onClick={() => onClick(4, '/charge/reservation')}
+          onClick={() =>
+            handleTabClick(4, '/charge/reservation')
+          }
         >
           충전소 예약
         </button>
@@ -90,7 +99,7 @@ const Testheader = () => {
           className={
             state === 5 ? styles.tabliactive : styles.tabli
           }
-          onClick={() => onClick(5, '/noti')}
+          onClick={() => handleTabClick(5, '/noti')}
         >
           이용방법
         </button>
@@ -98,7 +107,7 @@ const Testheader = () => {
           className={
             state === 6 ? styles.tabliactive : styles.tabli
           }
-          onClick={() => onClick(6, '/events')}
+          onClick={() => handleTabClick(6, '/events')}
         >
           이벤트
         </button>
@@ -106,7 +115,7 @@ const Testheader = () => {
           className={
             state === 7 ? styles.tabliactive : styles.tabli
           }
-          onClick={() => onClick(7, '/review')}
+          onClick={() => handleTabClick(7, '/review')}
         >
           이용후기
         </button>
@@ -114,14 +123,14 @@ const Testheader = () => {
           className={
             state === 8 ? styles.tabliactive : styles.tabli
           }
-          onClick={() => onClick(8, '/mypage')}
+          onClick={() => handleTabClick(8, '/mypage')}
         >
           마이페이지 {name}
         </button>
         {!isLoggedIn ? (
           <button
             className={styles.loginbtn}
-            onClick={click}
+            onClick={() => navigate('/Login')}
           >
             로그인
           </button>
@@ -140,13 +149,12 @@ const Testheader = () => {
                 ? styles.tabliactive
                 : styles.tabli
             }
-            onClick={() => onClick(9, '/admin')}
+            onClick={() => handleTabClick(9, '/admin')}
           >
             예약 및 리뷰 목록 & 관리
           </button>
         )}
       </div>
-      <ChargeFooter />
     </div>
   );
 };
