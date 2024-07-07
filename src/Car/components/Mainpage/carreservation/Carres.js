@@ -306,13 +306,9 @@ const Carres = () => {
             </div>
           </div>
           <div className={styles.caltotalbox1}>
-            1일 렌트금액
+            총 렌트 금액
             <div className={styles.caltotalbox2}>
-              {(selectedCar
-                ? selectedCar.carPrice
-                : 0
-              ).toLocaleString('ko-KR')}{' '}
-              원
+              {totalPrice}원
             </div>
           </div>
           <div className={styles.reservationBtn}>
