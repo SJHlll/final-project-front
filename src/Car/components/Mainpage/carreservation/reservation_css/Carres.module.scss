@@ -8,8 +8,10 @@
     // display: flex;
     // justify-content: flex-end;
     width: 100%;
- height: auto;
- margin-top: 1%;
+//  height: auto;
+//  margin-top: 1%;
+position: relative;
+top: 80%;
 
     .resBtn { // 예약하기 버튼
        /* position: relative; */

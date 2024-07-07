@@ -1,12 +1,20 @@
 .eventbody {
   padding: 1%;
+  overflow: auto;
+  height: 100%;
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
 }
 
 // 이벤트 리스트
 .eventlistContainer {
   width: 100%;
   padding: 20px;
-
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
   .tabs {
     display: flex;
     justify-content: space-around;
@@ -151,6 +159,9 @@
   margin: 30px 0;
   height: 608px;
   position: relative;
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
 
   .eventDetailImg {
     width: 1000px;
@@ -170,7 +181,9 @@
 .eventButton {
   margin-left: 110px;
   margin-right: 10px;
-  margin-top: 520px;
-  width: 120px;
-  height: 60px;
+  width: 80px;
+  height: 40px;
+  position: fixed;
+  bottom: 3%;
+  right: 2%;
 }

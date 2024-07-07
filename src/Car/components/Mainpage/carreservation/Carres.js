@@ -219,7 +219,7 @@ const Carres = () => {
 
   const button = (
     <button
-      className={`${style.resBtn} ${style.publicBtn}`}
+      className={`${styles.resBtn} ${style.publicBtn}`}
       onClick={confirmReservationHandler}
       type='button'
     >
@@ -364,34 +364,12 @@ const Carres = () => {
               원
             </div>
           </div>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              width: '100%',
-              height: '100%',
-            }}
-          >
-            <div className={styles.caltotalbox3}>
-              총 렌트금액
-              <div className={styles.caltotalbox4}>
-                {totalPrice} 원
-              </div>
-            </div>
-            <div className={styles.reservationBtn}>
-              {modal ? modalOpen : button}
-            </div>
-            <div className={styles.caltotalbox2}>
-              {daysBetween} 일
-            </div>
-            <div className={styles.caltotalbox3}>금액</div>
-            <div className={styles.caltotalbox4}>
-              {totalPrice} 원
-            </div>
+          <div className={styles.reservationBtn}>
+            {modal ? modalOpen : button}
           </div>
         </div>
       </div>
-      {selectedCar && <CarInfo rentCar={[selectedCar]} />}
+      {/* {selectedCar && <CarInfo rentCar={[selectedCar]} />} */}
       {/* 선택된 차가 있을 때만 CarInfo 컴포넌트 렌더링 */}
 
       <StationProvider />

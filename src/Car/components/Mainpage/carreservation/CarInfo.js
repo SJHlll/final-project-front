@@ -65,10 +65,7 @@ const CarInfo = () => {
               명
             </div>
             <div className={styles.selectcarbox}>
-              <div className={styles.selinformation}>
-                1일 렌트 가격
-              </div>
-              :
+              1일 렌트 가격 :
               <div className={styles.selinformation2}>
                 {selectedCar.carPrice.toLocaleString(
                   'ko-KR',
