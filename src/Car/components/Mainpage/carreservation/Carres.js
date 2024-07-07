@@ -150,6 +150,20 @@ const Carres = () => {
     setModal(!modal);
 
     saveReservation(reservationData);
+
+    // totalPrice를 정수로 변환
+    const intPrice = parseInt(totalPrice.replace(/,/g, ''));
+
+    const width = 700;
+    const height = 800;
+    const left = window.screen.width / 2 - width / 2;
+    const top = window.screen.height / 2 - height / 2;
+
+    window.open(
+      `/pay?totalPrice=${intPrice}`,
+      '_blank',
+      `width=${width},height=${height},top=${top},left=${left}`,
+    );
   };
 
   // 비회원 예약 방지 및 차량, 날짜 선택 핸들러
