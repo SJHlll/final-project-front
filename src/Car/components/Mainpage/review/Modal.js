@@ -28,10 +28,26 @@ const Modal = ({ review, onClose, selectedType }) => {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
-      // hour: '2-digit',
-      // minute: 'numeric',
-      // hour12: true,
     });
+  };
+
+  // 기본 이미지 URL
+  const defaultImage =
+    selectedType === 'rental'
+      ? 'https://plugngo.s3.ap-northeast-2.amazonaws.com/2023041259109115.jpg'
+      : 'https://plugngo.s3.ap-northeast-2.amazonaws.com/207af597d815193c998b06d41b704937.jpg';
+
+  // 리뷰 작성자 이름 가리기
+  const anonymizeName = (name) => {
+    if (!name) return ''; // 이름이 없을 경우 빈 문자열을 반환
+
+    const firstChar = name.charAt(0); // 첫 번째 글자 추출
+    const remainingChars = name.slice(1); // 첫 글자를 제외한 나머지 부분 추출
+
+    // 나머지 부분을 '*'로 치환
+    const anonymized =
+      firstChar + remainingChars.replace(/./g, '*');
+    return anonymized;
   };
 
   // 모달 컴포넌트의 렌더링 부분
@@ -40,33 +56,31 @@ const Modal = ({ review, onClose, selectedType }) => {
       className={styles.modal}
       onClick={handleOutsideClick}
     >
-      {/* 모달 외부 클릭 이벤트 처리 */}
       <div className={styles.modalContent}>
         <span className={styles.close} onClick={onClose}>
-          {/* 모달 닫기 버튼 */}
-          &times; {/* '×' 문자 */}
+          &times;
         </span>
         <div className={styles.modalImageContainer}>
-          <img src={review.photo} alt='이미지' />{' '}
-          {/* 리뷰에 대한 이미지 */}
-          <span className={styles.reviewDate}>
-            {/* {review.updateDate} */}
-            {formatTime(review.updateDate)}
-            {/* {'2024.07.04'} */}
-          </span>
-          {/* 리뷰 작성 날짜 */}
+          <img
+            src={review.photo || defaultImage}
+            alt='이미지'
+          />{' '}
         </div>
-        <h3>{review.name}</h3> {/* 리뷰 이름 */}
+        <div style={{ width: '100%', textAlign: 'end' }}>
+          <span className={styles.reviewDate}>
+            {formatTime(review.updateDate)}
+          </span>
+        </div>
+        <h3>{anonymizeName(review.name)}</h3>
         <div className={styles.rating}>
-          {fullStars} {/* 꽉 찬 별 배열 */}
-          {emptyStars} {/* 빈 별 배열 */}
+          {fullStars}
+          {emptyStars}
         </div>
         <h2>
           {`${selectedType === 'rental' ? '차량 : ' : '충전소 : '}`}
           {`${selectedType === 'rental' ? `${review.carName}` : `${review.stationName}`}`}
         </h2>{' '}
-        {/* 리뷰의 이름 */}
-        <p>{review.content}</p> {/* 리뷰 내용 */}
+        <p>{review.content}</p>
       </div>
     </div>
   );
