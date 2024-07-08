@@ -69,7 +69,7 @@ const PlugAndGoStation = ({
   // 예약하기 모달창 활성화
   const modalOpen = () => (
     <ModalBackground onClick={toggle}>
-      <ModalContent>
+      <ModalContent onClick={(e) => e.stopPropagation()}>
         {closeBtn}
         <ReservationModal
           chargeId={StationId}
