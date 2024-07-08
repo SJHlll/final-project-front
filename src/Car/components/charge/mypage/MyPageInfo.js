@@ -22,8 +22,13 @@ const MyPageInfo = () => {
   const [confirmDelete, setConfirmDelete] = useState(false);
   const navigate = useNavigate();
 
-  const { userName, email, phoneNumber, onLogout } =
-    useContext(AuthContext);
+  const {
+    userName,
+    email,
+    phoneNumber,
+    birthDay,
+    onLogout,
+  } = useContext(AuthContext);
 
   const toggleUpdateInfo = () => setUpdateInfo(!updateInfo);
   const toggleConfirmDelete = () =>
@@ -114,6 +119,10 @@ const MyPageInfo = () => {
         <div className={styles.flex}>
           <div className={styles.value}>핸드폰번호</div>
           <div>{phoneNumber}</div>
+        </div>
+        <div className={styles.flex}>
+          <div className={styles.value}>생년월일</div>
+          <div>{birthDay || ''}</div>
         </div>
         <div style={{ width: '100%', textAlign: 'center' }}>
           <button

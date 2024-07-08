@@ -7,8 +7,8 @@ import './MyPageBtn.scss';
 
 // 이미지 파일 import
 import myPageInfoImg from '../assets/img/MyInfo.jpg';
-import myPageChargeImg from '../assets/img/StaReser.jpg';
-import myPageRentCarImg from '../assets/img/carReser.jpg';
+import myPageChargeImg from '../assets/img/StaReser.png';
+import myPageRentCarImg from '../assets/img/carReser.png';
 import myPageReviewImg from '../assets/img/Myreview.jpg';
 
 // 모달의 접근성을 위한 root 엘리먼트 지정

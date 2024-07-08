@@ -49,7 +49,7 @@ const MyPageReviewMap = () => {
     };
 
     fetchReviews();
-  }, [setReview]);
+  }, [email, setReview]);
 
   const handleDeleteReview = async (reviewNo) => {
     try {
