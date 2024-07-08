@@ -13,6 +13,8 @@ import { addMonths, setHours, setMinutes } from 'date-fns';
 import { Height } from '@mui/icons-material';
 import { CarContext } from '../../../../contexts/CarContext';
 import AuthContext from '../../../../util/AuthContext';
+import axios from 'axios';
+import { Button } from 'reactstrap';
 
 registerLocale('ko', ko); // 한국어 등록
 
@@ -30,6 +32,7 @@ const CarCalendar = ({
   const { selectedCar } = useContext(CarContext);
   const { isLoggedIn, token } = useContext(AuthContext); // AuthContext에서 로그인 상태와 토큰 가져오기
   const [reservedDates, setReservedDates] = useState([]);
+  const [rentCarList, setRentCarList] = useState([]);
 
   useEffect(() => {
     const fetchReservedDates = async () => {
@@ -61,6 +64,24 @@ const CarCalendar = ({
     };
     fetchReservedDates();
   }, [selectedCar, isLoggedIn, token]);
+
+  const fetchRentCarList = async () => {
+    const accToken = localStorage.getItem('ACCESS_TOKEN');
+    try {
+      const reponse = await axios.get(
+        'http://localhost:8181/rentcar/reslist',
+        {
+          headers: {
+            Authorization: `Bearer ${accToken}`,
+          },
+        },
+      );
+      setRentCarList(reponse.data);
+      console.log('response.data: ', reponse.data);
+    } catch (err) {
+      console.log('Error: ', err);
+    }
+  };
 
   // 날짜 변경 핸들러
   const handleDateChange = (dates) => {
@@ -231,6 +252,7 @@ const CarCalendar = ({
           }}
         >
           시간선택
+          <Button onClick={fetchRentCarList} />
         </header>
         <div className={styles.timeBlock}>
           <div
