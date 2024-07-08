@@ -1,7 +1,8 @@
 .eventbody {
   padding: 1%;
   overflow: auto;
-  height: 90%;
+  height: 100%;
+  padding-bottom: 10%;
 
   &::-webkit-scrollbar {
     width: 0px;
