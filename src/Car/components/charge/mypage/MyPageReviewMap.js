@@ -160,10 +160,13 @@ const MyPageReviewMap = () => {
             </div>
             <div className={styles.resSelectedTime}>
               <div>
-                {formatTime(e.updateDate)}
-                {e.regDate !== e.updateDate
-                  ? ' (수정됨)'
-                  : ''}
+                작성일 : {formatTime(e.updateDate)}
+                <div>
+                  {formatTime(e.regDate) !==
+                  formatTime(e.updateDate)
+                    ? `수정일 : ${formatTime(e.updateDate)} (수정됨)`
+                    : ''}
+                </div>
               </div>
             </div>
           </div>

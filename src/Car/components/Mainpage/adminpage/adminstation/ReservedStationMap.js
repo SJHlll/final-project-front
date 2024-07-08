@@ -185,7 +185,7 @@ const ReservedStationMap = () => {
   // 본체
   return (
     <>
-      {role === 'ADMIN' && reserveStation.length > 0 ? (
+      {role === 'ADMIN' && reserveStation.length === 0 ? (
         <>
           <AdminContents stations={filteredStations} />
           <input

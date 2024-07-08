@@ -180,9 +180,9 @@ const ReviewMap = () => {
             <div className={styles.resSelectedTime}>
               <div>작성일 : {formatTime(e.regDate)}</div>
               <div>
-                수정일 : {formatTime(e.updateDate)}
-                {e.regDate !== e.updateDate
-                  ? ' (수정됨)'
+                {formatTime(e.regDate) !==
+                formatTime(e.updateDate)
+                  ? `수정일 : ${formatTime(e.updateDate)} (수정됨)`
                   : ''}
               </div>
             </div>
