@@ -65,7 +65,7 @@ const Carres = () => {
     : 0;
 
   const [pickup, setPickup] = useState({
-    date: new Date(),
+    date: null,
     time: setHours(setMinutes(new Date(), 0), 9),
   });
   const [returning, setReturning] = useState({
@@ -136,15 +136,26 @@ const Carres = () => {
   const reservationHandler = () => {
     const reservationData = {
       carId: selectedCar.id,
-      rentDate: `${pickup.date.toISOString().split('T')[0]}T${pickup.time.toTimeString().split(' ')[0]}`,
-      turninDate: `${returning.date.toISOString().split('T')[0]}T${returning.time.toTimeString().split(' ')[0]}`,
-      rentTime: pickup.time.toTimeString().split(' ')[0],
+      rentDate: pickup.date
+        ? pickup.date.toISOString().split('T')[0]
+        : null,
+      turninDate: returning.date
+        ? returning.date.toISOString().split('T')[0]
+        : null,
+      rentTime: pickup.time
+        ? pickup.time.toTimeString().split(' ')[0]
+        : null,
       turninTime: returning.time
-        .toTimeString()
-        .split(' ')[0],
+        ? returning.time.toTimeString().split(' ')[0]
+        : null,
       totalPrice: totalPrice.replace(/,/g, ''),
       extra,
     };
+
+    if (!pickup.date || !returning.date) {
+      alert('픽업 날짜와 반납 날짜를 선택하세요.');
+      return;
+    }
 
     alert('예약이 완료되어 결제창으로 넘어갑니다.');
     setModal(!modal);
@@ -176,7 +187,7 @@ const Carres = () => {
     } else if (!pickup.date) {
       alert('대여 시작 날짜를 선택 해 주세요.');
     } else if (!returning.date) {
-      alert('반납 날짜를 선턱해 주세요.');
+      alert('반납 날짜를 선택해 주세요.');
     } else {
       toggle();
     }
