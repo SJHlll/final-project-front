@@ -7,10 +7,10 @@
   z-index: 1;
   top: 0;
   // 드래그 못하게
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  // -webkit-user-select: none;
+  // -moz-user-select: none;
+  // -ms-user-select: none;
+  // user-select: none;
 }
 
 .searchListContainer.visible {

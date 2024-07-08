@@ -7,7 +7,10 @@ import { TestRcContext } from '../../Mainpage/adminpage/admincar/TestRcContext';
 import styles from './MyPageReviewList.module.scss';
 import AuthContext from '../../../../util/AuthContext';
 import MyPageModal from './MyPageModal';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Margin } from '@mui/icons-material';
 
 const MyPageRentCarMap = () => {
   const navigate = useNavigate();
@@ -19,6 +22,7 @@ const MyPageRentCarMap = () => {
 
   const [newRentDate, setNewRentDate] = useState('');
   const [newTurninDate, setNewTurninDate] = useState('');
+  const [extra, setExtra] = useState('');
   const [isEditDateMode, setIsEditDateMode] =
     useState(false);
 
@@ -28,7 +32,7 @@ const MyPageRentCarMap = () => {
       try {
         const token = localStorage.getItem('ACCESS_TOKEN');
         const response = await fetch(
-          'http://localhost:8181/mypage/car',
+          'http://localhost:8181/admin/car',
           {
             method: 'GET',
             headers: {
@@ -56,14 +60,14 @@ const MyPageRentCarMap = () => {
     };
 
     fetchStations();
-  }, [setReserveCar]);
+  }, [setReserveCar, phoneNumber]);
 
   // 예약한 충전소 DB에 지우기 (예약번호를 기준으로)
   const handleCancelReservation = async (reservationNo) => {
     try {
       const token = localStorage.getItem('ACCESS_TOKEN');
       const response = await fetch(
-        `http://localhost:8181/mypage/car?reservationNo=${reservationNo}`,
+        `http://localhost:8181/admin/car?reservationNo=${reservationNo}`,
         {
           method: 'DELETE',
           headers: {
@@ -76,9 +80,6 @@ const MyPageRentCarMap = () => {
         throw new Error('Failed to cancel reservation');
       }
 
-      alert(
-        '예약이 취소되었습니다. 환불은 24시간 이내로 이루어집니다.',
-      );
       // 예약 취소가 성공하면 UI에서 해당 예약을 제거
       setReserveCar((prevCar) => {
         const updatedCar = prevCar.filter(
@@ -135,6 +136,37 @@ const MyPageRentCarMap = () => {
     setIsEditDateMode(!isEditDateMode);
   };
 
+  const rentcarUpdateHandler = async (e, carNo) => {
+    e.preventDefault();
+
+    const token = localStorage.getItem('ACCESS_TOKEN');
+
+    try {
+      const res = await axios.patch(
+        `http://localhost:8181/rentcar/${carNo}`,
+        {
+          rentTime: newRentDate,
+          turninTime: newTurninDate,
+          extra,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      if (res.status === 200) {
+        alert('예약이 변경되었습니다.');
+      } else {
+        console.log('Error: ', res.data);
+        alert('예약 변경에 실패하였습니다.');
+      }
+    } catch (err) {
+      console.error('Error: ', err.response);
+      alert('예약 변경에 실패하였습니다.');
+    }
+  };
+
   const AdminContents = ({ car }) => {
     return (
       <>
@@ -177,34 +209,46 @@ const MyPageRentCarMap = () => {
             {selectedCar && (
               <div>
                 <h2>렌트카 상세</h2>
-                <p>차종: {selectedCar.carName}</p>
-                <p>
+                <p
+                  style={{
+                    margin: '3px 0',
+                  }}
+                >
+                  차종: {selectedCar.carName}
+                </p>
+                <p
+                  style={{
+                    margin: '3px 0',
+                  }}
+                >
                   가격:{' '}
                   {formatPrice(selectedCar.totalPrice)}원
                 </p>
                 {isEditDateMode ? (
-                  <p>
-                    <div>
-                      렌트 시작일 :
-                      <input
-                        type='datetime-local'
-                        value={newRentDate}
-                        onChange={(e) =>
-                          setNewRentDate(e.target.value)
-                        }
-                      />
-                    </div>
-                    <div>
-                      렌트 반납일 :
-                      <input
-                        type='datetime-local'
-                        value={newTurninDate}
-                        onChange={(e) =>
-                          setNewTurninDate(e.target.value)
-                        }
-                      />
-                    </div>
-                  </p>
+                  <form onSubmit={rentcarUpdateHandler}>
+                    <p>
+                      <div>
+                        렌트 시작일 :
+                        <input
+                          type='datetime-local'
+                          value={newRentDate}
+                          onChange={(e) =>
+                            setNewRentDate(e.target.value)
+                          }
+                        />
+                      </div>
+                      <div>
+                        렌트 반납일 :
+                        <input
+                          type='datetime-local'
+                          value={newTurninDate}
+                          onChange={(e) =>
+                            setNewTurninDate(e.target.value)
+                          }
+                        />
+                      </div>
+                    </p>
+                  </form>
                 ) : (
                   <p>
                     <div>
@@ -217,50 +261,64 @@ const MyPageRentCarMap = () => {
                         selectedCar.turninDate,
                       )}
                     </div>
+                    <div
+                      style={{
+                        margin: '3px 0',
+                      }}
+                    >
+                      메모:
+                    </div>
+                    <div
+                      style={{
+                        border: '1px solid lightgray',
+                        borderRadius: '7px',
+                      }}
+                    >
+                      {selectedCar.extra || '없음'}
+                    </div>
                   </p>
                 )}
-                <button
-                  className={styles.buttonbutton}
-                  onClick={() => {
-                    if (
-                      window.confirm(
-                        '정말 예약을 취소하시겠습니까?',
-                      )
-                    ) {
-                      handleCancelReservation(
-                        selectedCar.reservationNo,
-                      );
-                    }
-                  }}
-                >
-                  예약 취소
-                </button>
-                {/* <button
-                  className={styles.buttonbutton}
-                  onClick={toggleEditDateMode}
-                >
-                  {isEditDateMode
-                    ? '수정 취소'
-                    : '날짜 수정하기'}
-                </button>
+                {!isEditDateMode && (
+                  <>
+                    <button
+                      className={styles.buttonbutton}
+                      onClick={() => {
+                        if (
+                          window.confirm(
+                            '정말 예약을 취소하시겠습니까?',
+                          )
+                        ) {
+                          handleCancelReservation(
+                            selectedCar.reservationNo,
+                          );
+                        }
+                      }}
+                    >
+                      예약 취소
+                    </button>
+                    <button
+                      className={styles.buttonbutton}
+                      onClick={toggleEditDateMode}
+                    >
+                      날짜 수정하기
+                    </button>
+                  </>
+                )}
                 {isEditDateMode && (
-                  <button
-                    className={styles.buttonbutton}
-                    // onClick={() => {
-                    //   if (
-                    //     window.confirm(
-                    //       '정말 예약을 수정하시겠습니까?',
-                    //     )
-                    //   ) {
-                    //     handleUpdateReservation(
-                    //       selectedCar.reservationNo,
-                    //     );
-                    //   }
-                    // }}
-                  >
-                    수정 완료
-                  </button>
-                )} */}
+                  <>
+                    <button
+                      className={styles.buttonbutton}
+                      onClick={() => {
+                        // handleUpdateReservation 함수 호출 추가 가능
+                        // 예: handleUpdateReservation(selectedCar.reservationNo);
+                        // 상태를 reset하거나 업데이트할 필요가 있다면 여기에 추가
+                        alert('예약이 수정되었습니다.');
+                      }}
+                    >
+                      수정 완료
+                    </button>
+                  </>
+                )}
               </div>
             )}
           </MyPageModal>
@@ -268,7 +326,7 @@ const MyPageRentCarMap = () => {
             예약한 렌트카 :{' '}
             <span className={styles.filteredNum}>
               {reserveCar.length}
-            </span>
+            </span>{' '}
             개
           </p>
         </>
