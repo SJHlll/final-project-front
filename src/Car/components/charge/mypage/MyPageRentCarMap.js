@@ -9,7 +9,6 @@ import AuthContext from '../../../../util/AuthContext';
 import MyPageModal from './MyPageModal';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { Margin } from '@mui/icons-material';
 
 const MyPageRentCarMap = () => {
