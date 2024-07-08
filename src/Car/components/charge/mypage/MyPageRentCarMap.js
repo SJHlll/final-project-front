@@ -9,6 +9,8 @@ import AuthContext from '../../../../util/AuthContext';
 import MyPageModal from './MyPageModal';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { Margin } from '@mui/icons-material';
 
 const MyPageRentCarMap = () => {
   const navigate = useNavigate();
@@ -207,8 +209,18 @@ const MyPageRentCarMap = () => {
             {selectedCar && (
               <div>
                 <h2>렌트카 상세</h2>
-                <p>차종: {selectedCar.carName}</p>
-                <p>
+                <p
+                  style={{
+                    margin: '3px 0',
+                  }}
+                >
+                  차종: {selectedCar.carName}
+                </p>
+                <p
+                  style={{
+                    margin: '3px 0',
+                  }}
+                >
                   가격:{' '}
                   {formatPrice(selectedCar.totalPrice)}원
                 </p>
@@ -248,6 +260,21 @@ const MyPageRentCarMap = () => {
                       {formatRentTime(
                         selectedCar.turninDate,
                       )}
+                    </div>
+                    <div
+                      style={{
+                        margin: '3px 0',
+                      }}
+                    >
+                      메모:
+                    </div>
+                    <div
+                      style={{
+                        border: '1px solid lightgray',
+                        borderRadius: '7px',
+                      }}
+                    >
+                      {selectedCar.extra || '없음'}
                     </div>
                   </p>
                 )}
