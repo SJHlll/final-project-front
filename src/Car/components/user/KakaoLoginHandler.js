@@ -51,7 +51,10 @@ const KakaoLoginHandler = () => {
           birthDay,
         );
         console.log('birth: ', birthDay);
-        redirection('/'); // 카카오 로그인 성공 시 메인으로 이동
+        redirection('/mypage'); // 이 페이지로 이동
+        alert(
+          '카카오 로그인에 성공하셨습니다. \nMyInfo에서 생년월일을 입력해주세요!',
+        ); // 경고창 띄우기
       } catch (error) {
         console.error('Error during Kakao login:', error);
       }

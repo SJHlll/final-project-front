@@ -38,7 +38,10 @@ const GoogleHandler = () => {
         )
         .then((res) => {
           setProfile(res.data);
-          redirect('/');
+          redirect('/mypage'); // 이 페이지로 이동
+          alert(
+            '구글 로그인에 성공하셨습니다. \nMyInfo에서 생년월일을 입력해주세요!',
+          ); // 경고창 띄우기
         })
         .catch((err) => console.log(err));
     }
