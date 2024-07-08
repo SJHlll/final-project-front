@@ -29,14 +29,10 @@ const NaverLoginHandler = () => {
   console.log('state: ', state);
 
   useEffect(() => {
-    // 컴포넌트가 렌더링될때 인가 코드를 백엔드로 전송하는 fetch 요청
+    // 컴포넌트가 렌더링될 때 인가 코드를 백엔드로 전송하는 fetch 요청
     const naverLogin = async () => {
       const res = await fetch(
-        REQUEST_URL +
-          '/naverLogin?code=' +
-          code +
-          '&state=' +
-          state,
+        `${REQUEST_URL}/naverLogin?code=${code}&state=${state}`,
       );
       const {
         token,
@@ -57,7 +53,10 @@ const NaverLoginHandler = () => {
         birthDay,
       );
 
-      redirection('/'); // 네이버 로그인 성공 시 메인화면 이동
+      redirection('/mypage'); // 이 페이지로 이동
+      alert(
+        '네이버 로그인에 성공하셨습니다. \nMyInfo에서 생년월일을 입력해주세요!',
+      ); // 경고창 띄우기
     };
 
     naverLogin();
