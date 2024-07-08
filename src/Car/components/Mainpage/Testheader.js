@@ -48,6 +48,7 @@ const Testheader = () => {
       // AuthContext의 onLogout 함수를 호출하여 로그인 상태를 업데이트
       onLogout();
       navigate('/'); // 로그아웃 후 홈으로 이동
+      setState(1);
     } catch (error) {
       console.error('Logout failed:', error);
     }
@@ -134,7 +135,11 @@ const Testheader = () => {
                 ? styles.loginbtn
                 : styles.loginbtn
             }
-            onClick={() => handleTabClick(9, '/Login')}
+            onClick={() => {
+              handleTabClick(9, '/Login');
+              setState(9); // 로그인 시 state를 로그인(9)으로 설정
+              localStorage.setItem('activeTab', 9); // 로컬 저장소에도 로그인(9) 저장
+            }}
           >
             로그인
           </button>
@@ -153,7 +158,11 @@ const Testheader = () => {
                 ? styles.tabliactive
                 : styles.tabli
             }
-            onClick={() => handleTabClick(9, '/admin')}
+            onClick={() => {
+              handleTabClick(9, '/admin');
+              setState(9); // 관리자 페이지로 이동 시 state를 설정
+              localStorage.setItem('activeTab', 9); // 로컬 저장소에도 설정
+            }}
           >
             예약 및 리뷰 목록 & 관리
           </button>

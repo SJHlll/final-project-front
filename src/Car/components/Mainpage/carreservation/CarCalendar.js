@@ -2,6 +2,7 @@ import React, {
   useContext,
   useEffect,
   useState,
+  useCallback,
 } from 'react';
 import DatePicker, {
   registerLocale,
@@ -9,11 +10,18 @@ import DatePicker, {
 import 'react-datepicker/dist/react-datepicker.css';
 import styles from './reservation_css/CarCalendar.module.scss';
 import { ko } from 'date-fns/locale';
-import { addMonths, setHours, setMinutes } from 'date-fns';
-import AuthContext from '../../../../util/AuthContext';
-import { CarContext } from '../../../../contexts/CarContext';
-import axios from 'axios';
+import {
+  addMonths,
+  setHours,
+  setMinutes,
+  parse,
+  isValid,
+  addDays,
+} from 'date-fns';
 import { Button } from 'reactstrap';
+import axios from 'axios';
+import { CarContext } from '../../../../contexts/CarContext';
+import AuthContext from '../../../../util/AuthContext';
 
 registerLocale('ko', ko);
 
@@ -26,36 +34,17 @@ const CarCalendar = ({
   endTime,
   onChangeStartTime,
   onChangeEndTime,
-  setDaysBetween, // 일 수를 설정하는 콜백 함수 추가
+  setDaysBetween,
 }) => {
+  const { selectedCar } = useContext(CarContext);
+  const { isLoggedIn, token } = useContext(AuthContext);
   const [reservedDates, setReservedDates] = useState([]);
   const [rentCarList, setRentCarList] = useState([]);
 
-  const { selectedCar } =useContext(CarContext);
-  const { isLoggedIn, token } = useContext(AuthContext);
-  useEffect(() => {
-    console.log('selected Car:', selectedCar);
-    console.log('reserved dates:', reservedDates);
-  }, [selectedCar, reservedDates]);
-
-        if (!res.ok) {
-          throw new Error('패치에 실패했음.');
-        }
-        const data = await res.json();
-        setReservedDates(
-          data.map((date) => new Date(date)),
-        );
-      } catch (error) {
-        console.error('에러 패치 예약 일~~~', error);
-      }
-    };
-    fetchReservedDates();
-  }, [selectedCar, isLoggedIn, token]);
-
-  const fetchRentCarList = async () => {
+  const fetchRentCarList = useCallback(async () => {
     const accToken = localStorage.getItem('ACCESS_TOKEN');
     try {
-      const reponse = await axios.get(
+      const response = await axios.get(
         'http://localhost:8181/rentcar/reslist',
         {
           headers: {
@@ -63,21 +52,119 @@ const CarCalendar = ({
           },
         },
       );
-      setRentCarList(reponse.data);
-      console.log('response.data: ', reponse.data);
+      console.log(
+        'API response:',
+        JSON.stringify(response.data, null, 2),
+      );
+      setRentCarList(response.data.rentList);
     } catch (err) {
-      console.log('Error: ', err);
+      console.error('Error fetching rent car list:', err);
     }
-  };
+  }, []);
 
-  // 날짜 변경 핸들러
+  useEffect(() => {
+    console.log(
+      'Component mounted, fetching rent car list',
+    );
+    fetchRentCarList();
+  }, [fetchRentCarList]);
+
+  useEffect(() => {
+    const filterDates = () => {
+      console.log(
+        'rentCarList:',
+        JSON.stringify(rentCarList, null, 2),
+      );
+      console.log(
+        'selectedCar:',
+        JSON.stringify(selectedCar, null, 2),
+      );
+
+      if (selectedCar && rentCarList.length > 0) {
+        const filteredDates = rentCarList
+          .filter((item) => {
+            console.log(
+              'Comparing:',
+              item.carName,
+              selectedCar.carName,
+            );
+            return (
+              item.carName &&
+              selectedCar.carName &&
+              item.carName.toLowerCase() ===
+                selectedCar.carName.toLowerCase()
+            );
+          })
+          .flatMap((item) => {
+            console.log(
+              'Processing item:',
+              JSON.stringify(item, null, 2),
+            );
+            if (!item.rentDate || !item.turninDate) {
+              console.error(
+                'rentDate or turninDate is missing for item:',
+                item,
+              );
+              return [];
+            }
+            try {
+              const rentDate = parse(
+                item.rentDate,
+                'yyyy-MM-dd',
+                new Date(),
+              );
+              const turninDate = parse(
+                item.turninDate,
+                'yyyy-MM-dd',
+                new Date(),
+              );
+
+              if (
+                !isValid(rentDate) ||
+                !isValid(turninDate)
+              ) {
+                throw new Error('Invalid date');
+              }
+
+              // 대여 시작일부터 반납일 전날까지의 모든 날짜 포함
+              const dates = [];
+              let currentDate = rentDate; // 대여 시작일부터 시작
+              while (currentDate < turninDate) {
+                // 반납일 전날까지
+                dates.push(new Date(currentDate));
+                currentDate = addDays(currentDate, 1);
+              }
+
+              console.log('Generated dates:', dates);
+              return dates;
+            } catch (error) {
+              console.error(
+                'Error processing dates:',
+                error,
+              );
+              return [];
+            }
+          });
+
+        console.log('filteredDates:', filteredDates);
+        setReservedDates(filteredDates);
+      } else {
+        console.log('No car selected or empty rentCarList');
+        setReservedDates([]);
+      }
+    };
+
+    filterDates();
+  }, [rentCarList, selectedCar]);
+
+  useEffect(() => {
+    console.log('Reserved dates updated:', reservedDates);
+  }, [reservedDates]);
   const handleDateChange = (dates) => {
     const [start, end] = dates;
-    console.log('Selected Dates:', { start, end }); // 디버깅용 콘솔 출력
     onChangeStartDate(start);
     onChangeEndDate(end);
 
-    // 픽업 날짜 변경 시 픽업 시간을 해당 날짜로 설정
     if (start) {
       onChangeStartTime(
         setHours(
@@ -90,7 +177,6 @@ const CarCalendar = ({
       );
     }
 
-    // 반납 날짜 변경 시 반납 시간을 해당 날짜로 설정
     if (end) {
       onChangeEndTime(
         setHours(
@@ -98,19 +184,16 @@ const CarCalendar = ({
           endTime.getHours(),
         ),
       );
-      // 시작 날짜와 종료 날짜 사이의 일 수를 계산
       const daysBetween = Math.ceil(
         (new Date(end) - new Date(start)) /
           (1000 * 60 * 60 * 24) +
           1,
       );
-      setDaysBetween(daysBetween); // 일 수를 설정
-      console.log('렌트기간: ', daysBetween, '일'); // 디버깅용 콘솔 출력
+      setDaysBetween(daysBetween);
     }
   };
 
   const handleStartTimeChange = (time) => {
-    console.log('Selected Start Time:', time); // 디버깅용 콘솔 출력
     if (startDate) {
       const newStartTime = new Date(startDate);
       newStartTime.setHours(time.getHours());
@@ -122,7 +205,6 @@ const CarCalendar = ({
   };
 
   const handleEndTimeChange = (time) => {
-    console.log('Selected End Time:', time); // 디버깅용 콘솔 출력
     if (endDate) {
       const newEndTime = new Date(endDate);
       newEndTime.setHours(time.getHours());
@@ -133,26 +215,8 @@ const CarCalendar = ({
     }
   };
 
-  useEffect(() => {
-    console.log(
-      '픽업 날짜: ',
-      startDate,
-      '픽업시간: ',
-      startTime,
-    ); // startDate 상태 변경 추적
-  }, [startDate, startTime]);
-
-  useEffect(() => {
-    console.log(
-      '반납날짜: ',
-      endDate,
-      '반납시간: ',
-      endTime,
-    ); // endDate 상태 변경 추적
-  }, [endDate, endTime]);
-
-  const minDate = new Date(); // 최소 날짜는 오늘 날짜로 설정합니다.
-  const maxDate = addMonths(new Date(), 12); // 최대 날짜를 12개월 후로 설정합니다.
+  const minDate = new Date();
+  const maxDate = addMonths(new Date(), 12);
 
   return (
     <div className={styles.carCalendarContent}>
@@ -202,16 +266,16 @@ const CarCalendar = ({
               </button>
             </div>
           )}
-          onChange={handleDateChange} // 날짜 변경 핸들러 연결
-          startDate={startDate} // 시작 날짜
-          endDate={endDate} // 종료 날짜
-          minDate={minDate} // 최소 날짜 설정
-          maxDate={maxDate} // 최대 날짜 설정
+          onChange={handleDateChange}
+          startDate={startDate}
+          endDate={endDate}
+          minDate={minDate}
+          maxDate={maxDate}
           selectsRange
           inline
           showDisabledMonthNavigation
-          monthsShown={2} // 화면에 보여주는 월 갯수
-          excludeDates={reservedDates} // 예약된 날짜들을 제외
+          monthsShown={2}
+          excludeDates={reservedDates}
         />
       </div>
 
@@ -237,10 +301,11 @@ const CarCalendar = ({
             padding: '1.5%',
             borderBottom: '1px solid black',
           }}
-          className={styles.timeHeader}
         >
           시간선택
-          <Button onClick={fetchRentCarList} />
+          <Button onClick={fetchRentCarList}>
+            새로고침
+          </Button>
         </header>
         <div className={styles.timeBlock}>
           <div
@@ -254,7 +319,7 @@ const CarCalendar = ({
           <DatePicker
             id={styles.pickupTime}
             selected={startTime}
-            onChange={handleStartTimeChange} // 시작 시간 변경 핸들러 연결
+            onChange={handleStartTimeChange}
             showTimeSelect
             showTimeSelectOnly
             timeIntervals={30}
@@ -275,7 +340,7 @@ const CarCalendar = ({
           <DatePicker
             id={styles.returnTime}
             selected={endTime}
-            onChange={handleEndTimeChange} // 종료 시간 변경 핸들러 연결
+            onChange={handleEndTimeChange}
             showTimeSelect
             showTimeSelectOnly
             timeIntervals={30}
