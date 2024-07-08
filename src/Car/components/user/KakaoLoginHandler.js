@@ -51,10 +51,18 @@ const KakaoLoginHandler = () => {
           birthDay,
         );
         console.log('birth: ', birthDay);
-        redirection('/mypage'); // 이 페이지로 이동
-        alert(
-          '카카오 로그인에 성공하셨습니다. \nMyInfo에서 생년월일을 입력해주세요!',
-        ); // 경고창 띄우기
+        // 조건에 따라 리다이렉트
+        if (!phoneNumber || !birthDay) {
+          // 생년월일이나 휴대폰 번호가 없는 경우
+          redirection('/mypage'); // 이 페이지로 이동
+          alert(
+            '카카오 로그인에 성공하셨습니다. \nMyInfo에서 생년월일과 휴대폰 번호를 입력해주세요!',
+          ); // 경고창 띄우기
+        } else {
+          // 둘 다 값이 있는 경우
+          redirection('/'); // 홈 페이지로 이동
+          alert('카카오 로그인에 성공하셨습니다!'); // 경고창 띄우기
+        }
       } catch (error) {
         console.error('Error during Kakao login:', error);
       }

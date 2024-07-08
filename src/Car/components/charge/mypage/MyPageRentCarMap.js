@@ -7,10 +7,10 @@ import { TestRcContext } from '../../Mainpage/adminpage/admincar/TestRcContext';
 import styles from './MyPageReviewList.module.scss';
 import AuthContext from '../../../../util/AuthContext';
 import MyPageModal from './MyPageModal';
-import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Margin } from '@mui/icons-material';
+import axios from 'axios';
+import RentCarReservationUpdate from './RentCarReservationUpdate';
+import { Modal } from 'reactstrap';
 
 const MyPageRentCarMap = () => {
   const navigate = useNavigate();
@@ -19,10 +19,9 @@ const MyPageRentCarMap = () => {
   const { phoneNumber } = useContext(AuthContext);
   const [selectedCar, setSelectedCar] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [updateModalOpen, setUpdateModalOpen] =
+    useState(false);
 
-  const [newRentDate, setNewRentDate] = useState('');
-  const [newTurninDate, setNewTurninDate] = useState('');
-  const [extra, setExtra] = useState('');
   const [isEditDateMode, setIsEditDateMode] =
     useState(false);
 
@@ -122,8 +121,6 @@ const MyPageRentCarMap = () => {
   const handlerentCarClick = (rentCar) => {
     setSelectedCar(rentCar);
     setIsModalOpen(true);
-    setNewRentDate(rentCar.rentDate);
-    setNewTurninDate(rentCar.turninDate);
   };
 
   const closeModal = () => {
@@ -134,37 +131,7 @@ const MyPageRentCarMap = () => {
 
   const toggleEditDateMode = () => {
     setIsEditDateMode(!isEditDateMode);
-  };
-
-  const rentcarUpdateHandler = async (e, carNo) => {
-    e.preventDefault();
-
-    const token = localStorage.getItem('ACCESS_TOKEN');
-
-    try {
-      const res = await axios.patch(
-        `http://localhost:8181/rentcar/${carNo}`,
-        {
-          rentTime: newRentDate,
-          turninTime: newTurninDate,
-          extra,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-      if (res.status === 200) {
-        alert('예약이 변경되었습니다.');
-      } else {
-        console.log('Error: ', res.data);
-        alert('예약 변경에 실패하였습니다.');
-      }
-    } catch (err) {
-      console.error('Error: ', err.response);
-      alert('예약 변경에 실패하였습니다.');
-    }
+    setUpdateModalOpen(!updateModalOpen);
   };
 
   const AdminContents = ({ car }) => {
@@ -173,7 +140,7 @@ const MyPageRentCarMap = () => {
         {car.map((e) => (
           <div
             className={styles.listBody}
-            key={e.reservationNo}
+            key={e.carNo}
             onClick={() => handlerentCarClick(e)}
           >
             <div className={styles.resSelectedAd2}>
@@ -207,119 +174,69 @@ const MyPageRentCarMap = () => {
             onClose={closeModal}
           >
             {selectedCar && (
-              <div>
+              <>
                 <h2>렌트카 상세</h2>
-                <p
-                  style={{
-                    margin: '3px 0',
-                  }}
-                >
+                <p style={{ margin: '3px 0' }}>
                   차종: {selectedCar.carName}
                 </p>
-                <p
-                  style={{
-                    margin: '3px 0',
-                  }}
-                >
+                <p style={{ margin: '3px 0' }}>
                   가격:{' '}
                   {formatPrice(selectedCar.totalPrice)}원
                 </p>
-                {isEditDateMode ? (
-                  <form onSubmit={rentcarUpdateHandler}>
-                    <p>
-                      <div>
-                        렌트 시작일 :
-                        <input
-                          type='datetime-local'
-                          value={newRentDate}
-                          onChange={(e) =>
-                            setNewRentDate(e.target.value)
-                          }
-                        />
-                      </div>
-                      <div>
-                        렌트 반납일 :
-                        <input
-                          type='datetime-local'
-                          value={newTurninDate}
-                          onChange={(e) =>
-                            setNewTurninDate(e.target.value)
-                          }
-                        />
-                      </div>
-                    </p>
-                  </form>
-                ) : (
-                  <p>
-                    <div>
-                      렌트 시작일 :{' '}
-                      {formatRentTime(selectedCar.rentDate)}
-                    </div>
-                    <div>
-                      렌트 반납일 :{' '}
-                      {formatRentTime(
-                        selectedCar.turninDate,
-                      )}
-                    </div>
-                    <div
-                      style={{
-                        margin: '3px 0',
-                      }}
-                    >
-                      메모:
-                    </div>
-                    <div
-                      style={{
-                        border: '1px solid lightgray',
-                        borderRadius: '7px',
-                      }}
-                    >
-                      {selectedCar.extra || '없음'}
-                    </div>
-                  </p>
-                )}
-                {!isEditDateMode && (
-                  <>
-                    <button
-                      className={styles.buttonbutton}
-                      onClick={() => {
-                        if (
-                          window.confirm(
-                            '정말 예약을 취소하시겠습니까?',
-                          )
-                        ) {
-                          handleCancelReservation(
-                            selectedCar.reservationNo,
-                          );
-                        }
-                      }}
-                    >
-                      예약 취소
-                    </button>
-                    <button
-                      className={styles.buttonbutton}
-                      onClick={toggleEditDateMode}
-                    >
-                      날짜 수정하기
-                    </button>
-                  </>
-                )}
-                {isEditDateMode && (
-                  <>
-                    <button
-                      className={styles.buttonbutton}
-                      onClick={() => {
-                        // handleUpdateReservation 함수 호출 추가 가능
-                        // 예: handleUpdateReservation(selectedCar.reservationNo);
-                        // 상태를 reset하거나 업데이트할 필요가 있다면 여기에 추가
-                        alert('예약이 수정되었습니다.');
-                      }}
-                    >
-                      수정 완료
-                    </button>
-                  </>
-                )}
-              </div>
+                <div>
+                  렌트 시작일 :{' '}
+                  {formatRentTime(selectedCar.rentDate)}
+                </div>
+                <div>
+                  렌트 반납일 :{' '}
+                  {formatRentTime(selectedCar.turninDate)}
+                </div>
+                <div style={{ margin: '3px 0' }}>메모:</div>
+                <div
+                  style={{
+                    border: '1px solid lightgray',
+                    borderRadius: '7px',
+                  }}
+                >
+                  {selectedCar.extra || '없음'}
+                </div>
+              </>
+            )}
+            {isEditDateMode && (
+              <Modal
+                isOpen={updateModalOpen}
+                toggle={toggleEditDateMode}
+              >
+                <RentCarReservationUpdate
+                  carNo={selectedCar.carNo}
+                />
+              </Modal>
+            )}
+            {!isEditDateMode && (
+              <>
+                <button
+                  className={styles.buttonbutton}
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        '정말 예약을 취소하시겠습니까?',
+                      )
+                    ) {
+                      handleCancelReservation(
+                        selectedCar.reservationNo,
+                      );
+                    }
+                  }}
+                >
+                  예약 취소
+                </button>
+                <button
+                  className={styles.buttonbutton}
+                  onClick={toggleEditDateMode}
+                >
+                  날짜 수정하기
+                </button>
+              </>
             )}
           </MyPageModal>
           <p className={styles.filteredCount}>
