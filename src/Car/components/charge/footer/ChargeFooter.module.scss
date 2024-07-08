@@ -1,37 +1,63 @@
-.charge_footer {
-   width: 10%;
-    height: 100%;
-align-content: center;
+.Footer {
+    width: 100%;
+    height: 250px;
+    background-color: rgb(155, 155, 155);
+    display: flex;
+}
+
+.chargeFooter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 250px;
+    background-color: rgb(155, 155, 155);
+    border-top: 1px solid #dee2e6;
     z-index: 5;
-}
-
-.git {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-}
-
-.notion {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-}
-
-.erd {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
+    padding: 10px 0;
+    // border: 1px solid black;
 
 }
 
-.instagram {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
+.iconLink {
+    margin: 0 3px;
 }
 
-.kakao {
+.icon {
     width: 20px;
+    /* 아이콘 크기를 30px로 설정 */
     height: 20px;
-    margin-right: 5px;
+    transition: transform 0.3s ease;
+}
+
+.icon:hover {
+    transform: scale(1.2);
+    /* 호버 시 아이콘 크기 1.2배 */
+}
+
+.logoSimb {
+    width: 40%;
+    background-color: rgb(155, 155, 155);
+    margin-left: 10%;
+}
+
+.iconLogo {
+    width: 33%;
+    margin-left: 28%;
+    // border: 1px solid black;
+
+
+}
+
+.dummy {
+    width: 36%;
+    margin-top: 120px;
+    // border: 1px solid black;
+    text-align: center;
+}
+
+.footerStyle {
+    // border: 1px solid black;
+    margin-left: 50%;
+
 }
