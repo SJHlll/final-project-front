@@ -8,6 +8,7 @@ const MyPageRentCarList = () => {
   return (
     <>
       <div className={styles.listHeader}>
+        <div className={styles.resSelectedNo}>예약번호</div>
         <div className={styles.resSelectedAd2}>차종</div>
         <div className={styles.resSelectedName2}>가격</div>
         <div className={styles.resSelectedTime}>

@@ -158,7 +158,7 @@ const ReservedStationMap = () => {
             <div className={styles.spaceBlank}>
               <button
                 className={styles.resCancelBtn}
-                onDoubleClick={() => {
+                onClick={() => {
                   if (
                     window.confirm(
                       '정말 예약을 취소하시겠습니까?',
@@ -185,7 +185,7 @@ const ReservedStationMap = () => {
   // 본체
   return (
     <>
-      {role === 'ADMIN' && reserveStation.length > 0 ? (
+      {role === 'ADMIN' && reserveStation.length === 0 ? (
         <>
           <AdminContents stations={filteredStations} />
           <input

@@ -10,13 +10,14 @@ import {
   API_BASE_URL,
   USER,
 } from '../../../config/host-config';
+import AdminPage from '../../assets/admin_page.png';
 
 const Testheader = () => {
   const navigate = useNavigate();
   const [state, setState] = useState(1);
 
   // Context에서 인증 정보 가져오기
-  const { isLoggedIn, name, onLogout, role } =
+  const { isLoggedIn, userName, onLogout, role } =
     useContext(AuthContext);
 
   // 컴포넌트가 마운트될 때 저장된 탭 상태를 로드
@@ -48,7 +49,6 @@ const Testheader = () => {
       // AuthContext의 onLogout 함수를 호출하여 로그인 상태를 업데이트
       onLogout();
       navigate('/'); // 로그아웃 후 홈으로 이동
-      setState(1);
     } catch (error) {
       console.error('Logout failed:', error);
     }
@@ -120,14 +120,18 @@ const Testheader = () => {
         >
           이용후기
         </button>
-        <button
-          className={
-            state === 8 ? styles.tabliactive : styles.tabli
-          }
-          onClick={() => handleTabClick(8, '/mypage')}
-        >
-          마이페이지 {name}
-        </button>
+        {isLoggedIn && (
+          <button
+            className={
+              state === 8
+                ? styles.tabliactive
+                : styles.tabli
+            }
+            onClick={() => handleTabClick(8, '/mypage')}
+          >
+            마이페이지
+          </button>
+        )}
         {!isLoggedIn ? (
           <button
             className={
@@ -151,23 +155,21 @@ const Testheader = () => {
             <p style={{ marginTop: '10px' }}>로그아웃</p>
           </button>
         )}
-        {isLoggedIn && role === 'ADMIN' && (
-          <button
-            className={
-              state === 9
-                ? styles.tabliactive
-                : styles.tabli
-            }
-            onClick={() => {
-              handleTabClick(9, '/admin');
-              setState(9); // 관리자 페이지로 이동 시 state를 설정
-              localStorage.setItem('activeTab', 9); // 로컬 저장소에도 설정
-            }}
-          >
-            예약 및 리뷰 목록 & 관리
-          </button>
-        )}
       </div>
+      {isLoggedIn && role === 'ADMIN' ? (
+        <img
+          src={AdminPage}
+          alt='관리자 페이지'
+          className={styles.isAdmin}
+          onClick={() => handleTabClick(9, '/admin')}
+        />
+      ) : isLoggedIn ? (
+        <span className={styles.isUser}>
+          {userName}님, 환영합니다!
+        </span>
+      ) : (
+        ''
+      )}
     </div>
   );
 };
