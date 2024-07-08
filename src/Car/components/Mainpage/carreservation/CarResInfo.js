@@ -8,8 +8,9 @@ import { CarContext } from '../../../../contexts/CarContext';
 import AuthContext from '../../../../util/AuthContext';
 import axios from 'axios';
 import { API_BASE_URL } from '../../../../config/host-config';
-import { logDOM } from '@testing-library/react';
 import { useNavigate } from 'react-router-dom';
+
+const MAX_EXTRA_LENGTH = 255; // 비고 최대 글자 수
 
 const CarResInfo = ({
   pickup,
@@ -22,9 +23,9 @@ const CarResInfo = ({
   const { isLoggedIn } = useContext(AuthContext); // 로그인 중인지?
 
   const [extra, setExtra] = useState(''); // 비고
+  const [warning, setWarning] = useState(''); // 경고 메시지 상태
 
-  const { userName, email, phoneNumber } =
-    useContext(AuthContext); // 유저 정보 가져오기
+  const { userName, phoneNumber } = useContext(AuthContext); // 유저 정보 가져오기
 
   const token = localStorage.getItem('ACCESS_TOKEN'); // 로컬 토큰
 
@@ -32,8 +33,13 @@ const CarResInfo = ({
 
   const handleExtraChange = (e) => {
     const newExtra = e.target.value;
-    setExtra(newExtra);
-    onExtraChange(newExtra); // 부모 컴포넌트에 extra 값 전달
+    if (newExtra.length <= MAX_EXTRA_LENGTH) {
+      setExtra(newExtra);
+      setWarning(''); // 경고 메시지 제거
+      onExtraChange(newExtra); // 부모 컴포넌트에 extra 값 전달
+    } else {
+      setWarning('최대 255자까지 입력할 수 있습니다.'); // 경고 메시지 설정
+    }
   };
 
   useEffect(() => {
@@ -79,7 +85,7 @@ const CarResInfo = ({
       rentTime: formatTime(pickup.time),
       turninTime: formatTime(returning.time),
       totalPrice,
-      extra: `${extra}`,
+      extra,
     };
 
     try {
@@ -111,7 +117,7 @@ const CarResInfo = ({
         <div className={styles.resName}>
           이름: {userName}
         </div>
-        <div className={styles.phonNumber}>
+        <div className={styles.phoneNumber}>
           전화번호: {phoneNumber}
         </div>
         <div>예약하실 자동차: {selectedCar.carName}</div>
@@ -128,12 +134,19 @@ const CarResInfo = ({
           반납 시간: {formatTime(returning.time)}
         </div>
         <div>결제 금액: {totalPrice} 원</div>
-        비고 :
-        <input
-          type='text'
-          value={extra}
-          onChange={handleExtraChange}
-        />
+        <div className={styles.extra}>
+          메모:
+          <input
+            type='text'
+            value={extra}
+            onChange={handleExtraChange}
+            maxLength={MAX_EXTRA_LENGTH} // 입력 최대 길이 설정
+          />
+          {warning && (
+            <div className={styles.warning}>{warning}</div>
+          )}{' '}
+          {/* 경고 메시지 표시 */}
+        </div>
       </div>
     </form>
   );
