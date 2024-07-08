@@ -10,6 +10,7 @@ import { KAKAO_AUTH_URL } from '../../../config/kakao-config';
 import { NAVER_AUTH_URL } from '../../../config/naver-config';
 import { useNavigate } from 'react-router-dom';
 import { GOOGLE_URL } from '../../../config/google-config';
+import style from '../../../scss/Button.module.scss';
 import {
   GoogleLogin,
   GoogleOAuthProvider,
@@ -142,21 +143,21 @@ const Login = () => {
               </Grid>
             </div>
             <Grid item xs={12}>
-              <Button
-                className={styles.Loginbtn}
+              <button
+                className={style.publicBtn}
                 type='submit'
-                fullWidth
-                variant='contained'
+                // fullWidth
+                // variant='contained'
                 onClick={loginHandler}
                 style={{
                   width: '208px',
                   height: '44px',
                   margin: '5px',
-                  backgroundColor: 'skyblue',
+                  // backgroundColor: 'skyblue',
                 }}
               >
                 로그인
-              </Button>
+              </button>
             </Grid>
           </Grid>
 

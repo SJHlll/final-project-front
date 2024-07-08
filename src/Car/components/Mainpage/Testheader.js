@@ -129,8 +129,12 @@ const Testheader = () => {
         </button>
         {!isLoggedIn ? (
           <button
-            className={styles.loginbtn}
-            onClick={() => navigate('/Login')}
+            className={
+              state === 9
+                ? styles.loginbtn
+                : styles.loginbtn
+            }
+            onClick={() => handleTabClick(9, '/Login')}
           >
             로그인
           </button>

@@ -133,6 +133,11 @@ const CarResInfo = ({
           type='text'
           value={extra}
           onChange={handleExtraChange}
+          placeholder='특이사항을 적어주세요'
+          style={{
+            border: '1px solid white',
+            width: '90%',
+          }}
         />
       </div>
     </form>
