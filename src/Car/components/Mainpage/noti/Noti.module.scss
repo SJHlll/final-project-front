@@ -1,37 +1,43 @@
-.notiline{
+.notiline {
     padding: 1%;
 }
-.createnotilist{
+
+.createnotilist {
     width: 90px;
     height: 40px;
     font-size: 18px;
     position: absolute;
     border-radius: 15px;
     right: 50px;
-    bottom: 830px;
+    bottom: 860px;
     color: #2c7fdf;
     background-color: #ebf5ff;
-    &:hover{
+
+    &:hover {
         cursor: pointer;
         color: #2c7fdf;
         background-color: #c2e1ff;
     }
 }
-.notilistupdatebtn{
+
+.notilistupdatebtn {
     left: 10%;
 }
-.notilistinput{
+
+.notilistinput {
     width: 100%;
 
 }
-.notilisttext{
- 
-        width: 100%;
-        height: 300px;
-        margin-top: 1%;
-  
-    
+
+.notilisttext {
+
+    width: 100%;
+    height: 300px;
+    margin-top: 1%;
+
+
 }
-.notilistform{
+
+.notilistform {
     width: 100%;
 }
