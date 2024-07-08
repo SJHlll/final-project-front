@@ -88,7 +88,7 @@ const Login = () => {
       redirection('/');
     } catch (error) {
       console.log('error', error);
-      alert(error.response.data);
+      alert('이메일과 비밀번호를 확이해주세요.');
     }
   };
   const loginHandler = (e) => {
