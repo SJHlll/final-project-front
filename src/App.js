@@ -37,6 +37,7 @@ import MyPageReviewList from './Car/components/charge/mypage/MyPageReviewList';
 import { TestRvProvider } from './Car/components/Mainpage/adminpage/adminreview/TestRvContext';
 import { TestRcProvider } from './Car/components/Mainpage/adminpage/admincar/TestRcContext';
 import MyPageRentCarList from './Car/components/charge/mypage/MyPageRentCarList';
+import RentCarReservationUpdate from './Car/components/charge/mypage/RentCarReservationUpdate';
 
 const App = () => {
   const location = useLocation();
@@ -166,6 +167,10 @@ const App = () => {
                 <Route
                   path='/admin/review'
                   element={<ReviewList />}
+                />
+                <Route
+                  path='/rentUpdate'
+                  element={<RentCarReservationUpdate />}
                 />
               </Routes>
             </div>
