@@ -16,7 +16,7 @@ const MyPageReviewList = () => {
           리뷰내용
         </div>
         <div className={styles.resSelectedTime}>
-          작성날짜
+          작성날짜/수정날짜
         </div>
       </div>
       <MyPageReviewMap />
