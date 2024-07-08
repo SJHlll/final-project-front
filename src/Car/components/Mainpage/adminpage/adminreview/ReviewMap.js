@@ -137,8 +137,7 @@ const ReviewMap = () => {
 
     // 작성일자 기준 내림차순 정렬
     filtered.sort(
-      (a, b) =>
-        new Date(b.updateDate) - new Date(a.updateDate),
+      (a, b) => new Date(b.reviewNo) - new Date(a.reviewNo),
     );
 
     setFilteredReview(filtered);
@@ -179,7 +178,8 @@ const ReviewMap = () => {
               {truncateText(e.content, 50)}
             </div>
             <div className={styles.resSelectedTime}>
-              <div>{formatTime(e.updateDate)}</div>
+              <div>작성 : {formatTime(e.regDate)}</div>
+              <div>수정 : {formatTime(e.updateDate)}</div>
             </div>
             <div className={styles.spaceBlank}>
               <button
