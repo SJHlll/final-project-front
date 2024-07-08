@@ -7,6 +7,8 @@ import { TestRcContext } from '../../Mainpage/adminpage/admincar/TestRcContext';
 import styles from './MyPageReviewList.module.scss';
 import AuthContext from '../../../../util/AuthContext';
 import MyPageModal from './MyPageModal';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Margin } from '@mui/icons-material';
 
@@ -20,6 +22,7 @@ const MyPageRentCarMap = () => {
 
   const [newRentDate, setNewRentDate] = useState('');
   const [newTurninDate, setNewTurninDate] = useState('');
+  const [extra, setExtra] = useState('');
   const [isEditDateMode, setIsEditDateMode] =
     useState(false);
 
@@ -133,6 +136,37 @@ const MyPageRentCarMap = () => {
     setIsEditDateMode(!isEditDateMode);
   };
 
+  const rentcarUpdateHandler = async (e, carNo) => {
+    e.preventDefault();
+
+    const token = localStorage.getItem('ACCESS_TOKEN');
+
+    try {
+      const res = await axios.patch(
+        `http://localhost:8181/rentcar/${carNo}`,
+        {
+          rentTime: newRentDate,
+          turninTime: newTurninDate,
+          extra,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      if (res.status === 200) {
+        alert('예약이 변경되었습니다.');
+      } else {
+        console.log('Error: ', res.data);
+        alert('예약 변경에 실패하였습니다.');
+      }
+    } catch (err) {
+      console.error('Error: ', err.response);
+      alert('예약 변경에 실패하였습니다.');
+    }
+  };
+
   const AdminContents = ({ car }) => {
     return (
       <>
@@ -191,32 +225,30 @@ const MyPageRentCarMap = () => {
                   {formatPrice(selectedCar.totalPrice)}원
                 </p>
                 {isEditDateMode ? (
-                  <p>
-                    <div>
-                      렌트 시작일 :
-                      <input
-                        type='datetime-local'
-                        value={newRentDate}
-                        onChange={(e) =>
-                          setNewRentDate(e.target.value)
-                        }
-                      />
-                    </div>
-                    <div
-                      style={{
-                        margin: '3px 0',
-                      }}
-                    >
-                      렌트 반납일 :
-                      <input
-                        type='datetime-local'
-                        value={newTurninDate}
-                        onChange={(e) =>
-                          setNewTurninDate(e.target.value)
-                        }
-                      />
-                    </div>
-                  </p>
+                  <form onSubmit={rentcarUpdateHandler}>
+                    <p>
+                      <div>
+                        렌트 시작일 :
+                        <input
+                          type='datetime-local'
+                          value={newRentDate}
+                          onChange={(e) =>
+                            setNewRentDate(e.target.value)
+                          }
+                        />
+                      </div>
+                      <div>
+                        렌트 반납일 :
+                        <input
+                          type='datetime-local'
+                          value={newTurninDate}
+                          onChange={(e) =>
+                            setNewTurninDate(e.target.value)
+                          }
+                        />
+                      </div>
+                    </p>
+                  </form>
                 ) : (
                   <p>
                     <div>
