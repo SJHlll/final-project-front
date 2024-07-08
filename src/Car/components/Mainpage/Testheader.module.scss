@@ -95,7 +95,7 @@
 .isAdmin {
   width: 50px;
   height: 50px;
-  margin: 40px auto 0;
+  margin-top: 40px;
   cursor: pointer;
   transition: transform 0.2s ease;
 
@@ -105,5 +105,5 @@
 }
 
 .isUser {
-  margin: 50px auto 0;
+  margin-top: 50px;
 }
