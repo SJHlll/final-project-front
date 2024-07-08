@@ -77,7 +77,7 @@
 
 .adminPageList {
     width: 80%;
-    height: 600px;
+    max-height: 560px;
     margin: 0 auto;
     overflow-y: auto;
 
@@ -88,17 +88,17 @@
 
     // 스크롤바 배경
     &::-webkit-scrollbar-track {
-        background: #c2e1ff;
+        background: white;
     }
 
     // 스크롤바 위치
     &::-webkit-scrollbar-thumb {
-        background: #2c7fdf;
+        background: #ccc;
     }
 
     // 스크롤바 호버
     &::-webkit-scrollbar-thumb:hover {
-        background: #0056b3;
+        background: #aaa;
     }
 
     .noSelect {

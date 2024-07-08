@@ -190,6 +190,15 @@ const ReservationModal = ({
           );
           setOnConfirm(() => () => navigate('/Login'));
           setModalOpen(true);
+        } else if (
+          error.response.data ===
+          '해당 시간대에 이미 예약된 충전소가 있습니다.'
+        ) {
+          setModalMessage(
+            `해당 시간대에 이미 예약된 충전소가 있습니다. 다른 시간대에 예약 신청을 해주세요.`,
+          );
+          setOnConfirm(null);
+          setModalOpen(true);
         }
       } else {
         setModalMessage(error.message);

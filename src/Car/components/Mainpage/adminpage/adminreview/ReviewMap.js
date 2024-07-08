@@ -137,8 +137,7 @@ const ReviewMap = () => {
 
     // 작성일자 기준 내림차순 정렬
     filtered.sort(
-      (a, b) =>
-        new Date(b.updateDate) - new Date(a.updateDate),
+      (a, b) => new Date(b.reviewNo) - new Date(a.reviewNo),
     );
 
     setFilteredReview(filtered);
@@ -179,12 +178,18 @@ const ReviewMap = () => {
               {truncateText(e.content, 50)}
             </div>
             <div className={styles.resSelectedTime}>
-              <div>{formatTime(e.updateDate)}</div>
+              <div>작성일 : {formatTime(e.regDate)}</div>
+              <div>
+                {formatTime(e.regDate) !==
+                formatTime(e.updateDate)
+                  ? `수정일 : ${formatTime(e.updateDate)} (수정됨)`
+                  : ''}
+              </div>
             </div>
             <div className={styles.spaceBlank}>
               <button
                 className={styles.resCancelBtn}
-                onDoubleClick={() => {
+                onClick={() => {
                   if (
                     window.confirm(
                       '정말 리뷰를 삭제하시겠습니까?',

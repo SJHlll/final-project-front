@@ -7,8 +7,9 @@ import { TestRcContext } from '../../Mainpage/adminpage/admincar/TestRcContext';
 import styles from './MyPageReviewList.module.scss';
 import AuthContext from '../../../../util/AuthContext';
 import MyPageModal from './MyPageModal';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Margin } from '@mui/icons-material';
 import RentCarReservationUpdate from './RentCarReservationUpdate';
 import { Modal } from 'reactstrap';
 
@@ -49,8 +50,7 @@ const MyPageRentCarMap = () => {
           (car) => car.phoneNumber === phoneNumber,
         );
         filteredData.sort(
-          (a, b) =>
-            new Date(a.rentDate) - new Date(b.rentDate),
+          (a, b) => new Date(b.carNo) - new Date(a.carNo),
         );
         setReserveCar(filteredData);
       } catch (error) {
@@ -143,6 +143,9 @@ const MyPageRentCarMap = () => {
             key={e.carNo}
             onClick={() => handlerentCarClick(e)}
           >
+            <div className={styles.resSelectedNo}>
+              {e.carNo}
+            </div>
             <div className={styles.resSelectedAd2}>
               {e.carName}
             </div>

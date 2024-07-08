@@ -63,6 +63,13 @@ const ReservedCarList = () => {
           )}
           {selected === 'review' && <ReviewList />}
         </div>
+        <div
+          style={{
+            width: '80%',
+            margin: '0 auto',
+            borderBottom: '2px solid black',
+          }}
+        ></div>
       </Frame>
     </TestRcProvider>
   );

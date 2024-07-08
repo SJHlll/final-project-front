@@ -159,7 +159,15 @@ const MyPageReviewMap = () => {
               {truncateText(e.content, 150)}
             </div>
             <div className={styles.resSelectedTime}>
-              <div>{formatTime(e.updateDate)}</div>
+              <div>
+                작성일 : {formatTime(e.updateDate)}
+                <div>
+                  {formatTime(e.regDate) !==
+                  formatTime(e.updateDate)
+                    ? `수정일 : ${formatTime(e.updateDate)} (수정됨)`
+                    : ''}
+                </div>
+              </div>
             </div>
           </div>
         ))}
@@ -181,7 +189,7 @@ const MyPageReviewMap = () => {
               <div>
                 <h2>리뷰 상세</h2>
                 <p>내용: {selectedReview.content}</p>
-                <p>사진: {selectedReview.photo}</p>
+                {/* <p>사진: {selectedReview.photo}</p> */}
                 <p>별점: {selectedReview.rating}</p>
                 <p>
                   차/충전소이름: {selectedReview.carName}

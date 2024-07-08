@@ -7,8 +7,13 @@
   // box-shadow: 3px 4px 3px 3px #555555;
   display: flex;
   margin: 0 auto;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
 }
+
 .logo {
   background-image: url(../../assets/nlogo.png);
   background-size: contain;
@@ -24,6 +29,7 @@
   margin-left: 3%;
   transform: scale(2);
 }
+
 .loginbtn {
   // position: relative;
   // bottom: 30%;
@@ -34,6 +40,7 @@
   border: 1px solid rgb(209, 209, 209);
   margin-left: 3%;
 }
+
 .logoutbtn {
   display: flex;
   width: 5%;
@@ -43,9 +50,11 @@
   bottom: 25%;
   right: 2%;
 }
+
 .logouticon {
   align-self: center;
 }
+
 .tabline {
   width: 60%;
   // box-shadow: 3px 4px 3px 3px #555555;
@@ -56,20 +65,23 @@
   // padding-bottom: 1%;
   margin-left: 7%;
 }
+
 .tabli {
   width: 10%;
-  height:50px;
+  height: 50px;
   // margin-bottom: 5px;
   background-color: transparent;
   border: 1px solid rgb(209, 209, 209);
   // border-bottom: 1px solid black;
-align-self: center;
+  align-self: center;
+
   &:hover {
     cursor: pointer;
     color: white;
     // background-color: #c2e1ff;
   }
 }
+
 .tabliactive {
   width: 10%;
   height: 50px;
@@ -78,4 +90,20 @@ align-self: center;
   // box-shadow: 2px 2px 1px 1px #555555;
   color: white;
   background-color: rgb(209, 209, 209);
+}
+
+.isAdmin {
+  width: 50px;
+  height: 50px;
+  margin-top: 40px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.15);
+  }
+}
+
+.isUser {
+  margin-top: 50px;
 }

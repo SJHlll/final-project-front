@@ -41,8 +41,11 @@ import RentCarReservationUpdate from './Car/components/charge/mypage/RentCarRese
 
 const App = () => {
   const location = useLocation();
-  // 헤더가 안보여도 되는 페이지 경로
   const hideHeaderPaths = ['/pay', '/success', '/fail'];
+
+  const shouldHideHeader =
+    hideHeaderPaths.includes(location.pathname) ||
+    location.pathname.startsWith('/error');
 
   return (
     <ModalProvider>
@@ -53,9 +56,7 @@ const App = () => {
               className='App'
               style={{ fontFamily: 'font2' }}
             >
-              {!hideHeaderPaths.includes(
-                location.pathname,
-              ) && <Testheader />}
+              {!shouldHideHeader && <Testheader />}
               <Routes>
                 {/* 메인 홈페이지 */}
                 <Route
@@ -80,7 +81,6 @@ const App = () => {
                 />
                 {/* 이용방법 페이지 */}
                 <Route path='/noti' element={<Noti />} />
-
                 <Route
                   path='/noti/:id'
                   element={<NotiPage />}
@@ -105,7 +105,6 @@ const App = () => {
                   path='charge/reservation'
                   element={<ReservationCharge />}
                 />
-
                 {/* 마이페이지 */}
                 <Route
                   path='/mypage'
@@ -119,32 +118,26 @@ const App = () => {
                   path='/mypage/car'
                   element={<MyPageRentCarList />}
                 />
-
                 {/* 공통 로그인페이지 */}
                 <Route
                   path='/Login'
                   element={<Loginpage />}
                 />
-
                 {/* 카카오 로그인페이지 */}
                 <Route
                   path='/oauth/kakao'
-                  element={<KakaoLoginHandler />} // 로그아웃 아이콘 나오면 성공
+                  element={<KakaoLoginHandler />}
                 />
                 {/* 네이버 로그인페이지 */}
                 <Route
                   path='/oauth/naver'
-                  element={<NaverLoginHandler />} // 로그아웃 아이콘 나오면 성공
+                  element={<NaverLoginHandler />}
                 />
-
-                {/* 구글 로그인페이지 */}
-
                 {/* 회원가입 */}
                 <Route
                   path='/register'
                   element={<RegisterPage />}
                 />
-
                 {/* 토스페이먼츠 */}
                 <Route path='/pay' element={<Checkout />} />
                 <Route
@@ -152,15 +145,12 @@ const App = () => {
                   element={<Success />}
                 />
                 <Route path='/fail' element={<Fail />} />
-
                 {/* 에러페이지 */}
                 <Route path='/*' element={<Error />} />
-
                 <Route
                   path='/info'
                   element={<UserInfoSave />}
                 />
-
                 {/* 어드민페이지 */}
                 <Route
                   path='/admin'

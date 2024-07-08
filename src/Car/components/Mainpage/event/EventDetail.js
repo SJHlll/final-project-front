@@ -44,12 +44,14 @@ const EventDetail = () => {
   return (
     <Frame>
       <div
+        className='eventdetailscroll'
         style={{
           // padding: '1% 5%',
           border: '1px solid black',
           width: '70%',
           margin: '0 auto',
           overflow: 'auto',
+          height: '2000px',
         }}
       >
         <div className={styles.eventDetailHeader}>

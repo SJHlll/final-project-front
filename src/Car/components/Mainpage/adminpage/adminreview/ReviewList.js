@@ -56,7 +56,7 @@ const ReviewList = () => {
             리뷰내용
           </div>
           <div className={styles.resSelectedTime}>
-            작성날짜
+            작성날짜/수정날짜
           </div>
           <div className={styles.hiddenText}></div>
         </div>
@@ -71,6 +71,13 @@ const ReviewList = () => {
           )}
           {selected === 'car' && <ReservedCarList />}
         </div>
+        <div
+          style={{
+            width: '80%',
+            margin: '0 auto',
+            borderBottom: '2px solid black',
+          }}
+        ></div>
       </Frame>
     </TestRvProvider>
   );
