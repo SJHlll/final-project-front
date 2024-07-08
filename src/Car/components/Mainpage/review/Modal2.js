@@ -236,7 +236,7 @@ const Modal2 = ({
         alert('리뷰 등록이 완료되었습니다.');
         navigate('/review');
         onClose();
-        window.location.reload(); // 재렌더링
+        window.location.reload(); // 페이지 새로 고침
       } else {
         console.log('Error : ', response.data);
         alert('리뷰 등록에 실패하였습니다.');
@@ -312,6 +312,7 @@ const Modal2 = ({
         alert('리뷰 수정이 완료되었습니다.');
         navigate('/mypage/review');
         onClose();
+        window.location.reload(); // 페이지 새로 고침
       } else {
         console.log('Error: ', res.data);
         alert('리뷰 수정에 실패하였습니다.');
