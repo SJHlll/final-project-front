@@ -7,6 +7,7 @@
   width: 600px;
   border: 1px solid black;
   font-family: font;
+  margin-top: 10px;
 
   .flex {
     display: flex;
@@ -31,4 +32,8 @@
 .modalContent {
   background-color: #fff;
   width: 462px;
+}
+
+.checkLabel {
+  margin: 0 15px 0 5px;
 }

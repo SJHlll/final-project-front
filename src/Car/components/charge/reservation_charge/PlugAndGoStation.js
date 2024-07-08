@@ -53,30 +53,34 @@ const PlugAndGoStation = ({
   );
 
   const closeBtn = (
-    <button className={styles.publicBtn} onClick={toggle}>
+    <button
+      className={styles.publicBtn}
+      onClick={toggle}
+      style={{
+        display: 'block',
+        marginLeft: 'auto',
+        marginTop: '10px',
+      }}
+    >
       &times;
     </button>
   );
 
   // 예약하기 모달창 활성화
   const modalOpen = () => (
-    <ModalBackground>
-      <Modal
-        isOpen={modal}
-        toggle={toggle}
-        style={{ top: '15%' }}
-      >
-        <ModalBody>
-          <ReservationModal
-            chargeId={StationId}
-            stationName={Name}
-            address={Address}
-            speed={Speed}
-            type={Type}
-            price={price}
-          />
-        </ModalBody>
-      </Modal>
+    <ModalBackground onClick={toggle}>
+      <ModalContent onClick={(e) => e.stopPropagation()}>
+        {closeBtn}
+        <ReservationModal
+          chargeId={StationId}
+          stationName={Name}
+          address={Address}
+          speed={Speed}
+          type={Type}
+          price={price}
+          isOpen={modal}
+        />
+      </ModalContent>
     </ModalBackground>
   );
 
@@ -144,4 +148,13 @@ const ModalBackground = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 10;
+`;
+
+const ModalContent = styled.div`
+  background: white;
+  padding: 0 15px 0;
+  border-radius: 10px;
+  height: 465px;
+  overflow-y: auto;
+  position: relative;
 `;

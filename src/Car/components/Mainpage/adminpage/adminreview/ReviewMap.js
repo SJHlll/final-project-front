@@ -178,13 +178,18 @@ const ReviewMap = () => {
               {truncateText(e.content, 50)}
             </div>
             <div className={styles.resSelectedTime}>
-              <div>작성 : {formatTime(e.regDate)}</div>
-              <div>수정 : {formatTime(e.updateDate)}</div>
+              <div>작성일 : {formatTime(e.regDate)}</div>
+              <div>
+                수정일 : {formatTime(e.updateDate)}
+                {e.regDate !== e.updateDate
+                  ? ' (수정됨)'
+                  : ''}
+              </div>
             </div>
             <div className={styles.spaceBlank}>
               <button
                 className={styles.resCancelBtn}
-                onDoubleClick={() => {
+                onClick={() => {
                   if (
                     window.confirm(
                       '정말 리뷰를 삭제하시겠습니까?',

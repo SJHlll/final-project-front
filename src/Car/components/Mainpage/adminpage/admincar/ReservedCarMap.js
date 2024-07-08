@@ -109,7 +109,7 @@ const ReservedCarMap = () => {
     }
 
     filtered.sort(
-      (a, b) => new Date(a.rentDate) - new Date(b.rentDate),
+      (a, b) => new Date(b.carNo) - new Date(a.carNo),
     );
     setfilteredCar(filtered);
   }, [filterPhoneNumber, reserveCar]);
@@ -123,9 +123,7 @@ const ReservedCarMap = () => {
             className={styles.listBody}
             key={e.reservationNo}
           >
-            <div className={styles.resNo}>
-              {e.reservationNo}
-            </div>
+            <div className={styles.resNo}>{e.carNo}</div>
             <div className={styles.resUserName}>
               <div>{e.userName}</div>
               <div>{e.phoneNumber}</div>
@@ -143,7 +141,7 @@ const ReservedCarMap = () => {
             <div className={styles.spaceBlank}>
               <button
                 className={styles.resCancelBtn}
-                onDoubleClick={() => {
+                onClick={() => {
                   if (
                     window.confirm(
                       '정말 예약을 취소하시겠습니까?',
