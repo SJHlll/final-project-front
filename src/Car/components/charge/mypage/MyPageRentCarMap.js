@@ -56,7 +56,7 @@ const MyPageRentCarMap = () => {
     };
 
     fetchStations();
-  }, [setReserveCar]);
+  }, [phoneNumber, setReserveCar]);
 
   // 예약한 충전소 DB에 지우기 (예약번호를 기준으로)
   const handleCancelReservation = async (reservationNo) => {
