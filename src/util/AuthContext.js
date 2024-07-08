@@ -8,6 +8,7 @@ const AuthContext = React.createContext({
   phoneNumber: '',
   role: '',
   birthDay: '',
+  userId: '',
   loginMethod: '',
   onLogout: () => {},
   onLogin: () => {},
@@ -22,6 +23,7 @@ export const AuthContextProvider = (props) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [role, setRole] = useState('');
   const [birthDay, setBirthDay] = useState('');
+  const [userId, setUserId] = useState('');
   const [loginMethod, setLoginMethod] = useState('');
 
   // 로그인 핸들러
@@ -32,6 +34,7 @@ export const AuthContextProvider = (props) => {
     phoneNumber,
     role,
     birthDay,
+    userId,
     loginMethod,
   ) => {
     // json에 담긴 인증 정보를 클라이언트에 보관
@@ -50,13 +53,22 @@ export const AuthContextProvider = (props) => {
     localStorage.setItem('USER_PHONENUMBER', phoneNumber);
     localStorage.setItem('USER_ROLE', role);
     localStorage.setItem('USER_BIRTHDAY', birthDay);
+    localStorage.setItem('LOGIN_USERID', userId);
     setIsLoggedIn(true);
     setUserName(userName);
     setEmail(email);
     setPhoneNumber(phoneNumber);
     setRole(role);
     setBirthDay(birthDay);
+    setUserId(userId);
     setLoginMethod(loginMethod);
+
+    console.log('localStorage: ', localStorage);
+
+    console.log(
+      'userID: ',
+      localStorage.getItem('LOGIN_USERID'),
+    );
 
     console.log(
       '생일 : ',
@@ -73,6 +85,7 @@ export const AuthContextProvider = (props) => {
     setPhoneNumber('');
     setRole('');
     setBirthDay('');
+    setUserId('');
     setLoginMethod('');
   };
 
@@ -86,6 +99,7 @@ export const AuthContextProvider = (props) => {
       );
       setRole(localStorage.getItem('USER_ROLE'));
       setBirthDay(localStorage.getItem('USER_BIRTHDAY'));
+      setUserId(localStorage.getItem('LOGIN_USERID'));
       setLoginMethod(localStorage.getItem('LOGIN_METHOD'));
     }
   }, []);
@@ -99,6 +113,7 @@ export const AuthContextProvider = (props) => {
         phoneNumber,
         role,
         birthDay,
+        userId,
         loginMethod,
         onLogout: logoutHandler,
         onLogin: loginHandler,

@@ -72,6 +72,7 @@ const Login = () => {
         phoneNumber,
         role,
         birthDay,
+        userId,
       } = await res.data;
 
       // Context API를 사용하여 로그인 상태를 업데이트 합니다.
@@ -82,6 +83,7 @@ const Login = () => {
         phoneNumber,
         role,
         birthDay,
+        userId,
       );
 
       // 홈으로 리다이렉트

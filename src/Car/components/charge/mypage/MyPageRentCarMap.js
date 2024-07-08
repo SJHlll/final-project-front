@@ -13,7 +13,7 @@ const MyPageRentCarMap = () => {
   const navigate = useNavigate();
   const { reserveCar, setReserveCar } =
     useContext(TestRcContext);
-  const { phoneNumber } = useContext(AuthContext);
+  const { userId } = useContext(AuthContext);
   const [selectedCar, setSelectedCar] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -28,7 +28,7 @@ const MyPageRentCarMap = () => {
       try {
         const token = localStorage.getItem('ACCESS_TOKEN');
         const response = await fetch(
-          'http://localhost:8181/mypage/car',
+          `http://localhost:8181/rentcar/resInfo/user/${userId}`,
           {
             method: 'GET',
             headers: {
@@ -42,14 +42,15 @@ const MyPageRentCarMap = () => {
         }
         const data = await response.json();
 
-        const filteredData = data.filter(
-          (car) => car.phoneNumber === phoneNumber,
-        );
-        filteredData.sort(
-          (a, b) =>
-            new Date(a.rentDate) - new Date(b.rentDate),
-        );
-        setReserveCar(filteredData);
+        // const filteredData = data.filter(
+        //   (car) => car.phoneNumber === phoneNumber,
+        // );
+        // filteredData.sort(
+        //   (a, b) =>
+        //     new Date(a.rentDate) - new Date(b.rentDate),
+        // );
+        setReserveCar(data);
+        console.log(reserveCar);
       } catch (error) {
         console.error(error);
       }
