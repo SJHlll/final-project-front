@@ -10,6 +10,7 @@ import { KAKAO_AUTH_URL } from '../../../config/kakao-config';
 import { NAVER_AUTH_URL } from '../../../config/naver-config';
 import { useNavigate } from 'react-router-dom';
 import { GOOGLE_URL } from '../../../config/google-config';
+import style from '../../../scss/Button.module.scss';
 import {
   GoogleLogin,
   GoogleOAuthProvider,
@@ -72,7 +73,6 @@ const Login = () => {
         phoneNumber,
         role,
         birthDay,
-        userId,
       } = await res.data;
 
       // Context API를 사용하여 로그인 상태를 업데이트 합니다.
@@ -83,17 +83,16 @@ const Login = () => {
         phoneNumber,
         role,
         birthDay,
-        userId,
       );
 
       // 홈으로 리다이렉트
       redirection('/');
     } catch (error) {
       console.log('error', error);
-      alert('이메일과 비밀번호를 확이해주세요.');
+      alert(error.response.data);
     }
   };
-  const loginHandler = (e) => {
+  const loginHandler = async (e) => {
     e.preventDefault();
     // 입력값에 관련된 처리를 하고 싶다면 여기서 하시면 됩니다.
     // 예제에서는 생략하겠습니다.
@@ -144,21 +143,21 @@ const Login = () => {
               </Grid>
             </div>
             <Grid item xs={12}>
-              <Button
-                className={styles.Loginbtn}
+              <button
+                className={style.publicBtn}
                 type='submit'
-                fullWidth
-                variant='contained'
+                // fullWidth
+                // variant='contained'
                 onClick={loginHandler}
                 style={{
                   width: '208px',
                   height: '44px',
                   margin: '5px',
-                  backgroundColor: 'skyblue',
+                  // backgroundColor: 'skyblue',
                 }}
               >
                 로그인
-              </Button>
+              </button>
             </Grid>
           </Grid>
 

@@ -1,14 +1,16 @@
-$img-w: 150px;
-$img-h: 150px;
+$img-w: 130px;
+$img-h: 130px;
 
 .thumbnailBox {
   width: $img-w;
   height: $img-h;
   border-radius: 50%;
   overflow: hidden;
-  margin: 30px auto 10px;
+  margin: 20px auto 10px;
   cursor: pointer;
-
+  &::-webkit-scrollbar{
+    display: none;
+  }
   img {
     width: 100%;
     height: 100%;
