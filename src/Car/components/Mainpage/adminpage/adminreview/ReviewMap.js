@@ -189,7 +189,7 @@ const ReviewMap = () => {
             <div className={styles.spaceBlank}>
               <button
                 className={styles.resCancelBtn}
-                onDoubleClick={() => {
+                onClick={() => {
                   if (
                     window.confirm(
                       '정말 리뷰를 삭제하시겠습니까?',
