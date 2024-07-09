@@ -8,57 +8,50 @@ import styles from './RentCarReservationUpdate.module.scss';
 
 const RentCarReservationUpdate = ({ carNo, onClose }) => {
   const [newRentDate, setNewRentDate] = useState(null);
-  const [newRentTime, setNewRentTime] = useState(
-    new Date(),
-  );
+  const [newRentTime, setNewRentTime] = useState(null);
   const [newTurninDate, setNewTurninDate] = useState(null);
-  const [newTurninTime, setNewTurninTime] = useState(
-    new Date(),
-  );
+  const [newTurninTime, setNewTurninTime] = useState(null);
   const [extra, setExtra] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(true); // 모달 상태를 관리하는 useState
 
   const handleStartTimeChange = (time) => {
-    if (newRentDate) {
-      const newRentTime = new Date(newRentDate);
-      newRentTime.setHours(time.getHours());
-      newRentTime.setMinutes(time.getMinutes());
-      setNewRentTime(newRentTime);
-    }
-    console.log('rentDate: ', newRentDate);
-    console.log('rentTime: ', newRentTime);
+    console.log('typeof time: ', typeof time);
+    console.log(time);
+    setNewRentTime(time);
   };
 
   const handleEndTimeChange = (time) => {
-    if (newTurninDate) {
-      const newTurninTime = new Date(newTurninDate);
-      newTurninTime.setHours(time.getHours());
-      newTurninTime.setMinutes(time.getMinutes());
-      setNewTurninTime(newTurninTime);
-    }
-    console.log('turninDate: ', newTurninDate);
-    console.log('turninTime: ', newTurninTime);
+    setNewTurninTime(time);
   };
 
   useEffect(() => {
-    console.log(
-      '픽업 날짜: ',
-      newRentDate,
-      '픽업시간: ',
-      newRentTime,
-    );
-  }, [newRentDate, newRentTime]);
+    console.log('픽업 날짜: ', newRentDate);
+  }, [newRentDate]);
 
   useEffect(() => {
-    console.log(
-      '반납날짜: ',
-      newTurninDate,
-      '반납시간: ',
-      newTurninTime,
-    );
-  }, [newTurninDate, newTurninTime]);
+    console.log('반납날짜: ', newTurninDate);
+  }, [newTurninDate]);
 
   console.log('carNo: ', carNo);
+
+  const formatDateTimeToKST = (dateTime) => {
+    if (!dateTime) return null;
+
+    const options = {
+      timeZone: 'Asia/Seoul',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    };
+
+    return new Intl.DateTimeFormat('ko-KR', options)
+      .format(dateTime)
+      .replace(/\./g, '-');
+  };
 
   const minDate = new Date(); // 최소 날짜는 오늘 날짜로 설정합니다.
   const maxDate = addMonths(new Date(), 12); // 최대 날짜를 12개월 후로 설정합니다.
@@ -72,9 +65,10 @@ const RentCarReservationUpdate = ({ carNo, onClose }) => {
       updateRentDate: newRentDate,
       rentTime: newRentTime,
       updateTurninDate: newTurninDate,
-      turninTume: newTurninTime,
+      turninTime: newTurninTime,
       extra,
     };
+    console.log('requestData: ', requestData);
 
     try {
       const res = await axios.patch(
@@ -88,7 +82,7 @@ const RentCarReservationUpdate = ({ carNo, onClose }) => {
       );
       if (res.status === 200) {
         alert('예약이 변경되었습니다.');
-        onClose(); // 변경 완료 후 부모 컴포넌트에서 제공하는 onClose 함수 호출
+        // onClose(); // 변경 완료 후 부모 컴포넌트에서 제공하는 onClose 함수 호출
       } else {
         console.log('Error: ', res.data);
         alert('예약 변경에 실패하였습니다.');
@@ -134,14 +128,12 @@ const RentCarReservationUpdate = ({ carNo, onClose }) => {
               />
               <DatePicker
                 selected={newRentTime}
-                onChange={(time) =>
-                  handleStartTimeChange(time)
-                }
+                onChange={handleStartTimeChange}
                 showTimeSelect
                 showTimeSelectOnly
                 timeIntervals={30}
                 timeCaption='Time'
-                dateFormat='h:mm aa'
+                dateFormat='aa h:mm'
                 className={styles.datePicker}
               />
             </div>
@@ -157,14 +149,12 @@ const RentCarReservationUpdate = ({ carNo, onClose }) => {
               />
               <DatePicker
                 selected={newTurninTime}
-                onChange={(time) =>
-                  handleEndTimeChange(time)
-                }
+                onChange={handleEndTimeChange}
                 showTimeSelect
                 showTimeSelectOnly
                 timeIntervals={30}
                 timeCaption='Time'
-                dateFormat='h:mm aa'
+                dateFormat='aa h:mm'
                 className={styles.datePicker}
               />
             </div>
