@@ -242,11 +242,15 @@ const Carres = () => {
               </div>
             </div>
           </ModalBody>
-          <hr />
+          <hr
+            style={{
+              marginBottom: '0px',
+            }}
+          />
           <ModalFooter>
             <div className={styles.payBtnParent}>
               <button
-                className={`${style.publicBtn} ${style.payBtn}`}
+                className={`${style.publicBtn} ${styles.payBtn}`}
                 onClick={reservationHandler}
               >
                 예약 확정 하기
@@ -331,13 +335,48 @@ const Carres = () => {
             </div>
           </div>
           <div className={styles.caltotalbox1}>
-            총 렌트 금액
+            1일 렌트 금액
             <div className={styles.caltotalbox2}>
-              {totalPrice}원
+              {selectedCar
+                ? `${selectedCar.carPrice.toLocaleString('ko-KR')}원`
+                : '0원'}
             </div>
           </div>
-          <div className={styles.reservationBtn}>
-            {modal ? modalOpen : button}
+          <div
+            style={{
+              display: 'flex',
+              position: 'relative',
+              top: '48%',
+              paddingLeft: '3%',
+              alignContent: 'center',
+            }}
+          >
+            <div
+              style={{
+                width: '60%',
+              }}
+            >
+              <ul
+                style={{
+                  fontSize: '23px',
+                  marginBottom: '0px',
+                  top: '46%',
+                }}
+              >
+                총 렌트가격
+              </ul>
+              <ul
+                style={{
+                  fontSize: '20px',
+                  marginBottom: '0px',
+                }}
+              >
+                {totalPrice} 원
+              </ul>
+            </div>
+            <div className={styles.reservationBtn}>
+              {modal ? modalOpen : button}
+            </div>
           </div>
         </div>
       </div>

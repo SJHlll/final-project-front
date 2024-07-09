@@ -134,8 +134,16 @@ const Testheader = () => {
         )}
         {!isLoggedIn ? (
           <button
-            className={styles.loginbtn}
-            onClick={() => navigate('/Login')}
+            className={
+              state === 9
+                ? styles.loginbtn
+                : styles.loginbtn
+            }
+            onClick={() => {
+              handleTabClick(9, '/Login');
+              setState(9); // 로그인 시 state를 로그인(9)으로 설정
+              localStorage.setItem('activeTab', 9); // 로컬 저장소에도 로그인(9) 저장
+            }}
           >
             로그인
           </button>

@@ -219,7 +219,7 @@ const RegisterPage = () => {
     if (!inputValue) {
       msg = '전화번호 필수입니다.';
     } else if (!phoneRegex.test(inputValue)) {
-      msg = '전화번호를 다시 입력해주세요.';
+      msg = `전화번호에 " - "을 포함하여 입력해주세요.`;
     } else {
       msg = '사용 가능한 전화번호 입니다.';
       flag = true;
@@ -335,7 +335,7 @@ const RegisterPage = () => {
     <Container
       component='main'
       maxWidth='xs'
-      style={{ margin: '200px auto' }}
+      style={{ margin: '0px auto', marginTop: '10px' }}
     >
       <form noValidate>
         <Grid container spacing={2}>

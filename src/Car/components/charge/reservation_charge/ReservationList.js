@@ -89,6 +89,8 @@ const PlugAndGoStationContainer = styled.div`
   background-color: lightblue;
   position: relative;
   left: 843px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   border-bottom: 3px solid lightblue;
   // 스크롤바 몸통
   &::-webkit-scrollbar {

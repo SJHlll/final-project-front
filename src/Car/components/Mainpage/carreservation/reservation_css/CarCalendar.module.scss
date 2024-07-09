@@ -52,6 +52,7 @@
     width: 100%;
     padding: 0; // 내부 여백 제거
     margin: 0; // 외부 여백 제거
+
   }
 
   .timeContainer {
@@ -90,6 +91,7 @@
 }
 #pickupTime{
   margin-left: 30px;
+  z-index: 5;
 }
 .pickupTitle{
 font-size: 19px;
