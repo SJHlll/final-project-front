@@ -116,14 +116,20 @@ const ReservedStationMap = () => {
 
   // 전화번호 뒷자리 4개로 필터링
   useEffect(() => {
+    let filtered;
+
     if (filterPhoneNumber.length === 4) {
-      const filtered = reserveStation.filter((e) =>
+      filtered = reserveStation.filter((e) =>
         e.phoneNumber.endsWith(filterPhoneNumber),
       );
-      setFilteredStations(filtered);
     } else {
-      setFilteredStations(reserveStation);
+      filtered = [...reserveStation];
     }
+
+    filtered.sort(
+      (a, b) => new Date(b.chargeNo) - new Date(a.chargeNo),
+    );
+    setFilteredStations(filtered);
   }, [filterPhoneNumber, reserveStation]);
 
   // 회원이 예약한 충전소 목록
@@ -185,7 +191,7 @@ const ReservedStationMap = () => {
   // 본체
   return (
     <>
-      {role === 'ADMIN' && reserveStation.length === 0 ? (
+      {role === 'ADMIN' && reserveStation.length > 0 ? (
         <>
           <AdminContents stations={filteredStations} />
           <input
