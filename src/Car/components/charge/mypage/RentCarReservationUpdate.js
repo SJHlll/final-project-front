@@ -7,9 +7,15 @@ import 'react-datepicker/dist/react-datepicker.css';
 import styles from './RentCarReservationUpdate.module.scss';
 import moment from 'moment';
 
-const RentCarReservationUpdate = ({ carNo, onClose }) => {
-  const [newRentTime, setNewRentTime] = useState(null);
-  const [newTurninTime, setNewTurninTime] = useState(null);
+const RentCarReservationUpdate = ({
+  carNo,
+  onClose,
+  rentDate,
+  turninDate,
+}) => {
+  const [newRentTime, setNewRentTime] = useState(rentDate);
+  const [newTurninTime, setNewTurninTime] =
+    useState(turninDate);
   const [extra, setExtra] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(true); // 모달 상태를 관리하는 useState
 
