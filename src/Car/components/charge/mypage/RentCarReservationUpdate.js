@@ -5,11 +5,10 @@ import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import styles from './RentCarReservationUpdate.module.scss';
+import moment from 'moment';
 
 const RentCarReservationUpdate = ({ carNo, onClose }) => {
-  const [newRentDate, setNewRentDate] = useState(null);
   const [newRentTime, setNewRentTime] = useState(null);
-  const [newTurninDate, setNewTurninDate] = useState(null);
   const [newTurninTime, setNewTurninTime] = useState(null);
   const [extra, setExtra] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(true); // 모달 상태를 관리하는 useState
@@ -24,34 +23,7 @@ const RentCarReservationUpdate = ({ carNo, onClose }) => {
     setNewTurninTime(time);
   };
 
-  useEffect(() => {
-    console.log('픽업 날짜: ', newRentDate);
-  }, [newRentDate]);
-
-  useEffect(() => {
-    console.log('반납날짜: ', newTurninDate);
-  }, [newTurninDate]);
-
   console.log('carNo: ', carNo);
-
-  const formatDateTimeToKST = (dateTime) => {
-    if (!dateTime) return null;
-
-    const options = {
-      timeZone: 'Asia/Seoul',
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: false,
-    };
-
-    return new Intl.DateTimeFormat('ko-KR', options)
-      .format(dateTime)
-      .replace(/\./g, '-');
-  };
 
   const minDate = new Date(); // 최소 날짜는 오늘 날짜로 설정합니다.
   const maxDate = addMonths(new Date(), 12); // 최대 날짜를 12개월 후로 설정합니다.
@@ -62,10 +34,8 @@ const RentCarReservationUpdate = ({ carNo, onClose }) => {
     const token = localStorage.getItem('ACCESS_TOKEN');
 
     const requestData = {
-      updateRentDate: newRentDate,
-      rentTime: newRentTime,
-      updateTurninDate: newTurninDate,
-      turninTime: newTurninTime,
+      rentTime: moment(newRentTime).toString(),
+      turninTime: moment(newTurninTime).toString(),
       extra,
     };
     console.log('requestData: ', requestData);
@@ -119,43 +89,25 @@ const RentCarReservationUpdate = ({ carNo, onClose }) => {
             <div className={styles.field}>
               <label>렌트 픽업일 :</label>
               <DatePicker
-                selected={newRentDate}
-                onChange={(date) => setNewRentDate(date)}
-                dateFormat='yyyy년 MM월 dd일'
+                selected={newRentTime}
+                onChange={handleStartTimeChange}
+                dateFormat='yyyy년 MM월 dd일 aa HH:mm'
                 minDate={minDate}
                 maxDate={maxDate}
                 className={styles.datePicker}
-              />
-              <DatePicker
-                selected={newRentTime}
-                onChange={handleStartTimeChange}
                 showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={30}
-                timeCaption='Time'
-                dateFormat='aa h:mm'
-                className={styles.datePicker}
               />
             </div>
             <div className={styles.field}>
               <label>렌트 반납일 :</label>
               <DatePicker
-                selected={newTurninDate}
-                onChange={(date) => setNewTurninDate(date)}
-                dateFormat='yyyy년 MM월 dd일'
+                selected={newTurninTime}
+                onChange={handleEndTimeChange}
+                dateFormat='yyyy년 MM월 dd일 aa HH:mm'
                 minDate={minDate}
                 maxDate={maxDate}
                 className={styles.datePicker}
-              />
-              <DatePicker
-                selected={newTurninTime}
-                onChange={handleEndTimeChange}
                 showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={30}
-                timeCaption='Time'
-                dateFormat='aa h:mm'
-                className={styles.datePicker}
               />
             </div>
             <div className={styles.field}>
