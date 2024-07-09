@@ -46,6 +46,10 @@ const ReservationModal = ({
   const [selectedOption, setSelectedOption] =
     useState('option1');
 
+  const [unavailableTimes, setUnavailableTimes] = useState(
+    [],
+  );
+
   const handlerRadioChange = (e) => {
     setSelectedOption(e.target.value);
     if (e.target.value === 'option1') {
@@ -208,6 +212,50 @@ const ReservationModal = ({
     }
   };
 
+  useEffect(() => {
+    const fetchUnavailableTimes = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8181/charge/unavailable-times/${chargeId}`,
+        );
+        setUnavailableTimes(response.data);
+      } catch (error) {
+        console.error(
+          'Failed to fetch unavailable times:',
+          error,
+        );
+      }
+    };
+
+    fetchUnavailableTimes();
+  }, [chargeId]);
+
+  const filterUnavailableTimes = (time) => {
+    const selectedDate = new Date(time);
+    return !unavailableTimes.some((unavailable) => {
+      const startTime = new Date(unavailable.startTime);
+      const endTime = new Date(unavailable.endTime);
+      return (
+        selectedDate >= startTime && selectedDate <= endTime
+      );
+    });
+  };
+
+  const getTimeClassName = (time) => {
+    const selectedDate = new Date(time);
+    const isUnavailable = unavailableTimes.some(
+      (unavailable) => {
+        const startTime = new Date(unavailable.startTime);
+        const endTime = new Date(unavailable.endTime);
+        return (
+          selectedDate >= startTime &&
+          selectedDate <= endTime
+        );
+      },
+    );
+    return isUnavailable ? styles.unavailableTime : '';
+  };
+
   return (
     <>
       <ModalModal
@@ -292,15 +340,18 @@ const ReservationModal = ({
             <DatePicker
               className={styles.datePicker}
               selected={startDate}
-              // showIcon
               onChange={(date) => setStartDate(date)}
               showTimeSelect
               shouldCloseOnSelect
               minDate={today}
               maxDate={addDays(today, 2)}
-              filterTime={filterPassedTime}
-              timeIntervals={10} // 10분 단위
+              filterTime={(time) =>
+                filterPassedTime(time) &&
+                filterUnavailableTimes(time)
+              }
+              timeIntervals={10}
               dateFormat={'yyyy년 MM월 dd일 aa hh:mm'}
+              timeClassName={getTimeClassName}
             />
           </div>
           <div className={styles.flex}>
