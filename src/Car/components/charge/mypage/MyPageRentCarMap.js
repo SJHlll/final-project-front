@@ -20,6 +20,7 @@ const MyPageRentCarMap = () => {
   const { phoneNumber } = useContext(AuthContext);
   const [selectedCar, setSelectedCar] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalClose, setModalClose] = useState(false);
   const [updateModalOpen, setUpdateModalOpen] =
     useState(false);
 
@@ -131,6 +132,10 @@ const MyPageRentCarMap = () => {
     setIsEditDateMode(false);
   };
 
+  const onClose = () => {
+    setModalClose(true);
+  };
+
   const toggleEditDateMode = () => {
     setIsEditDateMode(!isEditDateMode);
     setUpdateModalOpen(!updateModalOpen);
@@ -222,6 +227,9 @@ const MyPageRentCarMap = () => {
               >
                 <RentCarReservationUpdate
                   carNo={selectedCar.carNo}
+                  onClose={onClose}
+                  rentDate={selectedCar.rentTime}
+                  turninDate={selectedCar.turninTime}
                 />
               </Modal>
             )}
@@ -247,7 +255,7 @@ const MyPageRentCarMap = () => {
                   className={styles.buttonbutton}
                   onClick={toggleEditDateMode}
                 >
-                  날짜 수정하기
+                  예약 변경
                 </button>
               </>
             )}
