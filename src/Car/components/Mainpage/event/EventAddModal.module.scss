@@ -24,7 +24,7 @@
     border-radius: 5px;
     /* 모서리를 둥글게 */
     width: 500px;
-    height: 532.7px;
+    height: 600px;
     /* 고정된 크기 설정 */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     /* 그림자 효과 */
@@ -50,6 +50,7 @@
 .formGroup {
     margin-bottom: 15px;
     width: 100%;
+
     /* 첫 번째 formGroup에만 적용 */
     &:first-child {
         border-bottom: 1px solid lightgray;
