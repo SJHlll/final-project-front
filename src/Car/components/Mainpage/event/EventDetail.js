@@ -3,7 +3,11 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+} from 'react-router-dom';
 import styles from './Event.module.scss';
 import style from '../../../../scss/Button.module.scss';
 import axios from 'axios';
@@ -11,55 +15,33 @@ import EventAddModal from './EventAddModal';
 import Frame from '../Frame';
 import AuthContext from '../../../../util/AuthContext';
 import { API_BASE_URL } from '../../../../config/host-config';
+import EventBtn from './EventBtn';
 
 const EventDetail = () => {
-  const location = useLocation();
-  const { id, img, title, status } = location.state || {};
+  const { id } = useParams();
   const navigate = useNavigate();
   const toList = () => navigate('/events');
 
-  const [events, setEvents] = useState([]);
-  const [currentEventIndex, setCurrentEventIndex] =
-    useState(-1);
+  const [event, setEvent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태
   const { role } = useContext(AuthContext);
   const token = localStorage.getItem('ACCESS_TOKEN');
 
-  const API_EVENT_URL = API_BASE_URL + `/events/list`;
+  const API_EVENT_URL = `${API_BASE_URL}/events/list/${id}`;
 
   useEffect(() => {
-    const fetchEvents = async () => {
+    const fetchEvent = async () => {
       try {
         const res = await axios.get(API_EVENT_URL);
-        console.log(`url : ${API_EVENT_URL}`);
-
-        const eventsList = res.data;
-        console.log('resData: ', res.data);
-        console.log('eventList: ', eventsList);
-        console.log('id: ', id);
-        console.log('eventsLength:', events.length);
-
-        setEvents(eventsList);
-        const index = events.findIndex(
-          (event) => event.id === id,
-        );
-
-        console.log('index: ', index);
-        console.log('Event ID: ', id);
-        if (index !== -1) {
-          setCurrentEventIndex(index);
-        } else {
-          console.error(
-            'Current event ID not found in the event list',
-          );
-        }
+        setEvent(res.data);
+        console.log('res-data: ', res.data);
       } catch (err) {
-        console.log('Error fetching events: ', err);
+        console.error('Error fetching event: ', err);
       }
     };
 
-    fetchEvents();
-  }, [id]);
+    fetchEvent();
+  }, [API_EVENT_URL]);
 
   const removeEvent = async () => {
     try {
@@ -74,7 +56,7 @@ const EventDetail = () => {
       alert('삭제 완료');
       navigate('/events');
     } catch (err) {
-      console.error('Error deleting notification:', err);
+      console.error('Error deleting event:', err);
     }
   };
 
@@ -86,26 +68,16 @@ const EventDetail = () => {
     setIsModalOpen(false);
   };
 
-  const goToPreviousEvent = () => {
-    if (currentEventIndex > 0) {
-      const previousEventId =
-        events[currentEventIndex - 1].id;
-      navigate(`/events/${previousEventId}`, {
-        state: events[currentEventIndex - 1],
-      });
-    }
-  };
+  if (!event) {
+    return <div>Loading...</div>;
+  }
 
-  const goToNextEvent = () => {
-    if (currentEventIndex < events.length - 1) {
-      const nextEventId = events[currentEventIndex + 1].id;
-      navigate(`/events/${nextEventId}`, {
-        state: events[currentEventIndex + 1],
-      });
-    }
-  };
+  const {
+    content: img,
+    title,
+    eventCategory: status,
+  } = event;
 
-  const newLocal = '-10';
   return (
     <Frame>
       <div
@@ -126,41 +98,50 @@ const EventDetail = () => {
                 ? '종료'
                 : null}
           </div>
-          <button
-            style={{
-              backgroundColor: '#fff',
-              border: '0px',
-              marginRight: '30px',
-              fontSize: '50px',
-              padding: '0px 30px',
-              color: 'black',
-            }}
-            className={`${style.publicBtn} ${styles.updateButton}`}
-            onClick={goToPreviousEvent}
-            disabled={currentEventIndex <= 0} // 이전 버튼 비활성화 조건
-          >
-            &lt;
-          </button>
-          <div className={styles.eventDetailTitle}>
-            {title}
+
+          <div className={styles.eventDetailButtons}>
+            <button
+              style={{
+                backgroundColor: '#fff',
+                border: '0px',
+                fontSize: '50px',
+                padding: '0px 30px',
+                color: 'black',
+              }}
+              className={`${style.publicBtn} ${styles.updateButton}`}
+              onClick={() =>
+                navigate(
+                  `/events/${parseInt(id, 10) - 1}`,
+                  { state: { id: parseInt(id, 10) - 1 } },
+                )
+              }
+            >
+              &lt;
+            </button>
+
+            <div className={styles.eventDetailTitle}>
+              {title}
+            </div>
+
+            <button
+              style={{
+                backgroundColor: '#fff',
+                border: '0px',
+                fontSize: '50px',
+                padding: '0px 30px',
+                color: 'black',
+              }}
+              className={`${style.publicBtn} ${styles.updateButton}`}
+              onClick={() =>
+                navigate(
+                  `/events/${parseInt(id, 10) + 1}`,
+                  { state: { id: parseInt(id, 10) + 1 } },
+                )
+              }
+            >
+              &gt;
+            </button>
           </div>
-          <button
-            className={`${style.publicBtn} ${styles.updateButton}`}
-            style={{
-              backgroundColor: '#fff',
-              border: '0px',
-              fontSize: '50px',
-              marginLeft: '30px',
-              padding: '0px 30px',
-              color: 'black',
-            }}
-            onClick={goToNextEvent}
-            disabled={
-              currentEventIndex >= events.length - 1
-            } // 다음 버튼 비활성화 조건
-          >
-            &gt;
-          </button>
 
           <div
             className={`${styles.flexBox} ${styles.marginBox}`}
@@ -179,6 +160,7 @@ const EventDetail = () => {
             </button>
           </div>
         </div>
+
         <div className={styles.eventDetailBody}>
           {img && (
             <img

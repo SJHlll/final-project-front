@@ -15,7 +15,7 @@ import EventAddModal from './EventAddModal';
 import Frame from '../Frame';
 
 const Event = () => {
-  const redirection = useNavigate();
+  const navigate = useNavigate();
   const { onLogout, role } = useContext(AuthContext);
   const [isModal, setIsModal] = useState(false);
   const [events, setEvents] = useState([]);
@@ -24,7 +24,6 @@ const Event = () => {
   const API_EVENT_URL = API_BASE_URL + '/events';
 
   const eventAddModalOpen = () => {
-    console.log('클릭 이벤트 발생!');
     setIsModal(true);
   };
 
@@ -37,17 +36,26 @@ const Event = () => {
           setLoading(false);
         },
         onLogout,
-        redirection,
+        navigate,
       );
     };
 
     fetchEvents();
-  }, [API_EVENT_URL, onLogout, redirection]);
+  }, [API_EVENT_URL, onLogout, navigate]);
+
+  const handleEventClick = (eventId) => {
+    navigate(`/events/${eventId}`, {
+      state: { id: eventId },
+    });
+  };
 
   return (
     <Frame>
       <div className={styles.eventbody}>
-        <Eventlist eventList={events} />
+        <Eventlist
+          eventList={events}
+          onEventClick={handleEventClick}
+        />
         {role === 'ADMIN' && (
           <button
             className={`${style.publicBtn} ${styles.eventButton}`}
