@@ -136,7 +136,7 @@ const ReservedCarMap = () => {
             </div>
             <div className={styles.resSelectedTime}>
               <div>{formatRentTime(e.rentTime)}</div>
-              <div>~ {formatRentTime(e.turninTime)}</div>
+              <div>~ {formatRentTime(e.turnine)}</div>
             </div>
             <div className={styles.spaceBlank}>
               <button
