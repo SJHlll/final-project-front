@@ -1,22 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import styles from './Event.module.scss';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styles from './Event.module.scss';
 import style from '../../../../scss/Button.module.scss';
 
-const Eventlist = ({ eventList }) => {
-  const navigate = useNavigate();
+const Eventlist = ({ eventList, onEventClick }) => {
   const [activeTab, setActiveTab] = useState('전체');
+  const navigate = useNavigate();
 
   // 상세보기로 이동
   const handleClick = (item) => {
-    navigate(`/events/${item.eventNo}`, {
-      state: {
-        id: item.eventNo,
-        img: item.content,
-        title: item.title,
-        status: item.eventCategory,
-      },
-    });
+    if (onEventClick) {
+      onEventClick(item.eventNo);
+    }
   };
 
   // 필터링 진행중 / 종료
