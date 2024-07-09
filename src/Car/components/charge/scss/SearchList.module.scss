@@ -1,5 +1,5 @@
 .searchListContainer {
-  width: 30%;
+  width: 510px;
   height: 89vh;
   background-color: white;
   border-right: 1px solid #888;
@@ -16,11 +16,11 @@
 .searchListContainer.visible {
   left: 0;
   transition: left 0.5s ease;
-  width: 30%;
+  width: 510px;
 }
 
 .searchListContainer.hidden {
-  left: -30%;
+  left: -510px;
   transition: left 0.5s ease;
 }
 
@@ -52,7 +52,7 @@
 }
 
 .openBtn.visible {
-  left: 30%;
+  left: 510px;
 }
 
 .openBtn.hidden {
