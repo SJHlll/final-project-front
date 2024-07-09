@@ -96,6 +96,10 @@ const ReservedCarMap = () => {
     return text;
   };
 
+  const formatPrice = (price) => {
+    return price.toLocaleString('ko-KR');
+  };
+
   // 전화번호 뒷자리 4개로 필터링
   useEffect(() => {
     let filtered;
@@ -132,11 +136,11 @@ const ReservedCarMap = () => {
               {truncateText(e.carName, 20)}
             </div>
             <div className={styles.resSelectedAd}>
-              {e.totalPrice}원
+              {formatPrice(e.totalPrice)}원
             </div>
             <div className={styles.resSelectedTime}>
               <div>{formatRentTime(e.rentTime)}</div>
-              <div>~ {formatRentTime(e.turnine)}</div>
+              <div>~ {formatRentTime(e.turninTime)}</div>
             </div>
             <div className={styles.spaceBlank}>
               <button
