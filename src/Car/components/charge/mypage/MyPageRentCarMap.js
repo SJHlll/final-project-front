@@ -159,7 +159,7 @@ const MyPageRentCarMap = () => {
               <div>{formatRentTime(e.turninDate)}</div>
             </div>
             <div className={styles.resNote}>
-              {e.extra ? truncateText(e.extra, 80) : '없음'}
+              {e.extra ? truncateText(e.extra, 40) : '없음'}
             </div>
           </div>
         ))}
