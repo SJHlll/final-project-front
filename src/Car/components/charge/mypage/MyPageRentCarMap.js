@@ -153,10 +153,10 @@ const MyPageRentCarMap = () => {
               {formatPrice(e.totalPrice)}원
             </div>
             <div className={styles.resSelectedTime}>
-              <div>{formatRentTime(e.rentDate)}</div>
+              <div>{formatRentTime(e.rentTime)}</div>
             </div>
             <div className={styles.resSelectedTime}>
-              <div>{formatRentTime(e.turninDate)}</div>
+              <div>{formatRentTime(e.turninTime)}</div>
             </div>
             <div className={styles.resNote}>
               {e.extra ? truncateText(e.extra, 40) : '없음'}
@@ -188,11 +188,11 @@ const MyPageRentCarMap = () => {
                 </p>
                 <div>
                   렌트 시작일 :{' '}
-                  {formatRentTime(selectedCar.rentDate)}
+                  {formatRentTime(selectedCar.rentTime)}
                 </div>
                 <div>
                   렌트 반납일 :{' '}
-                  {formatRentTime(selectedCar.turninDate)}
+                  {formatRentTime(selectedCar.turninTime)}
                 </div>
                 <div style={{ margin: '3px 0' }}>메모:</div>
                 <div

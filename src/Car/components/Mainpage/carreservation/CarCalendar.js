@@ -100,36 +100,36 @@ const CarCalendar = ({
               'Processing item:',
               JSON.stringify(item, null, 2),
             );
-            if (!item.rentDate || !item.turninDate) {
+            if (!item.rentTime || !item.turninTime) {
               console.error(
-                'rentDate or turninDate is missing for item:',
+                'rentDate or turninTime is missing for item:',
                 item,
               );
               return [];
             }
             try {
-              const rentDate = parse(
-                item.rentDate,
+              const rentTime = parse(
+                item.rentTime,
                 'yyyy-MM-dd',
                 new Date(),
               );
-              const turninDate = parse(
-                item.turninDate,
+              const turninTime = parse(
+                item.turninTime,
                 'yyyy-MM-dd',
                 new Date(),
               );
 
               if (
-                !isValid(rentDate) ||
-                !isValid(turninDate)
+                !isValid(rentTime) ||
+                !isValid(turninTime)
               ) {
                 throw new Error('Invalid date');
               }
 
               // 대여 시작일부터 반납일 전날까지의 모든 날짜 포함
               const dates = [];
-              let currentDate = rentDate; // 대여 시작일부터 시작
-              while (currentDate < turninDate) {
+              let currentDate = rentTime; // 대여 시작일부터 시작
+              while (currentDate < turninTime) {
                 // 반납일 전날까지
                 dates.push(new Date(currentDate));
                 currentDate = addDays(currentDate, 1);
