@@ -16,6 +16,7 @@ import CarInfo from './CarInfo';
 import { CarContext } from '../../../../contexts/CarContext';
 import AuthContext from '../../../../util/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -101,6 +102,7 @@ const Carres = () => {
 
   const saveReservation = async (reservationData) => {
     const token = localStorage.getItem('ACCESS_TOKEN'); // 로컬 토큰
+    console.log('token: ', token);
     try {
       const res = await fetch('/rentcar/reservation', {
         method: 'POST',
@@ -136,17 +138,12 @@ const Carres = () => {
   const reservationHandler = () => {
     const reservationData = {
       carId: selectedCar.id,
-      rentDate: pickup.date
-        ? pickup.date.toISOString().split('T')[0]
-        : null,
-      turninDate: returning.date
-        ? returning.date.toISOString().split('T')[0]
-        : null,
+      carName: selectedCar.carName,
       rentTime: pickup.time
-        ? pickup.time.toTimeString().split(' ')[0]
+        ? moment(pickup.time).toString()
         : null,
       turninTime: returning.time
-        ? returning.time.toTimeString().split(' ')[0]
+        ? moment(returning.time).toString()
         : null,
       totalPrice: totalPrice.replace(/,/g, ''),
       extra,
