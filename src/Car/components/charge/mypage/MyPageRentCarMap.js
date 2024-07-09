@@ -20,6 +20,7 @@ const MyPageRentCarMap = () => {
   const { phoneNumber } = useContext(AuthContext);
   const [selectedCar, setSelectedCar] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalClose, setModalClose] = useState(false);
   const [updateModalOpen, setUpdateModalOpen] =
     useState(false);
 
@@ -153,13 +154,13 @@ const MyPageRentCarMap = () => {
               {formatPrice(e.totalPrice)}원
             </div>
             <div className={styles.resSelectedTime}>
-              <div>{formatRentTime(e.rentDate)}</div>
+              <div>{formatRentTime(e.rentTime)}</div>
             </div>
             <div className={styles.resSelectedTime}>
               <div>{formatRentTime(e.turninDate)}</div>
             </div>
             <div className={styles.resNote}>
-              {e.extra ? truncateText(e.extra, 80) : '없음'}
+              {e.extra ? truncateText(e.extra, 40) : '없음'}
             </div>
           </div>
         ))}
@@ -207,11 +208,20 @@ const MyPageRentCarMap = () => {
             )}
             {isEditDateMode && (
               <Modal
+                style={{
+                  position: 'absolute',
+                  top: '100px',
+                  left: '710px',
+                  width: '100%',
+                }}
                 isOpen={updateModalOpen}
                 toggle={toggleEditDateMode}
               >
                 <RentCarReservationUpdate
                   carNo={selectedCar.carNo}
+                  onClose={closeModal}
+                  rentDate={selectedCar.rentDate}
+                  turninDate={selectedCar.turninDate}
                 />
               </Modal>
             )}
@@ -237,7 +247,7 @@ const MyPageRentCarMap = () => {
                   className={styles.buttonbutton}
                   onClick={toggleEditDateMode}
                 >
-                  날짜 수정하기
+                  예약 변경
                 </button>
               </>
             )}
