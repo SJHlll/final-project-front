@@ -35,7 +35,7 @@ const ModalContent = styled.div`
   background: white;
   padding: 0 15px 0;
   border-radius: 10px;
-  width: 35%;
+  width: 25%;
   max-height: 90%;
   overflow-y: auto;
 `;
@@ -250,7 +250,7 @@ const Carres = () => {
                 className={`${style.publicBtn} ${styles.payBtn}`}
                 onClick={reservationHandler}
               >
-                예약 확정 하기
+                결제하기
               </button>
             </div>
           </ModalFooter>

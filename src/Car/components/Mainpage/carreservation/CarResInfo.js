@@ -142,8 +142,10 @@ const CarResInfo = ({
             onChange={handleExtraChange}
             placeholder='특이사항을 적어주세요'
             style={{
-              border: '1px solid white',
-              width: '90%',
+              border: '1px solid lightgray',
+              width: '85%',
+              marginLeft: '10px',
+              overflow: 'auto',
             }}
             maxLength={MAX_EXTRA_LENGTH} // 입력 최대 길이 설정
           />
