@@ -24,6 +24,10 @@ const MyPageCharge = () => {
     setCancel(!cancel);
   };
 
+  const formatPrice = (price) => {
+    return price.toLocaleString('ko-KR');
+  };
+
   // 시간 / 분 필터
   const formatTime = (minutes) => {
     // 시간
@@ -199,7 +203,7 @@ const MyPageCharge = () => {
               <div className={styles.flex}>
                 <div className={styles.value}>가격</div>
                 <div>
-                  {r.rentChargePrice}원 (
+                  {formatPrice(r.rentChargePrice)}원 (
                   {formatTime(r.time)})
                 </div>
               </div>

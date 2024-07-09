@@ -27,6 +27,8 @@ const MyPageRentCarMap = () => {
   const [isEditDateMode, setIsEditDateMode] =
     useState(false);
 
+  const [isHovered, setIsHovered] = useState(false);
+
   // DB에서 예약한 렌트카 가져오기
   useEffect(() => {
     const fetchStations = async () => {
@@ -160,7 +162,7 @@ const MyPageRentCarMap = () => {
               <div>{formatRentTime(e.turninDate)}</div>
             </div>
             <div className={styles.resNote}>
-              {e.extra ? truncateText(e.extra, 40) : '없음'}
+              {e.extra ? truncateText(e.extra, 80) : '없음'}
             </div>
           </div>
         ))}
@@ -202,7 +204,15 @@ const MyPageRentCarMap = () => {
                     borderRadius: '7px',
                   }}
                 >
-                  {selectedCar.extra || '없음'}
+                  {selectedCar.extra > 0 ? (
+                    <div style={{ padding: '5px' }}>
+                      {selectedCar.extra}
+                    </div>
+                  ) : (
+                    <div style={{ padding: '5px' }}>
+                      없음
+                    </div>
+                  )}
                 </div>
               </>
             )}
