@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import styles from '../scss/PlugAndGoStation.module.scss';
-import { Modal, ModalBody } from 'reactstrap';
 import styled from 'styled-components';
 import ReservationModal from './ReservationModal';
 import { SecondMapContext } from '../../../../contexts/SecondMapContext';

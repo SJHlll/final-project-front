@@ -409,7 +409,7 @@ const Modal2 = ({
                   : chargeList.map((charge) => (
                       <option
                         key={charge.stationId}
-                        value={charge.stationName}
+                        value={charge.stationId}
                       >
                         {charge.stationName}
                       </option>
