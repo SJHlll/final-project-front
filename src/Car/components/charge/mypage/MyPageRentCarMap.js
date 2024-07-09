@@ -26,6 +26,8 @@ const MyPageRentCarMap = () => {
   const [isEditDateMode, setIsEditDateMode] =
     useState(false);
 
+  const [isHovered, setIsHovered] = useState(false);
+
   // DB에서 예약한 렌트카 가져오기
   useEffect(() => {
     const fetchStations = async () => {
@@ -153,13 +155,13 @@ const MyPageRentCarMap = () => {
               {formatPrice(e.totalPrice)}원
             </div>
             <div className={styles.resSelectedTime}>
-              <div>{formatRentTime(e.rentDate)}</div>
+              <div>{formatRentTime(e.rentTime)}</div>
             </div>
             <div className={styles.resSelectedTime}>
-              <div>{formatRentTime(e.turninDate)}</div>
+              <div>{formatRentTime(e.turninTime)}</div>
             </div>
             <div className={styles.resNote}>
-              {e.extra ? truncateText(e.extra, 40) : '없음'}
+              {e.extra ? truncateText(e.extra, 20) : '없음'}
             </div>
           </div>
         ))}
@@ -188,20 +190,28 @@ const MyPageRentCarMap = () => {
                 </p>
                 <div>
                   렌트 시작일 :{' '}
-                  {formatRentTime(selectedCar.rentDate)}
+                  {formatRentTime(selectedCar.rentTime)}
                 </div>
                 <div>
                   렌트 반납일 :{' '}
-                  {formatRentTime(selectedCar.turninDate)}
+                  {formatRentTime(selectedCar.turninTime)}
                 </div>
-                <div style={{ margin: '3px 0' }}>메모:</div>
+                <div style={{ margin: '3px 0' }}>메모</div>
                 <div
                   style={{
                     border: '1px solid lightgray',
                     borderRadius: '7px',
                   }}
                 >
-                  {selectedCar.extra || '없음'}
+                  {selectedCar.extra > 0 ? (
+                    <div style={{ padding: '5px' }}>
+                      {selectedCar.extra}
+                    </div>
+                  ) : (
+                    <div style={{ padding: '5px' }}>
+                      없음
+                    </div>
+                  )}
                 </div>
               </>
             )}

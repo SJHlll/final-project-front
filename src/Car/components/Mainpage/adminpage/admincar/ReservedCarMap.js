@@ -135,8 +135,8 @@ const ReservedCarMap = () => {
               {e.totalPrice}원
             </div>
             <div className={styles.resSelectedTime}>
-              <div>{formatRentTime(e.rentDate)}</div>
-              <div>~ {formatRentTime(e.turninDate)}</div>
+              <div>{formatRentTime(e.rentTime)}</div>
+              <div>~ {formatRentTime(e.turnine)}</div>
             </div>
             <div className={styles.spaceBlank}>
               <button
