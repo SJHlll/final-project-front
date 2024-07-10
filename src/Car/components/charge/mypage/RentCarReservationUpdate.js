@@ -9,6 +9,7 @@ import React, {
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import styles from './RentCarReservationUpdate.module.scss';
+import style from '../../../../scss/Button.module.scss';
 import moment from 'moment';
 
 const RentCarReservationUpdate = ({
@@ -27,6 +28,8 @@ const RentCarReservationUpdate = ({
   const [reservedDates, setReservedDates] = useState([]);
 
   const handleStartTimeChange = (time) => {
+    console.log('typeof time: ', typeof time);
+    console.log(time);
     setNewRentTime(time);
   };
 
@@ -170,7 +173,7 @@ const RentCarReservationUpdate = ({
               <DatePicker
                 selected={newRentTime}
                 onChange={handleStartTimeChange}
-                dateFormat='yyyy년 MM월 dd일 h:mm aa'
+                dateFormat='yyyy년 MM월 dd일 aa HH:mm'
                 minDate={minDate}
                 maxDate={maxDate}
                 className={styles.datePicker}
@@ -184,7 +187,7 @@ const RentCarReservationUpdate = ({
               <DatePicker
                 selected={newTurninTime}
                 onChange={handleEndTimeChange}
-                dateFormat='yyyy년 MM월 dd일 h:mm aa'
+                dateFormat='yyyy년 MM월 dd일 aa HH:mm'
                 minDate={minDate}
                 maxDate={maxDate}
                 className={styles.datePicker}
@@ -207,7 +210,9 @@ const RentCarReservationUpdate = ({
             </div>
             <button
               type='submit'
-              className={styles.submitButton}
+              className={`${styles.submitButton}
+                ${style.publicBtn}
+              `}
             >
               예약 변경
             </button>

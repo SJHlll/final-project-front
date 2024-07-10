@@ -149,6 +149,36 @@ const ReviewMap = () => {
     isCar,
   ]);
 
+  const ReviewStars = ({ rating }) => {
+    // 꽉 찬 별의 개수
+    const fullStars = Math.floor(rating);
+    // 빈 별의 개수
+    const emptyStars = 5 - fullStars;
+
+    // 꽉 찬 별 배열 생성
+    const fullStarsArray = Array.from(
+      { length: fullStars },
+      (_, index) => (
+        <span key={index}>&#9733;</span> // ★
+      ),
+    );
+
+    // 빈 별 배열 생성
+    const emptyStarsArray = Array.from(
+      { length: emptyStars },
+      (_, index) => (
+        <span key={index + fullStars}>&#9734;</span> // ☆
+      ),
+    );
+
+    return (
+      <span style={{ color: '#FFC107' }}>
+        {fullStarsArray}
+        {emptyStarsArray}
+      </span>
+    );
+  };
+
   // 회원이 작성한 리뷰 목록
   const AdminContents = ({ reviews }) => {
     return (
@@ -175,6 +205,8 @@ const ReviewMap = () => {
                   : null}
             </div>
             <div className={styles.resSelectedName}>
+              <ReviewStars rating={e.rating} />
+              {' / '}
               {truncateText(e.content, 50)}
             </div>
             <div className={styles.resSelectedTime}>
