@@ -128,6 +128,7 @@ const MyPageInfo = () => {
           <button
             className={style.publicBtn}
             onClick={toggleUpdateInfo}
+            style={{ marginRight: '20px' }}
           >
             수정하기
           </button>
