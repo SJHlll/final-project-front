@@ -104,3 +104,24 @@ font-size: 19px;
 #returnTime{
   margin-left: 30px;
 }
+.customDatepicker {
+  font-family: 'Arial', sans-serif;
+  border: 1px solid #e4e4e4;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.styles.customDatepicker__time{
+  width: 200px;
+}
+.customDatepicker__header {
+  background-color: #4caf50;
+  color: white;
+}
+
+.customDatepicker__daySelected,
+.customDatepicker__dayKeyboard-selected {
+  background-color: #ff5722;
+  color: white;
+}

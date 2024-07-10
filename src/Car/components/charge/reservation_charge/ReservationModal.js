@@ -350,7 +350,7 @@ const ReservationModal = ({
                 filterUnavailableTimes(time)
               }
               timeIntervals={10}
-              dateFormat={'yyyy년 MM월 dd일 aa hh:mm'}
+              dateFormat={'yyyy년 MM월 dd일 h:mm aa'}
               timeClassName={getTimeClassName}
             />
           </div>

@@ -96,10 +96,6 @@ const Carres = () => {
     }
   }, [daysBetween, selectedCar]);
 
-  const onSelectCar = (car) => {
-    setSelectedCar(car);
-  };
-
   const saveReservation = async (reservationData) => {
     const token = localStorage.getItem('ACCESS_TOKEN'); // 로컬 토큰
     console.log('token: ', token);
@@ -201,15 +197,6 @@ const Carres = () => {
       type='button'
     >
       예약하기
-    </button>
-  );
-
-  const closeBtn = (
-    <button
-      className={`${styles.publicBtn} ${styles.closeBtn}`}
-      onClick={toggle}
-    >
-      &times;
     </button>
   );
 
