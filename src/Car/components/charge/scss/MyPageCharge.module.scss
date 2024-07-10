@@ -1,6 +1,6 @@
 .reservationList {
   width: 450px;
-  border: 1px solid black;
+  // border: 1px solid lightgray;
   border-radius: 3px;
   padding: 10px;
 
@@ -9,6 +9,7 @@
     height: 30px;
     margin: 10px 5px;
     align-items: center;
+    border-bottom: 1px solid lightgray;
   }
 
   .value {
@@ -56,4 +57,3 @@
   border: 1px solid #2c7fdf;
   border-radius: 5px;
 }
-
