@@ -10,9 +10,11 @@ import MyPageModal from './MyPageModal';
 import { useNavigate } from 'react-router-dom';
 import RentCarReservationUpdate from './RentCarReservationUpdate';
 import { Modal } from 'reactstrap';
+import { TabContext } from '../../Mainpage/TabContext';
 
 const MyPageRentCarMap = () => {
   const navigate = useNavigate();
+  const { updateActiveTab } = useContext(TabContext);
   const { reserveCar, setReserveCar } =
     useContext(TestRcContext);
   const { phoneNumber } = useContext(AuthContext);
@@ -278,7 +280,10 @@ const MyPageRentCarMap = () => {
             예약한 렌트카가 없습니다.
             <div>
               <span
-                onClick={() => navigate('/car/res')}
+                onClick={() => {
+                  updateActiveTab(2);
+                  navigate('/car/res');
+                }}
                 style={{
                   cursor: 'pointer',
                   color: '#F18D8A',
