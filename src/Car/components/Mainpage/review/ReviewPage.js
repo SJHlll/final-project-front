@@ -25,7 +25,7 @@ const ReviewPage = ({ ReviewList }) => {
     const fetchReviews = async () => {
       try {
         const response = await fetch(
-          'http://plugngo.site/review/list',
+          `${process.env.REACT_APP_API_URL}/review/list`,
         );
         if (!response.ok) {
           throw new Error('Failed to fetch reviews');

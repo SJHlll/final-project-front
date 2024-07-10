@@ -154,7 +154,7 @@ const ReservationModal = ({
     // 시도
     try {
       const response = await axios.post(
-        'http://plugngo.site/charge/reservation',
+        `${process.env.REACT_APP_API_URL}/charge/reservation`,
         requestDTO,
       );
       console.log(response.data);
@@ -216,7 +216,7 @@ const ReservationModal = ({
     const fetchUnavailableTimes = async () => {
       try {
         const response = await axios.get(
-          `http://plugngo.site/charge/unavailable-times/${chargeId}`,
+          `${process.env.REACT_APP_API_URL}/charge/unavailable-times/${chargeId}`,
         );
         setUnavailableTimes(response.data);
       } catch (error) {

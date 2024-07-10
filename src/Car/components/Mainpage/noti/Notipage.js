@@ -52,7 +52,7 @@ const NotiPage = () => {
   const saveUpdateHandler = async () => {
     try {
       const response = await axios.patch(
-        `http://plugngo.site/noti/${id}`,
+        `${process.env.REACT_APP_API_URL}/noti/${id}`,
         {
           notiId,
           notiTitle: editedHeader,
@@ -77,7 +77,7 @@ const NotiPage = () => {
   const deleteNotiHandler = async () => {
     try {
       await axios.delete(
-        `http://plugngo.site/noti/${notiId}`,
+        `${process.env.REACT_APP_API_URL}/noti/${notiId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -94,7 +94,7 @@ const NotiPage = () => {
   const getNotiInfo = async () => {
     try {
       const response = await axios.get(
-        `http://plugngo.site/noti/info/${id}`,
+        `${process.env.REACT_APP_API_URL}/noti/info/${id}`,
       );
       setCurrentHeader(response.data.notiList[0].notiTitle);
       setCurrentContents(

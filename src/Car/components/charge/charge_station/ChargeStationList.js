@@ -44,7 +44,7 @@ const ChargeStationList = () => {
       // 불러왔다
       try {
         const response = await fetch(
-          'http://plugngo.site/charge/list', // 현재 링크
+          `${process.env.REACT_APP_API_URL}/charge/list`, // 현재 링크
         );
         // 에러떴다
         if (!response.ok) {

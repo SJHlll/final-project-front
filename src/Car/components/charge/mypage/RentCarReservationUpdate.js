@@ -49,7 +49,7 @@ const RentCarReservationUpdate = ({
 
     try {
       const res = await axios.patch(
-        `http://plugngo.site/rentcar/${carNo}`,
+        `${process.env.REACT_APP_API_URL}/rentcar/${carNo}`,
         requestData,
         {
           headers: {

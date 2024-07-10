@@ -45,7 +45,7 @@ const Noti = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        'http://plugngo.site/noti',
+        `${process.env.REACT_APP_API_URL}/noti`,
         {
           notiTitle: NotiTitle,
           notiContent: NotiContent,
@@ -70,7 +70,7 @@ const Noti = () => {
   const fetchNotiList = async () => {
     try {
       const response = await axios.get(
-        'http://plugngo.site/noti/info',
+        `${process.env.REACT_APP_API_URL}/noti/info`,
       );
       setNotiList(response.data.notiList);
     } catch (err) {

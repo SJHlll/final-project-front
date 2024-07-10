@@ -32,7 +32,7 @@ const MyPageRentCarMap = () => {
       try {
         const token = localStorage.getItem('ACCESS_TOKEN');
         const response = await fetch(
-          'http://plugngo.site/admin/car',
+          `${process.env.REACT_APP_API_URL}/admin/car`,
           {
             method: 'GET',
             headers: {
@@ -66,7 +66,7 @@ const MyPageRentCarMap = () => {
     try {
       const token = localStorage.getItem('ACCESS_TOKEN');
       const response = await fetch(
-        `http://plugngo.site/admin/car?reservationNo=${reservationNo}`,
+        `${process.env.REACT_APP_API_URL}/admin/car?reservationNo=${reservationNo}`,
         {
           method: 'DELETE',
           headers: {

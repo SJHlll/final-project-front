@@ -76,7 +76,7 @@ const MyPageCharge = () => {
     try {
       const token = localStorage.getItem('ACCESS_TOKEN');
       const response = await fetch(
-        `http://plugngo.site/mypage?reservationNo=${cancelReservationNumber}`,
+        `${process.env.REACT_APP_API_URL}/mypage?reservationNo=${cancelReservationNumber}`,
         {
           method: 'DELETE',
           headers: {
@@ -263,7 +263,7 @@ const MyPageCharge = () => {
       try {
         const token = localStorage.getItem('ACCESS_TOKEN');
         const response = await fetch(
-          'http://plugngo.site/mypage',
+          `${process.env.REACT_APP_API_URL}/mypage`,
           {
             method: 'GET',
             headers: {

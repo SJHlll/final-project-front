@@ -23,7 +23,7 @@ export function Success() {
 
     async function confirm() {
       const response = await fetch(
-        'http://plugngo.site/confirm',
+        `${process.env.REACT_APP_API_URL}/confirm`,
         {
           method: 'POST',
           headers: {
