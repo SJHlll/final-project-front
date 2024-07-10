@@ -224,9 +224,11 @@ const MyPageRentCarMap = () => {
               >
                 <RentCarReservationUpdate
                   carNo={selectedCar.carNo}
+                  carId={selectedCar.carId}
                   onClose={closeModal}
                   rentDate={selectedCar.rentDate}
                   turninDate={selectedCar.turninDate}
+                  reservedCar={reserveCar}
                 />
               </Modal>
             )}
