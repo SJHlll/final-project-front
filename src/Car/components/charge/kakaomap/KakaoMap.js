@@ -143,8 +143,8 @@ const KakaoMap = () => {
       >
         <MarkerClusterer
           averageCenter={true}
-          minLevel={4}
-          gridSize={80}
+          minLevel={5}
+          gridSize={40}
         >
           {filteredMarkers.map((marker) => (
             <MapMarker

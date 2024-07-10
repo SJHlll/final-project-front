@@ -7,7 +7,10 @@ import {
   USER,
 } from '../../../config/host-config';
 import AdminPage from '../../assets/admin_page.png';
+import kakaologo from '../../assets/kakao-logo.png'; // 고정된 이미지 import
+import instalogo from '../../assets/instagram-logo.png'; // 기본 유저 이미지 import
 import { TabContext } from './TabContext';
+
 
 const Testheader = () => {
   const navigate = useNavigate();
@@ -160,12 +163,37 @@ const Testheader = () => {
           onClick={() => handleTabClick(9, '/admin')}
         />
       ) : isLoggedIn ? (
-        <span className={styles.isUser}>
-          {userName}님, 환영합니다!
-        </span>
+        <div className={styles.userInfoContainer}>
+          <span className={styles.isUser}>
+            {userName}님, 환영합니다!
+          </span>
+        </div>
       ) : (
         ''
       )}
+      <div
+        className={styles.kakaologo}
+        style={{
+          marginLeft: '100px',
+        }}
+      >
+        <a
+          href='https://pf.kakao.com/_xbIPcG'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          <img src={kakaologo} alt='kakaologo' />
+        </a>
+      </div>
+      <div className={styles.instalogo}>
+        <a
+          href='https://www.instagram.com/plug._.o2/'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          <img src={instalogo} alt='instalogo' />
+        </a>
+      </div>
     </div>
   );
 };
