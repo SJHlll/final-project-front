@@ -60,6 +60,11 @@ const MyPageBtn = () => {
     <div>
       {/* 버튼과 모달 */}
       <div className='ButtonContainer'>
+        <div className='karina'></div>
+        <div className='wonyoung'></div>
+        <div className='seungyeon'></div>
+        <div className='yeeun'></div>
+
         {buttonData.map((button, index) => (
           <button
             key={index} // 각 버튼의 고유 키

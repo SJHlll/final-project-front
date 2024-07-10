@@ -432,7 +432,7 @@ const Modal2 = ({
             </div>
           </div>
           <div className={styles.imageUpload}>
-            <label htmlFor='photo'>upload</label>
+            <label htmlFor='photo'>사진 올리기</label>
             <input
               type='file'
               id='photo'
