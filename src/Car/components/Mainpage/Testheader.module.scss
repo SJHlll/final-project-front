@@ -2,16 +2,10 @@
   width: 100%;
   height: 130px;
   background-color: rgb(209, 209, 209);
-  // background-color: transparent;
   z-index: 9999;
-  // box-shadow: 3px 4px 3px 3px #555555;
   display: flex;
   margin: 0 auto;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-
 }
 
 .logo {
@@ -23,16 +17,12 @@
   height: 80%;
   text-align: center;
   align-content: center;
-  // position: relative;
-  // bottom: 20%;
   cursor: pointer;
   margin-left: 3%;
   transform: scale(2);
 }
 
 .loginbtn {
-  // position: relative;
-  // bottom: 30%;
   width: 7%;
   height: 50px;
   align-self: center;
@@ -57,28 +47,20 @@
 
 .tabline {
   width: 60%;
-  // box-shadow: 3px 4px 3px 3px #555555;
-  // margin-right: 15%;
   display: flex;
-  // margin-top: 5%;
-  // padding-top: 1%;
-  // padding-bottom: 1%;
   margin-left: 7%;
 }
 
 .tabli {
   width: 10%;
   height: 50px;
-  // margin-bottom: 5px;
   background-color: transparent;
   border: 1px solid rgb(209, 209, 209);
-  // border-bottom: 1px solid black;
   align-self: center;
 
   &:hover {
     cursor: pointer;
     color: white;
-    // background-color: #c2e1ff;
   }
 }
 
@@ -87,7 +69,6 @@
   height: 50px;
   margin-top: 0.7%;
   border: 0.1px solid rgb(209, 209, 209);
-  // box-shadow: 2px 2px 1px 1px #555555;
   color: white;
   background-color: rgb(209, 209, 209);
 }
@@ -106,4 +87,25 @@
 
 .isUser {
   margin-top: 50px;
+}
+
+.userInfoContainer {
+  display: flex;
+  // align-items: center;
+}
+
+.kakaologo,
+.instalogo {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+  margin-top: 50px;
+
+}
+
+.kakaologo img,
+.instalogo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

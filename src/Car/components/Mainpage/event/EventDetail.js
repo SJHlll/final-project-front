@@ -3,11 +3,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import {
-  useLocation,
-  useNavigate,
-  useParams,
-} from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styles from './Event.module.scss';
 import style from '../../../../scss/Button.module.scss';
 import axios from 'axios';
@@ -15,7 +11,6 @@ import EventAddModal from './EventAddModal';
 import Frame from '../Frame';
 import AuthContext from '../../../../util/AuthContext';
 import { API_BASE_URL } from '../../../../config/host-config';
-import EventBtn from './EventBtn';
 
 const EventDetail = () => {
   const { id } = useParams(); // URL에서 id를 가져옴
@@ -109,47 +104,49 @@ const EventDetail = () => {
           </div>
 
           <div className={styles.eventDetailButtons}>
-            <button
-              style={{
-                backgroundColor: '#fff',
-                border: '0px',
-                fontSize: '50px',
-                padding: '0px 30px',
-                color: 'black',
-              }}
-              className={`${style.publicBtn} ${styles.updateButton}`}
-              onClick={() =>
-                navigate(`/events/${previousPage}`, {
-                  state: { id: previousPage },
-                })
-              }
-              disabled={previousPage < 1} // 이전 페이지가 1보다 작을 경우 버튼 비활성화
-            >
-              &lt;
-            </button>
+            {previousPage >= 1 && (
+              <button
+                style={{
+                  backgroundColor: '#fff',
+                  border: '0px',
+                  fontSize: '50px',
+                  padding: '0px 30px',
+                  color: 'black',
+                }}
+                className={`${style.publicBtn} ${styles.updateButton}`}
+                onClick={() =>
+                  navigate(`/events/${previousPage}`, {
+                    state: { id: previousPage },
+                  })
+                }
+              >
+                &lt;
+              </button>
+            )}
 
             <div className={styles.eventDetailTitle}>
               {title}
             </div>
 
-            <button
-              style={{
-                backgroundColor: '#fff',
-                border: '0px',
-                fontSize: '50px',
-                padding: '0px 30px',
-                color: 'black',
-              }}
-              className={`${style.publicBtn} ${styles.updateButton}`}
-              onClick={() =>
-                navigate(`/events/${nextPage}`, {
-                  state: { id: nextPage },
-                })
-              }
-              disabled={nextPage > 6} // 다음 페이지가 6보다 클 경우 버튼 비활성화
-            >
-              &gt;
-            </button>
+            {nextPage <= 10 && (
+              <button
+                style={{
+                  backgroundColor: '#fff',
+                  border: '0px',
+                  fontSize: '50px',
+                  padding: '0px 30px',
+                  color: 'black',
+                }}
+                className={`${style.publicBtn} ${styles.updateButton}`}
+                onClick={() =>
+                  navigate(`/events/${nextPage}`, {
+                    state: { id: nextPage },
+                  })
+                }
+              >
+                &gt;
+              </button>
+            )}
           </div>
 
           <div
