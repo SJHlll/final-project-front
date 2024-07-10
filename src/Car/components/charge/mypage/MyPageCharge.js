@@ -11,10 +11,12 @@ import style from '../../../../scss/Button.module.scss';
 import { ReserveStationContext } from '../../../../contexts/ReserveStationContext';
 import AuthContext from '../../../../util/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { TabContext } from '../../Mainpage/TabContext';
 
 const MyPageCharge = () => {
   const navigate = useNavigate();
   const [cancel, setCancel] = useState(false);
+  const { updateActiveTab } = useContext(TabContext);
   const [
     cancelReservationNumber,
     setCancelReservationNumber,
@@ -143,9 +145,10 @@ const MyPageCharge = () => {
             <div>예약하신 충전소가 없습니다.</div>
             <div>
               <span
-                onClick={() =>
-                  navigate('/charge/reservation')
-                }
+                onClick={() => {
+                  navigate('/charge/reservation');
+                  updateActiveTab(4);
+                }}
                 style={{
                   cursor: 'pointer',
                   color: '#F18D8A',
