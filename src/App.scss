@@ -2,10 +2,9 @@
   font-family: 'font2';
   src: url(https://plugngo.s3.ap-northeast-2.amazonaws.com/WantedSans-SemiBold.woff2);
 }
-body{
-    // 스크롤바 몸통
-    &::-webkit-scrollbar {
-     display: none;
-    }
-
+body {
+  // 스크롤바 몸통
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
