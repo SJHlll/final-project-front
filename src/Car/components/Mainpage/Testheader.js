@@ -137,21 +137,24 @@ const Testheader = () => {
           </button>
         )}
         {!isLoggedIn ? (
-          <button
+          <img
             className={styles.loginbtn}
             onClick={() => {
               handleTabClick(9, '/Login');
             }}
-          >
-            로그인
-          </button>
+            src='https://plugngo.s3.ap-northeast-2.amazonaws.com/login.png'
+          />
         ) : (
-          <button
+          // <button
+          //   className={styles.loginbtn}
+          //   onClick={logoutHandler}
+          // >
+          <img
             className={styles.loginbtn}
             onClick={logoutHandler}
-          >
-            <p style={{ marginTop: '10px' }}>로그아웃</p>
-          </button>
+            src='https://plugngo.s3.ap-northeast-2.amazonaws.com/logoutDoor.png'
+          />
+          // </button>
         )}
       </div>
       {isLoggedIn && role === 'ADMIN' ? (
@@ -170,28 +173,36 @@ const Testheader = () => {
       ) : (
         ''
       )}
+
       <div
-        className={styles.kakaologo}
         style={{
-          marginLeft: '100px',
+          paddingRight: '150px',
+          display: 'flex',
         }}
       >
-        <a
-          href='https://pf.kakao.com/_xbIPcG'
-          target='_blank'
-          rel='noopener noreferrer'
+        <div
+          className={styles.kakaologo}
+          style={{
+            marginLeft: '30px',
+          }}
         >
-          <img src={kakaologo} alt='kakaologo' />
-        </a>
-      </div>
-      <div className={styles.instalogo}>
-        <a
-          href='https://www.instagram.com/plug._.o2/'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <img src={instalogo} alt='instalogo' />
-        </a>
+          <a
+            href='https://pf.kakao.com/_xbIPcG'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <img src={kakaologo} alt='kakaologo' />
+          </a>
+        </div>
+        <div className={styles.instalogo}>
+          <a
+            href='https://www.instagram.com/plug._.o2/'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <img src={instalogo} alt='instalogo' />
+          </a>
+        </div>
       </div>
     </div>
   );
