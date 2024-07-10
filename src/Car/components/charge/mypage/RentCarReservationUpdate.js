@@ -1,7 +1,7 @@
 import { Textarea } from '@mui/joy';
 import axios from 'axios';
 import { addMonths } from 'date-fns';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import styles from './RentCarReservationUpdate.module.scss';

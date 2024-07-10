@@ -7,9 +7,7 @@ import { TestRcContext } from '../../Mainpage/adminpage/admincar/TestRcContext';
 import styles from './MyPageReviewList.module.scss';
 import AuthContext from '../../../../util/AuthContext';
 import MyPageModal from './MyPageModal';
-import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import { Margin } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 import RentCarReservationUpdate from './RentCarReservationUpdate';
 import { Modal } from 'reactstrap';
 
@@ -20,14 +18,11 @@ const MyPageRentCarMap = () => {
   const { phoneNumber } = useContext(AuthContext);
   const [selectedCar, setSelectedCar] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalClose, setModalClose] = useState(false);
   const [updateModalOpen, setUpdateModalOpen] =
     useState(false);
 
   const [isEditDateMode, setIsEditDateMode] =
     useState(false);
-
-  const [isHovered, setIsHovered] = useState(false);
 
   // DB에서 예약한 렌트카 가져오기
   useEffect(() => {
