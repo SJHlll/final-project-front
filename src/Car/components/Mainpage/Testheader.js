@@ -11,7 +11,6 @@ import kakaologo from '../../assets/kakao-logo.png'; // 고정된 이미지 impo
 import instalogo from '../../assets/instagram-logo.png'; // 기본 유저 이미지 import
 import { TabContext } from './TabContext';
 
-
 const Testheader = () => {
   const navigate = useNavigate();
   const { activeTab, updateActiveTab } =
@@ -138,21 +137,24 @@ const Testheader = () => {
           </button>
         )}
         {!isLoggedIn ? (
-          <button
+          <img
             className={styles.loginbtn}
             onClick={() => {
               handleTabClick(9, '/Login');
             }}
-          >
-            로그인
-          </button>
+            src='https://plugngo.s3.ap-northeast-2.amazonaws.com/login.png'
+          />
         ) : (
-          <button
+          // <button
+          //   className={styles.loginbtn}
+          //   onClick={logoutHandler}
+          // >
+          <img
             className={styles.loginbtn}
             onClick={logoutHandler}
-          >
-            <p style={{ marginTop: '10px' }}>로그아웃</p>
-          </button>
+            src='https://plugngo.s3.ap-northeast-2.amazonaws.com/logoutDoor.png'
+          />
+          // </button>
         )}
       </div>
       {isLoggedIn && role === 'ADMIN' ? (
