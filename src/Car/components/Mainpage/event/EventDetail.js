@@ -18,22 +18,23 @@ import { API_BASE_URL } from '../../../../config/host-config';
 import EventBtn from './EventBtn';
 
 const EventDetail = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const toList = () => navigate('/events');
+  const { id } = useParams(); // URL에서 id를 가져옴
+  const navigate = useNavigate(); // 페이지 이동을 위한 함수
+  const toList = () => navigate('/events'); // 이벤트 목록으로 이동하는 함수
 
-  const [event, setEvent] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태
-  const { role } = useContext(AuthContext);
-  const token = localStorage.getItem('ACCESS_TOKEN');
+  const [event, setEvent] = useState(null); // 이벤트 데이터를 저장할 상태
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열림 상태를 저장할 상태
+  const { role } = useContext(AuthContext); // 사용자 역할을 가져옴 (예: ADMIN)
+  const token = localStorage.getItem('ACCESS_TOKEN'); // 로컬 스토리지에서 토큰을 가져옴
 
-  const API_EVENT_URL = `${API_BASE_URL}/events/list/${id}`;
+  const API_EVENT_URL = `${API_BASE_URL}/events/list/${id}`; // 이벤트 정보를 가져올 API URL
 
   useEffect(() => {
+    // 컴포넌트가 마운트될 때 이벤트 정보를 가져오는 함수
     const fetchEvent = async () => {
       try {
         const res = await axios.get(API_EVENT_URL);
-        setEvent(res.data);
+        setEvent(res.data); // 이벤트 데이터를 상태에 저장
         console.log('res-data: ', res.data);
       } catch (err) {
         console.error('Error fetching event: ', err);
@@ -44,6 +45,7 @@ const EventDetail = () => {
   }, [API_EVENT_URL]);
 
   const removeEvent = async () => {
+    // 이벤트를 삭제하는 함수
     try {
       await axios.delete(
         `http://localhost:8181/events/${id}`,
@@ -53,22 +55,25 @@ const EventDetail = () => {
           },
         },
       );
-      alert('삭제 완료');
-      navigate('/events');
+      alert('삭제 완료'); // 삭제 완료 알림
+      navigate('/events'); // 이벤트 목록으로 이동
     } catch (err) {
       console.error('Error deleting event:', err);
     }
   };
 
   const openModal = () => {
+    // 모달을 여는 함수
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
+    // 모달을 닫는 함수
     setIsModalOpen(false);
   };
 
   if (!event) {
+    // 이벤트 데이터가 로딩 중일 때
     return <div>Loading...</div>;
   }
 
@@ -77,6 +82,10 @@ const EventDetail = () => {
     title,
     eventCategory: status,
   } = event;
+
+  const currentId = parseInt(id, 10); // 현재 이벤트 ID를 숫자로 변환
+  const previousPage = currentId - 1; // 이전 페이지 ID
+  const nextPage = currentId + 1; // 다음 페이지 ID
 
   return (
     <Frame>
@@ -110,11 +119,11 @@ const EventDetail = () => {
               }}
               className={`${style.publicBtn} ${styles.updateButton}`}
               onClick={() =>
-                navigate(
-                  `/events/${parseInt(id, 10) - 1}`,
-                  { state: { id: parseInt(id, 10) - 1 } },
-                )
+                navigate(`/events/${previousPage}`, {
+                  state: { id: previousPage },
+                })
               }
+              disabled={previousPage < 1} // 이전 페이지가 1보다 작을 경우 버튼 비활성화
             >
               &lt;
             </button>
@@ -133,11 +142,11 @@ const EventDetail = () => {
               }}
               className={`${style.publicBtn} ${styles.updateButton}`}
               onClick={() =>
-                navigate(
-                  `/events/${parseInt(id, 10) + 1}`,
-                  { state: { id: parseInt(id, 10) + 1 } },
-                )
+                navigate(`/events/${nextPage}`, {
+                  state: { id: nextPage },
+                })
               }
+              disabled={nextPage > 6} // 다음 페이지가 6보다 클 경우 버튼 비활성화
             >
               &gt;
             </button>
