@@ -218,7 +218,7 @@ const MyPageRentCarMap = () => {
                 style={{
                   position: 'absolute',
                   top: '100px',
-                  left: '710px',
+                  left: '817px',
                   width: '100%',
                 }}
                 isOpen={updateModalOpen}

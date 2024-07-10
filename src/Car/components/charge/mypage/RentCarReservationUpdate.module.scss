@@ -1,6 +1,8 @@
 .modalContent {
-  width: 80%;
-  margin: 56px auto; /* Add top margin to move the modal down */
+
+  width: 90%;
+  margin: 56px auto;
+  /* Add top margin to move the modal down */
   background: white;
   padding: 20px;
   border-radius: 10px;
@@ -57,12 +59,9 @@
 
 .submitButton {
   padding: 10px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  width: 110px;
   font-size: 16px;
+  margin: a;
 }
 
 .submitButton:hover {

@@ -182,18 +182,17 @@
 
 /* 닫기 버튼 스타일 */
 .CloseButton {
-    font-size: 15px;
-    float: right;
-    background: #222020;
-    color: white;
+    float: left;
+    background: #fff;
+    color: black;
     border: none;
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    // border: 1px solid black;
+    font-size: 25px;
     text-align: center;
     line-height: 25px;
     cursor: pointer;
-    margin: 5px 10px 0 0;
+    margin-left: auto;
     /* 닫기 버튼을 왼쪽으로 10px 이동 */
 }
 
@@ -544,21 +543,23 @@
     padding: 5px 10px;
     /* 패딩 설정 */
 }
-.karina{
+
+.karina {
     width: 350px;
     height: 350px;
     z-index: 1;
     position: absolute;
     bottom: 140px;
-    right:  1140px;
+    right: 1140px;
     border: 1px solid lightgray;
     border-radius: 50%;
     background-image: url(../../../assets/다운로드-removebg-preview.png);
     background-repeat: no-repeat;
     background-size: cover;
-   
+
 }
-.wonyoung{
+
+.wonyoung {
     position: absolute;
     top: 50%;
     right: 96%;
@@ -570,7 +571,8 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
-.seungyeon{
+
+.seungyeon {
     position: absolute;
     top: 50%;
     left: 96%;
@@ -582,7 +584,8 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
-.yeeun{
+
+.yeeun {
     position: absolute;
     width: 350px;
     height: 350px;
@@ -591,6 +594,6 @@
     background-image: url(../../../assets/yeeun.png);
     background-repeat: no-repeat;
     bottom: 140px;
-    left:  96%;
+    left: 96%;
     background-size: cover;
 }

@@ -11,7 +11,6 @@ import kakaologo from '../../assets/kakao-logo.png'; // 고정된 이미지 impo
 import instalogo from '../../assets/instagram-logo.png'; // 기본 유저 이미지 import
 import { TabContext } from './TabContext';
 
-
 const Testheader = () => {
   const navigate = useNavigate();
   const { activeTab, updateActiveTab } =
