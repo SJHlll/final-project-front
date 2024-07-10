@@ -18,7 +18,7 @@ import {
   isValid,
   addDays,
 } from 'date-fns';
-import { Button } from 'reactstrap';
+import style from '../../../../scss/Button.module.scss';
 import axios from 'axios';
 import { CarContext } from '../../../../contexts/CarContext';
 import AuthContext from '../../../../util/AuthContext';
@@ -159,38 +159,89 @@ const CarCalendar = ({
     console.log('Reserved dates updated:', reservedDates);
   }, [reservedDates]);
 
-  const handleDateChange = (dates) => {
-    const [start, end] = dates;
-    onChangeStartDate(start);
-    onChangeEndDate(end);
+  const isRangeAvailable = useCallback(
+    (start, end) => {
+      if (!start || !end) return true;
 
-    if (start) {
-      onChangeStartTime(
-        setHours(
-          setMinutes(
-            new Date(start),
-            startTime.getMinutes(),
-          ),
-          startTime.getHours(),
-        ),
+      const startTime = new Date(start).setHours(
+        0,
+        0,
+        0,
+        0,
       );
-    }
+      const endTime = new Date(end).setHours(0, 0, 0, 0);
 
-    if (end) {
-      onChangeEndTime(
-        setHours(
-          setMinutes(new Date(end), endTime.getMinutes()),
-          endTime.getHours(),
-        ),
-      );
-      const daysBetween = Math.ceil(
-        (new Date(end) - new Date(start)) /
-          (1000 * 60 * 60 * 24) +
-          1,
-      );
-      setDaysBetween(daysBetween);
-    }
-  };
+      return !reservedDates.some((reserved) => {
+        const reservedTime = new Date(reserved).setHours(
+          0,
+          0,
+          0,
+          0,
+        );
+        return (
+          reservedTime >= startTime &&
+          reservedTime <= endTime
+        );
+      });
+    },
+    [reservedDates],
+  );
+
+  const handleDateChange = useCallback(
+    (dates) => {
+      const [start, end] = dates;
+
+      if (start && end && !isRangeAvailable(start, end)) {
+        alert(
+          '선택한 기간 중 이미 예약된 날짜가 포함되어 있습니다. 다시 선택해 주세요.',
+        );
+        return;
+      }
+
+      onChangeStartDate(start);
+      onChangeEndDate(end);
+
+      if (start) {
+        const newStartTime = new Date(start);
+        newStartTime.setHours(
+          startTime ? startTime.getHours() : 0,
+        );
+        newStartTime.setMinutes(
+          startTime ? startTime.getMinutes() : 0,
+        );
+        onChangeStartTime(newStartTime);
+      }
+
+      if (end) {
+        const newEndTime = new Date(end);
+        newEndTime.setHours(
+          endTime ? endTime.getHours() : 0,
+        );
+        newEndTime.setMinutes(
+          endTime ? endTime.getMinutes() : 0,
+        );
+        onChangeEndTime(newEndTime);
+
+        if (start) {
+          const daysBetween =
+            Math.ceil(
+              (end - start) / (1000 * 60 * 60 * 24),
+            ) + 1;
+          setDaysBetween(daysBetween);
+        }
+      }
+    },
+    [
+      isRangeAvailable,
+      onChangeStartDate,
+      onChangeEndDate,
+      onChangeStartTime,
+      onChangeEndTime,
+      setDaysBetween,
+      startTime,
+      endTime,
+    ],
+  );
 
   const handleStartTimeChange = (time) => {
     if (startDate) {
@@ -294,6 +345,7 @@ const CarCalendar = ({
           showDisabledMonthNavigation
           monthsShown={2}
           excludeDates={reservedDates}
+          onChangeRaw={(event) => event.preventDefault()}
         />
       </div>
 
@@ -321,58 +373,76 @@ const CarCalendar = ({
           }}
         >
           시간선택
-          <Button onClick={fetchRentCarList}>
-            새로고침
-          </Button>
         </header>
-        <div className={styles.timeBlock}>
-          <div
-            style={{
-              display: 'flex',
-            }}
-            className={styles.pickupTitle}
-          >
-            픽업 :
-          </div>
-          <DatePicker
-            id={styles.pickupTime}
-            selected={startTime}
-            onChange={handleStartTimeChange}
-            showTimeSelect
-            showTimeSelectOnly
-            timeIntervals={30}
-            excludeTimes={[
-              setHours(setMinutes(new Date(), 0), 17),
-              setHours(setMinutes(new Date(), 0), 17),
-              setHours(setMinutes(new Date(), 30), 18),
-              setHours(setMinutes(new Date(), 30), 19),
-              setHours(setMinutes(new Date(), 30), 17),
-            ]}
-            filterTime={filterPassedTime}
-            dateFormat='h:mm aa'
-            timeCaption='픽업 시간'
-          />
-        </div>
+        <div
+          style={{
+            display: 'flex',
+            height: '100%',
+          }}
+        >
+          <div>
+            <div className={styles.timeBlock}>
+              <div
+                style={{
+                  display: 'flex',
+                }}
+                className={styles.pickupTitle}
+              >
+                픽업 :
+              </div>
+              <DatePicker
+                id={styles.pickupTime}
+                selected={startTime}
+                onChange={handleStartTimeChange}
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={30}
+                excludeTimes={[
+                  setHours(setMinutes(new Date(), 0), 17),
+                  setHours(setMinutes(new Date(), 0), 17),
+                  setHours(setMinutes(new Date(), 30), 18),
+                  setHours(setMinutes(new Date(), 30), 19),
+                  setHours(setMinutes(new Date(), 30), 17),
+                ]}
+                dateFormat='h:mm aa'
+                timeCaption='픽업 시간'
+              />
+            </div>
 
-        <div className={styles.timeBlock}>
-          <div className={styles.returnTitle}>반납 :</div>
-          <DatePicker
-            id={styles.returnTime}
-            selected={endTime}
-            onChange={handleEndTimeChange}
-            showTimeSelect
-            showTimeSelectOnly
-            timeIntervals={30}
-            excludeTimes={[
-              setHours(setMinutes(new Date(), 0), 17),
-              setHours(setMinutes(new Date(), 30), 18),
-              setHours(setMinutes(new Date(), 30), 19),
-              setHours(setMinutes(new Date(), 30), 17),
-            ]}
-            filterTime={filterTime}
-            dateFormat='h:mm aa'
-            timeCaption='반납 시간'
-          />
+            <div className={styles.timeBlock}>
+              <div className={styles.returnTitle}>
+                반납 :
+              </div>
+              <DatePicker
+                id={styles.returnTime}
+                selected={endTime}
+                onChange={handleEndTimeChange}
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={30}
+                excludeTimes={[
+                  setHours(setMinutes(new Date(), 0), 17),
+                  setHours(setMinutes(new Date(), 30), 18),
+                  setHours(setMinutes(new Date(), 30), 19),
+                  setHours(setMinutes(new Date(), 30), 17),
+                ]}
+                dateFormat='h:mm aa'
+                timeCaption='반납 시간'
+              />
+            </div>
+          </div>
+          <button
+            className={style.publicBtn}
+            style={{
+              position: 'relative',
+              width: '90px',
+              left: '12px',
+              top: '-14px',
+            }}
+            onClick={fetchRentCarList}
+          >
+            차량조회
+          </button>
         </div>
       </div>
     </div>

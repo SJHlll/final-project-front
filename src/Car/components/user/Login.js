@@ -1,4 +1,4 @@
-import { Grid, Link, TextField } from '@mui/material';
+import { Grid, TextField } from '@mui/material';
 import React, {
   useContext,
   useEffect,
@@ -9,12 +9,8 @@ import styles from '../../../scss/Login.module.scss';
 import { KAKAO_AUTH_URL } from '../../../config/kakao-config';
 import { NAVER_AUTH_URL } from '../../../config/naver-config';
 import { useNavigate } from 'react-router-dom';
-import { GOOGLE_URL } from '../../../config/google-config';
 import style from '../../../scss/Button.module.scss';
-import {
-  GoogleLogin,
-  GoogleOAuthProvider,
-} from '@react-oauth/google';
+
 import GoogleAuthLogin from './GoogleAuthLogin';
 import {
   API_BASE_URL as BASE,
@@ -22,14 +18,11 @@ import {
 } from '../../../config/host-config';
 import AuthContext from '../../../util/AuthContext';
 import axios from 'axios';
+import { TabContext } from '../Mainpage/TabContext';
 
 const Login = () => {
   const navigate = useNavigate();
-
-  const click = (text) => {
-    // 특정 경로로 네비게이션
-    navigate(text);
-  };
+  const { updateActiveTab } = useContext(TabContext);
 
   const goToRegister = () => {
     navigate('/register');
@@ -38,7 +31,7 @@ const Login = () => {
   const REQUEST_URL = BASE + USER + '/signin';
 
   const { onLogin, isLoggedIn } = useContext(AuthContext);
-  const [open, setOpen] = useState(false);
+  const [setOpen] = useState(false);
 
   const redirection = useNavigate();
 
@@ -84,7 +77,7 @@ const Login = () => {
         role,
         birthDay,
       );
-
+      updateActiveTab(1);
       // 홈으로 리다이렉트
       redirection('/');
     } catch (error) {

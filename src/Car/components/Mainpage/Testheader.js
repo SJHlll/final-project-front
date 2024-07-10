@@ -1,8 +1,4 @@
-import React, {
-  useContext,
-  useState,
-  useEffect,
-} from 'react';
+import React, { useContext } from 'react';
 import styles from './Testheader.module.scss';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../../util/AuthContext';
@@ -11,28 +7,20 @@ import {
   USER,
 } from '../../../config/host-config';
 import AdminPage from '../../assets/admin_page.png';
+import { TabContext } from './TabContext';
 
 const Testheader = () => {
   const navigate = useNavigate();
-  const [state, setState] = useState(1);
+  const { activeTab, updateActiveTab } =
+    useContext(TabContext);
 
   // Context에서 인증 정보 가져오기
   const { isLoggedIn, userName, onLogout, role } =
     useContext(AuthContext);
 
-  // 컴포넌트가 마운트될 때 저장된 탭 상태를 로드
-  useEffect(() => {
-    const savedState = localStorage.getItem('activeTab');
-    if (savedState) {
-      setState(Number(savedState));
-    }
-  }, []);
-
-  // 탭 클릭 시 로컬 저장소에 상태 저장하고 페이지 이동
   const handleTabClick = (index, path) => {
     navigate(path === '' ? '/' : path);
-    setState(index);
-    localStorage.setItem('activeTab', index);
+    updateActiveTab(index);
   };
 
   // 로그아웃 핸들러
@@ -46,9 +34,9 @@ const Testheader = () => {
             localStorage.getItem('ACCESS_TOKEN'),
         },
       });
-      // AuthContext의 onLogout 함수를 호출하여 로그인 상태를 업데이트
       onLogout();
-      navigate('/'); // 로그아웃 후 홈으로 이동
+      navigate('/');
+      updateActiveTab(1); // 로그아웃 후 홈 탭으로 설정
     } catch (error) {
       console.error('Logout failed:', error);
     }
@@ -64,7 +52,9 @@ const Testheader = () => {
       <div className={styles.tabline}>
         <button
           className={
-            state === 1 ? styles.tabliactive : styles.tabli
+            activeTab === 1
+              ? styles.tabliactive
+              : styles.tabli
           }
           onClick={() => handleTabClick(1, '/')}
         >
@@ -72,7 +62,9 @@ const Testheader = () => {
         </button>
         <button
           className={
-            state === 2 ? styles.tabliactive : styles.tabli
+            activeTab === 2
+              ? styles.tabliactive
+              : styles.tabli
           }
           onClick={() => handleTabClick(2, '/car/res')}
         >
@@ -80,7 +72,9 @@ const Testheader = () => {
         </button>
         <button
           className={
-            state === 3 ? styles.tabliactive : styles.tabli
+            activeTab === 3
+              ? styles.tabliactive
+              : styles.tabli
           }
           onClick={() => handleTabClick(3, '/charge/list')}
         >
@@ -88,7 +82,9 @@ const Testheader = () => {
         </button>
         <button
           className={
-            state === 4 ? styles.tabliactive : styles.tabli
+            activeTab === 4
+              ? styles.tabliactive
+              : styles.tabli
           }
           onClick={() =>
             handleTabClick(4, '/charge/reservation')
@@ -98,7 +94,9 @@ const Testheader = () => {
         </button>
         <button
           className={
-            state === 5 ? styles.tabliactive : styles.tabli
+            activeTab === 5
+              ? styles.tabliactive
+              : styles.tabli
           }
           onClick={() => handleTabClick(5, '/noti')}
         >
@@ -106,7 +104,9 @@ const Testheader = () => {
         </button>
         <button
           className={
-            state === 6 ? styles.tabliactive : styles.tabli
+            activeTab === 6
+              ? styles.tabliactive
+              : styles.tabli
           }
           onClick={() => handleTabClick(6, '/events')}
         >
@@ -114,7 +114,9 @@ const Testheader = () => {
         </button>
         <button
           className={
-            state === 7 ? styles.tabliactive : styles.tabli
+            activeTab === 7
+              ? styles.tabliactive
+              : styles.tabli
           }
           onClick={() => handleTabClick(7, '/review')}
         >
@@ -123,7 +125,7 @@ const Testheader = () => {
         {isLoggedIn && (
           <button
             className={
-              state === 8
+              activeTab === 8
                 ? styles.tabliactive
                 : styles.tabli
             }
@@ -134,15 +136,9 @@ const Testheader = () => {
         )}
         {!isLoggedIn ? (
           <button
-            className={
-              state === 9
-                ? styles.loginbtn
-                : styles.loginbtn
-            }
+            className={styles.loginbtn}
             onClick={() => {
               handleTabClick(9, '/Login');
-              setState(9); // 로그인 시 state를 로그인(9)으로 설정
-              localStorage.setItem('activeTab', 9); // 로컬 저장소에도 로그인(9) 저장
             }}
           >
             로그인
