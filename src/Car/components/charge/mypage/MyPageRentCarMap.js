@@ -208,7 +208,7 @@ const MyPageRentCarMap = () => {
                     borderRadius: '7px',
                   }}
                 >
-                  {selectedCar.extra > 0 ? (
+                  {selectedCar.extra ? (
                     <div style={{ padding: '5px' }}>
                       {selectedCar.extra}
                     </div>
