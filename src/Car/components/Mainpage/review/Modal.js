@@ -145,7 +145,15 @@ const Modal = ({ review, onClose, selectedType }) => {
           {`${selectedType === 'rental' ? '차량 : ' : '충전소 : '}`}
           {`${selectedType === 'rental' ? review.carName : review.stationName}`}
         </h2>
-        <p>{review.content}</p>
+        <p
+          style={{
+            border: '1px solid #aaa',
+            borderRadius: '5px',
+            padding: '5px',
+          }}
+        >
+          {review.content}
+        </p>
       </div>
     </div>
   );
