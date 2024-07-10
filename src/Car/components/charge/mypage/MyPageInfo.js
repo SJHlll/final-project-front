@@ -105,7 +105,10 @@ const MyPageInfo = () => {
   );
 
   return (
-    <div className={styles.reservationList}>
+    <div
+      className={styles.reservationList}
+      style={{ fontFamily: 'font2' }}
+    >
       <div className={styles.reservationList}>
         <h3 style={{ textAlign: 'center' }}>내 정보</h3>
         <div className={styles.flex}>

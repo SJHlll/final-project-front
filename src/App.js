@@ -176,10 +176,6 @@ const App = () => {
                     path='/admin/review'
                     element={<ReviewList />}
                   />
-                  <Route
-                    path='/rentUpdate'
-                    element={<RentCarReservationUpdate />}
-                  />
                 </Routes>
               </div>
             </TestRcProvider>
