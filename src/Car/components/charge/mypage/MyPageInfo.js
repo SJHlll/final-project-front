@@ -124,7 +124,12 @@ const MyPageInfo = () => {
           <div className={styles.value}>생년월일</div>
           <div>{birthDay || ''}</div>
         </div>
-        <div style={{ width: '100%', textAlign: 'center' }}>
+        <div
+          style={{
+            width: '100%',
+            textAlign: 'justify',
+          }}
+        >
           <button
             className={style.publicBtn}
             onClick={toggleUpdateInfo}
@@ -132,7 +137,7 @@ const MyPageInfo = () => {
             수정하기
           </button>
           <button
-            className={style.publicBtn}
+            className={`${style.publicBtn} infoDelete`}
             onClick={toggleConfirmDelete}
           >
             회원탈퇴
