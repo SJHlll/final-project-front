@@ -173,28 +173,36 @@ const Testheader = () => {
       ) : (
         ''
       )}
+
       <div
-        className={styles.kakaologo}
         style={{
-          marginLeft: '100px',
+          paddingRight: '150px',
+          display: 'flex',
         }}
       >
-        <a
-          href='https://pf.kakao.com/_xbIPcG'
-          target='_blank'
-          rel='noopener noreferrer'
+        <div
+          className={styles.kakaologo}
+          style={{
+            marginLeft: '30px',
+          }}
         >
-          <img src={kakaologo} alt='kakaologo' />
-        </a>
-      </div>
-      <div className={styles.instalogo}>
-        <a
-          href='https://www.instagram.com/plug._.o2/'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <img src={instalogo} alt='instalogo' />
-        </a>
+          <a
+            href='https://pf.kakao.com/_xbIPcG'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <img src={kakaologo} alt='kakaologo' />
+          </a>
+        </div>
+        <div className={styles.instalogo}>
+          <a
+            href='https://www.instagram.com/plug._.o2/'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <img src={instalogo} alt='instalogo' />
+          </a>
+        </div>
       </div>
     </div>
   );
