@@ -14,7 +14,6 @@ import {
   addMonths,
   setHours,
   setMinutes,
-  parse,
   isValid,
   addDays,
 } from 'date-fns';
@@ -45,7 +44,7 @@ const CarCalendar = ({
     const accToken = localStorage.getItem('ACCESS_TOKEN');
     try {
       const response = await axios.get(
-        'http://localhost:8181/rentcar/reslist',
+        'http://43.200.66.160/rentcar/reslist',
         {
           headers: {
             Authorization: `Bearer ${accToken}`,

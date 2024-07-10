@@ -24,7 +24,7 @@ const ReservedStationMap = () => {
       try {
         const token = localStorage.getItem('ACCESS_TOKEN');
         const response = await fetch(
-          'http://localhost:8181/admin/station',
+          'http://plugngo.site/admin/station',
           {
             method: 'GET',
             headers: {
@@ -51,7 +51,7 @@ const ReservedStationMap = () => {
     try {
       const token = localStorage.getItem('ACCESS_TOKEN');
       const response = await fetch(
-        `http://localhost:8181/mypage?reservationNo=${reservationNo}`,
+        `http://plugngo.site/mypage?reservationNo=${reservationNo}`,
         {
           method: 'DELETE',
           headers: {

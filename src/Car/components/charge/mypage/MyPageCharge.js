@@ -76,7 +76,7 @@ const MyPageCharge = () => {
     try {
       const token = localStorage.getItem('ACCESS_TOKEN');
       const response = await fetch(
-        `http://localhost:8181/mypage?reservationNo=${cancelReservationNumber}`,
+        `http://plugngo.site/mypage?reservationNo=${cancelReservationNumber}`,
         {
           method: 'DELETE',
           headers: {
@@ -263,7 +263,7 @@ const MyPageCharge = () => {
       try {
         const token = localStorage.getItem('ACCESS_TOKEN');
         const response = await fetch(
-          'http://localhost:8181/mypage',
+          'http://plugngo.site/mypage',
           {
             method: 'GET',
             headers: {

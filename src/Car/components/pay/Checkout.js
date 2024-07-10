@@ -69,8 +69,8 @@ export function Checkout() {
         customerName: '서준혁', // 손님 이름
         customerEmail: 'white4x@naver.com', // 손님 이메일
         customerMobilePhone: '01054983553', // 손님 전화번호
-        successUrl: `${window.location.origin}/success`, // http://localhost:3000/success
-        failUrl: `${window.location.origin}/fail`, // http://localhost:3000/fail
+        successUrl: `${window.location.origin}/success`, // http://plugngo.site/success
+        failUrl: `${window.location.origin}/fail`, // http://plugngo.site/fail
       });
     } catch (error) {
       console.error('Error requesting payment:', error);

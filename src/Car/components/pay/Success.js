@@ -23,7 +23,7 @@ export function Success() {
 
     async function confirm() {
       const response = await fetch(
-        'http://localhost:8181/confirm',
+        'http://plugngo.site/confirm',
         {
           method: 'POST',
           headers: {

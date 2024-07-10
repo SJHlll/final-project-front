@@ -25,7 +25,7 @@ const ReviewMap = () => {
       try {
         const token = localStorage.getItem('ACCESS_TOKEN');
         const response = await fetch(
-          'http://localhost:8181/admin/review',
+          'http://plugngo.site/admin/review',
           {
             method: 'GET',
             headers: {
@@ -52,7 +52,7 @@ const ReviewMap = () => {
     try {
       const token = localStorage.getItem('ACCESS_TOKEN');
       const response = await fetch(
-        `http://localhost:8181/admin/review?reviewNo=${reviewNo}`,
+        `http://plugngo.site/admin/review?reviewNo=${reviewNo}`,
         {
           method: 'DELETE',
           headers: {

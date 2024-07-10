@@ -113,7 +113,7 @@ const Modal2 = ({
     const fetchCarList = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:8181/car/res',
+          'http://plugngo.site/car/res',
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -144,7 +144,7 @@ const Modal2 = ({
     const fetchChargeList = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:8181/charge/reservation',
+          'http://plugngo.site/charge/reservation',
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -228,7 +228,7 @@ const Modal2 = ({
       return;
     }
 
-    const url = `http://localhost:8181/review/${selectedType === 'rental' ? 'car' : 'charge'}`;
+    const url = `http://plugngo.site/review/${selectedType === 'rental' ? 'car' : 'charge'}`;
 
     // 충전소 리뷰 데이터
     const reviewChargeJsonBlob = new Blob(

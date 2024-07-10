@@ -11,7 +11,7 @@ const Notilist = ({ notiList, fetchNotiList }) => {
     try {
       console.log(list.notiId);
       await axios.patch(
-        `http://localhost:8181/noti/views/${list.notiId}`,
+        `http://plugngo.site/noti/views/${list.notiId}`,
       );
       fetchNotiList();
       navigate(`${list.notiId}`, {

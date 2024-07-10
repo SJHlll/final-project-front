@@ -21,7 +21,7 @@ const ReservedCarMap = () => {
       try {
         const token = localStorage.getItem('ACCESS_TOKEN');
         const response = await fetch(
-          'http://localhost:8181/admin/car',
+          'http://plugngo.site/admin/car',
           {
             method: 'GET',
             headers: {
@@ -48,7 +48,7 @@ const ReservedCarMap = () => {
     try {
       const token = localStorage.getItem('ACCESS_TOKEN');
       const response = await fetch(
-        `http://localhost:8181/admin/car?reservationNo=${reservationNo}`,
+        `http://plugngo.site/admin/car?reservationNo=${reservationNo}`,
         {
           method: 'DELETE',
           headers: {

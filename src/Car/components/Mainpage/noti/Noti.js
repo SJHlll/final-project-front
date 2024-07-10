@@ -45,7 +45,7 @@ const Noti = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        'http://localhost:8181/noti',
+        'http://plugngo.site/noti',
         {
           notiTitle: NotiTitle,
           notiContent: NotiContent,
@@ -70,7 +70,7 @@ const Noti = () => {
   const fetchNotiList = async () => {
     try {
       const response = await axios.get(
-        'http://localhost:8181/noti/info',
+        'http://plugngo.site/noti/info',
       );
       setNotiList(response.data.notiList);
     } catch (err) {

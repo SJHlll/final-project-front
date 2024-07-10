@@ -46,7 +46,7 @@ const EventDetail = () => {
   const removeEvent = async () => {
     try {
       await axios.delete(
-        `http://localhost:8181/events/${id}`,
+        `http://plugngo.site/events/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
