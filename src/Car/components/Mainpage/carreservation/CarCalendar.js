@@ -52,6 +52,14 @@ const CarCalendar = ({
           },
         },
       );
+
+      // 여기에서 HTTP 상태 코드를 검사합니다
+      if (response.status !== 200) {
+        throw new Error(
+          `Network response was not ok: ${response.statusText}`,
+        );
+      }
+
       console.log(
         'API response:',
         JSON.stringify(response.data, null, 2),
@@ -68,7 +76,6 @@ const CarCalendar = ({
     );
     fetchRentCarList();
   }, [fetchRentCarList]);
-
   useEffect(() => {
     const filterDates = () => {
       console.log(
@@ -102,35 +109,26 @@ const CarCalendar = ({
             );
             if (!item.rentTime || !item.turninTime) {
               console.error(
-                'rentDate or turninTime is missing for item:',
+                'rentTime or turninTime is missing for item:',
                 item,
               );
               return [];
             }
             try {
-              const rentTime = parse(
-                item.rentTime,
-                'yyyy-MM-dd',
-                new Date(),
-              );
-              const turninTime = parse(
-                item.turninTime,
-                'yyyy-MM-dd',
-                new Date(),
-              );
+              const rentDate = new Date(item.rentTime);
+              const turninDate = new Date(item.turninTime);
 
               if (
-                !isValid(rentTime) ||
-                !isValid(turninTime)
+                !isValid(rentDate) ||
+                !isValid(turninDate)
               ) {
                 throw new Error('Invalid date');
               }
 
-              // 대여 시작일부터 반납일 전날까지의 모든 날짜 포함
+              // 대여 시작일부터 반납일까지의 모든 날짜 포함
               const dates = [];
-              let currentDate = rentTime; // 대여 시작일부터 시작
-              while (currentDate < turninTime) {
-                // 반납일 전날까지
+              let currentDate = rentDate;
+              while (currentDate <= turninDate) {
                 dates.push(new Date(currentDate));
                 currentDate = addDays(currentDate, 1);
               }
@@ -160,6 +158,7 @@ const CarCalendar = ({
   useEffect(() => {
     console.log('Reserved dates updated:', reservedDates);
   }, [reservedDates]);
+
   const handleDateChange = (dates) => {
     const [start, end] = dates;
     onChangeStartDate(start);

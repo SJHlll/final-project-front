@@ -99,6 +99,6 @@ const MapContainer = styled(Map)`
   border: 2px solid #999;
   border-radius: 15px;
   position: absolute;
-  left: 259px;
+  left: 240px;
   top: 15px;
 `;
