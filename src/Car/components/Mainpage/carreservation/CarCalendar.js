@@ -14,12 +14,14 @@ import {
   addMonths,
   setHours,
   setMinutes,
+  parse,
   isValid,
   addDays,
 } from 'date-fns';
 import style from '../../../../scss/Button.module.scss';
 import axios from 'axios';
 import { CarContext } from '../../../../contexts/CarContext';
+import AuthContext from '../../../../util/AuthContext';
 
 registerLocale('ko', ko);
 
@@ -35,6 +37,7 @@ const CarCalendar = ({
   setDaysBetween,
 }) => {
   const { selectedCar } = useContext(CarContext);
+  const { isLoggedIn, token } = useContext(AuthContext);
   const [reservedDates, setReservedDates] = useState([]);
   const [rentCarList, setRentCarList] = useState([]);
 
@@ -50,6 +53,7 @@ const CarCalendar = ({
         },
       );
 
+      // 여기에서 HTTP 상태 코드를 검사합니다
       if (response.status !== 200) {
         throw new Error(
           `Network response was not ok: ${response.statusText}`,
@@ -72,7 +76,6 @@ const CarCalendar = ({
     );
     fetchRentCarList();
   }, [fetchRentCarList]);
-
   useEffect(() => {
     const filterDates = () => {
       console.log(
@@ -122,6 +125,7 @@ const CarCalendar = ({
                 throw new Error('Invalid date');
               }
 
+              // 대여 시작일부터 반납일까지의 모든 날짜 포함
               const dates = [];
               let currentDate = rentDate;
               while (currentDate <= turninDate) {
@@ -259,6 +263,25 @@ const CarCalendar = ({
     } else {
       onChangeEndTime(time);
     }
+  };
+
+  const filterPassedTime = (time) => {
+    const currentDate = new Date();
+    const selectedDate = new Date(time);
+
+    return currentDate.getTime() < selectedDate.getTime();
+  };
+
+  const filterTime = (time) => {
+    const selectedTime = new Date(time);
+    const oneHourAfterRentTime = new Date(
+      startTime.getTime() + 4 * 60 * 60 * 1000, // 픽업시간보다 4시간 이후로만 클릭 가능하게
+    );
+
+    return (
+      selectedTime.getTime() >=
+      oneHourAfterRentTime.getTime()
+    );
   };
 
   const minDate = new Date();
