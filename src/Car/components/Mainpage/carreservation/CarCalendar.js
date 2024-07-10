@@ -215,6 +215,25 @@ const CarCalendar = ({
     }
   };
 
+  const filterPassedTime = (time) => {
+    const currentDate = new Date();
+    const selectedDate = new Date(time);
+
+    return currentDate.getTime() < selectedDate.getTime();
+  };
+
+  const filterTime = (time) => {
+    const selectedTime = new Date(time);
+    const oneHourAfterRentTime = new Date(
+      startTime.getTime() + 4 * 60 * 60 * 1000, // 픽업시간보다 4시간 이후로만 클릭 가능하게
+    );
+
+    return (
+      selectedTime.getTime() >=
+      oneHourAfterRentTime.getTime()
+    );
+  };
+
   const minDate = new Date();
   const maxDate = addMonths(new Date(), 12);
 
@@ -330,6 +349,7 @@ const CarCalendar = ({
               setHours(setMinutes(new Date(), 30), 19),
               setHours(setMinutes(new Date(), 30), 17),
             ]}
+            filterTime={filterPassedTime}
             dateFormat='h:mm aa'
             timeCaption='픽업 시간'
           />
@@ -350,6 +370,7 @@ const CarCalendar = ({
               setHours(setMinutes(new Date(), 30), 19),
               setHours(setMinutes(new Date(), 30), 17),
             ]}
+            filterTime={filterTime}
             dateFormat='h:mm aa'
             timeCaption='반납 시간'
           />
