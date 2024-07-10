@@ -53,12 +53,14 @@ const PlugAndGoStation = ({
 
   const closeBtn = (
     <button
-      className={styles.publicBtn}
       onClick={toggle}
       style={{
+        border: '0px',
+        background: '#fff',
         display: 'block',
         marginLeft: 'auto',
         marginTop: '10px',
+        fontSize: '20px',
       }}
     >
       &times;

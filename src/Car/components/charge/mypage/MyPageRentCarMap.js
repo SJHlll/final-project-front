@@ -218,7 +218,7 @@ const MyPageRentCarMap = () => {
                 style={{
                   position: 'absolute',
                   top: '100px',
-                  left: '710px',
+                  left: '817px',
                   width: '100%',
                 }}
                 isOpen={updateModalOpen}
@@ -226,9 +226,11 @@ const MyPageRentCarMap = () => {
               >
                 <RentCarReservationUpdate
                   carNo={selectedCar.carNo}
+                  carId={selectedCar.carId}
                   onClose={closeModal}
                   rentDate={selectedCar.rentDate}
                   turninDate={selectedCar.turninDate}
+                  reservedCar={reserveCar}
                 />
               </Modal>
             )}

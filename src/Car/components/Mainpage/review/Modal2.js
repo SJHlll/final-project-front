@@ -59,7 +59,7 @@ const Modal2 = ({
       'https://plugngo.s3.ap-northeast-2.amazonaws.com/Car/McLaren_Artura.png',
     '메르세데스-벤츠 AMG S클래스 E 퍼포먼스':
       'https://plugngo.s3.ap-northeast-2.amazonaws.com/Car/Mercedes_Benz_AMG_SClass.png',
-    '메르세데스-벤츠 EQE':
+    '메르스데스-벤츠 EQE':
       'https://plugngo.s3.ap-northeast-2.amazonaws.com/Car/Mercedes_Benz_EQE.png',
     '볼린저 B2':
       'https://plugngo.s3.ap-northeast-2.amazonaws.com/Car/Bollinger_B2.png',
@@ -432,7 +432,7 @@ const Modal2 = ({
             </div>
           </div>
           <div className={styles.imageUpload}>
-            <label htmlFor='photo'>사진 올리기</label>
+            <label htmlFor='photo'>upload</label>
             <input
               type='file'
               id='photo'
