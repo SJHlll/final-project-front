@@ -154,6 +154,10 @@ const Carres = () => {
       return;
     }
 
+    if (!reservationData) {
+      alert('예약이 불가능합니다.');
+    }
+
     alert('예약이 완료되어 결제창으로 넘어갑니다.');
     setModal(!modal);
 
