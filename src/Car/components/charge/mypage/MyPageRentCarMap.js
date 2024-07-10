@@ -7,27 +7,24 @@ import { TestRcContext } from '../../Mainpage/adminpage/admincar/TestRcContext';
 import styles from './MyPageReviewList.module.scss';
 import AuthContext from '../../../../util/AuthContext';
 import MyPageModal from './MyPageModal';
-import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import { Margin } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 import RentCarReservationUpdate from './RentCarReservationUpdate';
 import { Modal } from 'reactstrap';
+import { TabContext } from '../../Mainpage/TabContext';
 
 const MyPageRentCarMap = () => {
   const navigate = useNavigate();
+  const { updateActiveTab } = useContext(TabContext);
   const { reserveCar, setReserveCar } =
     useContext(TestRcContext);
   const { phoneNumber } = useContext(AuthContext);
   const [selectedCar, setSelectedCar] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalClose, setModalClose] = useState(false);
   const [updateModalOpen, setUpdateModalOpen] =
     useState(false);
 
   const [isEditDateMode, setIsEditDateMode] =
     useState(false);
-
-  const [isHovered, setIsHovered] = useState(false);
 
   // DB에서 예약한 렌트카 가져오기
   useEffect(() => {
@@ -132,10 +129,6 @@ const MyPageRentCarMap = () => {
     setIsEditDateMode(false);
   };
 
-  const onClose = () => {
-    setModalClose(true);
-  };
-
   const toggleEditDateMode = () => {
     setIsEditDateMode(!isEditDateMode);
     setUpdateModalOpen(!updateModalOpen);
@@ -208,7 +201,7 @@ const MyPageRentCarMap = () => {
                     borderRadius: '7px',
                   }}
                 >
-                  {selectedCar.extra > 0 ? (
+                  {selectedCar.extra ? (
                     <div style={{ padding: '5px' }}>
                       {selectedCar.extra}
                     </div>
@@ -222,14 +215,20 @@ const MyPageRentCarMap = () => {
             )}
             {isEditDateMode && (
               <Modal
+                style={{
+                  position: 'absolute',
+                  top: '100px',
+                  left: '710px',
+                  width: '100%',
+                }}
                 isOpen={updateModalOpen}
                 toggle={toggleEditDateMode}
               >
                 <RentCarReservationUpdate
                   carNo={selectedCar.carNo}
-                  onClose={onClose}
-                  rentDate={selectedCar.rentTime}
-                  turninDate={selectedCar.turninTime}
+                  onClose={closeModal}
+                  rentDate={selectedCar.rentDate}
+                  turninDate={selectedCar.turninDate}
                 />
               </Modal>
             )}
@@ -281,7 +280,10 @@ const MyPageRentCarMap = () => {
             예약한 렌트카가 없습니다.
             <div>
               <span
-                onClick={() => navigate('/car/res')}
+                onClick={() => {
+                  updateActiveTab(2);
+                  navigate('/car/res');
+                }}
                 style={{
                   cursor: 'pointer',
                   color: '#F18D8A',

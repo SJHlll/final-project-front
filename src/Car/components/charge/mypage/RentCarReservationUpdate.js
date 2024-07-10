@@ -1,7 +1,7 @@
 import { Textarea } from '@mui/joy';
 import axios from 'axios';
 import { addMonths } from 'date-fns';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import styles from './RentCarReservationUpdate.module.scss';
@@ -13,15 +13,16 @@ const RentCarReservationUpdate = ({
   rentDate,
   turninDate,
 }) => {
-  const [newRentTime, setNewRentTime] = useState(rentDate);
-  const [newTurninTime, setNewTurninTime] =
-    useState(turninDate);
+  const [newRentTime, setNewRentTime] = useState(
+    new Date(rentDate),
+  );
+  const [newTurninTime, setNewTurninTime] = useState(
+    new Date(turninDate),
+  );
   const [extra, setExtra] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(true); // 모달 상태를 관리하는 useState
 
   const handleStartTimeChange = (time) => {
-    console.log('typeof time: ', typeof time);
-    console.log(time);
     setNewRentTime(time);
   };
 
@@ -69,6 +70,25 @@ const RentCarReservationUpdate = ({
     }
   };
 
+  const filterPassedTime = (time) => {
+    const currentDate = new Date();
+    const selectedDate = new Date(time);
+
+    return currentDate.getTime() < selectedDate.getTime();
+  };
+
+  const filterTime = (time) => {
+    const selectedTime = new Date(time);
+    const oneHourAfterRentTime = new Date(
+      newRentTime.getTime() + 4 * 60 * 60 * 1000, // 픽업시간보다 4시간 이후로만 클릭 가능하게
+    );
+
+    return (
+      selectedTime.getTime() >=
+      oneHourAfterRentTime.getTime()
+    );
+  };
+
   const handleCloseModal = () => {
     setIsModalOpen(false); // 모달 닫기
     onClose(); // 부모 컴포넌트에서 제공하는 onClose 함수 호출
@@ -97,11 +117,12 @@ const RentCarReservationUpdate = ({
               <DatePicker
                 selected={newRentTime}
                 onChange={handleStartTimeChange}
-                dateFormat='yyyy년 MM월 dd일 aa HH:mm'
+                dateFormat='yyyy년 MM월 dd일 h:mm aa'
                 minDate={minDate}
                 maxDate={maxDate}
                 className={styles.datePicker}
                 showTimeSelect
+                filterTime={filterPassedTime}
               />
             </div>
             <div className={styles.field}>
@@ -109,10 +130,11 @@ const RentCarReservationUpdate = ({
               <DatePicker
                 selected={newTurninTime}
                 onChange={handleEndTimeChange}
-                dateFormat='yyyy년 MM월 dd일 aa HH:mm'
+                dateFormat='yyyy년 MM월 dd일 h:mm aa'
                 minDate={minDate}
                 maxDate={maxDate}
                 className={styles.datePicker}
+                filterTime={filterTime}
                 showTimeSelect
               />
             </div>
