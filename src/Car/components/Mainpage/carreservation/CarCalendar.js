@@ -14,7 +14,6 @@ import {
   addMonths,
   setHours,
   setMinutes,
-  parse,
   isValid,
   addDays,
   addHours,
@@ -22,7 +21,6 @@ import {
 import style from '../../../../scss/Button.module.scss';
 import axios from 'axios';
 import { CarContext } from '../../../../contexts/CarContext';
-import AuthContext from '../../../../util/AuthContext';
 
 registerLocale('ko', ko);
 
@@ -38,7 +36,6 @@ const CarCalendar = ({
   setDaysBetween,
 }) => {
   const { selectedCar } = useContext(CarContext);
-  const { isLoggedIn, token } = useContext(AuthContext);
   const [reservedDates, setReservedDates] = useState([]);
   const [rentCarList, setRentCarList] = useState([]);
 
@@ -46,7 +43,7 @@ const CarCalendar = ({
     const accToken = localStorage.getItem('ACCESS_TOKEN');
     try {
       const response = await axios.get(
-        'http://localhost:8181/rentcar/reslist',
+        `${process.env.REACT_APP_API_URL}/rentcar/reslist`,
         {
           headers: {
             Authorization: `Bearer ${accToken}`,

@@ -19,7 +19,7 @@ const CarSwiperReal = ({ setSelectedCar }) => {
     const fetchCars = async () => {
       try {
         const response = await fetch(
-          'http://localhost:8181/car/res',
+          `${process.env.REACT_APP_API_URL}/car/res`,
         );
         if (!response.ok) {
           throw new Error('Failed to fetch cars');

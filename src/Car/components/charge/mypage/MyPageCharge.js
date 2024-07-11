@@ -11,7 +11,7 @@ import style from '../../../../scss/Button.module.scss';
 import { ReserveStationContext } from '../../../../contexts/ReserveStationContext';
 import AuthContext from '../../../../util/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { TabContext } from '../../Mainpage/TabContext';
+import { TabContext } from '../../../../contexts/TabContext';
 
 const MyPageCharge = () => {
   const navigate = useNavigate();
@@ -76,7 +76,7 @@ const MyPageCharge = () => {
     try {
       const token = localStorage.getItem('ACCESS_TOKEN');
       const response = await fetch(
-        `http://localhost:8181/mypage?reservationNo=${cancelReservationNumber}`,
+        `${process.env.REACT_APP_API_URL}/mypage?reservationNo=${cancelReservationNumber}`,
         {
           method: 'DELETE',
           headers: {
@@ -196,11 +196,19 @@ const MyPageCharge = () => {
                 <div>{r.stationName}</div>
               </div>
 
-              <div className={styles.flex}>
+              <div
+                style={{
+                  height: '50px',
+                  lineHeight: 'center',
+                }}
+                className={styles.flex}
+              >
                 <div className={styles.value}>
                   충전소 주소
                 </div>
-                <div>{r.address}</div>
+                <div style={{ width: '500px' }}>
+                  {r.address}
+                </div>
               </div>
 
               <div className={styles.flex}>
@@ -263,7 +271,7 @@ const MyPageCharge = () => {
       try {
         const token = localStorage.getItem('ACCESS_TOKEN');
         const response = await fetch(
-          'http://localhost:8181/mypage',
+          `${process.env.REACT_APP_API_URL}/mypage`,
           {
             method: 'GET',
             headers: {

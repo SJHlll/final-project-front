@@ -10,7 +10,6 @@ import { Modal, ModalBody } from 'reactstrap';
 import styled from 'styled-components';
 import AuthContext from '../../../../util/AuthContext';
 import axios from 'axios';
-import { redirect } from 'react-router-dom';
 import style from '../../../../scss/Button.module.scss';
 const ModalBackground = styled.div`
   position: fixed;
@@ -30,7 +29,7 @@ const Noti = () => {
   const [NotiContent, setNotiContent] = useState('');
   const { role } = useContext(AuthContext);
   const [notiList, setNotiList] = useState([]);
-  const [error, setError] = useState(null);
+  const [setError] = useState(null);
 
   // const handleSubmit = (e) => {
   //   e.preventDefault();
@@ -45,7 +44,7 @@ const Noti = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        'http://localhost:8181/noti',
+        `${process.env.REACT_APP_API_URL}/noti`,
         {
           notiTitle: NotiTitle,
           notiContent: NotiContent,
@@ -70,7 +69,7 @@ const Noti = () => {
   const fetchNotiList = async () => {
     try {
       const response = await axios.get(
-        'http://localhost:8181/noti/info',
+        `${process.env.REACT_APP_API_URL}/noti/info`,
       );
       setNotiList(response.data.notiList);
     } catch (err) {
@@ -103,7 +102,7 @@ const Noti = () => {
           <div style={{ display: 'flex' }}>
             {role === 'ADMIN' && (
               <button
-                className={styles.createnotilist}
+                className={`${styles.createnotilist} ${style.publicBtn}`}
                 onClick={toggle}
               >
                 등록

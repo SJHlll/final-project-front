@@ -14,18 +14,16 @@
     margin: 0 auto;
     display: block;
   }
-
+}
   .actionButtons {
-    position: absolute;
-    right: 45%;
-    // bottom: 25px;
+    position: fixed;
+    right: 5px;
+    top: 90%;
     /* 위치 조정 */
     // display: flex;
     gap: 10px;
     /* 버튼 간격 조정 */
-  }
-
-  .actionButtons button {
+  
     padding: 10px 20px;
     margin: 10px 5px 5px;
 
@@ -37,7 +35,7 @@
   }
 
 
-}
+
 
 // 이벤트 리스트
 .eventlistContainer {

@@ -13,6 +13,7 @@
     /* 비디오 위에 버튼이 배치되도록 설정 */
     position: relative;
     /* 애니메이션 효과를 위한 상대적 위치 설정 */
+
 }
 
 /* 버튼 스타일 */
@@ -226,7 +227,9 @@
 
 .reviewList {
     display: flex;
-
+    position: absolute;
+    bottom: 7%;
+    z-index: 3;
     /* 버튼 컨테이너 스타일 */
     .ButtonContainer {
         display: grid;

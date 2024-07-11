@@ -18,7 +18,7 @@ const ReservationList = () => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          'http://localhost:8181/charge/reservation',
+          `${process.env.REACT_APP_API_URL}/charge/reservation`,
         );
         if (!response.ok) {
           throw new Error('Failed to fetch stations');

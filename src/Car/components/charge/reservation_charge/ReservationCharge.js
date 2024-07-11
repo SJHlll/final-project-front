@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from '../scss/ReservationCharge.module.scss';
+
 import ReservationList from './ReservationList';
 import { StationProvider } from '../../../../contexts/StationContext';
 import { SecondMapProvider } from '../../../../contexts/SecondMapContext';
-import styled from 'styled-components';
+
 import Frame from '../../Mainpage/Frame';
 
 const ReservationCharge = () => {
@@ -39,14 +39,3 @@ const ReservationCharge = () => {
 };
 
 export default ReservationCharge;
-
-const ReserveHeader = styled.div`
-  width: 850px;
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-`;
-
-const BigSpan = styled.span`
-  font-size: 1.5rem;
-`;

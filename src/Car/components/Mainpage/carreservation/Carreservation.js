@@ -1,7 +1,6 @@
 import React from 'react';
 import Carres from './Carres';
 import Frame from '../Frame';
-import styled from 'styled-components';
 import { CarProvider } from '../../../../contexts/CarContext';
 
 const Carreservation = () => {

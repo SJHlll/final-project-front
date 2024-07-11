@@ -71,7 +71,7 @@ const EventAddModal = ({
     }
 
     if (!$fileInputRef.current.files[0]) {
-      alert('이미지를 업로드 해 주세요!');
+      alert('이미지를 선택해주세요.');
       return;
     }
 
@@ -124,7 +124,7 @@ const EventAddModal = ({
     }
 
     if (!$fileInputRef.current.files[0]) {
-      alert('이미지를 업로드 해 주세요!');
+      alert('이미지를 선택해주세요.');
       return;
     }
 
