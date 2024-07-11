@@ -42,7 +42,7 @@ const CarCalendar = ({
     const accToken = localStorage.getItem('ACCESS_TOKEN');
     try {
       const response = await axios.get(
-        'http://43.200.66.160/rentcar/reslist',
+        `${process.env.REACT_APP_API_URL}/rentcar/reslist`,
         {
           headers: {
             Authorization: `Bearer ${accToken}`,

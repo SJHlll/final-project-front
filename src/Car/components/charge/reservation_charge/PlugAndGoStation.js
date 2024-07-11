@@ -71,7 +71,15 @@ const PlugAndGoStation = ({
   const modalOpen = () => (
     <ModalBackground onClick={toggle}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
+        <div
+          style={{
+            width: '100%',
+          }}
+        >
+          제목
+        </div>
         {closeBtn}
+        <hr />
         <ReservationModal
           chargeId={StationId}
           stationName={Name}

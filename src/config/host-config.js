@@ -15,6 +15,6 @@ if (clientHostName === 'localhost') {
   backEndHostName = 'http://43.200.66.160'; // 도메인 구매시 이부분 변경
 }
 
-export const API_BASE_URL = backEndHostName;
+export const API_BASE_URL = process.env.REACT_APP_API_URL;
 export const USER = '/api/auth';
 export const REVIEW = '/review';

@@ -11,6 +11,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import styles from './RentCarReservationUpdate.module.scss';
 import style from '../../../../scss/Button.module.scss';
 import moment from 'moment';
+import { API_BASE_URL } from '../../../../config/host-config';
 
 const RentCarReservationUpdate = ({
   carNo,
@@ -23,7 +24,7 @@ const RentCarReservationUpdate = ({
   const [newTurninTime, setNewTurninTime] =
     useState(turninDate);
   const [extra, setExtra] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(true); // 모달 상태를 관리하는 useState
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
   const [reservedDates, setReservedDates] = useState([]);
 
@@ -37,14 +38,12 @@ const RentCarReservationUpdate = ({
     setNewTurninTime(time);
   };
 
-  // const API_RENT_URL = API_BASE_URL + '/rentcar';
-
   const fetchReservedDates = useCallback(async () => {
     const token = localStorage.getItem('ACCESS_TOKEN');
 
     try {
       const response = await axios.get(
-        `http://localhost:8181/rentcar/${carNo}`,
+        `${API_BASE_URL}/rentcar/${carNo}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -52,20 +51,6 @@ const RentCarReservationUpdate = ({
         },
       );
       if (response.status === 200) {
-        // const rentCarList = response.data.rentList;
-        // const reservedDates = rentCarList.flatMap(
-        //   (item) => {
-        //     const dates = [];
-        //     const rentDate = new Date(item.rentTime);
-        //     const turninDate = new Date(item.turninTime);
-        //     let currentDate = rentDate;
-        //     while (currentDate <= turninDate) {
-        //       dates.push(new Date(currentDate));
-        //       currentDate = addDays(currentDate, 1);
-        //     }
-        //     return dates;
-        //   },
-        // );
         const reservedDates = response.data.map(
           (dateString) => new Date(dateString),
         );
@@ -79,7 +64,7 @@ const RentCarReservationUpdate = ({
     } catch (err) {
       console.error('Error fetching reserved dates: ', err);
     }
-  }, [carId]);
+  }, [carNo]);
 
   useEffect(() => {
     fetchReservedDates();
@@ -95,7 +80,7 @@ const RentCarReservationUpdate = ({
   const filterTime = (time) => {
     const selectedTime = new Date(time);
     const oneHourAfterRentTime = new Date(
-      newRentTime.getTime() + 4 * 60 * 60 * 1000, // 픽업시간보다 4시간 이후로만 클릭 가능하게
+      newRentTime.getTime() + 4 * 60 * 60 * 1000,
     );
 
     return (
@@ -107,8 +92,8 @@ const RentCarReservationUpdate = ({
   console.log('carNo: ', carNo);
   console.log('carId: ', carId);
 
-  const minDate = new Date(); // 최소 날짜는 오늘 날짜로 설정합니다.
-  const maxDate = addMonths(new Date(), 12); // 최대 날짜를 12개월 후로 설정합니다.
+  const minDate = new Date();
+  const maxDate = addMonths(new Date(), 12);
 
   const rentcarUpdateHandler = async (e) => {
     e.preventDefault();
@@ -134,7 +119,7 @@ const RentCarReservationUpdate = ({
       );
       if (res.status === 200) {
         alert('예약이 변경되었습니다.');
-        onClose(); // 변경 완료 후 부모 컴포넌트에서 제공하는 onClose 함수 호출
+        onClose();
       } else {
         console.log('Error: ', res.data);
         alert('예약 변경에 실패하였습니다.');
@@ -146,8 +131,8 @@ const RentCarReservationUpdate = ({
   };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false); // 모달 닫기
-    onClose(); // 부모 컴포넌트에서 제공하는 onClose 함수 호출
+    setIsModalOpen(false);
+    onClose();
   };
 
   return (

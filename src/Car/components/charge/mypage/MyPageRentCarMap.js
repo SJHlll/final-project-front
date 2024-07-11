@@ -134,10 +134,10 @@ const MyPageRentCarMap = () => {
     setUpdateModalOpen(!updateModalOpen);
   };
 
-  const AdminContents = ({ car }) => {
+  const AdminContents = () => {
     return (
       <>
-        {car.map((e) => (
+        {reserveCar.map((e) => (
           <div
             className={styles.listBody}
             key={e.carNo}
@@ -218,7 +218,7 @@ const MyPageRentCarMap = () => {
                 style={{
                   position: 'absolute',
                   top: '100px',
-                  left: '817px',
+                  left: '710px',
                   width: '100%',
                   fontFamily: 'font2',
                 }}
@@ -229,8 +229,10 @@ const MyPageRentCarMap = () => {
                   carNo={selectedCar.carNo}
                   carId={selectedCar.carId}
                   onClose={closeModal}
-                  rentDate={selectedCar.rentDate}
-                  turninDate={selectedCar.turninDate}
+                  rentDate={new Date(selectedCar.rentTime)}
+                  turninDate={
+                    new Date(selectedCar.turninTime)
+                  }
                   reservedCar={reserveCar}
                 />
               </Modal>

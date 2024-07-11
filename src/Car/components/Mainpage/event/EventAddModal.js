@@ -70,6 +70,11 @@ const EventAddModal = ({
       return;
     }
 
+    if (!$fileInputRef.current.files[0]) {
+      alert('이미지를 선택해주세요.');
+      return;
+    }
+
     const eventJsonBlob = new Blob(
       [JSON.stringify(title)],
       {
@@ -115,6 +120,11 @@ const EventAddModal = ({
     e.preventDefault();
     if (!title || !imagePreview) {
       alert('제목과 이미지를 모두 입력해야 합니다.');
+      return;
+    }
+
+    if (!$fileInputRef.current.files[0]) {
+      alert('이미지를 선택해주세요.');
       return;
     }
 

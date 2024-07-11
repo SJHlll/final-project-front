@@ -27,7 +27,8 @@ const NotiPage = () => {
     useState(header);
   const [currentContents, setCurrentContents] =
     useState(contents);
-  const [setCurrentViews] = useState(views);
+  // 수정: useState 올바르게 사용
+  const [currentViews, setCurrentViews] = useState(views);
 
   const { role } = useContext(AuthContext);
   const token = localStorage.getItem('ACCESS_TOKEN');
@@ -39,7 +40,7 @@ const NotiPage = () => {
       console.error('Noti Id 없습니다.');
       navigate('/noti');
     }
-  }, [notiId, navigate]);
+  }, [id, navigate]); // 수정: notiId 대신 id 사용
 
   const click = () => {
     navigate('/noti');
@@ -64,8 +65,9 @@ const NotiPage = () => {
           },
         },
       );
-      // setCurrentHeader(response.data.notiTitle);
-      // setCurrentContents(response.data.notiContent);
+      // 수정: 주석 해제 및 response 데이터 사용
+      setCurrentHeader(response.data.notiTitle);
+      setCurrentContents(response.data.notiContent);
       setIsEditing(false);
       alert('수정 완료!');
       navigate('/noti/' + id);
@@ -110,8 +112,19 @@ const NotiPage = () => {
   };
 
   useEffect(() => {
-    getNotiInfo();
-  }, [notiId]);
+    // 수정: 비동기 함수를 올바르게 처리
+    const fetchData = async () => {
+      try {
+        await getNotiInfo();
+      } catch (error) {
+        console.error(
+          'Error fetching notification info:',
+          error,
+        );
+      }
+    };
+    fetchData();
+  }, [id]); // 수정: notiId 대신 id 사용
 
   return (
     <Frame>
@@ -170,22 +183,6 @@ const NotiPage = () => {
             >
               이전
             </button>
-            {/* {role === 'COMMON' &&
-              (isEditing ? (
-                <button
-                  className={styles.notibtn}
-                  onClick={saveUpdateHandler}
-                >
-                  저장
-                </button>
-              ) : (
-                <button
-                  className={styles.notibtn}
-                  onClick={updateHandler}
-                >
-                  수정불가능
-                </button>
-              ))} */}
             {role === 'ADMIN' && (
               <>
                 <button

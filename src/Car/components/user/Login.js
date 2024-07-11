@@ -120,6 +120,9 @@ const Login = () => {
                   label='Email'
                   name='email'
                   autoComplete='email'
+                  style={{
+                    marginBottom: '10px',
+                  }}
                 />
               </Grid>
               <Grid>

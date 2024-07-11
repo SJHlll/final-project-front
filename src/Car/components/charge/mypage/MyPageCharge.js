@@ -196,11 +196,19 @@ const MyPageCharge = () => {
                 <div>{r.stationName}</div>
               </div>
 
-              <div className={styles.flex}>
+              <div
+                style={{
+                  height: '50px',
+                  lineHeight: 'center',
+                }}
+                className={styles.flex}
+              >
                 <div className={styles.value}>
                   충전소 주소
                 </div>
-                <div>{r.address}</div>
+                <div style={{ width: '500px' }}>
+                  {r.address}
+                </div>
               </div>
 
               <div className={styles.flex}>
