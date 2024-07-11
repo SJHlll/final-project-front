@@ -229,8 +229,8 @@ const MyPageRentCarMap = () => {
                   carNo={selectedCar.carNo}
                   carId={selectedCar.carId}
                   onClose={closeModal}
-                  rentDate={selectedCar.rentDate}
-                  turninDate={selectedCar.turninDate}
+                  rentDate={selectedCar.rentTime}
+                  turninDate={selectedCar.turninTime}
                   reservedCar={reserveCar}
                 />
               </Modal>

@@ -101,7 +101,7 @@ const ReviewPage = ({ ReviewList }) => {
             selectedType === 'rental' ? styles.active : ''
           }
         >
-          렌트카 리뷰
+          렌트카
         </button>
         <button
           onClick={() => handleTypeChange('charging')}
@@ -109,7 +109,7 @@ const ReviewPage = ({ ReviewList }) => {
             selectedType === 'charging' ? styles.active : ''
           }
         >
-          충전소 리뷰
+          충전소
         </button>
       </div>
       <button
