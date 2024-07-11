@@ -5,6 +5,7 @@ import GoogleLoginHandler from './GoogleLoginHandler';
 const GoogleAuthLogin = () => {
   const clientId = process.env.REACT_APP_GOOGLE_CLIENT_KEY;
 
+  console.log('REACT_APP_GOOGLE_CLIENT_KEY:', clientId);
   if (!clientId) {
     console.error(
       'Google Client ID is not set in environment variables.',
