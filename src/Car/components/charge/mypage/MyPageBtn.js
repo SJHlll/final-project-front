@@ -57,7 +57,7 @@ const MyPageBtn = () => {
   ];
 
   return (
-    <div>
+    <div style={{ fontFamily: 'font2' }}>
       {/* 버튼과 모달 */}
       <div className='ButtonContainer'>
         <div className='karina'></div>

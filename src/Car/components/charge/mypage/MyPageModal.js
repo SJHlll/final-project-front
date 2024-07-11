@@ -33,6 +33,7 @@ const MyPageModal = ({ isOpen, onClose, children }) => {
     <div
       className={styles.modalOverlay}
       onClick={handleOverlayClick}
+      style={{ fontFamily: 'font2' }}
     >
       <div
         className={styles.modalContent}

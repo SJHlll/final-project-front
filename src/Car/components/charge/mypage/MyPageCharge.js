@@ -138,7 +138,7 @@ const MyPageCharge = () => {
   // 예약이 없는 상태 리턴값
   const NoReservation = () => {
     return (
-      <>
+      <div style={{ fontFamily: 'font2' }}>
         {phoneNumber.length > 1 ? (
           // 로그인은 했는지
           <div className={styles.noReserve}>
@@ -175,14 +175,14 @@ const MyPageCharge = () => {
             </div>
           </div>
         )}
-      </>
+      </div>
     );
   };
 
   // 예약한 상태 리턴값
   const YesReservation = ({ reservations }) => {
     return (
-      <>
+      <div style={{ fontFamily: 'font2' }}>
         {reservations.map((r) => {
           const endTime = calculateEndTime(
             r.rentTime,
@@ -247,7 +247,7 @@ const MyPageCharge = () => {
             </div>
           );
         })}
-      </>
+      </div>
     );
   };
 
@@ -293,8 +293,13 @@ const MyPageCharge = () => {
   }, [phoneNumber, setReserveStation]);
 
   return (
-    <div className={styles.reservationList}>
-      <h3 style={{ textAlign: 'center' }}>
+    <div
+      className={styles.reservationList}
+      fontFamily='font2'
+    >
+      <h3
+        style={{ textAlign: 'center', fontFamily: 'font2' }}
+      >
         전기차 충전소 예약 내역
       </h3>
       {reserveStation.length > 0 ? (

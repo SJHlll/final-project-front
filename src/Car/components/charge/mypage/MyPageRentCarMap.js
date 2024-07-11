@@ -110,7 +110,7 @@ const MyPageRentCarMap = () => {
       day: '2-digit',
       hour: '2-digit',
       minute: 'numeric',
-      hour12: false,
+      hour12: true,
     });
   };
 
@@ -168,7 +168,7 @@ const MyPageRentCarMap = () => {
   };
 
   return (
-    <>
+    <div style={{ fontFamily: 'font2' }}>
       {reserveCar.length > 0 ? (
         <>
           <AdminContents car={reserveCar} />
@@ -220,6 +220,7 @@ const MyPageRentCarMap = () => {
                   top: '100px',
                   left: '817px',
                   width: '100%',
+                  fontFamily: 'font2',
                 }}
                 isOpen={updateModalOpen}
                 toggle={toggleEditDateMode}
@@ -297,7 +298,7 @@ const MyPageRentCarMap = () => {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 };
 
