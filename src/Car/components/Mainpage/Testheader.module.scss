@@ -24,18 +24,18 @@
 }
 
 .loginbtn {
-  width: 7%;
-  height: 50px;
+  //width: 7%;
+  //height: 50px;
   align-self: center;
-  background-color: rgb(216, 230, 241);
-  border: 1px solid rgb(209, 209, 209);
+  //background-color: rgb(216, 230, 241);
+  //border: 1px solid rgb(209, 209, 209);
   margin-left: 3%;
 }
 
 .logoutbtn {
   display: flex;
-  width: 5%;
-  height: 20px;
+  width: 1%;
+  height: 10px;
   justify-content: center;
   position: fixed;
   bottom: 25%;
@@ -47,13 +47,14 @@
 }
 
 .tabline {
-  width: 60%;    
+  width: 70%;
   display: flex;
-  margin-left: 8%;
+  margin-left: 4%;
+  padding-right: 5px;
 }
 
 .tabli {
-  width: 10%;
+  width: 11%;
   height: 50px;
   background-color: transparent;
   border: 1px solid rgb(209, 209, 209);
@@ -107,17 +108,18 @@
 }
 
 .userInfoContainer {
-  display: flex;
-  // align-items: center;
+  // display: flex;
+  width: 200px;
+text-align: center;
+  align-content: center;
 }
 
 .kakaologo,
 .instalogo {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   margin-left: 5px;
   margin-top: 50px;
-
 }
 
 .kakaologo img,
