@@ -5,7 +5,7 @@ import Modal2 from './Modal2'; // Modal2 가져오기
 import styles from './ReviewPage.module.scss';
 
 // ReviewPage 컴포넌트 정의
-const ReviewPage = ({ ReviewList }) => {
+const ReviewPage = () => {
   const [selectedType, setSelectedType] =
     useState('rental');
   const [selectedReview, setSelectedReview] =
@@ -13,7 +13,7 @@ const ReviewPage = ({ ReviewList }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false); // 리뷰 상세보기 모달 상태
   const [isModalOpen2, setIsModalOpen2] = useState(false); // 후기 작성 모달 상태
-  const [reviewList, setReviewList] = useState([]);
+  const [setReviewList] = useState([]);
   const [rentalReviews, setRentalReviews] = useState([]);
   const [chargingReviews, setChargingReviews] = useState(
     [],
@@ -73,13 +73,13 @@ const ReviewPage = ({ ReviewList }) => {
     setIsModalOpen2(false);
   };
 
-  const handleAddReview = (review) => {
-    if (selectedType === 'rental') {
-      setRentalReviews([...rentalReviews, review]);
-    } else {
-      setChargingReviews([...chargingReviews, review]);
-    }
-  };
+  // const handleAddReview = (review) => {
+  //   if (selectedType === 'rental') {
+  //     setRentalReviews([...rentalReviews, review]);
+  //   } else {
+  //     setChargingReviews([...chargingReviews, review]);
+  //   }
+  // };
 
   const currentReviews =
     selectedType === 'rental'

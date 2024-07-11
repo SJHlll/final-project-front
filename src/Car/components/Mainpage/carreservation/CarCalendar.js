@@ -20,7 +20,6 @@ import {
 import style from '../../../../scss/Button.module.scss';
 import axios from 'axios';
 import { CarContext } from '../../../../contexts/CarContext';
-import AuthContext from '../../../../util/AuthContext';
 
 registerLocale('ko', ko);
 
@@ -36,7 +35,6 @@ const CarCalendar = ({
   setDaysBetween,
 }) => {
   const { selectedCar } = useContext(CarContext);
-  const { isLoggedIn, token } = useContext(AuthContext);
   const [reservedDates, setReservedDates] = useState([]);
   const [rentCarList, setRentCarList] = useState([]);
 

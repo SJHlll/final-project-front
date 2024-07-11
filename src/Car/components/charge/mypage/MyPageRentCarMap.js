@@ -10,7 +10,7 @@ import MyPageModal from './MyPageModal';
 import { useNavigate } from 'react-router-dom';
 import RentCarReservationUpdate from './RentCarReservationUpdate';
 import { Modal } from 'reactstrap';
-import { TabContext } from '../../Mainpage/TabContext';
+import { TabContext } from '../../../../contexts/TabContext';
 
 const MyPageRentCarMap = () => {
   const navigate = useNavigate();

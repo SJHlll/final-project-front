@@ -27,7 +27,7 @@ const NotiPage = () => {
     useState(header);
   const [currentContents, setCurrentContents] =
     useState(contents);
-  const [currentViews, setCurrentViews] = useState(views);
+  const [setCurrentViews] = useState(views);
 
   const { role } = useContext(AuthContext);
   const token = localStorage.getItem('ACCESS_TOKEN');

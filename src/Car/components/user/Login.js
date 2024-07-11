@@ -18,7 +18,7 @@ import {
 } from '../../../config/host-config';
 import AuthContext from '../../../util/AuthContext';
 import axios from 'axios';
-import { TabContext } from '../Mainpage/TabContext';
+import { TabContext } from '../../../contexts/TabContext';
 
 const Login = () => {
   const navigate = useNavigate();

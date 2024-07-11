@@ -10,7 +10,6 @@ import { Modal, ModalBody } from 'reactstrap';
 import styled from 'styled-components';
 import AuthContext from '../../../../util/AuthContext';
 import axios from 'axios';
-import { redirect } from 'react-router-dom';
 import style from '../../../../scss/Button.module.scss';
 const ModalBackground = styled.div`
   position: fixed;
@@ -30,7 +29,7 @@ const Noti = () => {
   const [NotiContent, setNotiContent] = useState('');
   const { role } = useContext(AuthContext);
   const [notiList, setNotiList] = useState([]);
-  const [error, setError] = useState(null);
+  const [setError] = useState(null);
 
   // const handleSubmit = (e) => {
   //   e.preventDefault();

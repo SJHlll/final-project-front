@@ -2,9 +2,8 @@ import React, {
   useCallback,
   useContext,
   useReducer,
-  useState,
 } from 'react';
-import { Modal } from 'reactstrap';
+
 import styles from '../scss/UserInfoSave.module.scss';
 import {
   initialState,

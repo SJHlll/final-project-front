@@ -19,7 +19,7 @@ const Event = () => {
   const { onLogout, role } = useContext(AuthContext);
   const [isModal, setIsModal] = useState(false);
   const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [setLoading] = useState(true);
 
   const API_EVENT_URL = API_BASE_URL + '/events';
 

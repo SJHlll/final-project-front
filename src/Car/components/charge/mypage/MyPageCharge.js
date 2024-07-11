@@ -11,7 +11,7 @@ import style from '../../../../scss/Button.module.scss';
 import { ReserveStationContext } from '../../../../contexts/ReserveStationContext';
 import AuthContext from '../../../../util/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { TabContext } from '../../Mainpage/TabContext';
+import { TabContext } from '../../../../contexts/TabContext';
 
 const MyPageCharge = () => {
   const navigate = useNavigate();

@@ -1,18 +1,11 @@
-import React, {
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, { useContext } from 'react';
 import AuthContext from '../../../util/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import {
   API_BASE_URL,
   USER,
 } from '../../../config/host-config';
-import {
-  GoogleLogin,
-  useGoogleLogin,
-} from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 
 const GoogleLoginHandler = () => {
