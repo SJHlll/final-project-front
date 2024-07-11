@@ -72,21 +72,23 @@ const MyPageInfo = () => {
         없습니다.
       </ModalBody>
       <ModalFooter>
-        <Button
+        <button
           color='danger'
+          className={style.publicBtn}
           onClick={() => {
             handleDeleteAccount();
             toggleConfirmDelete();
           }}
         >
           삭제
-        </Button>
-        <Button
+        </button>
+        <button
           color='secondary'
+          className={style.publicBtn}
           onClick={toggleConfirmDelete}
         >
           취소
-        </Button>
+        </button>
       </ModalFooter>
     </Modal>
   );

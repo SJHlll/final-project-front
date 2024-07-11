@@ -102,7 +102,7 @@ const Noti = () => {
           <div style={{ display: 'flex' }}>
             {role === 'ADMIN' && (
               <button
-                className={styles.createnotilist}
+                className={`${styles.createnotilist} ${style.publicBtn}`}
                 onClick={toggle}
               >
                 등록

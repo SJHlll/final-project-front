@@ -414,19 +414,20 @@ const ReservationModal = ({
               kWh)
             </div>
           </div>
+          <hr style={{ marginBottom: '5x' }} />
           <div
             style={{
               width: '100%',
+              height: '100%',
               textAlign: 'center',
               margin: '10px',
+              marginTop: '0px',
             }}
           >
             <button className={style.publicBtn}>
-              <div>
-                <span className={style.payButton}>
-                  결제하기
-                </span>
-              </div>
+              <span className={style.payButton}>
+                결제하기
+              </span>
             </button>
           </div>
         </form>

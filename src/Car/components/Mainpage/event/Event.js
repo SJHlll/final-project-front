@@ -58,7 +58,7 @@ const Event = () => {
         />
         {role === 'ADMIN' && (
           <button
-            className={`${style.publicBtn} ${styles.eventButton}`}
+            className={`${style.publicBtn} ${styles.actionButtons}`}
             onClick={eventAddModalOpen}
           >
             추가
