@@ -16,6 +16,7 @@ import {
   setMinutes,
   isValid,
   addDays,
+  addHours,
 } from 'date-fns';
 import style from '../../../../scss/Button.module.scss';
 import axios from 'axios';
@@ -252,14 +253,8 @@ const CarCalendar = ({
   };
 
   const handleEndTimeChange = (time) => {
-    if (endDate) {
-      const newEndTime = new Date(endDate);
-      newEndTime.setHours(time.getHours());
-      newEndTime.setMinutes(time.getMinutes());
-      onChangeEndTime(newEndTime);
-    } else {
-      onChangeEndTime(time);
-    }
+    const newEndTime = addHours(time, 4);
+    onChangeEndTime(newEndTime);
   };
 
   const filterPassedTime = (time) => {
@@ -283,6 +278,13 @@ const CarCalendar = ({
 
   const minDate = new Date();
   const maxDate = addMonths(new Date(), 12);
+
+  useEffect(() => {
+    if (startTime) {
+      const newEndTime = addHours(startTime, 4);
+      onChangeEndTime(newEndTime);
+    }
+  }, [startTime, onChangeEndTime]);
 
   return (
     <div className={styles.carCalendarContent}>
@@ -403,6 +405,7 @@ const CarCalendar = ({
                 ]}
                 dateFormat='h:mm aa'
                 timeCaption='픽업 시간'
+                filterTime={filterPassedTime}
               />
             </div>
 
@@ -425,6 +428,7 @@ const CarCalendar = ({
                 ]}
                 dateFormat='h:mm aa'
                 timeCaption='반납 시간'
+                filterTime={filterTime}
               />
             </div>
           </div>

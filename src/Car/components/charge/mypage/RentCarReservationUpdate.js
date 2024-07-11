@@ -29,8 +29,6 @@ const RentCarReservationUpdate = ({
   const [reservedDates, setReservedDates] = useState([]);
 
   const handleStartTimeChange = (time) => {
-    console.log('typeof time: ', typeof time);
-    console.log(time);
     setNewRentTime(time);
   };
 
@@ -89,8 +87,14 @@ const RentCarReservationUpdate = ({
     );
   };
 
-  console.log('carNo: ', carNo);
-  console.log('carId: ', carId);
+  const formatRentTime = (rentTime) => {
+    const date = new Date(rentTime);
+    return date.toLocaleString('ko-KR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    });
+  };
 
   const minDate = new Date();
   const maxDate = addMonths(new Date(), 12);
@@ -155,30 +159,34 @@ const RentCarReservationUpdate = ({
           >
             <div className={styles.field}>
               <label>렌트 픽업일</label>
+              <div>{formatRentTime(rentDate)}</div>
               <DatePicker
                 selected={newRentTime}
                 onChange={handleStartTimeChange}
-                dateFormat='yyyy년 MM월 dd일 aa HH:mm'
+                dateFormat='aa hh:mm'
                 minDate={minDate}
                 maxDate={maxDate}
                 className={styles.datePicker}
-                showTimeSelect
+                showTimeSelectOnly
                 filterTime={filterPassedTime}
-                excludeDates={reservedDates}
+                defaultValue={rentDate}
+                timeIntervals={15}
+                timeCaption='Time'
               />
             </div>
             <div className={styles.field}>
               <label>렌트 반납일</label>
+              <div>{formatRentTime(turninDate)}</div>
               <DatePicker
                 selected={newTurninTime}
                 onChange={handleEndTimeChange}
-                dateFormat='yyyy년 MM월 dd일 aa HH:mm'
+                dateFormat='aa hh:mm'
                 minDate={minDate}
                 maxDate={maxDate}
                 className={styles.datePicker}
-                showTimeSelect
+                showTimeSelectOnly
                 filterTime={filterTime}
-                excludeDates={reservedDates}
+                defaultValue={turninDate}
               />
             </div>
             <div className={styles.field}>
