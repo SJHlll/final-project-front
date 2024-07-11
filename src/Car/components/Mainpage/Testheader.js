@@ -9,7 +9,7 @@ import {
 import AdminPage from '../../assets/admin_page.png';
 import kakaologo from '../../assets/kakao-logo.png'; // 고정된 이미지 import
 import instalogo from '../../assets/instagram-logo.png'; // 기본 유저 이미지 import
-import { TabContext } from './TabContext';
+import { TabContext } from '../../../contexts/TabContext';
 
 const Testheader = () => {
   const navigate = useNavigate();

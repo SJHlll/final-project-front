@@ -4,7 +4,7 @@ import Frame from './Frame';
 import coverImage from '../../assets/pexels-bertellifotografia-799443.jpg'; // 이미지 import
 
 import { useNavigate } from 'react-router-dom';
-import { TabContext } from './TabContext';
+import { TabContext } from '../../../contexts/TabContext';
 const Testhome = () => {
   const navigate = useNavigate();
   const { updateActiveTab } = useContext(TabContext);

@@ -23,7 +23,7 @@ export function Success() {
 
     async function confirm() {
       const response = await fetch(
-        'http://localhost:8181/confirm',
+        `${process.env.REACT_APP_API_URL}/confirm`,
         {
           method: 'POST',
           headers: {

@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { API_BASE_URL, REVIEW } from './host-config';
+// import { API_BASE_URL, REVIEW } from './host-config';
 
-const REVIEW_URL = API_BASE_URL + REVIEW;
+// const REVIEW_URL = API_BASE_URL + REVIEW;
 
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({

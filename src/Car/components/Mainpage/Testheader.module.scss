@@ -67,7 +67,7 @@
 }
 
 .tabliactive {
-  width: 10%;
+  width: 11%;
   height: 50px;
   margin-top: 0.7%;
   border: 0.1px solid #a8cbe2;
@@ -97,7 +97,8 @@
   margin-top: 40px;
   cursor: pointer;
   transition: transform 0.2s ease;
-
+  position: relative;
+  right: 2%;
   &:hover {
     transform: scale(1.15);
   }

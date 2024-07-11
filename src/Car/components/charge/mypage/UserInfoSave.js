@@ -2,9 +2,8 @@ import React, {
   useCallback,
   useContext,
   useReducer,
-  useState,
 } from 'react';
-import { Modal } from 'reactstrap';
+import style from '../../../../scss/Button.module.scss';
 import styles from '../scss/UserInfoSave.module.scss';
 import {
   initialState,
@@ -287,7 +286,7 @@ const UserInfoSave = () => {
       >
         <button
           type='submit'
-          className={`${styles.publicBtn} ${styles.updating}`}
+          className={`${style.publicBtn} ${styles.updating}`}
           onClick={updateButtonClickHandler}
         >
           수정하기

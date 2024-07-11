@@ -58,8 +58,8 @@ const PlugAndGoStation = ({
         border: '0px',
         background: '#fff',
         display: 'block',
-        marginLeft: 'auto',
-        marginTop: '10px',
+        // marginLeft: 'auto',
+        // marginTop: '10px',
         fontSize: '20px',
       }}
     >
@@ -71,7 +71,28 @@ const PlugAndGoStation = ({
   const modalOpen = () => (
     <ModalBackground onClick={toggle}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
-        {closeBtn}
+        <div
+          style={{
+            display: 'flex',
+            padding: '3%',
+            paddingBottom: '0px',
+          }}
+        >
+          <div
+            style={{
+              width: '100%',
+              fontSize: '20px',
+            }}
+          >
+            전기차 충전소 예약
+          </div>
+          {closeBtn}
+        </div>
+        <hr
+          style={{
+            marginBottom: '0px',
+          }}
+        />
         <ReservationModal
           chargeId={StationId}
           stationName={Name}
@@ -155,7 +176,7 @@ const ModalContent = styled.div`
   background: white;
   padding: 0 15px 0;
   border-radius: 10px;
-  height: 465px;
+  height: 405px;
   overflow-y: auto;
   position: relative;
 `;

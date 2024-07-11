@@ -44,7 +44,7 @@ const KakaoMap = () => {
     const fetchStations = async () => {
       try {
         const response = await fetch(
-          'http://localhost:8181/charge/list',
+          `${process.env.REACT_APP_API_URL}/charge/list`,
         );
         if (!response.ok) {
           throw new Error('Failed to fetch stations');

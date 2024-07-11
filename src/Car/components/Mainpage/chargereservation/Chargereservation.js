@@ -1,7 +1,7 @@
 import React from 'react';
-import ReservationCharge from '../../../../charge/components/reservation_charge/ReservationCharge';
 import './Chargereservation.module.scss';
 import Frame from '../Frame';
+import ReservationCharge from '../../charge/reservation_charge/ReservationCharge';
 const Chargereservation = () => {
   return (
     <Frame>
