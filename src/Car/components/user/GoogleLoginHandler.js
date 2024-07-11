@@ -9,18 +9,12 @@ import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 
 const GoogleLoginHandler = () => {
-  console.log('GoogleLoginHandler initialized');
-
   const { onLogin } = useContext(AuthContext);
-  const redirection = useNavigate();
+  const navigate = useNavigate();
   const REQUEST_URL = `${API_BASE_URL}${USER}`;
 
   const handleLoginSuccess = async (response) => {
-    console.log('response_data: ', response);
-    console.log(
-      'response.credential: ',
-      response.credential,
-    );
+    console.log('Google login response:', response);
 
     try {
       const res = await axios.post(
@@ -38,6 +32,7 @@ const GoogleLoginHandler = () => {
         role,
         birthDay,
       } = res.data;
+      console.log('Login response data:', res.data);
       onLogin(
         token,
         userName,
@@ -46,8 +41,6 @@ const GoogleLoginHandler = () => {
         role,
         birthDay,
       );
-
-      console.log('birthDay: ', birthDay);
 
       // Conditional redirection based on user data
       if (!phoneNumber || !birthDay) {
@@ -59,9 +52,9 @@ const GoogleLoginHandler = () => {
           alertMessage +=
             '\n마이페이지에 생년월일을 입력해주세요!';
         alert(alertMessage);
-        redirection('/mypage');
+        navigate('/mypage');
       } else {
-        redirection('/');
+        navigate('/');
       }
     } catch (err) {
       console.error('Error logging in:', err);
@@ -71,8 +64,6 @@ const GoogleLoginHandler = () => {
   const handleLoginFailure = (error) => {
     console.error('Google login failed:', error);
   };
-
-  console.log('REQUEST_URL: ', REQUEST_URL);
 
   return (
     <GoogleLogin
