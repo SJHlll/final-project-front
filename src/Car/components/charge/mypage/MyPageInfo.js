@@ -46,8 +46,8 @@ const MyPageInfo = () => {
           },
         },
       );
-      console.log('responseData', response);
-      console.log('token', token);
+      // console.log('responseData', response);
+      // console.log('token', token);
       alert('회원탈퇴가 성공적으로 처리되었습니다.');
       onLogout(); // Update the authentication state
       navigate('/');
