@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styles from './Event.module.scss';
-import style from '../../../../scss/Button.module.scss';
 
 const Eventlist = ({ eventList, onEventClick }) => {
   const [activeTab, setActiveTab] = useState('전체');
-  const navigate = useNavigate();
 
   // 상세보기로 이동
   const handleClick = (item) => {

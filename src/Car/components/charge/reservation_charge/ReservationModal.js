@@ -154,7 +154,7 @@ const ReservationModal = ({
     // 시도
     try {
       const response = await axios.post(
-        'http://localhost:8181/charge/reservation',
+        `${process.env.REACT_APP_API_URL}/charge/reservation`,
         requestDTO,
       );
       console.log(response.data);
@@ -216,7 +216,7 @@ const ReservationModal = ({
     const fetchUnavailableTimes = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8181/charge/unavailable-times/${chargeId}`,
+          `${process.env.REACT_APP_API_URL}/charge/unavailable-times/${chargeId}`,
         );
         setUnavailableTimes(response.data);
       } catch (error) {
@@ -414,19 +414,20 @@ const ReservationModal = ({
               kWh)
             </div>
           </div>
+          <hr style={{ marginBottom: '5x' }} />
           <div
             style={{
               width: '100%',
+              height: '100%',
               textAlign: 'center',
               margin: '10px',
+              marginTop: '0px',
             }}
           >
             <button className={style.publicBtn}>
-              <div>
-                <span className={style.payButton}>
-                  결제하기
-                </span>
-              </div>
+              <span className={style.payButton}>
+                결제하기
+              </span>
             </button>
           </div>
         </form>

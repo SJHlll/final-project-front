@@ -37,8 +37,7 @@ import MyPageReviewList from './Car/components/charge/mypage/MyPageReviewList';
 import { TestRvProvider } from './Car/components/Mainpage/adminpage/adminreview/TestRvContext';
 import { TestRcProvider } from './Car/components/Mainpage/adminpage/admincar/TestRcContext';
 import MyPageRentCarList from './Car/components/charge/mypage/MyPageRentCarList';
-import RentCarReservationUpdate from './Car/components/charge/mypage/RentCarReservationUpdate';
-import { TabProvider } from './Car/components/Mainpage/TabContext';
+import { TabProvider } from './contexts/TabContext';
 
 const App = () => {
   const location = useLocation();

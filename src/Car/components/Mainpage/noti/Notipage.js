@@ -27,6 +27,7 @@ const NotiPage = () => {
     useState(header);
   const [currentContents, setCurrentContents] =
     useState(contents);
+  // 수정: useState 올바르게 사용
   const [currentViews, setCurrentViews] = useState(views);
 
   const { role } = useContext(AuthContext);
@@ -39,7 +40,7 @@ const NotiPage = () => {
       console.error('Noti Id 없습니다.');
       navigate('/noti');
     }
-  }, [notiId, navigate]);
+  }, [id, navigate]); // 수정: notiId 대신 id 사용
 
   const click = () => {
     navigate('/noti');
@@ -52,7 +53,7 @@ const NotiPage = () => {
   const saveUpdateHandler = async () => {
     try {
       const response = await axios.patch(
-        `http://localhost:8181/noti/${id}`,
+        `${process.env.REACT_APP_API_URL}/noti/${id}`,
         {
           notiId,
           notiTitle: editedHeader,
@@ -64,8 +65,9 @@ const NotiPage = () => {
           },
         },
       );
-      // setCurrentHeader(response.data.notiTitle);
-      // setCurrentContents(response.data.notiContent);
+      // 수정: 주석 해제 및 response 데이터 사용
+      setCurrentHeader(response.data.notiTitle);
+      setCurrentContents(response.data.notiContent);
       setIsEditing(false);
       alert('수정 완료!');
       navigate('/noti/' + id);
@@ -77,7 +79,7 @@ const NotiPage = () => {
   const deleteNotiHandler = async () => {
     try {
       await axios.delete(
-        `http://localhost:8181/noti/${notiId}`,
+        `${process.env.REACT_APP_API_URL}/noti/${notiId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -94,7 +96,7 @@ const NotiPage = () => {
   const getNotiInfo = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8181/noti/info/${id}`,
+        `${process.env.REACT_APP_API_URL}/noti/info/${id}`,
       );
       setCurrentHeader(response.data.notiList[0].notiTitle);
       setCurrentContents(
@@ -110,8 +112,19 @@ const NotiPage = () => {
   };
 
   useEffect(() => {
-    getNotiInfo();
-  }, [notiId]);
+    // 수정: 비동기 함수를 올바르게 처리
+    const fetchData = async () => {
+      try {
+        await getNotiInfo();
+      } catch (error) {
+        console.error(
+          'Error fetching notification info:',
+          error,
+        );
+      }
+    };
+    fetchData();
+  }, [id]); // 수정: notiId 대신 id 사용
 
   return (
     <Frame>
@@ -170,22 +183,6 @@ const NotiPage = () => {
             >
               이전
             </button>
-            {/* {role === 'COMMON' &&
-              (isEditing ? (
-                <button
-                  className={styles.notibtn}
-                  onClick={saveUpdateHandler}
-                >
-                  저장
-                </button>
-              ) : (
-                <button
-                  className={styles.notibtn}
-                  onClick={updateHandler}
-                >
-                  수정불가능
-                </button>
-              ))} */}
             {role === 'ADMIN' && (
               <>
                 <button

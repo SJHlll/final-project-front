@@ -43,7 +43,7 @@ const EventDetail = () => {
     // 이벤트를 삭제하는 함수
     try {
       await axios.delete(
-        `http://localhost:8181/events/${id}`,
+        `${process.env.REACT_APP_API_URL}/events/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

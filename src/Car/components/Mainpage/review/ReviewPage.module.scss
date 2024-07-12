@@ -53,7 +53,7 @@
   .reviewList {
     // background-color: #007bff;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     flex-wrap: wrap;
     margin: 0 150px;
     animation: fade-in 0.5s ease;
@@ -156,6 +156,9 @@
     display: flex;
     justify-content: center;
     // margin: 20px;
+    position: fixed;
+    top: 94%;
+    width: 100%;
 
     button {
       padding: 10px 15px;

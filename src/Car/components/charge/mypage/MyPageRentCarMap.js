@@ -10,7 +10,7 @@ import MyPageModal from './MyPageModal';
 import { useNavigate } from 'react-router-dom';
 import RentCarReservationUpdate from './RentCarReservationUpdate';
 import { Modal } from 'reactstrap';
-import { TabContext } from '../../Mainpage/TabContext';
+import { TabContext } from '../../../../contexts/TabContext';
 
 const MyPageRentCarMap = () => {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const MyPageRentCarMap = () => {
       try {
         const token = localStorage.getItem('ACCESS_TOKEN');
         const response = await fetch(
-          'http://localhost:8181/admin/car',
+          `${process.env.REACT_APP_API_URL}/admin/car`,
           {
             method: 'GET',
             headers: {
@@ -66,7 +66,7 @@ const MyPageRentCarMap = () => {
     try {
       const token = localStorage.getItem('ACCESS_TOKEN');
       const response = await fetch(
-        `http://localhost:8181/admin/car?reservationNo=${reservationNo}`,
+        `${process.env.REACT_APP_API_URL}/admin/car?reservationNo=${reservationNo}`,
         {
           method: 'DELETE',
           headers: {
@@ -134,10 +134,10 @@ const MyPageRentCarMap = () => {
     setUpdateModalOpen(!updateModalOpen);
   };
 
-  const AdminContents = ({ car }) => {
+  const AdminContents = () => {
     return (
       <>
-        {car.map((e) => (
+        {reserveCar.map((e) => (
           <div
             className={styles.listBody}
             key={e.carNo}
@@ -229,8 +229,8 @@ const MyPageRentCarMap = () => {
                   carNo={selectedCar.carNo}
                   carId={selectedCar.carId}
                   onClose={closeModal}
-                  rentDate={selectedCar.rentDate}
-                  turninDate={selectedCar.turninDate}
+                  rentDate={selectedCar.rentTime}
+                  turninDate={selectedCar.turninTime}
                   reservedCar={reserveCar}
                 />
               </Modal>

@@ -25,7 +25,7 @@ const MyPageReviewMap = () => {
       try {
         const token = localStorage.getItem('ACCESS_TOKEN');
         const response = await fetch(
-          'http://localhost:8181/mypage/review',
+          `${process.env.REACT_APP_API_URL}/mypage/review`,
           {
             method: 'GET',
             headers: {
@@ -55,7 +55,7 @@ const MyPageReviewMap = () => {
     try {
       const token = localStorage.getItem('ACCESS_TOKEN');
       const response = await fetch(
-        `http://localhost:8181/mypage/review?reviewNo=${reviewNo}`,
+        `${process.env.REACT_APP_API_URL}/mypage/review?reviewNo=${reviewNo}`,
         {
           method: 'DELETE',
           headers: {

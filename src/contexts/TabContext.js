@@ -7,18 +7,17 @@ import React, {
 export const TabContext = createContext();
 
 export const TabProvider = ({ children }) => {
-  const [activeTab, setActiveTab] = useState(1);
+  const [activeTab, setActiveTab] = useState(() => {
+    const savedTab = localStorage.getItem('activeTab');
+    return savedTab !== null ? parseInt(savedTab, 10) : 1;
+  });
 
   useEffect(() => {
-    const savedState = localStorage.getItem('activeTab');
-    if (savedState) {
-      setActiveTab(Number(savedState));
-    }
-  }, []);
+    localStorage.setItem('activeTab', activeTab);
+  }, [activeTab]);
 
-  const updateActiveTab = (tabIndex) => {
-    setActiveTab(tabIndex);
-    localStorage.setItem('activeTab', tabIndex);
+  const updateActiveTab = (tab) => {
+    setActiveTab(tab);
   };
 
   return (

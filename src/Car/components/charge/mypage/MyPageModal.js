@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './MyPageReviewList.module.scss';
 
 const MyPageModal = ({ isOpen, onClose, children }) => {

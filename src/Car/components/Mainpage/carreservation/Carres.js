@@ -100,33 +100,31 @@ const Carres = () => {
     const token = localStorage.getItem('ACCESS_TOKEN'); // 로컬 토큰
     console.log('token: ', token);
     try {
-      const res = await fetch('/rentcar/reservation', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}/rentcar/reservation`,
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(reservationData),
         },
-        body: JSON.stringify(reservationData),
-      });
+      );
 
       console.log('reservation Data: ', reservationData);
 
       if (!res.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      // JSON으로 구문 분석하기 전에 응답 본문이 비어 있지 않은지 확인합니다.
-      const result = await res.text();
-      if (result) {
-        const jsonResponse = JSON.parse(result);
-        console.log('Reservation saved:', jsonResponse);
-      } else {
-        console.log(
-          '예약이 저장되었지만 JSON 응답이 수신되지 않았습니다',
+        const errorMessage = await res.text(); // 서버에서 받은 오류 메시지 읽기
+        throw new Error(
+          `HTTP error! Status: ${res.status}, Message: ${errorMessage}`,
         );
       }
+
+      // 정상 처리일 경우 여기에 추가적인 처리를 할 수 있습니다.
     } catch (error) {
       console.error('Error saving reservation:', error);
+      throw error; // 더 상위에서 처리하거나 UI에 오류를 표시할 수 있습니다.
     }
   };
 
@@ -167,11 +165,22 @@ const Carres = () => {
     const left = window.screen.width / 2 - width / 2;
     const top = window.screen.height / 2 - height / 2;
 
-    window.open(
-      `/pay?totalPrice=${intPrice}`,
-      '_blank',
-      `width=${width},height=${height},top=${top},left=${left}`,
-    );
+    try {
+      const paymentWindow = window.open(
+        `/pay?totalPrice=${intPrice}`,
+        '_blank',
+        `width=${width},height=${height},top=${top},left=${left}`,
+      );
+
+      if (!paymentWindow) {
+        throw new Error('팝업 창을 열 수 없습니다.');
+      }
+    } catch (error) {
+      console.error('결제 창 열기 오류:', error);
+      alert(
+        '결제 창을 열 수 없습니다. 브라우저 설정을 확인해 주세요.',
+      );
+    }
   };
 
   // 비회원 예약 방지 및 차량, 날짜 선택 핸들러
