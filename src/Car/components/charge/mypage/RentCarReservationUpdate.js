@@ -26,7 +26,7 @@ const RentCarReservationUpdate = ({
   const [extra, setExtra] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(true);
 
-  const [reservedDates, setReservedDates] = useState([]);
+  // const [reservedDates, setReservedDates] = useState([]);
 
   const handleStartTimeChange = (time) => {
     setNewRentTime(time);
@@ -36,37 +36,37 @@ const RentCarReservationUpdate = ({
     setNewTurninTime(time);
   };
 
-  const fetchReservedDates = useCallback(async () => {
-    const token = localStorage.getItem('ACCESS_TOKEN');
+  // const fetchReservedDates = useCallback(async () => {
+  //   const token = localStorage.getItem('ACCESS_TOKEN');
 
-    try {
-      const response = await axios.get(
-        `${API_BASE_URL}/rentcar/${carNo}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-      if (response.status === 200) {
-        const reservedDates = response.data.map(
-          (dateString) => new Date(dateString),
-        );
-        setReservedDates(reservedDates);
-      } else {
-        console.error(
-          'Error fetching reserved dates: ',
-          response.statusText,
-        );
-      }
-    } catch (err) {
-      console.error('Error fetching reserved dates: ', err);
-    }
-  }, [carNo]);
+  //   try {
+  //     const response = await axios.get(
+  //       `${API_BASE_URL}/rentcar/${carNo}`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       },
+  //     );
+  //     if (response.status === 200) {
+  //       const reservedDates = response.data.map(
+  //         (dateString) => new Date(dateString),
+  //       );
+  //       setReservedDates(reservedDates);
+  //     } else {
+  //       console.error(
+  //         'Error fetching reserved dates: ',
+  //         response.statusText,
+  //       );
+  //     }
+  //   } catch (err) {
+  //     console.error('Error fetching reserved dates: ', err);
+  //   }
+  // }, [carNo]);
 
-  useEffect(() => {
-    fetchReservedDates();
-  }, [fetchReservedDates]);
+  // useEffect(() => {
+  //   fetchReservedDates();
+  // }, [fetchReservedDates]);
 
   const filterPassedTime = (time) => {
     const currentDate = new Date();
@@ -87,14 +87,14 @@ const RentCarReservationUpdate = ({
     );
   };
 
-  const formatRentTime = (rentTime) => {
-    const date = new Date(rentTime);
-    return date.toLocaleString('ko-KR', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-    });
-  };
+  // const formatRentTime = (rentTime) => {
+  //   const date = new Date(rentTime);
+  //   return date.toLocaleString('ko-KR', {
+  //     year: 'numeric',
+  //     month: '2-digit',
+  //     day: '2-digit',
+  //   });
+  // };
 
   const minDate = new Date();
   const maxDate = addMonths(new Date(), 12);
@@ -159,14 +159,15 @@ const RentCarReservationUpdate = ({
           >
             <div className={styles.field}>
               <label>렌트 픽업일</label>
-              <div>{formatRentTime(rentDate)}</div>
+              <DatePicker selectedDate={newRentTime} />
               <DatePicker
                 selected={newRentTime}
                 onChange={handleStartTimeChange}
-                dateFormat='aa hh:mm'
+                dateFormat='yyyy년 MM월 dd일 aa hh:mm'
                 minDate={minDate}
                 maxDate={maxDate}
                 className={styles.datePicker}
+                showTimeSelect
                 showTimeSelectOnly
                 filterTime={filterPassedTime}
                 defaultValue={rentDate}
@@ -176,14 +177,14 @@ const RentCarReservationUpdate = ({
             </div>
             <div className={styles.field}>
               <label>렌트 반납일</label>
-              <div>{formatRentTime(turninDate)}</div>
               <DatePicker
                 selected={newTurninTime}
                 onChange={handleEndTimeChange}
-                dateFormat='aa hh:mm'
+                dateFormat='yyyy년 MM월 dd일 aa hh:mm'
                 minDate={minDate}
                 maxDate={maxDate}
                 className={styles.datePicker}
+                showTimeSelect
                 showTimeSelectOnly
                 filterTime={filterTime}
                 defaultValue={turninDate}
